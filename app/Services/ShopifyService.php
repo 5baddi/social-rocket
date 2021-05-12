@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class ShopifyService extends Service
 {
     /** @var string */
-    const SCOPES = "";
+    const SCOPES = "read_orders,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
 
     /** @var Client */
     private $client;
@@ -32,7 +32,7 @@ class ShopifyService extends Service
         $oauthURL = Str::replaceFirst("{store}", $storeName, config('shopify.store_oauth_url'));
         $oauthURL .= "?client_id=" . config('shopify.api_key');
         $oauthURL .= "&scope=" . self::SCOPES;
-        $oauthURL .= "&redirect_uri=" .route('oauth.callback');
+        $oauthURL .= "&redirect_uri=" . route('oauth.callback');
 
         return $oauthURL;
     }
