@@ -1,6 +1,15 @@
 <?php
 
+/**
+ * Social Rocket
+ *
+ * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ */
+
 use Illuminate\Support\Facades\Route;
+use BADDIServices\SocialRocket\Http\Controllers\TestController;
+use BADDIServices\SocialRocket\Http\Controllers\OAuthController;
+use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/oauth/callback', TestController::class);
+
+Route::get('/connect', OAuthController::class)->name('oauth.connect');
+Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');

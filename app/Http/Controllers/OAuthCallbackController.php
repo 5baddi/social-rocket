@@ -15,6 +15,7 @@ class OAuthCallbackController extends Controller
 {
     public function __invoke(Request $request)
     {
-        
+        var_dump(base64_encode('badstoredevtest.myshopify.com'));
+        dd($request->all());
     }
 }
