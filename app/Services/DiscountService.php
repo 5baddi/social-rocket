@@ -10,5 +10,5 @@ namespace BADDIServices\SocialRocket\Services;
 
 class DiscountService extends Service
 {
-    
+
 }

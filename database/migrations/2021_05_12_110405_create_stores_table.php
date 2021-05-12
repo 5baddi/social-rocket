@@ -1,16 +1,10 @@
 <?php
 
-/**
- * Social Rocket
- *
- * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
- */
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCommissionSettingsTable extends Migration
+class CreateStoresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -19,8 +13,9 @@ class CreateCommissionSettingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('commission_settings', function (Blueprint $table) {
+        Schema::create('stores', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->uuid('user_id');
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateCommissionSettingsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commission_settings');
+        Schema::dropIfExists('stores');
     }
 }
