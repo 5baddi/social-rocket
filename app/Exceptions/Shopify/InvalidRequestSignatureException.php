@@ -11,13 +11,13 @@ namespace BADDIServices\SocialRocket\Exceptions\Shopify;
 use Exception;
 use Throwable;
 
-class InvalidStoreURLException extends Exception
+class InvalidRequestSignatureException extends Exception
 {
     /** @var int */
-    public const CODE = 11;
+    public const CODE = 12;
 
     /** @var string */
-    public const MESSAGE = "Store URL is invalid";
+    public const MESSAGE = "Request signature is invalid";
 
     public function __construct(string $message = self::MESSAGE, int $code = self::CODE, Throwable $previous = null)
     {

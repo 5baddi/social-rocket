@@ -18,7 +18,7 @@ trait HasUUID
 
         static::creating(function ($model){
             if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = Str::uuid();
+                $model->{$model->getKeyName()} = Str::orderedUuid();
             }
         });
     }

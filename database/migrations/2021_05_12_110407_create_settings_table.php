@@ -21,13 +21,13 @@ class CreateSettingsTable extends Migration
     public function up()
     {
         Schema::create('settings', function (Blueprint $table) {
-            $table->uuid('id')->primary();
+            $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->enum('commission_type', Setting::COMMISSION_TYPES)->nullable(false);
             $table->float('commission_amount')->default(0.0);
             $table->enum('discount_type', Setting::DISCOUNT_TYPES)->nullable(false);
             $table->float('discount_amount')->default(0.0);
-            $table->enum('discount_format', Setting::DISCOUNT_FOMATS)->nullable(false);
+            $table->enum('discount_format', Setting::DISCOUNT_FORMATS)->nullable(false);
             $table->timestamps();
         });
     }

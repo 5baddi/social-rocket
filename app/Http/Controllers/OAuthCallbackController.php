@@ -8,14 +8,36 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
+use BADDIServices\SocialRocket\Models\Store;
 
 class OAuthCallbackController extends Controller
 {
-    public function __invoke(Request $request)
+    /** @var ShopifyService */
+    private $shopifyService;
+
+    /** @var StoreService */
+    private $storeService;
+
+    public function __construct(ShopifyService $shopifyService, StoreService $storeService)
     {
-        var_dump(base64_encode('badstoredevtest.myshopify.com'));
-        dd($request->all());
+        $this->shopifyService = $shopifyService;
+        $this->storeService = $storeService;
+    }
+    
+    public function __invoke(OAuthCallbackRequest $request)
+    {
+        $storeName = $this->shopifyService->getStoreName($request->query('shop'));
+
+        $store = $this->storeService->findBySlug($storeName);
+        abort_unless($store instanceof Store, 'Store not found');
+
+        $accessToken = $this->shopifyService->getStoreAccessToken($request->query());
+        $attributes = $request->merge($accessToken)->all();
+        $oauth = $this->storeService->updateStoreOAuth($store, $attributes);
+        dd($oauth);
     }
 }

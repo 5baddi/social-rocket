@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateStoresTable extends Migration
+class CreateOauthsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateStoresTable extends Migration
      */
     public function up()
     {
-        Schema::create('stores', function (Blueprint $table) {
+        Schema::create('oauths', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->uuid('user_id')->nullable();
-            $table->string('slug')->unique()->nullable(false);
+            $table->uuid('store_id');
+            $table->string('code')->nullable(false);
+            $table->string('access_token')->nullable(false);
+            $table->string('scopes')->nullable(false);
+            $table->integer('timestamp')->nullable(false);
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreateStoresTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stores');
+        Schema::dropIfExists('store_o_auths');
     }
 }

@@ -8,9 +8,15 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
+use GuzzleHttp\Exception\ClientException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
+use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenResponseException;
+use Illuminate\Support\Facades\Log;
 
 class ShopifyService extends Service
 {
@@ -22,28 +28,25 @@ class ShopifyService extends Service
 
     public function __construct()
     {
-        $this->client = new Client([
-            'timeout'  => 2.0,
-        ]);
+        $this->client = new Client([]);
     }
 
-    public function getOAuthURL(string $storeURL): string
+    public function getOAuthURL(string $storeName): string
     {
-        $storeName = $this->getStoreName($storeURL);
-        if (is_null($storeName)) {
-            throw new InvalidStoreURLException();
-        }
-
         $oauthURL = Str::replace("{store}", $storeName, config('shopify.store_oauth_url'));
         $oauthURL .= "?client_id=" . config('shopify.api_key');
         $oauthURL .= "&scope=" . self::SCOPES;
-        $oauthURL .= "&redirect_uri=" . route('oauth.callback');
+        $oauthURL .= "&redirect_uri=" . urlencode(route('oauth.callback'));
 
         return $oauthURL;
     }
 
     public function getStoreName(string $storeURL): ?string
     {
+        if (!Str::startsWith($storeURL, 'http')) {
+            $storeURL = Str::start($storeURL, 'https://');
+        }
+
         $parseURL = parse_url($storeURL);
         $storeName = explode('.', $parseURL['host']);
 
@@ -54,22 +57,58 @@ class ShopifyService extends Service
         return $storeName[0];
     }
 
-    public function getStoreAccessToken(string $code, string $storeURL): string
+    public function getStoreAccessToken(array $params): array
     {
-        $storeName = $this->getStoreName($storeURL);
-        if (is_null($storeName)) {
-            throw new InvalidStoreURLException();
+        try {
+            $this->validateRequest($params);
+
+            $storeName = $this->getStoreName($params['shop']);
+            if (is_null($storeName)) {
+                throw new InvalidStoreURLException();
+            }
+
+            $oauthURL = Str::replace("{store}", $storeName, config('shopify.store_access_token_url'));
+            $requestBody = [
+                'client_id'                 =>  config('shopify.api_key'),
+                'client_secret'             =>  config('shopify.client_secret'),
+                'code'                      =>  $params['code']
+            ];
+
+            $response = $this->client->request('POST', $oauthURL, 
+                [
+                    'form_params'      => $requestBody,
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                    ]
+                ]
+            );
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception | ClientException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:access-token',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new InvalidAccessTokenResponseException();
+        }
+    }
+
+    private function validateRequest(array $params): bool
+    {
+        $hmac = Arr::get($params, 'hmac');
+        Arr::forget($params, 'hmac');
+        ksort($params);
+
+        $computedHmac = hash_hmac('sha256', http_build_query($params), config('shopify.client_secret'));
+        if (!hash_equals($hmac, $computedHmac)) {
+            throw new InvalidRequestSignatureException();
         }
 
-        $oauthURL = Str::replace("{store}", $storeName, config('shopify.store_access_token_url'));
-
-        $response = $this->client->request('POST', $oauthURL, [
-            'form_params'   => [
-                'client_id'                 =>  config('shopify.api_key'),
-                'cclient_secretlient_id'    =>  config('shopify.client_secret'),
-                'code'                      =>  $code
-            ]
-        ]);
-        return '';
+        return true;
     }
 }

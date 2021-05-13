@@ -7,7 +7,6 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\TestController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
 
@@ -21,8 +20,6 @@ use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/oauth/callback', TestController::class);
 
 Route::get('/connect', OAuthController::class)->name('oauth.connect');
 Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
