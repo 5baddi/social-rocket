@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
 use BADDIServices\SocialRocket\Services\StoreService;
@@ -33,15 +34,23 @@ class OAuthController extends Controller
     {
         try {
             $storeName = $this->shopifyService->getStoreName($request->input('store'));
+            if (is_null($storeName)) {
+                throw new InvalidStoreURLException();
+            }
+
             $oauthURL = $this->shopifyService->getOAuthURL($storeName);
 
             $this->storeService->createStore([
                 'slug'  =>  $storeName
             ]);
 
+            session('store', $storeName);
+
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
             return redirect()->back()->withErrors($ex->errors());
+        } catch (InvalidStoreURLException $ex) {
+            return redirect()->back()->withErrors($ex->getMessage());
         } catch (Exception $ex) {
             return redirect()->back()->withErrors("Internal server error");
         }
