@@ -11,7 +11,7 @@ namespace BADDIServices\SocialRocket\Http\Requests;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignUpRequest extends FormRequest
+class SignInRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,11 +31,8 @@ class SignUpRequest extends FormRequest
     public function rules()
     {
         return [
-            User::FIRST_NAME_COLUMN    => 'required|string|min:1',
-            User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string',
-            User::PHONE_COLUMN         => 'nullable|string|max:25'
+            User::PASSWORD_COLUMN      => 'required|string'
         ];
     }
 }

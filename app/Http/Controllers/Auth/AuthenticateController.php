@@ -11,11 +11,11 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\ValidationException;
-use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
+use Illuminate\Support\Facades\Hash;
 
 class AuthenticateController extends Controller
 {
@@ -27,18 +27,19 @@ class AuthenticateController extends Controller
         $this->userService = $userService;
     }
 
-    public function __invoke(SignUpRequest $request)
+    public function __invoke(SignInRequest $request)
     {
         try {
-            $existsEmail = $this->userService->findByEmail($request->input(User::EMAIL_COLUMN));
-            if (!$existsEmail) {
+            $user = $this->userService->findByEmail($request->input(User::EMAIL_COLUMN));
+            if (!$user) {
                 return redirect('/signin')->withInput()->with("error", "No account registred with those credentials");
             }
 
-            $user = $this->userService->create($request->input());
-            abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
+            if (!Hash::check($request->input(User::PASSWORD_COLUMN), $user->password)) {
+                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
+            }
 
-            $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $user->password]);
+            $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (!$authenticateUser) {
                 return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }

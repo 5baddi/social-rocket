@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
+use Illuminate\Support\Facades\Session;
 use Throwable;
 
 class OAuthCallbackController extends Controller
@@ -38,7 +39,10 @@ class OAuthCallbackController extends Controller
             $storeName = $this->shopifyService->getStoreName($request->query('shop'));
 
             $store = $this->storeService->findBySlug($storeName);
-            abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
+            if (!$store instanceof Store) {
+                Session::forget('slug');
+                abort(Response::HTTP_NOT_FOUND, 'Store not found');
+            }
 
             $accessToken = $this->shopifyService->getStoreAccessToken($request->query());
             $attributes = $request->merge($accessToken)->all();

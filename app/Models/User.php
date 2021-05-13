@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUUID;
 
     /** @var string */
     public const EMAIL_COLUMN = 'email';
@@ -21,6 +22,9 @@ class User extends Authenticatable
     public const PASSWORD_COLUMN = 'password';
     public const CURRENCY_COLUMN = 'currency';
     public const BRAND_NAME_COLUMN = 'brand_name';
+
+    /** @var string */
+    protected $primaryKey = 'id';
 
     /** @var array */
     protected $fillable = [

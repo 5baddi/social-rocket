@@ -8,7 +8,7 @@
         <div class="box-form-design1">
             <div class="form-group-custom1">
                 <label for="store" class="label-custom1">Shopify store name or URL</label>
-                <input id="store" name="store" type="text" class="input-custom1 @if($errors->has('store')) is-invalid @endif" placeholder="example.myshopify.com" autofocus="autofocus" required/>
+                <input id="store" name="store" value="{{ old('store') }}" type="text" class="input-custom1 @if($errors->has('store')) is-invalid @endif" placeholder="example.myshopify.com" autofocus="autofocus" required/>
                 @if($errors->has('store'))
                 <div class="invalid-feedback">
                     {{ $errors::first('store') }}

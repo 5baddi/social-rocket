@@ -19,7 +19,7 @@ class WelcomeMailFired
         /** @var User */
         $user = $event->user;
 
-        Mail::send('emails.welcome', compact($user), function($message) use ($user) {
+        Mail::send('emails.welcome', ['user' => $user], function($message) use ($user) {
             $message->to($user->email);
             $message->subject("Welcome to " . config('app.name'));
         });

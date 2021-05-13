@@ -18,7 +18,7 @@ class WelcomeMail
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /** @var User */
-    private $user;
+    public $user;
 
     public function __construct(User $user)
     {

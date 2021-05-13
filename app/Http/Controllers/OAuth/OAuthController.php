@@ -13,6 +13,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
 use BADDIServices\SocialRocket\Services\StoreService;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use Throwable;
 
@@ -44,7 +45,7 @@ class OAuthController extends Controller
                 'slug'  =>  $storeName
             ]);
 
-            session('slug', $storeName);
+            Session::put('slug', $storeName);
 
             return redirect($oauthURL);
         } catch (ValidationException $ex) {

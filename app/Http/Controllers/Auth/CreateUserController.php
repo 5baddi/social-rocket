@@ -20,6 +20,7 @@ use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Session;
 
 class CreateUserController extends Controller
 {
@@ -43,18 +44,19 @@ class CreateUserController extends Controller
                 return redirect('/signup')->withInput()->with("error", "Email already registred with another account");
             }
 
-            $store = $this->storeService->findBySlug(session('store'));
+            $store = $this->storeService->findBySlug(Session::get('slug'));
             abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
 
             $user = $this->userService->create($request->input());
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
+            Session::forget('slug');
             $store = $this->storeService->setUserId($store, $user->id);
-            Event::fire(new WelcomeMail($user));
+            Event::dispatch(new WelcomeMail($user));
 
-            $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $user->password]);
+            $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (!$authenticateUser) {
-                return redirect('/signup')->with('error', 'Something going wrong with the authentification');
+                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }
 
             return redirect('/dashboard')->with('success', 'Account created successfully');

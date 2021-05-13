@@ -6,7 +6,7 @@
         <div class="box-form-design1">
             <div class="form-group-custom1">
                 <label for="email" class="label-custom1">E-mail</label>
-                <input id="email" name="email" type="password" class="input-custom1 @if($errors->has('email')) is-invalid @endif" placeholder="E-mail" autofocus required/>
+                <input id="email" name="email" value="{{ old('email') }}" type="email" class="input-custom1 @if($errors->has('email')) is-invalid @endif" placeholder="E-mail" autofocus required/>
                 @if($errors->has('email'))
                 <div class="invalid-feedback">
                     {{ $errors::first('email') }}
@@ -31,7 +31,7 @@
                 <button class="btn-design1" type="submit">Login</button>
             </div>
             <p class="have-account">
-                {{-- <a href="https://socialsnowball.io/forgot-password" class="link-design1">Can’t access your account?</a> --}}
+                <a href="#" class="link-design1">Can’t access your account?</a>
                 <a href="{{ route('signup') }}" class="link-design1">or Register</a>
             </p>
         </div>

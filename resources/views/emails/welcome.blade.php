@@ -6,7 +6,7 @@
 					<tbody><tr>
 						<td style="padding:25px 0;text-align:center">
 							<a href="{{ url('/') }}" style="display:inline-block" target="_blank">
-								<img src="{{ url('img/logo.png') }}" width="160" alt="" class="CToWUd"/>
+								<img src="{{ asset('img/logo.png') }}" width="160" alt="" class="CToWUd"/>
 							</a>
 						</td>
 					</tr>

@@ -44,12 +44,12 @@ class StoreService extends Service
     
     public function udpate(Store $store, array $attributes): Store
     {
-        return $this->storeRepository->update($store->id, $attributes);
+        return $this->storeRepository->update($store, $attributes);
     }
     
     public function setUserId(Store $store, string $userId): Store
     {
-        return $this->storeRepository->update($store->id, [
+        return $this->storeRepository->update($store, [
             Store::USER_ID_COLUMN => $userId
         ]);
     }

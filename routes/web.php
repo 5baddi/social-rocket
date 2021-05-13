@@ -15,6 +15,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,18 +31,24 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController
 Route::redirect('/', '/connect', 301);
 Route::redirect('/guide', '/connect', 301);
 
-Route::get('/connect', ConnectController::class)->name('connect');
-Route::post('/connect', OAuthController::class)->name('oauth.connect');
-Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
+Route::middleware('guest')
+    ->group(function() {
+        Route::get('/connect', ConnectController::class)->name('connect');
+        Route::post('/connect', OAuthController::class)->name('oauth.connect');
+        Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
 
-Route::get('/signup', SignUpController::class)->name('signup');
-Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
-Route::get('/signin', SignInController::class)->name('signin');
-Route::post('/signin', AuthenticateController::class)->name('auth.signin');
+        Route::get('/signup', SignUpController::class)->name('signup');
+        Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
+        Route::get('/signin', SignInController::class)->name('signin');
+        Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
+    });
 
 Route::middleware('auth')
     ->name('dashboard')
     ->prefix('dashboard')
     ->group(function() {
+        Route::get('/', function() {
+            dd("Implement subscription..");
+        });
         Route::get('/subscription', SubscriptionController::class)->name('.select.pack');
     });
