@@ -6,14 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use Illuminate\Support\Facades\Route;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,7 @@ use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 */
 
 Route::redirect('/', '/connect', 301);
+Route::redirect('/guide', '/connect', 301);
 
 Route::get('/connect', ConnectController::class)->name('connect');
 Route::post('/connect', OAuthController::class)->name('oauth.connect');

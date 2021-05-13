@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\Events\WelcomeMail;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +19,7 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 
 class CreateUserController extends Controller
 {
@@ -48,6 +50,8 @@ class CreateUserController extends Controller
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
             $store = $this->storeService->setUserId($store, $user->id);
+            Event::fire(new WelcomeMail($user));
+
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $user->password]);
             if (!$authenticateUser) {
                 return redirect('/signup')->with('error', 'Something going wrong with the authentification');
