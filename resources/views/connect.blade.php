@@ -19,7 +19,9 @@
     <body class="body-login">
         <header>
             <div class="container content-header">
-                <a href="https://socialsnowball.io" class="logo-header logo-header-login"><img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/logo.svg" alt=""></a>
+                <a href="{{ url('/') }}" class="logo-header logo-header-login">
+                    <img src="{{ asset('img/logo.png') }}" alt="{{ config('app.name') }}"/>
+                </a>
             </div>
         </header>
         <div class="container-fluid container-fluid-body">
@@ -61,10 +63,10 @@
                 </div>
             </div>
         </div>
-        <script src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/js/jquery.min.js"></script>
-        <script src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/js/popper.js"></script>
-        <script src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/js/bootstrap.min.js"></script>
-        <script src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/js/owl.carousel.min.js"></script>
+        <script src="{{ asset('js/jquery.min.js') }}"></script>
+        <script src="{{ asset('js/popper.js') }}"></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
         <script src="{{ asset('js/main.js') }}"></script>
     </body>
 </html>
