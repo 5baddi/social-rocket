@@ -29,6 +29,17 @@ class StoreService extends Service
         return $this->storeRepository->findBySlug($slug);
     }
     
+    public function isLinked(string $slug): bool
+    {
+        $store = $this->storeRepository->isLinked($slug);
+
+        if(!$store instanceof Store) {
+            return false;
+        }
+
+        return true;
+    }
+    
     public function create(array $attributes): Store
     {
         $validator = Validator::make($attributes, [

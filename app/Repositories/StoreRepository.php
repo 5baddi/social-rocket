@@ -23,6 +23,23 @@ class StoreRepository
                     ->first();
     }
     
+    public function where(array $conditions): ?Store
+    {
+        return Store::query()
+                    ->where($conditions)
+                    ->first();
+    }
+    
+    public function isLinked(string $slug): ?Store
+    {
+        return Store::query()
+                    ->where([
+                        Store::SLUG_COLUMN => $slug
+                    ])
+                    ->whereNotNull(Store::USER_ID_COLUMN)
+                    ->first();
+    }
+    
     public function create(array $attributes): Store
     {
         return Store::query()

@@ -62,5 +62,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'subscription' => \BADDIServices\SocialRocket\Http\Middleware\Subscription::class,
+        'has.store' => \BADDIServices\SocialRocket\Http\Middleware\HasStore::class,
+        'app.connected' => \BADDIServices\SocialRocket\Http\Middleware\AlreadyAppConnected::class,
+        'app.notconnected' => \BADDIServices\SocialRocket\Http\Middleware\AppNotConnected::class,
     ];
 }

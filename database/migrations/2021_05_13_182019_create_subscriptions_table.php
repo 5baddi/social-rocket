@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOauthsTable extends Migration
+class CreateSubscriptionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateOauthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('oauths', function (Blueprint $table) {
+        Schema::create('subscriptions', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->uuid('store_id');
-            $table->string('code')->nullable(false);
-            $table->string('access_token')->nullable(false);
-            $table->string('scope')->nullable(false);
-            $table->integer('timestamp')->nullable(false);
+            $table->uuid('user_id');
+            $table->uuid('pack_id');
+            $table->tinyInteger('payment_gateway')->nullable();
+            $table->timestamp('paid_at')->nullable();
+            $table->timestamp('end_at')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateOauthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('oauths');
+        Schema::dropIfExists('subscriptions');
     }
 }

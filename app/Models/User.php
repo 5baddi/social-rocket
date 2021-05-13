@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -48,6 +49,11 @@ class User extends Authenticatable
     public function store(): HasOne
     {
         return $this->hasOne(Store::class);
+    }
+    
+    public function subscripotion(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
     }
 
     public function setPasswordAttribute($value): self

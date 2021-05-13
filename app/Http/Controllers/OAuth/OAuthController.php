@@ -8,14 +8,15 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
 
+use Throwable;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
-use BADDIServices\SocialRocket\Services\StoreService;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
-use Throwable;
+use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
+use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
+use BADDIServices\SocialRocket\Exceptions\Shopify\StoreAlreadyLinkedException;
 
 class OAuthController extends Controller
 {
@@ -37,6 +38,11 @@ class OAuthController extends Controller
             $storeName = $this->shopifyService->getStoreName($request->input('store'));
             if (is_null($storeName)) {
                 throw new InvalidStoreURLException();
+            }
+
+            $storeIsLinked = $this->storeService->isLinked($storeName);
+            if($storeIsLinked) {
+                throw new StoreAlreadyLinkedException();
             }
 
             $oauthURL = $this->shopifyService->getOAuthURL($storeName);
