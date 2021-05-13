@@ -7,16 +7,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    /** @var string */
+    public const EMAIL_COLUMN = 'email';
+    public const LAST_NAME_COLUMN = 'last_name';
+    public const FIRST_NAME_COLUMN = 'first_name';
+    public const PHONE_COLUMN = 'phone';
+    public const PASSWORD_COLUMN = 'password';
+    public const CURRENCY_COLUMN = 'currency';
+    public const BRAND_NAME_COLUMN = 'brand_name';
+
+    /** @var array */
     protected $fillable = [
         'first_name',
         'last_name',
@@ -24,21 +30,13 @@ class User extends Authenticatable
         'password'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+    /** @var array */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
+    /** @var array */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
@@ -46,5 +44,12 @@ class User extends Authenticatable
     public function store(): HasOne
     {
         return $this->hasOne(Store::class);
+    }
+
+    public function setPasswordAttribute($value): self
+    {
+        $this->setAttribute(self::PASSWORD_COLUMN, Hash::make($value));
+
+        return $this;
     }
 }

@@ -23,6 +23,7 @@ class Store extends Model
     /** @var string */
     public const ID_COLUMN = 'id';
     public const SLUG_COLUMN = 'slug';
+    public const USER_ID_COLUMN = 'user_id';
 
     /** @var array */
     protected $fillable = [

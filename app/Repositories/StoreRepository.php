@@ -34,6 +34,26 @@ class StoreRepository
                     );
     }
     
+    /**
+     * @return Store|false
+     */
+    public function update(Store $store, array $attributes)
+    {
+        $storeUpdated = Store::query()
+                            ->update(
+                                [
+                                    Store::ID_COLUMN => $store->id
+                                ], 
+                                $attributes
+                            );
+
+        if ($storeUpdated) {
+            return $store->refresh();
+        }
+
+        return false;
+    }
+    
     public function oauth(string $storeId, array $attributes): OAuth
     {
         return OAuth::query()
@@ -45,4 +65,3 @@ class StoreRepository
                     );
     }
 }
-    

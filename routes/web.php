@@ -6,10 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\ConnectController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\OAuthController;
-use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
+use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,20 @@ use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
 |
 */
 
+Route::redirect('/', '/connect', 301);
+
 Route::get('/connect', ConnectController::class)->name('connect');
 Route::post('/connect', OAuthController::class)->name('oauth.connect');
 Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
+
+Route::get('/signup', SignUpController::class)->name('signup');
+Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
+Route::get('/signin', SignInController::class)->name('signin');
+Route::post('/signin', AuthenticateController::class)->name('auth.signin');
+
+Route::middleware('auth')
+    ->name('dashboard')
+    ->prefix('dashboard')
+    ->group(function() {
+        Route::get('/subscription', SubscriptionController::class)->name('.select.pack');
+    });

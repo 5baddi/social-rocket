@@ -29,7 +29,7 @@ class StoreService extends Service
         return $this->storeRepository->findBySlug($slug);
     }
     
-    public function createStore(array $attributes): Store
+    public function create(array $attributes): Store
     {
         $validator = Validator::make($attributes, [
             'slug'      =>  'required|string'
@@ -40,6 +40,18 @@ class StoreService extends Service
         }
 
         return $this->storeRepository->create($attributes);
+    }
+    
+    public function udpate(Store $store, array $attributes): Store
+    {
+        return $this->storeRepository->update($store->id, $attributes);
+    }
+    
+    public function setUserId(Store $store, string $userId): Store
+    {
+        return $this->storeRepository->update($store->id, [
+            Store::USER_ID_COLUMN => $userId
+        ]);
     }
     
     public function updateStoreOAuth(Store $store, array $attributes): OAuth

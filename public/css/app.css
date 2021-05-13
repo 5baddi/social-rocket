@@ -169,7 +169,7 @@ body {
     background: transparent;
     border: 0;
     font-size: 14px;
-    color: #3860FB;
+    color: #000000;
     font-weight: 500;
     outline: none !important;
 }
@@ -179,7 +179,7 @@ body {
 }
 
 .custom-select-design2 {
-    color: #3860fb;
+    color: #000000;
     font-weight: 500;
     -webkit-appearance: none;
     border: 0;
@@ -492,7 +492,7 @@ body {
 
 .link-customize-rd {
     margin-left: auto;
-    color: #3860fb !important;
+    color: #000000 !important;
     font-size: 18px;
     font-weight: 500;
     display: block;
@@ -508,7 +508,7 @@ body {
 }
 
 .btn-submit-customize {
-    background: #3860FB;
+    background: #000000;
     border: 0;
     color: #fff;
     font-size: 18px;
@@ -606,11 +606,11 @@ textarea.custom-textarea {
 }
 
 .btn-payouts.active {
-    color: #3860FB;
+    color: #000000;
 }
 
 .btn-payouts.active span {
-    background: #3860FB;
+    background: #000000;
 }
 
 .box-body-payouts-body table {
@@ -777,11 +777,11 @@ textarea.custom-textarea {
 }
 
 .box-profile-settings-tabs a.active {
-    color: #3860FB;
+    color: #000000;
 }
 
 .box-profile-settings-tabs a.active:after {
-    background: #3860FB;
+    background: #000000;
 }
 
 .box-profile-settings-tabs a:after {
@@ -872,7 +872,7 @@ textarea.custom-textarea {
 }
 
 .item-notification-check input:checked + .box-slide-notification {
-    background: #3860FB;
+    background: #000000;
 }
 
 .item-notification-check input:disabled:checked + .box-slide-notification {
@@ -1073,7 +1073,7 @@ textarea.custom-textarea {
 }
 
 .col-payout input:checked+label span {
-    background: #3860fb;
+    background: #000000;
 }
 
 .item-payout>.row {
@@ -1178,7 +1178,7 @@ body.body-login {
 }
 
 .body-login .title2 {
-    color: #4E61B2;
+    color: #000000;
     font-weight: 700;
     font-size: 24px;
 }
@@ -1224,7 +1224,7 @@ body.body-login {
 .body-login .title1 {
     font-size: 28px;
     font-weight: 700;
-    color: #4E61B2;
+    color: #000000;
 }
 
 .label-custom1 {
@@ -1242,7 +1242,7 @@ body.body-login {
     border: 1px solid #E6E6E6;
     font-size: 13px;
     font-weight: 600;
-    color: #4E61B2;
+    color: #000000;
     background: #fff;
     padding: 7px 15px;
     outline: none !important;
@@ -1275,7 +1275,7 @@ body.body-login {
 }
 
 .input-custom1:focus {
-    border: 2px solid #3860FB;
+    border: 2px solid #000000;
 }
 
 .form-group-custom1 {
@@ -1287,7 +1287,7 @@ body.body-login {
     width: 100%;
     border-radius: 20px;
     border: 0;
-    background: #3860FB;
+    background: #000000;
     font-weight: 700;
     color: #fff;
     padding: 7px 5px;
@@ -1304,7 +1304,7 @@ body.body-login {
 
 .link-design1 {
     font-weight: 600;
-    color: #3860FB !important;
+    color: #000000 !important;
     font-size: 15px;
     text-decoration: none !important;
 }
@@ -1328,9 +1328,9 @@ body.body-login {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     padding-top: 60px;
 }
 
@@ -1341,8 +1341,8 @@ body.body-login {
 }
 
 .img-box-left-login {
-    max-width: 100%;
-    height: 340px;
+    max-width: 70%;
+    /* height: 340px; */
 }
 
 .box-text-left-login ul li:before {
@@ -1380,12 +1380,12 @@ body.body-login {
 }
 
 .form-group-custom1-exist input {
-    border-color: #3860FB;
+    border-color: #000000;
     border-width: 2px;
 }
 
 .exist-input {
-    background: #3860FB;
+    background: #000000;
 }
 
 .error-input {
@@ -1417,7 +1417,7 @@ body.body-login {
     font-weight: 600;
     border: 0;
     background: transparent;
-    color: #4e61b2;
+    color: #000000;
     position: relative;
     width: 100%;
     padding: 5px;
@@ -1908,7 +1908,7 @@ a.link-menu-lat.active {
 .btn-notification {
     width: 100%;
     border: 0;
-    background: #3860fb;
+    background: #000000;
     font-weight: 600;
     color: #fff;
     font-size: 16px;
@@ -2107,7 +2107,7 @@ a.link-menu-lat.active {
 .btn-design-td,
 .btn-design-td-invoice {
     height: 40px;
-    background: #3860fb;
+    background: #000000;
     border: 0;
     color: #fff !important;
     border-radius: 6px;
@@ -2199,7 +2199,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .td-check input:checked + label {
-    border-color: #3860fb
+    border-color: #000000
 }
 
 .box-design1-single-payouts {
@@ -2311,11 +2311,11 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .item-pay:hover .title-pay {
-    color: #3860fb;
+    color: #000000;
 }
 
 .item-pay:hover {
-    border-color: #3860fb;
+    border-color: #000000;
 }
 
 .btn-advanced-settings .title-box-body img {
@@ -2337,7 +2337,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .td-check label:after {
-    background: #3860fb;
+    background: #000000;
     position: absolute;
     left: 1px;
     right: 1px;
@@ -2729,7 +2729,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .btn-change-payment {
     font-size: 15px;
     font-weight: 600;
-    color: #3860fb !important;
+    color: #000000 !important;
     border: 0;
     background: transparent;
     -webkit-appearance: none;
@@ -2889,7 +2889,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .text-plan-logo {
-    background: #3860fb;
+    background: #000000;
     color: #fff;
     font-weight: 500;
     padding: 4px 12px;
@@ -2909,7 +2909,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .item-plan:hover {
-    border-color: #3860fb;
+    border-color: #000000;
 }
 
 .col-num-account img {
@@ -3098,7 +3098,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .title-wellcome,
 .title-code {
     font-size: 17px;
-    color: #3860fb;
+    color: #000000;
 }
 
 .title-code {
@@ -3173,7 +3173,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .title-steps {
     font-size: 13px;
-    color: #3860fb;
+    color: #000000;
     margin-bottom: 5px;
 }
 
@@ -3258,7 +3258,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     width: 100%;
     text-align: center;
     display: block;
-    background: #3860fb;
+    background: #000000;
     color: #fff !important;
     font-weight: 600;
     line-height: 16px;
@@ -3295,7 +3295,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     margin-right: 5px;
 }
 .text-notified {
-    color: #3860fb !important;
+    color: #000000 !important;
     font-weight: 600 !important;
 }
 
@@ -3317,7 +3317,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .box-show-more a {
     display: inline-block;
-    color: #3860fb;
+    color: #000000;
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 20px;
@@ -3481,7 +3481,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .box-item-bank-with-input {
     background: #fff;
-    border: 1px solid #3860FB;
+    border: 1px solid #000000;
     padding: 7px 15px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -3589,7 +3589,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
   .box-item-bank1 {
       background: #fff;
-      border: 1px solid #3860FB;
+      border: 1px solid #000000;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -3945,7 +3945,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .preview-popup-footer .btn-white-customize {
     background: #fff;
-    color: #3860fb;
+    color: #000000;
 }
 
 #preview-popup {
@@ -4098,7 +4098,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     height: 50px;
     line-height: 49px;
     font-size: 12px;
-    background: #3860fb;
+    background: #000000;
     border: 0;
     color: #fff !important;
     border-radius: 6px;
@@ -4256,7 +4256,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .subtitle-plans h1 {
     font-size: 33px;
     font-weight: 700;
-    color: #4E61B2;
+    color: #000000;
 }
 
 .select-pay {
@@ -4387,7 +4387,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .btn-design-delete {
-    background: #3860fb;
+    background: #000000;
     /* color: #fff !important; */
 }
 
@@ -4554,7 +4554,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .btn-copy-iframe {
-    background: #3860FB;
+    background: #000000;
     border: 0;
     color: #fff;
     font-size: 14px;
@@ -4573,7 +4573,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     /* display: block; */
     width: 100%;
     font-size: 80%;
-    color: #3860FB;
+    color: #000000;
     margin-top: -33px;
     margin-left: 30px;
     position: absolute;
@@ -4623,7 +4623,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     /*width: 100%;*/
     /*border-radius: 20px;*/
     border: 0;
-    background: #3860FB;
+    background: #000000;
     font-weight: 700;
     color: #fff;
     padding: 7px 5px;
@@ -4714,7 +4714,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .input-bank-account {
-    border: 1px solid #3860FB;
+    border: 1px solid #000000;
     font-weight: 500;
 }
 
@@ -4907,7 +4907,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .confirm-message {
-    color: #3860FB !important;
+    color: #000000 !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     margin-top: 0px !important;
@@ -4920,7 +4920,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .link-design2 {
     font-weight: 600;
-    color: #3860FB !important;
+    color: #000000 !important;
     font-size: 12px;
     text-decoration: none !important;
     margin-left: 0px;
@@ -4988,7 +4988,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .save-success {
     width: 100%;
     font-size: 80%;
-    color: #3860FB;
+    color: #000000;
     margin-top: -23px;
     margin-left: -7px;
     position: absolute;
@@ -5020,4 +5020,8 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .no-underline {
     text-decoration: none !important;
+}
+
+.uppercase{
+    text-transform: uppercase !important;
 }

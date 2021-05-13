@@ -6,14 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 
-class ConnectController extends Controller
+class SubscriptionController extends Controller
 {
     public function __invoke()
     {
-        return view('connect');
+        return view('dashboard.subscription');
     }
 }
