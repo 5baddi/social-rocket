@@ -43,18 +43,29 @@ class ShopifyService extends Service
 
     public function getStoreName(string $storeURL): ?string
     {
-        if (!Str::startsWith($storeURL, 'http')) {
-            $storeURL = Str::start($storeURL, 'https://');
+        if (filter_var($storeURL, FILTER_VALIDATE_URL) !== false || preg_match('/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/', $storeURL, $match) !== false) {
+            if (!Str::startsWith($storeURL, 'http')) {
+                $storeURL = Str::start($storeURL, 'https://');
+            }
+
+            $parseURL = parse_url($storeURL);
+            $storeName = explode('.', $parseURL['host']);
+
+            if (!isset($parseURL['host'], $storeName[0])) {
+                return null;
+            }
+
+            return $storeName[0];
         }
+        
+        $storeURL = Str::replace("{store}", $storeURL, config('shopify.store_url'));
+        $storeHeaders = @get_headers((string) $storeURL);
 
-        $parseURL = parse_url($storeURL);
-        $storeName = explode('.', $parseURL['host']);
-
-        if (!isset($parseURL['host'], $storeName[0])) {
+        if (!$storeHeaders || $storeHeaders[0] == "HTTP/1.1 404 Not Found") {
             return null;
         }
 
-        return $storeName[0];
+        return $storeURL;
     }
 
     public function getStoreAccessToken(array $params): array

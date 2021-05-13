@@ -12,6 +12,8 @@ use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
 use BADDIServices\SocialRocket\Services\StoreService;
+use Exception;
+use Illuminate\Validation\ValidationException;
 
 class OAuthController extends Controller
 {
@@ -29,13 +31,19 @@ class OAuthController extends Controller
     
     public function __invoke(ConnectStoreRequest $request)
     {
-        $storeName = $this->shopifyService->getStoreName($request->query('store'));
-        $oauthURL = $this->shopifyService->getOAuthURL($storeName);
+        try {
+            $storeName = $this->shopifyService->getStoreName($request->input('store'));
+            $oauthURL = $this->shopifyService->getOAuthURL($storeName);
 
-        $this->storeService->createStore([
-            'slug'  =>  $storeName
-        ]);
+            $this->storeService->createStore([
+                'slug'  =>  $storeName
+            ]);
 
-        return redirect($oauthURL);
+            return redirect($oauthURL);
+        } catch (ValidationException $ex) {
+            return redirect()->back()->withErrors($ex->errors());
+        } catch (Exception $ex) {
+            return redirect()->back()->withErrors("Internal server error");
+        }
     }
 }

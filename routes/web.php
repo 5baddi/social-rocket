@@ -6,6 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
+use BADDIServices\SocialRocket\Http\Controllers\ConnectController;
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
@@ -21,5 +22,6 @@ use BADDIServices\SocialRocket\Http\Controllers\OAuthCallbackController;
 |
 */
 
-Route::get('/connect', OAuthController::class)->name('oauth.connect');
+Route::get('/connect', ConnectController::class)->name('connect');
+Route::post('/connect', OAuthController::class)->name('oauth.connect');
 Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
