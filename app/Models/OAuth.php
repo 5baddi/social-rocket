@@ -19,7 +19,7 @@ class OAuth extends Model
         self::STORE_ID,
         'code',
         'access_token',
-        'scopes',
+        'scope',
         'timestamp',
     ];
 

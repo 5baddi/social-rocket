@@ -47,7 +47,7 @@ class StoreService extends Service
         $validator = Validator::make($attributes, [
             'code'              =>  'required|string',
             'access_token'      =>  'required|string',
-            'scopes'            =>  'required|string',
+            'scope'             =>  'required|string',
             'timestamp'         =>  'required|string',
         ]);
 

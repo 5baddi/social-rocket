@@ -44,15 +44,15 @@ class OAuthController extends Controller
                 'slug'  =>  $storeName
             ]);
 
-            session('store', $storeName);
+            session('slug', $storeName);
 
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
-            return redirect()->back()->withErrors($ex->errors());
+            return redirect()->back()->withInput()->withErrors($ex->errors());
         } catch (InvalidStoreURLException $ex) {
-            return redirect()->back()->withErrors($ex->getMessage());
+            return redirect()->back()->withInput()->withErrors($ex->getMessage());
         } catch (Exception $ex) {
-            return redirect()->back()->withErrors("Internal server error");
+            return redirect()->back()->withInput()->withErrors("Internal server error");
         }
     }
 }

@@ -13,12 +13,12 @@ class CreateOauthsTable extends Migration
      */
     public function up()
     {
-        Schema::create('oauths', function (Blueprint $table) {
+        Schema::create('o_auths', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->string('code')->nullable(false);
             $table->string('access_token')->nullable(false);
-            $table->string('scopes')->nullable(false);
+            $table->string('scope')->nullable(false);
             $table->integer('timestamp')->nullable(false);
             $table->timestamps();
         });
@@ -31,6 +31,6 @@ class CreateOauthsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('store_o_auths');
+        Schema::dropIfExists('o_auths');
     }
 }

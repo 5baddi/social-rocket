@@ -40,7 +40,7 @@
                 </div>
                 <div class="col-lg-5 col-box-right-login">
                     <div class="box-right-login box-right-login-conect-store">
-                                            <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/img-login-shop.png" alt="" class="img-box-right-login">
+                        <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/img-login-shop.png" alt="" class="img-box-right-login">
                         <h1 class="title1">Connect your store</h1>
                         <p>Please enter your Shopify store URL and we’ll redirect you to Shopify to finish connecting your store to Social Snowball. </p>
                         <form method="POST" action="{{ route('oauth.connect') }}">
