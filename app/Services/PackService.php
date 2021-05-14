@@ -40,8 +40,13 @@ class PackService extends Service
 
         /** @var Subscription */
         $subscription = $user->subscription;
-        $subscription->load('pack');
 
-        return $subscription->pack;
+        if (!is_null($subscription)) {
+            $subscription->load('pack');
+
+            return $subscription->pack;
+        }
+
+        return null;
     }
 }

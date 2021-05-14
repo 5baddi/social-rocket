@@ -21,7 +21,7 @@ class HasSubscription
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && strpos($request->path(), "dashboard") === 0) {
+        if (Auth::check() && strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
             /** @var User */
             $user = Auth::user();
             $user->load('subscription');
