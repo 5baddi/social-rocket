@@ -22,7 +22,7 @@ class PacksSeeder extends Seeder
     {
         Pack::create([
             'name'              =>  'gravity',
-            'amount'            =>  9.99,
+            'price'             =>  9.99,
             'type'              =>  Pack::TYPES[0],
             'symbol'            =>  '$',
             'currency'          =>  'usd',
@@ -63,7 +63,7 @@ class PacksSeeder extends Seeder
         
         Pack::create([
             'name'          =>  'Asteroid',
-            'amount'        =>  10,
+            'price'         =>  10,
             'type'          =>  Pack::TYPES[1],
             'features'      =>  [
                 [

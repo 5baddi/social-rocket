@@ -16,6 +16,7 @@ class Pack extends Model
     public const PER_MONTH = 'month';
     public const PER_YEAR = 'year';
     public const FEATURES_COLUMN = 'features';
+    public const PRICE_COLUMN = 'price';
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
     public const RECURRING_TYPE = 'recurring';
