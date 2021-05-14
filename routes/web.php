@@ -13,9 +13,14 @@ use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SettingController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Payment\StripePaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPayController;
@@ -61,11 +66,11 @@ Route::middleware(['auth', 'has.subscription'])
     ->prefix('dashboard')
     ->group(function() {
         Route::get('/', IndexController::class);
-        Route::get('/customize', function(){})->name('.customize');
-        Route::get('/payouts', function(){})->name('.payouts');
-        Route::get('/accounts', function(){})->name('.accounts');
-        Route::get('/setting', function(){})->name('.setting');
-        Route::get('/help', function(){})->name('.help');
+        Route::get('/customize', CustomizeController::class)->name('.customize');
+        Route::get('/payouts', PayoutsController::class)->name('.payouts');
+        Route::get('/accounts', AccountsController::class)->name('.accounts');
+        Route::get('/setting', SettingController::class)->name('.setting');
+        Route::get('/help', HelpController::class)->name('.help');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

@@ -86,8 +86,8 @@
                     <span class="nav-link-title">Dashboard</span>
                 </a>
               </li>
-              <li class="nav-item {{ request()->routeIs('customize') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+              <li class="nav-item {{ request()->routeIs('dashboard.customize') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.customize') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -105,8 +105,8 @@
                     <span class="nav-link-title">Customize</span>
                 </a>
               </li>
-              <li class="nav-item {{ request()->routeIs('payouts') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+              <li class="nav-item {{ request()->routeIs('dashboard.payouts') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.payouts') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -118,8 +118,8 @@
                     <span class="nav-link-title">Payouts</span>
                 </a>
               </li>
-              <li class="nav-item {{ request()->routeIs('accounts') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+              <li class="nav-item {{ request()->routeIs('dashboard.accounts') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.accounts') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -132,8 +132,8 @@
                     <span class="nav-link-title">Accounts</span>
                 </a>
               </li>
-              <li class="nav-item {{ request()->routeIs('setting') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+              <li class="nav-item {{ request()->routeIs('dashboard.setting') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.setting') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -144,8 +144,8 @@
                     <span class="nav-link-title">Setting</span>
                 </a>
               </li>
-              <li class="nav-item {{ request()->routeIs('help') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+              <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('dashboard.help') }}">
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
