@@ -31,8 +31,10 @@ class User extends Authenticatable
     protected $fillable = [
         'first_name',
         'last_name',
+        'phone',
         'email',
-        'password'
+        'password',
+        'last_login'
     ];
 
     /** @var array */
@@ -58,7 +60,7 @@ class User extends Authenticatable
 
     public function setPasswordAttribute($value): self
     {
-        $this->setAttribute(self::PASSWORD_COLUMN, Hash::make($value));
+        $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
 
         return $this;
     }

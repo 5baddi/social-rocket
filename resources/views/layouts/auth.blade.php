@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width"/>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name') }} &mdash; Connect store</title>
-        <link rel="icon" type="image/png" href="{{ asset('img/min-logo.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
@@ -38,6 +38,7 @@
                 </div>
             </div>
         </div>
+        
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/popper.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>

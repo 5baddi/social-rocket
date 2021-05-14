@@ -57,12 +57,12 @@ class StoreRepository
     public function update(Store $store, array $attributes)
     {
         $storeUpdated = Store::query()
-                            ->update(
+                            ->where(
                                 [
                                     Store::ID_COLUMN => $store->id
-                                ], 
-                                $attributes
-                            );
+                                ]
+                            )
+                            ->update($attributes);
 
         if ($storeUpdated) {
             return $store->refresh();

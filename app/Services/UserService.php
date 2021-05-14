@@ -35,7 +35,7 @@ class UserService extends Service
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
             User::PASSWORD_COLUMN      => 'required|string',
-            User::PHONE_COLUMN         => 'nullable|string|max:25'
+            User::PHONE_COLUMN         => 'nullable|string|max:50'
         ]);
 
         if ($validator->fails()) {

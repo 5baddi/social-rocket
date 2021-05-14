@@ -23,6 +23,8 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
+            $table->string('brand_name')->nullable();
+            $table->string('currency', 10)->default('USD');
             $table->enum('commission_type', Setting::COMMISSION_TYPES)->nullable(false);
             $table->float('commission_amount')->default(0.0);
             $table->enum('discount_type', Setting::DISCOUNT_TYPES)->nullable(false);

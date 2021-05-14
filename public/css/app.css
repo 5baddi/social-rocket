@@ -1350,11 +1350,15 @@ body.body-login {
     display: inline-block;
     width: 15px;
     height: 15px;
-    background-image: url(../img/icon-check.svg);
+    background-image: url(../img/check.svg);
     background-repeat: no-repeat;
     background-size: 15px;
     background-position: 0px 2px;
     margin-right: 7px;
+}
+
+.uncheck:before {
+    background-image: url(../img/uncheck.svg);
 }
 
 .box-text-left-login ul li {

@@ -23,7 +23,7 @@ class Subscription
         /** @var User */
         $user = Auth::user();
 
-        dd($user->subscripotion);
+        // dd($user->subscripotion);
 
         // if($user instanceof User && $user->subscripotion)
 

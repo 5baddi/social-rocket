@@ -11,11 +11,12 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SubscriptionController;
-use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\BillingPayController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,4 +52,7 @@ Route::middleware(['auth', 'subscription'])
             dd("Implement subscription..");
         });
         Route::get('/subscription', SubscriptionController::class)->name('.select.pack');
+        Route::get('/subscription/billing/{pack}', BillingPayController::class)->name('.billing.pay');
+
+        Route::get('/logout', SignOutController::class)->name('.signout');
     });

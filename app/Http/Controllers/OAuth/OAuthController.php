@@ -16,7 +16,7 @@ use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\ConnectStoreRequest;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
-use BADDIServices\SocialRocket\Exceptions\Shopify\StoreAlreadyLinkedException;
+use BADDIServices\SocialRocket\Exceptions\Store\StoreAlreadyLinkedException;
 
 class OAuthController extends Controller
 {
@@ -56,7 +56,7 @@ class OAuthController extends Controller
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
             return redirect()->back()->withInput()->withErrors($ex->errors());
-        } catch (InvalidStoreURLException $ex) {
+        } catch (InvalidStoreURLException | StoreAlreadyLinkedException $ex) {
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
             return redirect()->back()->withInput()->with("error", "Internal server error");

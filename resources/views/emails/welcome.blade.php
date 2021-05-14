@@ -32,7 +32,7 @@
                                                         Have any questions? Visit <a href="https://socialsnowball.zendesk.com/hc/en-us" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://socialsnowball.zendesk.com/hc/en-us&amp;source=gmail&amp;ust=1621002115819000&amp;usg=AFQjCNFhcMSOtCKVassVvDsz0RyIIqAzKA">{{ config('app.name') }} Support</a> or <a href="https://socialsnowball.zendesk.com/hc/en-us/requests/new" target="_blank" data-saferedirecturl="https://www.google.com/url?q=https://socialsnowball.zendesk.com/hc/en-us/requests/new&amp;source=gmail&amp;ust=1621002115819000&amp;usg=AFQjCNG0SUkUJdtsOToaxz4Du29oXex5vg">contact us</a>.
                                                     </p> --}}
 
-													<p style="font-size:14px">Best,<br>{{ config('app.name') }}</p>
+													<p style="font-size:14px">Best,<br><a href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a></p>
 												</td>
 											</tr>
 											<tr>
