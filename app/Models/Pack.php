@@ -14,6 +14,7 @@ class Pack extends Model
 {
     /** @var string */
     public const PER_MONTH = 'month';
+    public const PER_YEAR = 'year';
     public const FEATURES_COLUMN = 'features';
     public const PRICE_TYPE_COLUMN = 'price_type';
 
@@ -28,7 +29,8 @@ class Pack extends Model
 
     /** @var array */
     public const PAYMENT_CYCLES = [
-        self::PER_MONTH
+        self::PER_MONTH,
+        self::PER_YEAR
     ];
 
     /** @var array */

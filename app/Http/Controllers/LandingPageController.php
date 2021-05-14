@@ -10,21 +10,27 @@ namespace BADDIServices\SocialRocket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Services\AppService;
+use BADDIServices\SocialRocket\Services\PackService;
 
 class LandingPageController extends Controller
 {
     /** @var AppService */
     private $appService;
 
-    public function __construct(AppService $appService)
+    /** @var PackService */
+    private $packService;
+
+    public function __construct(AppService $appService, PackService $packService)
     {
         $this->appService = $appService;
+        $this->packService = $packService;
     }
 
     public function __invoke()
     {
         return view('landing', [
-            'appSettings'   =>  $this->appService->settings()
+            'appSettings'   =>  $this->appService->settings(),
+            'packs'         =>  $this->packService->all()
         ]);
     }
 }
