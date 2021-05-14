@@ -7,6 +7,5 @@
  */
 
 return [
-    'key'                   =>  env('STRIPE_KEY'),
-    'secret'                =>  env('STRIPE_SECRET'),
+    'api_key'                   =>  env('STRIPE_API_KEY'),
 ];

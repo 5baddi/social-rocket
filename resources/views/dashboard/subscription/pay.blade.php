@@ -51,6 +51,11 @@
                         </div>
                     </div>
                 </div>
+                @if(Session::has('error'))
+                <div class="invalid-feedback">
+                    {{ Session::get('error') }}
+                </div>
+                @endif
             </div>
             <div class="box-btn-submit">
                 <button class="btn-design1" type="submit">Pay</button>
