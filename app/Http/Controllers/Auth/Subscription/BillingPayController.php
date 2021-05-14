@@ -34,7 +34,7 @@ class BillingPayController extends Controller
         $pack = $this->packService->findById($id);
         abort_unless($pack instanceof Pack, Response::HTTP_NOT_FOUND, 'No pack selected');
 
-        if ($pack->price_type === Pack::PRICE_CYCLE_PERCENTAGE) {
+        if ($pack->type === Pack::PERCENTAGE_TYPE) {
             $this->subscriptionService->createWithPercentage(Auth::user(), $pack);
 
             return redirect()->route('dashboard');

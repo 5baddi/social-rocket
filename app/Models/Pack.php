@@ -16,9 +16,10 @@ class Pack extends Model
     public const PER_MONTH = 'month';
     public const PER_YEAR = 'year';
     public const FEATURES_COLUMN = 'features';
-    public const PRICE_TYPE_COLUMN = 'price_type';
-    public const PRICE_TYPE_FIXED = 'fixed';
-    public const PRICE_CYCLE_PERCENTAGE = 'percentage';
+    public const TYPE_COLUMN = 'type';
+    public const INTERVAL_COLUMN = 'interval';
+    public const RECURRING_TYPE = 'recurring';
+    public const PERCENTAGE_TYPE = 'percentage';
 
     /** @var int */
     public const DEFAULT_TRIAL_DAYS = 7;
@@ -30,15 +31,15 @@ class Pack extends Model
     public const REVENUE_NOT_SHARED = 5;
 
     /** @var array */
-    public const PAYMENT_CYCLES = [
+    public const INTERVAL = [
         self::PER_MONTH,
         self::PER_YEAR
     ];
 
     /** @var array */
-    public const PRICE_TYPES = [
-        self::PRICE_TYPE_FIXED,
-        self::PRICE_CYCLE_PERCENTAGE
+    public const TYPES = [
+        self::RECURRING_TYPE,
+        self::PERCENTAGE_TYPE
     ];
 
     public function subscriptions(): HasMany
@@ -60,6 +61,6 @@ class Pack extends Model
 
     public function isFixedPrice(): bool
     {
-        return $this->attributes[self::PRICE_TYPE_COLUMN] === self::PRICE_TYPES[0];
+        return $this->attributes[self::TYPE_COLUMN] === self::TYPES[0];
     }
 }

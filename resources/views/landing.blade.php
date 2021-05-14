@@ -153,7 +153,7 @@
                             <div class="item-plan">
                                 <h3 class="title-item-plan">{{ ucwords($pack->name) }} @if($pack->is_popular)<span>Most Popular</span>@endif</h3>
                                 <div class="box-price-item-plan">
-                                    <h4 class="title-price-item-plan">{{ $pack->isFixedPrice() ? $pack->currency_symbol : '' }}{{ $pack->price }}{{ !$pack->isFixedPrice() ? '%' : '' }}</h4>
+                                    <h4 class="title-price-item-plan">{{ $pack->isFixedPrice() ? $pack->symbol : '' }}{{ $pack->price }}{{ !$pack->isFixedPrice() ? '%' : '' }}</h4>
                                     <div class="text-price-item-plan">
                                         <p>/ {{ $pack->isFixedPrice() ? 'per month' : 'of revenue share' }}</p>
                                     </div>

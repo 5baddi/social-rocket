@@ -18,13 +18,13 @@ class CreatePacksTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->string('name', 100)->unique();
             $table->json('features')->nullable(true);
-            $table->float('price')->default(0.0);
-            $table->enum('price_type', Pack::PRICE_TYPES);
-            $table->enum('payment_cycle', Pack::PAYMENT_CYCLES)->default(Pack::PER_MONTH);
+            $table->float('amount')->default(0.0);
+            $table->enum('type', Pack::TYPES);
+            $table->enum('interval', Pack::INTERVAL)->default(Pack::PER_MONTH);
             $table->integer('trial_days')->default(Pack::DEFAULT_TRIAL_DAYS);
             $table->boolean('is_popular')->default(false);
             $table->string('currency', 10)->default('usd');
-            $table->string('currency_symbol', 10)->nullable();
+            $table->string('symbol', 10)->nullable();
             $table->timestamps();
         });
     }
