@@ -55,6 +55,9 @@
             <div class="box-btn-submit">
                 <button class="btn-design1" type="submit">Pay</button>
             </div>
+            <p class="have-account">
+                <a href="{{ route('dashboard.select.pack') }}" class="link-design1">Choose another plan</a>
+            </p>
         </div>
     </form>
 @endsection
