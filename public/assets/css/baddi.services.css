@@ -2,8 +2,13 @@
     height: 3rem !important;
 }
 
+.antialiased{
+    background-color: #ffffff !important;
+}
+
 .navbar-vertical{
     border-right: 1px solid rgba(32,107,196,.06);
+    background-color: #f4f6fa !important;
 }
 
 .navbar .navbar-nav .active{
