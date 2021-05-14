@@ -27,7 +27,7 @@ class HasSubscription
             $user->load('subscription');
 
             if(!$user->subscription instanceof Subscription) {
-                return redirect()->route('subscription');
+                return redirect()->route('subscription.select.pack');
             }
         }
 
