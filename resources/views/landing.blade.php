@@ -26,7 +26,11 @@
                         <li><a href="#pricing" class="link-header">Pricing</a></li>
                         <li><a href="#faqs" class="link-header">FAQ</a></li>
                         <li><a href="{{ route('guide') }}" class="link-header" target="_blank">Blog</a></li>
+                        @if(!auth()->check())
                         <li><a href="{{ route('signin') }}" class="link-sign-in btn-design1">Sign In</a></li>
+                        @else
+                        <li><a href="{{ route('dashboard') }}" class="link-sign-in btn-design1">Dashboard</a></li>
+                        @endif
                     </ul>
                 </div>
                 <button class="btn-mobile">
@@ -162,7 +166,7 @@
                                     @endforeach
                                 </ul>
                                 <div class="box-btn-item-plan">
-                                    <a href="{{ route('dashboard.pack.pay', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">Start Free Trial</a>
+                                    <a href="{{ route('dashboard.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">Start Free Trial</a>
                                 </div>
                             </div>
                             @endforeach
