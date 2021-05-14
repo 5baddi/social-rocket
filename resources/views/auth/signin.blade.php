@@ -1,4 +1,7 @@
 @extends('layouts.auth')
+
+@section('title') Sign in @endsection
+
 @section('form')
     <h1 class="title1">Welcome back</h1>
     <form method="POST" action="{{ route('auth.signin') }}">

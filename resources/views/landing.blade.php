@@ -162,7 +162,7 @@
                                     @endforeach
                                 </ul>
                                 <div class="box-btn-item-plan">
-                                    <a href="{{ route('dashboard.billing.pay', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">Start Free Trial</a>
+                                    <a href="{{ route('dashboard.pack.pay', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">Start Free Trial</a>
                                 </div>
                             </div>
                             @endforeach

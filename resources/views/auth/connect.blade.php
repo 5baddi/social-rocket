@@ -1,4 +1,7 @@
 @extends('layouts.auth')
+
+@section('title') Connect store @endsection
+
 @section('form')
     <img src="{{ asset('img/connect-app.png') }}" class="img-box-right-login"/>
     <h1 class="title1">Connect your store</h1>

@@ -16,9 +16,19 @@ class Subscription extends Model
     /** @var int */
     public const STRIPE_GATEWAY = 1;
 
+    /** @var string */
+    public const USER_ID_COLUMN = 'user_id';
+    public const PACK_ID_COLUMN = 'pack_id';
+
     /** @var array */
     public const PAYMENT_GATEWAYS = [
         self::STRIPE_GATEWAY
+    ];
+
+    /** @var array */
+    protected $fillable = [
+        self::USER_ID_COLUMN,
+        self::PACK_ID_COLUMN,
     ];
 
     public function user(): BelongsTo

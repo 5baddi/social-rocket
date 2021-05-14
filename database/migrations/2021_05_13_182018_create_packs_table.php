@@ -23,6 +23,7 @@ class CreatePacksTable extends Migration
             $table->enum('payment_cycle', Pack::PAYMENT_CYCLES)->default(Pack::PER_MONTH);
             $table->integer('trial_days')->default(Pack::DEFAULT_TRIAL_DAYS);
             $table->boolean('is_popular')->default(false);
+            $table->string('currency', 10)->default('usd');
             $table->string('currency_symbol', 10)->nullable();
             $table->timestamps();
         });

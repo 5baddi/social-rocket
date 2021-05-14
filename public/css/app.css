@@ -902,22 +902,27 @@ textarea.custom-textarea {
 
 .box-input-custom1 input::-webkit-input-placeholder {
     opacity: .5;
+    color: #DFE6E9;
 }
 
 .box-input-custom1 input::-moz-placeholder {
     opacity: .5;
+    color: #DFE6E9;
 }
 
 .box-input-custom1 input:-ms-input-placeholder {
     opacity: .5;
+    color: #DFE6E9;
 }
 
 .box-input-custom1 input::-ms-input-placeholder {
     opacity: .5;
+    color: #DFE6E9;
 }
 
 .box-input-custom1 input::placeholder {
     opacity: .5;
+    color: #DFE6E9;
 }
 
 .text-input {
@@ -1255,23 +1260,23 @@ body.body-login {
 }
 
 .input-custom1::-webkit-input-placeholder {
-    color: #fff;
+    color: #DFE6E9;
 }
 
 .input-custom1::-moz-placeholder {
-    color: #fff;
+    color: #DFE6E9;
 }
 
 .input-custom1:-ms-input-placeholder {
-    color: #fff;
+    color: #DFE6E9;
 }
 
 .input-custom1::-ms-input-placeholder {
-    color: #fff;
+    color: #DFE6E9;
 }
 
 .input-custom1::placeholder {
-    color: #fff;
+    color: #DFE6E9;
 }
 
 .input-custom1:focus {
@@ -5028,4 +5033,8 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .uppercase{
     text-transform: uppercase !important;
+}
+
+.no-padding{
+    padding: 0 !important;
 }

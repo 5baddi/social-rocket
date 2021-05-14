@@ -17,6 +17,8 @@ class Pack extends Model
     public const PER_YEAR = 'year';
     public const FEATURES_COLUMN = 'features';
     public const PRICE_TYPE_COLUMN = 'price_type';
+    public const PRICE_TYPE_FIXED = 'fixed';
+    public const PRICE_CYCLE_PERCENTAGE = 'percentage';
 
     /** @var int */
     public const DEFAULT_TRIAL_DAYS = 7;
@@ -35,8 +37,8 @@ class Pack extends Model
 
     /** @var array */
     public const PRICE_TYPES = [
-        'fixed',
-        'percentage'
+        self::PRICE_TYPE_FIXED,
+        self::PRICE_CYCLE_PERCENTAGE
     ];
 
     public function subscriptions(): HasMany

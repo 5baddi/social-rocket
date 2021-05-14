@@ -1,4 +1,7 @@
 @extends('layouts.auth')
+
+@section('title') Create account @endsection
+
 @section('form')
     <h1 class="title1 uppercase">Welcome to</br>{{ config('app.name') }}</h1>
     <p>Lets get started by creating your account</p>

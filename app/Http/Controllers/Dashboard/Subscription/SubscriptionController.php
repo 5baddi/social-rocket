@@ -9,6 +9,8 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
 
 class SubscriptionController extends Controller
@@ -24,7 +26,8 @@ class SubscriptionController extends Controller
     public function __invoke()
     {
         return view('dashboard.subscription.index', [
-            'packs'     =>  $this->packService->all()
+            'packs'         =>  $this->packService->all(),
+            'currentPack'   =>  $this->packService->loadCurrentPack(Auth::user())
         ]);
     }
 }

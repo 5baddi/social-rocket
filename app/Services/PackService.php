@@ -8,9 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Repositories\PackRepository;
 use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SocialRocket\Repositories\PackRepository;
 
 class PackService extends Service
 {
@@ -30,5 +32,16 @@ class PackService extends Service
     public function findById(string $id): Pack
     {
         return $this->packRepository->findById($id);
+    }
+
+    public function loadCurrentPack(User $user): ?Pack
+    {
+        $user->load('subscription');
+
+        /** @var Subscription */
+        $subscription = $user->subscription;
+        $subscription->load('pack');
+
+        return $subscription->pack;
     }
 }

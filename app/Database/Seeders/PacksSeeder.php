@@ -25,6 +25,7 @@ class PacksSeeder extends Seeder
             'price'             =>  9.99,
             'price_type'        =>  Pack::PRICE_TYPES[0],
             'currency_symbol'   =>  '$',
+            'currency'          =>  'usd',
             'features'          =>  [
                 [
                     'key'       =>  Pack::UNLIMITED_AFFILIATES,

@@ -53,7 +53,8 @@ Route::middleware(['auth', 'has.subscription'])
             dd("Implement subscription..");
         });
         Route::get('/subscription', SubscriptionController::class)->name('.select.pack');
-        Route::get('/subscription/billing/{pack}', BillingPayController::class)->name('.billing.pay');
+        Route::get('/subscription/billing/{pack}', BillingPayController::class)->name('.pack.billing');
+        Route::post('/subscription/pay/{pack}', BillingPayController::class)->name('.pay.subscription');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

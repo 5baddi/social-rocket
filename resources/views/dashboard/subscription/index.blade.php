@@ -42,8 +42,8 @@
                                     <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>
                                     @endforeach
                                 </ul>
-                                <div class="box-btn-item-plan">
-                                    <a href="{{ route('dashboard.billing.pay', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">Start Free Trial</a>
+                                <div class="box-btn-item-plan @if($currentPack->id === $pack->id) current-plan @endif">
+                                    <a href="{{ $currentPack->id === $pack->id ? route('dashboard') : route('dashboard.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">{{ $currentPack->id === $pack->id ? 'Current Plan' : 'Start Free Trial' }}</a>
                                 </div>
                             </div>
                             @endforeach
