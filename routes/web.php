@@ -17,6 +17,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\BillingPayController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\SubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\Subscript
 |
 */
 
-Route::redirect('/', '/connect', 301);
-Route::redirect('/guide', '/connect', 301);
+Route::get('/', LandingPageController::class);
+Route::redirect('/guide', '/', 301)->name('guide');
 
 Route::middleware('guest')
     ->group(function() {

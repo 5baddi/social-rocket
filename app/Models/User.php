@@ -20,26 +20,22 @@ class User extends Authenticatable
     public const PHONE_COLUMN = 'phone';
     public const PASSWORD_COLUMN = 'password';
     public const LAST_LOGIN = 'last_login';
+    public const REMEMBER_TOLEN = 'remember_token';
 
     /** @var array */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'phone',
-        'email',
-        'password',
-        'last_login'
+        self::FIRST_NAME_COLUMN,
+        self::LAST_NAME_COLUMN,
+        self::EMAIL_COLUMN,
+        self::PHONE_COLUMN,
+        self::PASSWORD_COLUMN,
+        self::LAST_LOGIN,
     ];
 
     /** @var array */
     protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /** @var array */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        self::PASSWORD_COLUMN,
+        self::REMEMBER_TOLEN,
     ];
 
     public function store(): HasOne

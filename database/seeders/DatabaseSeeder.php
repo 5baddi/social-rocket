@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use BADDIServices\SocialRocket\Database\Seeders\PacksSeeder;
 use Illuminate\Database\Seeder;
+use BADDIServices\SocialRocket\Database\Seeders\PacksSeeder;
+use BADDIServices\SocialRocket\Database\Seeders\SettingsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,7 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            PacksSeeder::class
+            PacksSeeder::class,
+            SettingsSeeder::class,
         ]);
     }
 }

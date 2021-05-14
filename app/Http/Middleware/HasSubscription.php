@@ -21,12 +21,14 @@ class HasSubscription
      */
     public function handle(Request $request, Closure $next)
     {
-        /** @var User */
-        $user = Auth::user();
-        $user->load('subscription');
+        if (Auth::check() && strpos($request->path(), "dashboard") === 0) {
+            /** @var User */
+            $user = Auth::user();
+            $user->load('subscription');
 
-        if(!$user->subscripotion instanceof Subscription && strpos($request->path(), "dashboard/subscription") === false) {
-            return redirect('/dashboard/subscription');
+            if(!$user->subscripotion instanceof Subscription && strpos($request->path(), "dashboard/subscription") === false) {
+                return redirect('/dashboard/subscription');
+            }
         }
 
         return $next($request);
