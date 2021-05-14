@@ -4,12 +4,10 @@ namespace App\Models;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
-use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Models\Authenticatable;
-use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class User extends Authenticatable
 {

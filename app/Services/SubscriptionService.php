@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Services;
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SocialRocket\Notifications\SubscriptionCreated;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 
 class SubscriptionService extends Service
@@ -25,6 +26,11 @@ class SubscriptionService extends Service
 
     public function createWithPercentage(User $user, Pack $pack): Subscription
     {
-        return $this->subscriptionRepository->createWithPercentage($user, $pack);
+        $subscription = $this->subscriptionRepository->createWithPercentage($user, $pack);
+        
+        $subscription->load('pack');
+        $user->notify(new SubscriptionCreated($subscription));
+
+        return $subscription;
     }
 }
