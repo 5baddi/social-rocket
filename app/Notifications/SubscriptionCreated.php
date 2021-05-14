@@ -39,8 +39,7 @@ class SubscriptionCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        // return ['mail', 'database'];
-        return ['database'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -52,9 +51,8 @@ class SubscriptionCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Your subscription has been activated')
+                    ->view('emails.subscription.activated', ['subscription' => $this->subscription]);
     }
 
     /**

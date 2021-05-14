@@ -28,7 +28,7 @@ class SubscriptionService extends Service
     {
         $subscription = $this->subscriptionRepository->createWithPercentage($user, $pack);
         
-        $subscription->load('pack');
+        $subscription->load(['user', 'pack']);
         $user->notify(new SubscriptionCreated($subscription));
 
         return $subscription;
