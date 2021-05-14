@@ -15,7 +15,6 @@ class UserRespository
     public function findByEmail(string $email): ?User
     {
         return User::query()
-                    ->with(['subscripotion'])
                     ->where([
                         User::EMAIL_COLUMN => $email
                     ])
@@ -26,5 +25,25 @@ class UserRespository
     {
         return User::query()
                     ->create($attributes);
+    }
+
+    /**
+     * @return User|false
+     */
+    public function update(User $user, array $attributes)
+    {
+        $userUpdated = User::query()
+                            ->where(
+                                [
+                                    User::ID_COLUMN => $user->id
+                                ]
+                            )
+                            ->update($attributes);
+
+        if ($userUpdated) {
+            return $user->refresh();
+        }
+
+        return false;
     }
 }

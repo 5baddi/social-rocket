@@ -44,7 +44,7 @@ Route::middleware('guest')
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
     });
 
-Route::middleware(['auth', 'subscription'])
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard')
     ->prefix('dashboard')
     ->group(function() {

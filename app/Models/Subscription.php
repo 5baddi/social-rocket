@@ -8,15 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use BADDIServices\SocialRocket\Traits\HasUUID;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Subscription extends Model
 {
-    use HasFactory, HasUUID;
-
     /** @var int */
     public const STRIPE_GATEWAY = 1;
 

@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Traits\HasUUID;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
+use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SocialRocket\Models\Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasUUID;
+    use Notifiable;
 
     /** @var string */
     public const EMAIL_COLUMN = 'email';
@@ -21,11 +19,7 @@ class User extends Authenticatable
     public const FIRST_NAME_COLUMN = 'first_name';
     public const PHONE_COLUMN = 'phone';
     public const PASSWORD_COLUMN = 'password';
-    public const CURRENCY_COLUMN = 'currency';
-    public const BRAND_NAME_COLUMN = 'brand_name';
-
-    /** @var string */
-    protected $primaryKey = 'id';
+    public const LAST_LOGIN = 'last_login';
 
     /** @var array */
     protected $fillable = [
@@ -53,9 +47,9 @@ class User extends Authenticatable
         return $this->hasOne(Store::class);
     }
     
-    public function subscripotion(): HasOne
+    public function subscription(): HasOne
     {
-        return $this->hasOne(Subscription::class);
+        return $this->hasOne(Subscription::class, 'user_id');
     }
 
     public function setPasswordAttribute($value): self

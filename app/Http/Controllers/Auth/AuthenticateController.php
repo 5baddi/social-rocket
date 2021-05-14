@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticateController extends Controller
@@ -43,6 +44,10 @@ class AuthenticateController extends Controller
             if (!$authenticateUser) {
                 return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }
+
+            $this->userService->update($user, [
+                User::LAST_LOGIN    =>  Carbon::now()
+            ]);
 
             return redirect('/dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $ex) {

@@ -8,13 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-use BADDIServices\SocialRocket\Traits\HasUUID;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
 class Setting extends Model
 {
-    use HasFactory, HasUUID;
+    /** @var string */
+    public const CURRENCY_COLUMN = 'currency';
+    public const BRAND_NAME_COLUMN = 'brand_name';
 
     /** @var array */
     public const COMMISSION_TYPES = [

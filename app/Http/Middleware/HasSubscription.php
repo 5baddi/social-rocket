@@ -12,8 +12,9 @@ use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\Models\Subscription;
 
-class Subscription
+class HasSubscription
 {
     /**
      * @return mixed
@@ -22,10 +23,11 @@ class Subscription
     {
         /** @var User */
         $user = Auth::user();
+        $user->load('subscription');
 
-        // dd($user->subscripotion);
-
-        // if($user instanceof User && $user->subscripotion)
+        if(!$user->subscripotion instanceof Subscription && $request->path() !== "dashboard/subscription") {
+            return redirect('/dashboard/subscription');
+        }
 
         return $next($request);
     }

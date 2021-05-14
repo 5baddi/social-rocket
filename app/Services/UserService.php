@@ -44,4 +44,9 @@ class UserService extends Service
 
         return $this->userRepository->create($attributes);
     }
+
+    public function update(User $user, array $attributes): User
+    {
+        return $this->userRepository->update($user, $attributes);
+    }
 }

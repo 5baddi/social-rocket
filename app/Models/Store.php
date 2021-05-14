@@ -9,19 +9,12 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Traits\HasUUID;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Store extends Model
 {
-    use HasFactory, HasUUID;
-
     /** @var string */
-    public const ID_COLUMN = 'id';
     public const SLUG_COLUMN = 'slug';
     public const USER_ID_COLUMN = 'user_id';
 
