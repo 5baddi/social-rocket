@@ -26,8 +26,8 @@ class HasSubscription
             $user = Auth::user();
             $user->load('subscription');
 
-            if(!$user->subscription instanceof Subscription && strpos($request->path(), "dashboard/subscription") === false) {
-                return redirect('/dashboard/subscription');
+            if(!$user->subscription instanceof Subscription) {
+                return redirect()->route('subscription');
             }
         }
 

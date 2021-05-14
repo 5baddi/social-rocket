@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription;
+namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Pack;
@@ -40,7 +40,7 @@ class BillingPayController extends Controller
             return redirect()->route('dashboard');
         }
 
-        return view('dashboard.subscription.pay', [
+        return view('auth.subscription.pay', [
             'pack'              =>  $pack
         ]);
     }

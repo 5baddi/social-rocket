@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription;
+namespace BADDIServices\SocialRocket\Http\Controllers\Payment;
 
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -47,7 +47,7 @@ class StripePaymentController extends Controller
                 'trace'     =>  $ex->getTrace()
             ]);
 
-            return redirect()->route('dashboard.pay.subscription')->withInput()->with('error', 'Payment creation failed!');
+            return redirect()->route('subscription.pay')->withInput()->with('error', 'Payment creation failed!');
         }
     }
 }

@@ -9,15 +9,16 @@
 use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
+use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\BillingPayController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Subscription\SubscriptionController;
-use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
+use BADDIServices\SocialRocket\Http\Controllers\Payment\StripePaymentController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPayController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,15 +47,21 @@ Route::middleware('guest')
     });
 
 Route::middleware(['auth', 'has.subscription'])
+    ->name('subscription')
+    ->prefix('subscription')
+    ->group(function() {
+        Route::get('/', SubscriptionController::class)->name('.select.pack');
+        Route::get('/billing/{pack}', BillingPayController::class)->name('.pack.billing');
+        Route::post('/pay/{pack}', StripePaymentController::class)->name('.pay');
+    });
+
+Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard')
     ->prefix('dashboard')
     ->group(function() {
         Route::get('/', function() {
             dd("Implement subscription..");
         });
-        Route::get('/subscription', SubscriptionController::class)->name('.select.pack');
-        Route::get('/subscription/billing/{pack}', BillingPayController::class)->name('.pack.billing');
-        Route::post('/subscription/pay/{pack}', BillingPayController::class)->name('.pay.subscription');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

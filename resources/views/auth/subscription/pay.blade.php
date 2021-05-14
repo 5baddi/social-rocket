@@ -5,7 +5,7 @@
 @section('form')
     <h1 class="title1">Payment details</h1>
     <p>{{ ucwords($pack->name) }} plan only <strong>{{ $pack->isFixedPrice() ? $pack->currency_symbol : '' }}{{ $pack->price }}{{ !$pack->isFixedPrice() ? '%' : '' }}</strong> {{ $pack->isFixedPrice() ? 'per month' : 'of revenue share' }}</p>
-    <form method="POST" action="{{ route('dashboard.pay.subscription', ['pack' => $pack->id]) }}">
+    <form method="POST" action="{{ route('subscription.pay', ['pack' => $pack->id]) }}">
         @csrf
         <div class="box-form-design1">
             <div class="form-group-custom1">
@@ -61,7 +61,7 @@
                 <button class="btn-design1" type="submit">Pay</button>
             </div>
             <p class="have-account">
-                <a href="{{ route('dashboard.select.pack') }}" class="link-design1">Choose another plan</a>
+                <a href="{{ route('subscription.select.pack') }}" class="link-design1">Choose another plan</a>
             </p>
         </div>
     </form>
