@@ -14,6 +14,7 @@ use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Payment\StripePaymentController;
@@ -59,9 +60,12 @@ Route::middleware(['auth', 'has.subscription'])
     ->name('dashboard')
     ->prefix('dashboard')
     ->group(function() {
-        Route::get('/', function() {
-            dd("Implement subscription..");
-        });
+        Route::get('/', IndexController::class);
+        Route::get('/customize', function(){})->name('.customize');
+        Route::get('/payouts', function(){})->name('.payouts');
+        Route::get('/accounts', function(){})->name('.accounts');
+        Route::get('/setting', function(){})->name('.setting');
+        Route::get('/help', function(){})->name('.help');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

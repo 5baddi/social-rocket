@@ -1,0 +1,19 @@
+.navbar-brand-image{
+    height: 3rem !important;
+}
+
+.navbar-vertical{
+    border-right: 1px solid rgba(32,107,196,.06);
+}
+
+.navbar .navbar-nav .active{
+    text-decoration: none;
+    background-color: rgba(32,107,196,.06);
+}
+.navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active{
+    color: #206bc4 !important;
+}
+.navbar .navbar-nav .nav-link:hover, .nav-link:hover{
+    color: inherit;
+    background-color: rgba(101,109,119,.06);
+}
