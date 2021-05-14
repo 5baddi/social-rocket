@@ -21,6 +21,9 @@ class SubscriptionCreated extends Notification implements ShouldQueue
     /** @var Subscription */
     private $subscription;
 
+    /** @var string */
+    public const SUBJECT = 'Your subscription has been activated';
+
     /**
      * Create a new notification instance.
      *
@@ -51,7 +54,7 @@ class SubscriptionCreated extends Notification implements ShouldQueue
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Your subscription has been activated')
+                    ->subject(self::SUBJECT)
                     ->view('emails.subscription.activated', ['subscription' => $this->subscription]);
     }
 
@@ -64,6 +67,7 @@ class SubscriptionCreated extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
+            'subject'           => self::SUBJECT,
             'subscription_id'   => $this->subscription->id, 
             'pack_id'           => $this->subscription->pack_id, 
             'type'              => $this->subscription->pack->price_type,
