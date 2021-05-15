@@ -138,6 +138,8 @@
 
 @section('script')
     document.addEventListener("DOMContentLoaded", function () {
+        localStorage.setItem('checkout-color', '{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}');
+
         var el = document.getElementById('select-commission-type');
         window.Choices && (new Choices(el, {
             classNames: {
@@ -216,6 +218,11 @@
                 } else {
                     dicountEl.text('%');
                 }
+            });
+            
+            $('#color').change(function () {
+                var value = $(this).val();
+                localStorage.setItem('checkout-color', value);
             });
         });
     });

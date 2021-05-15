@@ -155,8 +155,8 @@ style="overflow: visible; height: auto;">
                                                 <div class="section__content srow">
                                                     <div class="section__content__column scolumn-text">
                                                         <div class="text-container">
-                                                            <h2 class="heading-2 soffer_header"
-                                                                style="font-weight: 600; font-size: 23px; color:#7d2c2c;">
+                                                            <h2 id="offer_header"
+                                                                style="font-weight: 600; font-size: 23px;">
                                                                 You can make money promoting our products!</h2>
                                                             <p class="os-step__description">Simply share the discount code
                                                                 we created just for you <svg
@@ -281,7 +281,7 @@ style="overflow: visible; height: auto;">
                                             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
                                             <div
                                                 style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
-                                                <img src="https://app.socialsnowball.io/img/logo.svg"
+                                                <img src="{{ asset('img/logo.png') }}"
                                                     id="offer-details-logo"
                                                     style="display: none; vertical-align: middle; width: 60%;">
                                                 <p style="font-weight: 600">Affiliate Program</p>
@@ -663,31 +663,39 @@ style="overflow: visible; height: auto;">
 
 
         <script>
-            window.modalInfo = function () {
-                document.getElementById('offer-details').style.display = "flex";
-            }
+            document.addEventListener("DOMContentLoaded", function () {
+                var color = localStorage.getItem('checkout-color');
+                var el = document.getElementById('offer_header');
+                if (el && el !== 'undefined') {
+                    el.style.color = color || '{{ \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}';
+                }
 
-            window.modalClose = function () {
-                document.getElementById('offer-details').style.display = "none";
-            }
+                window.modalInfo = function () {
+                    document.getElementById('offer-details').style.display = "flex";
+                }
 
-            window.copyLink = function () {
-                var codeToCopy = document.getElementById('scode');
-                var selection = document.createRange();
-                selection.selectNodeContents(codeToCopy);
-                window.getSelection().removeAllRanges();
-                window.getSelection().addRange(selection);
-                var res = document.execCommand('copy');
-                window.getSelection().removeRange(selection);
-            }
+                window.modalClose = function () {
+                    document.getElementById('offer-details').style.display = "none";
+                }
 
-            window.shareFacebook = function () {
+                window.copyLink = function () {
+                    var codeToCopy = document.getElementById('scode');
+                    var selection = document.createRange();
+                    selection.selectNodeContents(codeToCopy);
+                    window.getSelection().removeAllRanges();
+                    window.getSelection().addRange(selection);
+                    var res = document.execCommand('copy');
+                    window.getSelection().removeRange(selection);
+                }
 
-            }
+                window.shareFacebook = function () {
 
-            window.shareTwitter = function () {
+                }
 
-            }
+                window.shareTwitter = function () {
+
+                }
+            });
         </script>
     </body>
 </html>
