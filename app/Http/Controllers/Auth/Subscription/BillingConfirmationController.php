@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
+use BADDIServices\SocialRocket\Notifications\SubscriptionActivated;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
 
@@ -52,6 +53,9 @@ class BillingConfirmationController extends Controller
             if (!$subscription instanceof Subscription || $subscription->status !== Subscription::CHARGE_ACCEPTED) {
                 return redirect()->route('subscription.select.pack')->with('error', 'Plan not activated please try to accept the billiing');
             }
+
+            $subscription->load(['user', 'pack']);
+            $user->notify(new SubscriptionActivated($subscription));
 
             return redirect()->route('dashboard')->with('success', ucwords($pack->name) . ' plan activated successfully');
         } catch (AcceptPaymentFailed $ex) {

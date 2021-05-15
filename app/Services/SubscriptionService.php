@@ -13,7 +13,6 @@ use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Notifications\SubscriptionCreated;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 
 class SubscriptionService extends Service
@@ -29,16 +28,6 @@ class SubscriptionService extends Service
         $this->subscriptionRepository = $subscriptionRepository;
         $this->shopifyService = $shopifyService;
     }
-
-    // public function createWithPercentage(User $user, Pack $pack): Subscription
-    // {
-    //     $subscription = $this->subscriptionRepository->createWithPercentage($user, $pack);
-        
-    //     $subscription->load(['user', 'pack']);
-    //     $user->notify(new SubscriptionCreated($subscription));
-
-    //     return $subscription;
-    // }
     
     public function createBillingConfirmationURL(Store $store, Pack $pack): string
     {
@@ -51,7 +40,10 @@ class SubscriptionService extends Service
         ];
 
         if ($pack->type === Pack::USAGE_TYPE) {
-            // return $this->shopifyService->createUsageBillingURL($store, $charge);
+            $charge = array_merge($charge, [
+                'capped_amount' =>  $pack->price,
+                'terms'         =>  $pack->price . '% of revenue share'
+            ]);
         }
 
         return $this->shopifyService->createRecurringBillingURL($store, $charge);
