@@ -193,6 +193,11 @@
                         <div class="card-body">
                           {{ auth()->user()->unreadNotifications->first()->data['subject'] }}
                         </div>
+                        <div class="card-footer">
+                          <a href="{{ route('dashboard.activity.read', ['notification' => auth()->user()->unreadNotifications->first()->id]) }}" class="btn btn-ghost-dark w-100">
+                            Read all
+                          </a>
+                        </div>
                       </div>
                     </div>
                     @endif
