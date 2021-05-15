@@ -8,6 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Repositories\SettingRepository;
+
 class SettingService extends Service
 {
     /** @var array */
@@ -127,4 +132,27 @@ class SettingService extends Service
         'YER' => 'Yemen Rial',
         'ZWD' => 'Zimbabwe Dollar'
     ];
+
+    /** @var SettingRepository */
+    private $settingRepository;
+
+    public function __construct(SettingRepository $settingRepository)
+    {
+        $this->settingRepository = $settingRepository;
+    }
+
+    public function all(): Collection
+    {
+        return $this->settingRepository->all();
+    }
+    
+    public function findById(string $id): Setting
+    {
+        return $this->settingRepository->findById($id);
+    }
+
+    public function save(Store $store, $attributes): Setting
+    {
+        return $this->settingRepository->save($store->id, $attributes);
+    }
 }

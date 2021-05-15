@@ -202,7 +202,9 @@
         </div>
         <div class="page-body mt-4">
           <div class="container-xl">
-              @yield('content')
+            @include('partials.dashboard.alert')
+
+            @yield('content')
           </div>
         </div>
         <footer class="footer footer-transparent d-print-none">

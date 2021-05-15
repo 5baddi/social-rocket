@@ -21,12 +21,13 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SettingController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityMarkAsReadController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ Route::middleware(['auth', 'has.subscription'])
     ->group(function() {
         Route::get('/', IndexController::class);
         Route::get('/customize', CustomizeController::class)->name('.customize');
+        Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
         Route::get('/customize/integrations', CustomizeController::class)->name('.customize.integrations');
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
         Route::get('/accounts', AccountsController::class)->name('.accounts');

@@ -26,10 +26,11 @@ class CreateSettingsTable extends Migration
             $table->string('brand_name')->nullable();
             $table->string('currency', 10)->default('USD');
             $table->enum('commission_type', Setting::COMMISSION_TYPES)->nullable(false);
-            $table->float('commission_amount')->default(0.0);
+            $table->float('commission_amount')->default(Setting::DFEAULT_COMMISSION);
             $table->enum('discount_type', Setting::DISCOUNT_TYPES)->nullable(false);
-            $table->float('discount_amount')->default(0.0);
-            $table->enum('discount_format', Setting::DISCOUNT_FORMATS)->nullable(false);
+            $table->float('discount_amount')->default(Setting::DFEAULT_DISCOUNT);
+            $table->enum('discount_format', array_keys(Setting::DISCOUNT_FORMATS))->nullable(false);
+            $table->string('color', 10)->default(Setting::DEFAULT_COLOR);
             $table->timestamps();
         });
     }
