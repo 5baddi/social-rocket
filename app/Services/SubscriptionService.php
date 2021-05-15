@@ -82,7 +82,6 @@ class SubscriptionService extends Service
     public function confirmUsageBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
     {
         $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
-        dd($billing);
 
         if ($pack->type === Pack::RECURRING_TYPE) {
             $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
