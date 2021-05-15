@@ -62,6 +62,7 @@ class Setting extends Model
         self::DISCOUNT_AMOUNT_COLUMN,
         self::DISCOUNT_FORMAT_COLUMN,
         self::COLOR_COLUMN,
+        self::CURRENCY_COLUMN,
     ];
 
     public function store(): HasOne
