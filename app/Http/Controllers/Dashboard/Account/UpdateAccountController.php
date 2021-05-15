@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize;
+namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
 
 use Throwable;
 use App\Models\User;
@@ -14,22 +14,27 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
-use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use BADDIServices\SocialRocket\Http\Requests\SaveCustomizeSettingRequest;
+use BADDIServices\SocialRocket\Http\Requests\UpdateAccountRequest;
+use Illuminate\Validation\ValidationException;
 
-class SaveCustomizeSettingController extends Controller
+class UpdateAccountController extends Controller
 {
+    /** @var UserService */
+    private $userService;
+    
     /** @var SettingService */
     private $settingService;
 
-    public function __construct(SettingService $settingService)
+    public function __construct(UserService $userService, SettingService $settingService)
     {
+        $this->userService = $userService;
         $this->settingService = $settingService;
     }
-
-    public function __invoke(SaveCustomizeSettingRequest $request)
+    
+    public function __invoke(UpdateAccountRequest $request)
     {
         try {
             /** @var User */
@@ -41,30 +46,42 @@ class SaveCustomizeSettingController extends Controller
                 throw new NotFoundHttpException('Store not found!');
             }
 
+            if (!is_null($request->input('current_password')) && !$this->userService->verifyPassword($user, $request->input('current_password'))) {
+                return redirect()->route('dashboard.account')
+                                ->with(
+                                    'alert', 
+                                    new Alert('Current passwrod not match your credential')
+                                )
+                                ->withInput();
+            }
+
+            $user = $this->userService->update($user, $request->input());
+            Auth::setUser($user);
+
             $setting = $this->settingService->save($store, $request->input());
 
-            return redirect()->route('dashboard.customize')
-                            ->withInput($setting->toArray())
+            return redirect()->route('dashboard.account')
+                            ->with('setting', $setting)
                             ->with(
                                 'alert', 
-                                new Alert('Customized setting saved successfully', 'success')
+                                new Alert('Account settings changed successfully', 'success')
                             );
         } catch (ValidationException $ex){
-            return redirect()->route('dashboard.customize')
+            return redirect()->route('dashboard.account')
                             ->withErrors($ex->errors)
                             ->withInput();
         } catch (NotFoundHttpException $ex){
-            return redirect()->route('dashboard.customize')
+            return redirect()->route('dashboard.account')
                             ->with(
                                 'alert', 
                                 new Alert($ex->getMessage())
                             )
                             ->withInput();
         } catch (Throwable $ex){
-            return redirect()->route('dashboard.customize')
+            return redirect()->route('dashboard.account')
                             ->with(
                                 'alert', 
-                                new Alert('Error saving customized setting')
+                                new Alert('Error saving account settings')
                             )
                             ->withInput();
         }

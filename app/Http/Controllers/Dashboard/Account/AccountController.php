@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
+namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
 
 use App\Models\User;
 use Illuminate\Http\Request;

@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.customize.save') }}" method="POST">
+    <form action="{{ route('dashboard.account.save') }}" method="POST">
         @csrf
         <div class="col">
             <div class="card">
@@ -42,32 +42,39 @@
                         <p class="text-muted">Setup your account, edit profile details, and change password</p>
                         <div class="col-4">
                             <label class="form-label">First name</label>
-                            <input type="text" name="first_name" class="form-control @if ($errors->has('first_name')) is-invalid @endif" value="{{ old('first_name') ?? ucfirst($user->first_name)  }}" placeholder="Your first name" autofocus required/>
+                            <input type="text" name="first_name" class="form-control @if ($errors->has('first_name')) is-invalid @endif" value="{{ old('first_name') ?? ucfirst($user->first_name)  }}" placeholder="Your first name" autofocus/>
                             @if ($errors->has('first_name'))
-                            <div class="invalid-feedback">{{ $errors::first('first_name') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
                             @endif
                         </div>
                         <div class="col-4">
                             <label class="form-label">First name</label>
-                            <input type="text" name="last_name" class="form-control @if ($errors->has('last_name')) is-invalid @endif" value="{{ old('last_name') ?? ucfirst($user->last_name) }}" placeholder="Your last name" required/>
+                            <input type="text" name="last_name" class="form-control @if ($errors->has('last_name')) is-invalid @endif" value="{{ old('last_name') ?? ucfirst($user->last_name) }}" placeholder="Your last name"/>
                             @if ($errors->has('last_name'))
-                            <div class="invalid-feedback">{{ $errors::first('last_name') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
                             @endif
                         </div>
                         <div class="col-4">
                             <label class="form-label">Brand name</label>
                             <input type="text" name="brand_name" class="form-control @if ($errors->has('brand_name')) is-invalid @endif" value="{{ old('brand_name') }}" placeholder="Brand name"/>
                             @if ($errors->has('brand_name'))
-                            <div class="invalid-feedback">{{ $errors::first('brand_name') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('brand_name') }}</div>
                             @endif
                         </div>
                     </div>
                     <div class="row mt-4">
-                        <div class="col-8">
+                        <div class="col-4">
                             <label class="form-label">E-mail</label>
-                            <input type="email" name="email" class="form-control @if ($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? $user->email }}" placeholder="E-mail" required/>
+                            <input type="email" name="email" class="form-control @if ($errors->has('email')) is-invalid @endif" value="{{ old('email') ?? $user->email }}" placeholder="E-mail"/>
                             @if ($errors->has('email'))
-                            <div class="invalid-feedback">{{ $errors::first('email') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                            @endif
+                        </div>
+                        <div class="col-4">
+                            <label class="form-label">Phone</label>
+                            <input type="text" name="phone" class="form-control @if ($errors->has('phone')) is-invalid @endif" value="{{ old('phone') ?? $user->phone }}" placeholder="Your phone number"/>
+                            @if ($errors->has('phone'))
+                            <div class="invalid-feedback">{{ $errors->first('phone') }}</div>
                             @endif
                         </div>
                         <div class="col-4">
@@ -78,7 +85,7 @@
                                 @endforeach
                             </select>
                             @if ($errors->has('currency'))
-                            <div class="invalid-feedback">{{ $errors::first('currency') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('currency') }}</div>
                             @endif
                         </div>
                     </div>
@@ -86,23 +93,23 @@
                     <div class="row">
                         <div class="col-4">
                             <label class="form-label">Current password</label>
-                            <input type="password" name="current_password" class="form-control @if ($errors->has('current_password')) is-invalid @endif" value="{{ old('current_password') }}" placeholder="Current password" required/>
+                            <input type="password" name="current_password" class="form-control @if ($errors->has('current_password')) is-invalid @endif" placeholder="Current password"/>
                             @if ($errors->has('current_password'))
-                            <div class="invalid-feedback">{{ $errors::first('current_password') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('current_password') }}</div>
                             @endif
                         </div>
                         <div class="col-4">
                             <label class="form-label">New password</label>
-                            <input type="password" name="new_password" class="form-control @if ($errors->has('new_password')) is-invalid @endif" value="{{ old('new_password') }}" placeholder="New password" required/>
-                            @if ($errors->has('new_password'))
-                            <div class="invalid-feedback">{{ $errors::first('new_password') }}</div>
+                            <input type="password" name="password" class="form-control @if ($errors->has('password')) is-invalid @endif" placeholder="New password"/>
+                            @if ($errors->has('password'))
+                            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                             @endif
                         </div>
                         <div class="col-4">
                             <label class="form-label">Confirm new password</label>
-                            <input type="password" name="confirm_password" class="form-control @if ($errors->has('confirm_password')) is-invalid @endif" value="{{ old('confirm_password') }}" placeholder="Confirm new password" required/>
+                            <input type="password" name="confirm_password" class="form-control @if ($errors->has('confirm_password')) is-invalid @endif" placeholder="Confirm new password"/>
                             @if ($errors->has('confirm_password'))
-                            <div class="invalid-feedback">{{ $errors::first('confirm_password') }}</div>
+                            <div class="invalid-feedback">{{ $errors->first('confirm_password') }}</div>
                             @endif
                         </div>
                     </div>

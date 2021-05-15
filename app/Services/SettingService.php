@@ -153,6 +153,15 @@ class SettingService extends Service
 
     public function save(Store $store, $attributes): Setting
     {
-        return $this->settingRepository->save($store->id, $attributes);
+        $attributes = collect([
+            Setting::BRAND_NAME_COLUMN      => $attributes[Setting::BRAND_NAME_COLUMN],
+            Setting::CURRENCY_COLUMN        => $attributes[Setting::CURRENCY_COLUMN],
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
     }
 }

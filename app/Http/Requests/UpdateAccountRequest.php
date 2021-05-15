@@ -9,9 +9,10 @@
 namespace BADDIServices\SocialRocket\Http\Requests;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SignUpRequest extends FormRequest
+class UpdateAccountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -34,8 +35,11 @@ class SignUpRequest extends FormRequest
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string|min:8',
-            User::PHONE_COLUMN         => 'nullable|string|max:25'
+            User::PHONE_COLUMN         => 'nullable|string|max:25',
+            Setting::BRAND_NAME_COLUMN => 'nullable|string|min:1',
+            User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',
+            'current_password'         => 'nullable|string|min:8',
+            'confirm_password'         => 'nullable|string|min:8'
         ];
     }
 }

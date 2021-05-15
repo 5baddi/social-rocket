@@ -16,7 +16,6 @@ use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 
 class AuthenticateController extends Controller
 {
@@ -36,7 +35,7 @@ class AuthenticateController extends Controller
                 return redirect('/signin')->withInput()->with("error", "No account registred with those credentials");
             }
 
-            if (!Hash::check($request->input(User::PASSWORD_COLUMN), $user->password)) {
+            if (!$this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
                 return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }
 
