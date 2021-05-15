@@ -15,7 +15,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <p class="text-muted">Set your affiliates commission. Your affiliate will earn this for every customer that purchases something from your store using their custom discount code.</p>
+                        <p class="text-muted">Set your affiliates commission. Your affiliate will earn this for every customer that purchases something from your store using their custom discount code</p>
                         <div class="col-4">
                             <label class="form-label">Type</label>
                             <select name="commission_type" class="form-select @if ($errors->has('commission_type')) is-invalid @endif" placeholder="Select a type" id="select-commission-type">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <p class="text-muted">Customize the discount codes that will be shared by your affiliates.</p>
+                        <p class="text-muted">Customize the discount codes that will be shared by your affiliates</p>
                         <div class="col-4">
                             <label class="form-label">Type</label>
                             <select name="discount_type" class="form-select @if ($errors->has('discount_type')) is-invalid @endif" placeholder="Select a type" id="select-discount-type">
@@ -92,7 +92,7 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <p class="text-muted">Customize the appearance of the thank you page feature. Please note: The fonts used here will be consistent with the fonts selected in your Shopify theme editor.</p>
+                        <p class="text-muted">Customize the appearance of the thank you page feature. Please note: The fonts used here will be consistent with the fonts selected in your Shopify theme editor</p>
                         <div class="col-4">
                             <label class="form-label">Heading color</label>
                             <input type="color" id="color" class="form-control form-control-color mb-2 @if ($errors->has('color')) is-invalid @endif" value="{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}" title="Choose your color">
@@ -116,8 +116,8 @@
     <div class="row mt-4">
         <div class="col-12 text-end">
             <div class="d-flex">
-            Need Help?&nbsp;<a href="{{ route('dashboard.help') }}">check our guide</a>
-            <button type="submit" class="btn btn-dark ms-auto">
+            {{-- Need Help?&nbsp;<a href="{{ route('dashboard.help') }}">check our guide</a> --}}
+            <button type="submit" class="btn btn-ghost-dark ms-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                     <path d="M6 4h10l4 4v10a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2"></path>

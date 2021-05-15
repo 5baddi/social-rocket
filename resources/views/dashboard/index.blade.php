@@ -30,7 +30,7 @@
                 </div>
                 <div class="h1 mb-3 text-green">+$0.00</div>
                 <div class="d-flex">
-                    <div>189 orders</div>
+                    <div>0 orders</div>
                 </div>
               </div>
             </div>

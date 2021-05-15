@@ -82,9 +82,10 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
         Route::get('/preview/checkout', CheckoutPreviewController::class)->name('.preview.checkout');
         Route::get('/plan', function() {
-            return redirect()->route('dashboard.account', ['tab' => 'settings']);
+            return redirect()->route('dashboard.account', ['tab' => 'plan']);
         })->name('.plan');
         Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
+        Route::get('/plan/cancel', UpgradePlanController::class)->name('.plan.cancel');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });
