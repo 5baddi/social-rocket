@@ -54,7 +54,7 @@ class UpdateAccountController extends Controller
                                 )
                                 ->withInput();
             }
-            if ($this->userService->findByEmail($request->input(User::EMAIL_COLUMN)) instanceof User) {
+            if ($request->input(User::EMAIL_COLUMN) !== $user->email && $this->userService->findByEmail($request->input(User::EMAIL_COLUMN)) instanceof User) {
                 return redirect()->route('dashboard.account')
                                 ->with(
                                     'alert', 
