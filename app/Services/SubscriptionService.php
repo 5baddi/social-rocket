@@ -41,7 +41,9 @@ class SubscriptionService extends Service
 
         if ($pack->type === Pack::USAGE_TYPE) {
             $charge = array_merge($charge, [
-                'capped_amount' =>  $pack->price,
+                'name'          =>  ucwords($pack->name) . ' Trial',
+                'capped_amount' =>  (string)round($pack->price),
+                'price'         =>  0,
                 'terms'         =>  $pack->price . '% of revenue share'
             ]);
         }
@@ -65,6 +67,35 @@ class SubscriptionService extends Service
             Subscription::CREATED_AT_COLUMN
         ]);
 
-        return $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription->load(['user', 'pack']);
+
+        return $subscription;
+    }
+    
+    public function confirmUsageBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
+    {
+        $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
+
+        if ($pack->type === Pack::RECURRING_TYPE) {
+            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
+        } else {
+            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $chargeId));
+        }
+
+        $billing = $billing->only([
+            Subscription::CHARGE_ID_COLUMN,
+            Subscription::STATUS_COLUMN,
+            Subscription::BILLING_ON_COLUMN,
+            Subscription::ACTIVATED_ON_COLUMN,
+            Subscription::TRIAL_ENDS_ON_COLUMN,
+            Subscription::CANCELLED_ON_COLUMN,
+            Subscription::CREATED_AT_COLUMN
+        ]);
+
+        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription->load(['user', 'pack']);
+
+        return $subscription;
     }
 }

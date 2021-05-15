@@ -26,7 +26,7 @@ class HasSubscription
             $user = Auth::user();
             $user->load('subscription');
 
-            if(!$user->subscription instanceof Subscription && !in_array($user->subscription->status, [Subscription::DEFAULT_STATUS, Subscription::CHARGE_ACCEPTED])) {
+            if(!$user->subscription instanceof Subscription || ($user->subscription instanceof Subscription && !in_array($user->subscription->status, [Subscription::DEFAULT_STATUS, Subscription::CHARGE_ACCEPTED]))) {
                 return redirect()->route('subscription.select.pack');
             }
         }

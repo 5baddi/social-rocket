@@ -27,6 +27,7 @@ class Subscription extends Model
     public const STORE_ID_COLUMN = 'store_id';
     public const PACK_ID_COLUMN = 'pack_id';
     public const CHARGE_ID_COLUMN = 'charge_id';
+    public const USAGE_ID_COLUMN = 'usage_id';
     public const STATUS_COLUMN = 'status';
     public const BILLING_ON_COLUMN = 'billing_on';
     public const ACTIVATED_ON_COLUMN = 'activated_on';
@@ -42,6 +43,7 @@ class Subscription extends Model
         self::STORE_ID_COLUMN,
         self::PACK_ID_COLUMN,
         self::CHARGE_ID_COLUMN,
+        self::USAGE_ID_COLUMN,
         self::STATUS_COLUMN,
         self::BILLING_ON_COLUMN,
         self::ACTIVATED_ON_COLUMN,

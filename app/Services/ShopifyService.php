@@ -31,6 +31,7 @@ class ShopifyService extends Service
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
     const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
+    const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
     const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
 
     /** @var Client */
@@ -63,14 +64,40 @@ class ShopifyService extends Service
     public function createRecurringBillingURL(Store $store, array $charge): string
     {
         try {
+            $billingApplication = $this->createBillingChargeApplication($store, $charge);
+
+            if (!isset($billingApplication['recurring_application_charge'], $billingApplication['recurring_application_charge']['confirmation_url'])) {
+                throw new Exception();
+            }
+
+            return $billingApplication['recurring_application_charge']['confirmation_url'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:create-reccuring-billing',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CreatePaymentConfirmationFailed();
+        }
+    }
+
+    /**
+     * @throws AcceptPaymentFailed
+     */
+    public function getUsageBilling(Store $store, string $chargeId): array
+    {
+        try {
             $accessToken = $this->hasAccessToken($store);
 
             $chargeURL = $this->getStoreURL($store->slug);
-            $chargeURL .= self::RECCURING_CHARGE_ENDPOINT;
+            $chargeURL .= Str::replace("{id}", $chargeId, self::USAGE_CHARGE_ENDPOINT);
 
             $requestBody['access_token'] = $accessToken;
 
-            $requestBody['recurring_application_charge'] = $charge;
+            $requestBody['recurring_application_charge'] = $chargeId;
 
             $response = $this->client->request('POST', $chargeURL, 
                 [
@@ -83,21 +110,22 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            if (!isset($data['recurring_application_charge'], $data['recurring_application_charge']['confirmation_url'])) {
+
+            if (!isset($data['usage_charge'], $data['usage_charge']['id'])) {
                 throw new Exception();
             }
 
-            return $data['recurring_application_charge']['confirmation_url'];
+            return $this->getBilling($store, $data['usage_charge']['id']);
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
-                'context'   =>  'store:create-billing',
+                'context'   =>  'store:create-usage-billing',
                 'code'      =>  $ex->getCode(),
                 'line'      =>  $ex->getLine(),
                 'file'      =>  $ex->getFile(),
                 'trace'     =>  $ex->getTrace()
             ]);
 
-            throw new CreatePaymentConfirmationFailed();
+            throw new AcceptPaymentFailed();
         }
     }
 
@@ -120,7 +148,7 @@ class ShopifyService extends Service
                     ]
                 ]
             );
-            
+
             $data = json_decode($response->getBody(), true);
             if (!isset($data['recurring_application_charge'])) {
                 throw new Exception();
@@ -237,5 +265,29 @@ class ShopifyService extends Service
         }
 
         return $store->oauth->access_token;
+    }
+
+    private function createBillingChargeApplication(Store $store, array $charge): array
+    {
+        $accessToken = $this->hasAccessToken($store);
+
+        $chargeURL = $this->getStoreURL($store->slug);
+        $chargeURL .= self::RECCURING_CHARGE_ENDPOINT;
+
+        $requestBody['access_token'] = $accessToken;
+
+        $requestBody['recurring_application_charge'] = $charge;
+
+        $response = $this->client->request('POST', $chargeURL, 
+            [
+                'form_params'      => $requestBody,
+                'headers'   => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/x-www-form-urlencoded',
+                ]
+            ]
+        );
+
+        return json_decode($response->getBody(), true);  
     }
 }
