@@ -48,6 +48,13 @@ class User extends Authenticatable
         return $this->hasOne(Subscription::class, 'user_id');
     }
 
+    public function setEmailAttribute($value): self
+    {
+        $this->attributes[self::EMAIL_COLUMN] = strtolower($value);
+
+        return $this;
+    }
+    
     public function setPasswordAttribute($value): self
     {
         $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);

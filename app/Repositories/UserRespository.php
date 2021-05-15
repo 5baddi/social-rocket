@@ -16,7 +16,7 @@ class UserRespository
     {
         return User::query()
                     ->where([
-                        User::EMAIL_COLUMN => $email
+                        User::EMAIL_COLUMN => strtolower($email)
                     ])
                     ->first();
     }
