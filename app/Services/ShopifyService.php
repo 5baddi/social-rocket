@@ -97,7 +97,7 @@ class ShopifyService extends Service
 
             $requestBody['access_token'] = $accessToken;
 
-            $requestBody['recurring_application_charge'] = $chargeId;
+            $requestBody['recurring_application_charge_id'] = $chargeId;
 
             $response = $this->client->request('POST', $chargeURL, 
                 [

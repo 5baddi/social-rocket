@@ -54,10 +54,11 @@ class BillingConfirmationController extends Controller
                 return redirect()->route('subscription.select.pack')->with('error', 'Plan not activated please try to accept the billiing');
             }
 
-            if ($subscription->pack->type === Pack::USAGE_TYPE) {
-                $subscription = $this->subscriptionService->confirmUsageBilling($user, $store, $pack, $request->query('charge_id'));
-            }
+            // if ($subscription->pack->type === Pack::USAGE_TYPE) {
+            //     $subscription = $this->subscriptionService->confirmUsageBilling($user, $store, $pack, $request->query('charge_id'));
+            // }
 
+            $subscription = $this->subscriptionService->loadRelations($subscription);
             $user->notify(new SubscriptionActivated($subscription));
 
             return redirect()->route('dashboard')->with('success', ucwords($pack->name) . ' plan activated successfully');

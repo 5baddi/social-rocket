@@ -24,6 +24,7 @@ class Pack extends Model
 
     /** @var int */
     public const DEFAULT_CHARGE_PRICE = 10;
+    public const DEFAULT_MAX_USAGE_PRICE = 1000;
     public const DEFAULT_TRIAL_DAYS = 7;
     public const UNLIMITED_AFFILIATES = 1;
     public const PAYOUT_METHODS = 2;

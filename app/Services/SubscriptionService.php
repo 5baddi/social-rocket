@@ -28,6 +28,13 @@ class SubscriptionService extends Service
         $this->subscriptionRepository = $subscriptionRepository;
         $this->shopifyService = $shopifyService;
     }
+
+    public function loadRelations(Subscription &$subscription): Subscription
+    {
+        $subscription->load(['user', 'pack']);
+        
+        return $subscription;
+    }
     
     public function createBillingConfirmationURL(Store $store, Pack $pack): string
     {
@@ -42,7 +49,7 @@ class SubscriptionService extends Service
         if ($pack->type === Pack::USAGE_TYPE) {
             $charge = array_merge($charge, [
                 'name'          =>  ucwords($pack->name) . ' Trial',
-                'capped_amount' =>  (string)round($pack->price),
+                'capped_amount' =>  Pack::DEFAULT_MAX_USAGE_PRICE,
                 'price'         =>  0,
                 'terms'         =>  $pack->price . '% of revenue share'
             ]);
@@ -68,7 +75,6 @@ class SubscriptionService extends Service
         ]);
 
         $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
-        $subscription->load(['user', 'pack']);
 
         return $subscription;
     }
@@ -76,6 +82,7 @@ class SubscriptionService extends Service
     public function confirmUsageBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
     {
         $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
+        dd($billing);
 
         if ($pack->type === Pack::RECURRING_TYPE) {
             $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
