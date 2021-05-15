@@ -26,6 +26,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityMarkAsReadCont
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
@@ -78,6 +79,7 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/help', HelpController::class)->name('.help');
         Route::get('/activity', ActivityController::class)->name('.activity');
         Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
+        Route::get('/preview/checkout', CheckoutPreviewController::class)->name('.preview.checkout');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

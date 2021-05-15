@@ -99,7 +99,7 @@
                             @if ($errors->has('color'))
                             <div class="invalid-feedback">{{ $errors::first('color') }}</div>
                             @endif
-                            <a href="{{ route('dashboard.help') }}" target="_blank">
+                            <a href="{{ route('dashboard.preview.checkout') }}" target="_blank">
                                 Preview&nbsp;
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
