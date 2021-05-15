@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ strtoupper($title) }}
+    {{ ucfirst($title) }}
 @endsection
 
 @section('content')
@@ -62,4 +62,8 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    @include('partials.dashboard.scripts.form')
 @endsection

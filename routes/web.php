@@ -69,6 +69,7 @@ Route::middleware(['auth', 'has.subscription'])
     ->group(function() {
         Route::get('/', IndexController::class);
         Route::get('/customize', CustomizeController::class)->name('.customize');
+        Route::get('/customize/integrations', CustomizeController::class)->name('.customize.integrations');
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
         Route::get('/accounts', AccountsController::class)->name('.accounts');
         Route::get('/setting', SettingController::class)->name('.setting');

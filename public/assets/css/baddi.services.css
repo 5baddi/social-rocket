@@ -19,6 +19,10 @@
     text-decoration: none;
     background-color: rgba(32,107,196,.06);
 }
+.navbar .navbar-nav .dropdown-active{
+    text-decoration: none;
+    background-color: rgba(0, 0, 0,.06);
+}
 .navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active{
     color: #206bc4 !important;
 }

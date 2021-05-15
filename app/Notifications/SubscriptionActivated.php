@@ -76,6 +76,10 @@ class SubscriptionActivated extends Notification implements ShouldQueue
             'cycle'             => $this->subscription->pack->payment_cycle,
             'currency_symbol'   => $this->subscription->pack->currency_symbol,
             'is_paid'           => !is_null($this->subscription->paid_at),
+            'link'              =>  [
+                'url'           =>  route('dashboard.customize.integrations'),
+                'label'         =>  'Getting started'
+            ]
         ];
     }
 }

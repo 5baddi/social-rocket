@@ -20,7 +20,7 @@ class Pack extends Model
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
     public const RECURRING_TYPE = 'recurring';
-    public const USAGE_TYPE = 'Usage';
+    public const USAGE_TYPE = 'usage';
 
     /** @var int */
     public const DEFAULT_CHARGE_PRICE = 10;

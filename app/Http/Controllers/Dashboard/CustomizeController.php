@@ -14,8 +14,8 @@ class CustomizeController extends Controller
 {
     public function __invoke()
     {
-        return view('dashboard.customize', [
-            'title'     =>  'Customize'
+        return view('dashboard.customize.index', [
+            'title'                 =>  'Customize'
         ]);
     }
 }
