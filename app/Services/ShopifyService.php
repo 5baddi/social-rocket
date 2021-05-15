@@ -120,8 +120,13 @@ class ShopifyService extends Service
                     ]
                 ]
             );
+            
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['recurring_application_charge'])) {
+                throw new Exception();
+            }
 
-            return json_decode($response->getBody(), true);
+            return $data['recurring_application_charge'];
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
                 'context'   =>  'store:get-billing',

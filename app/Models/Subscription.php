@@ -23,6 +23,7 @@ class Subscription extends Model
     ];
 
     /** @var string */
+    public const USER_ID_COLUMN = 'user_id';
     public const STORE_ID_COLUMN = 'store_id';
     public const PACK_ID_COLUMN = 'pack_id';
     public const CHARGE_ID_COLUMN = 'charge_id';
@@ -33,9 +34,11 @@ class Subscription extends Model
     public const CANCELLED_ON_COLUMN = 'cancelled_on';
 
     public const DEFAULT_STATUS = self::STATUSES[0];
+    public const CHARGE_ACCEPTED = self::STATUSES[1];
 
     /** @var array */
     protected $fillable = [
+        self::USER_ID_COLUMN,
         self::STORE_ID_COLUMN,
         self::PACK_ID_COLUMN,
         self::CHARGE_ID_COLUMN,

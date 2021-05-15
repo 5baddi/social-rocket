@@ -57,7 +57,7 @@ class SubscriptionService extends Service
         return $this->shopifyService->createRecurringBillingURL($store, $charge);
     }
 
-    public function createAcceptBillingURL(Store $store, Pack $pack, string $chargeId): string
+    public function confirmBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
     {
         $billing = collect($this->shopifyService->getBilling($store, $chargeId));
 
@@ -73,8 +73,6 @@ class SubscriptionService extends Service
             Subscription::CREATED_AT_COLUMN
         ]);
 
-        $subscription = $this->subscriptionRepository->save($store->id, $pack->id, $billing->toArray());
-
-        retrun '';
+        return $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
     }
 }
