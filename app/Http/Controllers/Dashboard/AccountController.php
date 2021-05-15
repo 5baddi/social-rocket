@@ -10,12 +10,12 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 
-class AccountsController extends Controller
+class AccountController extends Controller
 {
     public function __invoke()
     {
         return view('dashboard.accounts', [
-            'title'     =>  'Accounts'
+            'title'     =>  'Account'
         ]);
     }
 }

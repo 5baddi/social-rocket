@@ -19,9 +19,10 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SettingController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
@@ -74,12 +75,14 @@ Route::middleware(['auth', 'has.subscription'])
         Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
         Route::get('/customize/integrations', CustomizeController::class)->name('.customize.integrations');
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
-        Route::get('/accounts', AccountsController::class)->name('.accounts');
+        Route::get('/account', AccountController::class)->name('.account');
         Route::get('/setting', SettingController::class)->name('.setting');
         Route::get('/help', HelpController::class)->name('.help');
         Route::get('/activity', ActivityController::class)->name('.activity');
         Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
         Route::get('/preview/checkout', CheckoutPreviewController::class)->name('.preview.checkout');
+        Route::get('/plan', UpgradePlanController::class)->name('.plan');
+        Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

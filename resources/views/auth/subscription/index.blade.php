@@ -24,7 +24,7 @@
             <div class="container">
                 <div class="row row-pricing">
                     <div class="col-content-pricing col-lg-9">
-                        <h2 class="title2">Chose A Plan To Start Your 7 Day Trial</h2>
+                        <h2 class="title2">{{ !$currentPack ? 'Chose A Plan To Start Your 7 Day Trial' : 'Upgrade your plan' }}</h2>
                         @if(Session::has('error'))
                         <p class="invalid-feedback">{{ Session::get('error') }}</p>
                         @endif
@@ -46,7 +46,7 @@
                                     @endforeach
                                 </ul>
                                 <div class="box-btn-item-plan @if($currentPack && $currentPack->id === $pack->id) current-plan @endif">
-                                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? route('dashboard') : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : 'Start Free Trial' }}</a>
+                                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? route('dashboard') : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : (!$currentPack ? 'Start Free Trial' : 'Choose ' . ucwords($pack->name)) }}</a>
                                 </div>
                             </div>
                             @endforeach
