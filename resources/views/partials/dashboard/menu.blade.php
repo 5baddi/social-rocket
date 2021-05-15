@@ -83,7 +83,7 @@
                 <span class="nav-link-title">Setting</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
+          {{-- <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.help') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -95,7 +95,7 @@
                 </span>
                 <span class="nav-link-title">Help</span>
             </a>
-          </li>
+          </li> --}}
         </ul>
         <div class="row mb-4">
             <div class="col-12">

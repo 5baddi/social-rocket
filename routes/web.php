@@ -77,7 +77,7 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
         Route::get('/account', AccountController::class)->name('.account');
         Route::get('/setting', SettingController::class)->name('.setting');
-        Route::get('/help', HelpController::class)->name('.help');
+        // Route::get('/help', HelpController::class)->name('.help');
         Route::get('/activity', ActivityController::class)->name('.activity');
         Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
         Route::get('/preview/checkout', CheckoutPreviewController::class)->name('.preview.checkout');
