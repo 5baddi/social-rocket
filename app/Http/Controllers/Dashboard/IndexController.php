@@ -8,14 +8,17 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
 
+use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AnalyticsRequest;
 
 class IndexController extends Controller
 {
-    public function __invoke()
+    public function __invoke(AnalyticsRequest $request)
     {
         return view('dashboard.index', [
-            'title'     =>  'Dashboard'
+            'title'     =>  'Dashboard',
+            'period'    =>  Str::replace('_', ' ', $request->query('period'))
         ]);
     }
 }
