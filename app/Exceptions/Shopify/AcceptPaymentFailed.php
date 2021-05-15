@@ -11,13 +11,13 @@ namespace BADDIServices\SocialRocket\Exceptions\Shopify;
 use Exception;
 use Throwable;
 
-class InvalidAccessTokenResponseException extends Exception
+class AcceptPaymentFailed extends Exception
 {
     /** @var int */
-    public const CODE = 12;
+    public const CODE = 15;
 
     /** @var string */
-    public const MESSAGE = "Access token response is invalid";
+    public const MESSAGE = "Failed to redirect to payment acceptation link";
 
     public function __construct(string $message = self::MESSAGE, int $code = self::CODE, Throwable $previous = null)
     {

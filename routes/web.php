@@ -22,9 +22,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SettingController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Payment\StripePaymentController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPayController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,8 +57,8 @@ Route::middleware(['auth', 'has.subscription'])
     ->prefix('subscription')
     ->group(function() {
         Route::get('/', SubscriptionController::class)->name('.select.pack');
-        Route::get('/billing/{pack}', BillingPayController::class)->name('.pack.billing');
-        Route::post('/pay/{pack}', StripePaymentController::class)->name('.pay');
+        Route::get('/billing/{pack}', BillingPaymentController::class)->name('.pack.billing');
+        Route::get('/billing/{pack}/confirmation', BillingConfirmationController::class)->name('.billing.confirmation');
     });
 
 Route::middleware(['auth', 'has.subscription'])

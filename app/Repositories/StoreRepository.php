@@ -14,6 +14,12 @@ use Illuminate\Support\Arr;
 
 class StoreRepository
 {
+    public function findById(string $id): ?Store
+    {
+        return Store::query()
+                    ->find($id);
+    }
+
     public function findBySlug(string $slug): ?Store
     {
         return Store::query()
@@ -73,10 +79,12 @@ class StoreRepository
     
     public function oauth(string $storeId, array $attributes): OAuth
     {
+        Arr::set($attributes, OAuth::STORE_ID_COLUMN, $storeId);
+        
         return OAuth::query()
                     ->updateOrCreate(
                         [
-                            OAuth::STORE_ID  =>  $storeId
+                            OAuth::STORE_ID_COLUMN  =>  $storeId
                         ], 
                         $attributes
                     );

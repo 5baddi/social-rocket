@@ -20,7 +20,7 @@ class Pack extends Model
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
     public const RECURRING_TYPE = 'recurring';
-    public const PERCENTAGE_TYPE = 'percentage';
+    public const USAGE_TYPE = 'Usage';
 
     /** @var int */
     public const DEFAULT_TRIAL_DAYS = 7;
@@ -40,7 +40,7 @@ class Pack extends Model
     /** @var array */
     public const TYPES = [
         self::RECURRING_TYPE,
-        self::PERCENTAGE_TYPE
+        self::USAGE_TYPE
     ];
 
     public function subscriptions(): HasMany

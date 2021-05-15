@@ -25,6 +25,11 @@
                 <div class="row row-pricing">
                     <div class="col-content-pricing col-lg-9">
                         <h2 class="title2">Chose A Plan To Start Your 7 Day Trial</h2>
+                        @if(Session::has('error'))
+                        <div class="invalid-feedback">
+                            {{ Session::get('error') }}
+                        </div>
+                        @endif
                         <div class="list-plans-pricing" id="monthly">
                             @foreach ($packs as $pack)
                             <div class="item-plan">

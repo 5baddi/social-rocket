@@ -24,6 +24,11 @@ class StoreService extends Service
         $this->storeRepository = $storeRepository;
     }
 
+    public function findById(string $id): ?Store
+    {
+        return $this->storeRepository->findById($id);
+    }
+    
     public function findBySlug(string $slug): ?Store
     {
         return $this->storeRepository->findBySlug($slug);

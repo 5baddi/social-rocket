@@ -9,13 +9,15 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\PackService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
-use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
 
-class BillingPayController extends Controller
+class BillingConfirmationController extends Controller
 {
     /** @var PackService */
     private $packService;
@@ -29,19 +31,18 @@ class BillingPayController extends Controller
         $this->subscriptionService = $subscriptionService;
     }
 
-    public function __invoke(string $id)
+    public function __invoke(string $packId, BillingConfirmationRequest $request)
     {
-        $pack = $this->packService->findById($id);
+        /** @var User */
+        $user = Auth::user();
+        $user->load('store');
+
+        $store = $user->store;
+        abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
+        
+        $pack = $this->packService->findById($packId);
         abort_unless($pack instanceof Pack, Response::HTTP_NOT_FOUND, 'No pack selected');
 
-        if ($pack->type === Pack::PERCENTAGE_TYPE) {
-            $this->subscriptionService->createWithPercentage(Auth::user(), $pack);
-
-            return redirect()->route('dashboard');
-        }
-
-        return view('auth.subscription.pay', [
-            'pack'              =>  $pack
-        ]);
+        $this->subscriptionService->createAcceptBillingURL($store, $pack, $request->query('charge_id'));
     }
 }

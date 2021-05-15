@@ -10,7 +10,9 @@ namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Notifications\SubscriptionCreated;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 
@@ -18,19 +20,61 @@ class SubscriptionService extends Service
 {
     /** @var SubscriptionRepository */
     private $subscriptionRepository;
+    
+    /** @var ShopifyService */
+    private $shopifyService;
 
-    public function __construct(SubscriptionRepository $subscriptionRepository)
+    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService)
     {
         $this->subscriptionRepository = $subscriptionRepository;
+        $this->shopifyService = $shopifyService;
     }
 
-    public function createWithPercentage(User $user, Pack $pack): Subscription
-    {
-        $subscription = $this->subscriptionRepository->createWithPercentage($user, $pack);
+    // public function createWithPercentage(User $user, Pack $pack): Subscription
+    // {
+    //     $subscription = $this->subscriptionRepository->createWithPercentage($user, $pack);
         
-        $subscription->load(['user', 'pack']);
-        $user->notify(new SubscriptionCreated($subscription));
+    //     $subscription->load(['user', 'pack']);
+    //     $user->notify(new SubscriptionCreated($subscription));
 
-        return $subscription;
+    //     return $subscription;
+    // }
+    
+    public function createBillingConfirmationURL(Store $store, Pack $pack): string
+    {
+        $charge = [
+            'name'          =>  ucwords($pack->name),
+            'trial_days'    =>  $pack->trial_days,
+            'test'          =>  config('app.debug') ? true : null,
+            'price'         =>  $pack->price,
+            'return_url'    =>  route('subscription.billing.confirmation', ['pack' => $pack->id])
+        ];
+
+        if ($pack->type === Pack::USAGE_TYPE) {
+            // return $this->shopifyService->createUsageBillingURL($store, $charge);
+        }
+
+        return $this->shopifyService->createRecurringBillingURL($store, $charge);
+    }
+
+    public function createAcceptBillingURL(Store $store, Pack $pack, string $chargeId): string
+    {
+        $billing = collect($this->shopifyService->getBilling($store, $chargeId));
+
+        $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
+
+        $billing = $billing->only([
+            Subscription::CHARGE_ID_COLUMN,
+            Subscription::STATUS_COLUMN,
+            Subscription::BILLING_ON_COLUMN,
+            Subscription::ACTIVATED_ON_COLUMN,
+            Subscription::TRIAL_ENDS_ON_COLUMN,
+            Subscription::CANCELLED_ON_COLUMN,
+            Subscription::CREATED_AT_COLUMN
+        ]);
+
+        $subscription = $this->subscriptionRepository->save($store->id, $pack->id, $billing->toArray());
+
+        retrun '';
     }
 }

@@ -15,11 +15,15 @@ class Model extends BaseModel
 {
     use HasUUID;
 
+    /** @var string */
+    public const ID_COLUMN = 'id';
+    public const UPDATED_AT_COLUMN = self::UPDATED_AT;
+    public const CREATED_AT_COLUMN = self::CREATED_AT;
+
     /** @var bool */
     public $incrementing = false;
 
     /** @var string */
     protected $primaryKey = 'id';
     protected $keyType = 'string';
-    public const ID_COLUMN = 'id';
 }
