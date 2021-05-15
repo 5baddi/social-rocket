@@ -23,6 +23,8 @@ class UserRespository
 
     public function create(array $attributes): User
     {
+        $attributes[User::EMAIL_COLUMN] = strtolower($attributes[User::EMAIL_COLUMN]);
+        
         return User::query()
                     ->create($attributes);
     }

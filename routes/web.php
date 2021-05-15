@@ -20,8 +20,10 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\SettingController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\AccountsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
@@ -71,6 +73,8 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/accounts', AccountsController::class)->name('.accounts');
         Route::get('/setting', SettingController::class)->name('.setting');
         Route::get('/help', HelpController::class)->name('.help');
+        Route::get('/activity', ActivityController::class)->name('.activity');
+        Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

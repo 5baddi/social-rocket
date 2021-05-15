@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ $title }}
+    {{ strtoupper($title) }}
 @endsection
