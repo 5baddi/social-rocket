@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Services\StoreService;
 
 class AffiliateController extends Controller
@@ -26,6 +27,13 @@ class AffiliateController extends Controller
     {
         $store = $this->storeService->findBySlug($storeName);
         if (!$store instanceof Store) {
+            return redirect('/');
+        }
+
+        $store->load('setting');
+        $setting = $store->setting;
+        
+        if (!$setting instanceof Setting || !$setting->affiliate_form) {
             return redirect('/');
         }
 

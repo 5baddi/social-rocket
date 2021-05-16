@@ -78,6 +78,7 @@ class Setting extends Model
         self::NOTIFY_NEW_ACCOUNT_COLUMN,
         self::NOTIFY_NEW_OREDR_COLUMN,
         self::AFFILIATE_FORM_COLUMN,
+        self::THANKYOU_PAGE_COLUMN,
     ];
 
     /** @var array */
@@ -96,6 +97,15 @@ class Setting extends Model
         return $this->hasOne(Store::class);
     }
 
+    public function getPayoutMethodsAttribute($value): array
+    {
+        if (is_null($this->attributes[self::PAYOUT_METHODS_COLUMN])) {
+            return [];
+        }
+
+        return json_decode($this->attributes[self::PAYOUT_METHODS_COLUMN]);
+    }
+    
     public function setCurrencyAttribute($value): self
     {
         $this->attributes[self::CURRENCY_COLUMN] = strtoupper($value);

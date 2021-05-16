@@ -12,17 +12,18 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="d-flex align-items-center">
-                        <label class="form-check form-check-single form-switch" style="padding-left: 0 !important; padding-right: 1rem">
-                            <input name="affiliate_form" class="form-check-input" value="1" type="checkbox" @if (old('affiliate_form') ?? $setting->affiliate_form)checked @endif/>
-                        </label>
-                        <label class="card-title">Afilliate Form</label>
+                    <div class="row">
+                        <div class="d-flex align-items-center">
+                            <label class="form-check form-check-single form-switch" style="padding-left: 0 !important; padding-right: 1rem">
+                                <input name="affiliate_form" id="affiliate-form-check" class="form-check-input" value="1" type="checkbox" @if (old('affiliate_form') ?? $setting->affiliate_form)checked @endif/>
+                            </label>
+                            <label class="card-title">Afilliate Form</label>
+                        </div>
+                        <p class="text-muted mt-2 mb-0">Embed a custom form on your website to attract new affiliates</p>
                     </div>
                 </div>
-                {{-- <div class="card-body" style="display: none;"> --}}
-                <div class="card-body">
+                <div class="card-body" id="affiliate-form" style="display: none;">
                     <div class="row">
-                        <p class="text-muted">Embed a custom form on your website to attract new affiliates</p>
                         <a href="{{ route('guide.affiliate.setup') }}">How to add your sign up form to Shopify</a>
                         <div class="col mt-2">
                             <label class="form-label">Copy this code and paste on a page</label>
@@ -56,7 +57,7 @@
                         </label>
                         <label class="card-title" style="margin: 0;">Thank You Page</label>
                     </div>
-                    <p class="text-muted mt-2">Turning this off will disable the thank you page feature (Recommended to keep ON)</p>
+                    <p class="text-muted mt-2 mb-0">Turning this off will disable the thank you page feature (Recommended to keep ON)</p>
                 </div>
             </div>
         </div>
@@ -90,6 +91,22 @@
         var el = document.getElementById('iframe');
         var actionBtn = document.getElementById('copy-iframe');
         var copyMsg = document.getElementById('valid-copy');
+        var affiliateFormEl = document.getElementById('affiliate-form-check');
+        var affiliateForm = document.getElementById('affiliate-form');
+
+        if (affiliateFormEl.checked) {
+            affiliateForm.style.display = "block";
+        } else {
+            affiliateForm.style.display = "none";
+        }
+
+        affiliateFormEl.addEventListener("change", function() {
+            if (affiliateFormEl.checked) {
+                affiliateForm.style.display = "block";
+            } else {
+                affiliateForm.style.display = "none";
+            }
+        });
 
         actionBtn.addEventListener("click", function() {
             iframe.select();
