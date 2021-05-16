@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-4">
                             <label class="form-label">Brand name</label>
-                            <input type="text" name="brand_name" class="form-control @if ($errors->has('brand_name')) is-invalid @endif" value="{{ old('brand_name') }}" placeholder="Brand name"/>
+                            <input type="text" name="brand_name" class="form-control @if ($errors->has('brand_name')) is-invalid @endif" value="{{ old('brand_name') ?? $setting->brand_name }}" placeholder="Brand name"/>
                             @if ($errors->has('brand_name'))
                             <div class="invalid-feedback">{{ $errors->first('brand_name') }}</div>
                             @endif
@@ -81,7 +81,7 @@
                             <label class="form-label">Currency</label>
                             <select name="currency" class="form-select @if ($errors->has('currency')) is-invalid @endif" placeholder="Select a currency" id="select-currency">
                                 @foreach ($currencies as $key => $format)
-                                <option @if (old('currency') == $key || \BADDIServices\SocialRocket\Models\Setting::DEFAULT_CURRENCY == $key) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
+                                <option @if (old('currency') == $key || (is_null(old('currency')) && $setting->currency == $key) || (is_null(old('currency')) && is_null($setting->currency) && \BADDIServices\SocialRocket\Models\Setting::DEFAULT_CURRENCY == $key)) selected @endif value="{{ $key }}">{{ ucwords($format) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('currency'))

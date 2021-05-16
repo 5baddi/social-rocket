@@ -37,6 +37,7 @@ class UpdateAccountRequest extends FormRequest
             User::EMAIL_COLUMN         => 'required|email',
             User::PHONE_COLUMN         => 'nullable|string|max:25',
             Setting::BRAND_NAME_COLUMN => 'nullable|string|min:1',
+            Setting::CURRENCY_COLUMN   => 'nullable|string|max:10',
             User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',
             'current_password'         => 'nullable|string|min:8',
             'confirm_password'         => 'nullable|string|min:8'

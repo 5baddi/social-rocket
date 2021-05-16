@@ -69,4 +69,11 @@ class Setting extends Model
     {
         return $this->hasOne(Store::class);
     }
+
+    public function setCurrencyAttribute($value): self
+    {
+        $this->attributes[self::CURRENCY_COLUMN] = strtoupper($value);
+
+        return $this;
+    }
 }

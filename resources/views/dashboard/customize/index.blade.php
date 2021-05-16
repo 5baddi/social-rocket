@@ -20,7 +20,7 @@
                             <label class="form-label">Type</label>
                             <select name="commission_type" class="form-select @if ($errors->has('commission_type')) is-invalid @endif" placeholder="Select a type" id="select-commission-type">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::COMMISSION_TYPES as $type)
-                                <option @if (old('commission_type') == $type || \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type) selected @endif  value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
+                                <option @if (old('commission_type') == $type || (is_null(old('commission_type')) && \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type)) selected @endif  value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('commission_type'))
@@ -53,7 +53,7 @@
                             <label class="form-label">Type</label>
                             <select name="discount_type" class="form-select @if ($errors->has('discount_type')) is-invalid @endif" placeholder="Select a type" id="select-discount-type">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_TYPES as $type)
-                                <option @if (old('discount_type') == $type || \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type) selected @endif value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
+                                <option @if (old('discount_type') == $type || (is_null(old('discount_type')) && \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type)) selected @endif value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('discount_type'))
@@ -74,7 +74,7 @@
                             <label class="form-label">Format</label>
                             <select name="discount_format" class="form-select @if ($errors->has('discount_format')) is-invalid @endif" placeholder="Select a type" id="select-discount-format">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_FORMATS as $key => $format)
-                                <option @if (old('discount_format') == $key || \BADDIServices\SocialRocket\Models\Setting::UNIQUE_DISCOUNT_FORMAT == $key) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
+                                <option @if (old('discount_format') == $key || (is_null(old('discount_format')) && \BADDIServices\SocialRocket\Models\Setting::UNIQUE_DISCOUNT_FORMAT == $key)) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('discount_format'))
