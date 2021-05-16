@@ -30,7 +30,7 @@
     <div class="wrapper">
       @include('partials.dashboard.menu')
       <div class="page-wrapper">
-        {{-- @include('partials.dashboard.navbar') --}}
+        @include('partials.dashboard.breadcrumb')
         <div class="page-body mt-4">
           <div class="container-xl">
             @include('partials.dashboard.alert')

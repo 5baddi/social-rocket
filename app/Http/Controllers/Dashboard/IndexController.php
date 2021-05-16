@@ -8,17 +8,21 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
 
+use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\AnalyticsRequest;
+use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
 
-class IndexController extends Controller
+class IndexController extends DashboardController
 {
     public function __invoke(AnalyticsRequest $request)
     {
         return view('dashboard.index', [
             'title'     =>  'Dashboard',
-            'period'    =>  Str::replace('_', ' ', $request->query('period'))
+            'period'    =>  Str::replace('_', ' ', $request->query('period')),
+            'unreadNotifications'               =>  $this->user->unreadNotifications,
+            'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30))
         ]);
     }
 }

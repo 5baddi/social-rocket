@@ -24,7 +24,7 @@
                 </div>
                 <div class="card-body" id="affiliate-form" style="display: none;">
                     <div class="row">
-                        <a href="{{ route('guide.affiliate.setup') }}">How to add your sign up form to Shopify</a>
+                        <a href="{{ route('guide.affiliate.setup') }}" target="_blank">How to add your sign up form to Shopify</a>
                         <div class="col mt-2">
                             <label class="form-label">Copy this code and paste on a page</label>
                             <div class="input-group input-group-flat">

@@ -21,6 +21,7 @@ class ActivityMarkAllAsReadController extends Controller
 
         $user->notifications->markAsRead();
 
-        return redirect()->route('dashboard.activity');
+        // return redirect()->route('dashboard.activity');
+        return redirect()->route('dashboard');
     }
 }

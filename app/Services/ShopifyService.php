@@ -18,11 +18,11 @@ use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenException;
+use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePaymentConfirmationFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
 
@@ -37,6 +37,7 @@ class ShopifyService extends Service
     const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
     const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
+    const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
 
     /** @var Client */
     private $client;
@@ -158,7 +159,19 @@ class ShopifyService extends Service
                 throw new Exception();
             }
 
+            $this->createScriptTag($store);
+
             return $data['recurring_application_charge'];
+        } catch (CancelSubscriptionFailed $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:cancel-billing',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CancelSubscriptionFailed();
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
                 'context'   =>  'store:get-billing',
@@ -203,6 +216,50 @@ class ShopifyService extends Service
             ]);
 
             throw new CancelSubscriptionFailed();
+        }
+    }
+    
+    public function createScriptTag(Store $store): bool
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $scriptTagURL = $this->getStoreURL($store->slug);
+            $scriptTagURL .= self::POST_SCRIPT_TAG_ENDPOINT;
+
+            $requestBody = [
+                'event'         =>  'onload',
+                'display_scope' =>  'order_status',
+                'src'           =>  asset('order_status.js')
+            ];
+
+            $requestBody['access_token'] = $accessToken;
+
+            $response = $this->client->request('POST', $scriptTagURL, 
+                [
+                    'form_params'      => $requestBody,
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                    ]
+                ]
+            );
+
+            if (!isset($data['usage_charge'], $data['usage_charge']['id'])) {
+                throw new IntegateAppLayoutToThemeFailed();
+            }
+
+            return true;
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:integrate-script-tag',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new IntegateAppLayoutToThemeFailed();
         }
     }
 
