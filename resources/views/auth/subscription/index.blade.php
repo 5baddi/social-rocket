@@ -28,6 +28,9 @@
                         @if(Session::has('error'))
                         <p class="invalid-feedback">{{ Session::get('error') }}</p>
                         @endif
+                        @if(Session::has('success'))
+                        <p class="valid-feedback" style="display: block;">{{ Session::get('success') }}</p>
+                        @endif
                         <div class="list-plans-pricing" id="monthly">
                             @foreach ($packs as $pack)
                             <div class="item-plan">

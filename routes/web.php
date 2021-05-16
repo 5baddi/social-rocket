@@ -33,6 +33,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPayment
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\CancelSubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
@@ -116,7 +117,7 @@ Route::middleware(['auth', 'has.subscription'])
             return redirect()->route('dashboard.account', ['tab' => 'plan']);
         })->name('.plan');
         Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
-        Route::get('/plan/cancel', UpgradePlanController::class)->name('.plan.cancel');
+        Route::get('/plan/cancel', CancelSubscriptionController::class)->name('.plan.cancel');
 
         Route::get('/logout', SignOutController::class)->name('.signout');
     });

@@ -15,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Subscription extends Model
 {
     use SoftDeletes;
-    
+
     /** @var array */
     public const STATUSES = [
         'pending',
@@ -39,6 +39,7 @@ class Subscription extends Model
 
     public const DEFAULT_STATUS = self::STATUSES[0];
     public const CHARGE_ACCEPTED = self::STATUSES[1];
+    public const CHARGE_CANCELLD = self::STATUSES[4];
 
     /** @var array */
     protected $fillable = [

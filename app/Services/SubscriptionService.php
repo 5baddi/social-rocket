@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Exception;
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
@@ -103,5 +104,14 @@ class SubscriptionService extends Service
         $subscription->load(['user', 'pack']);
 
         return $subscription;
+    }
+
+    public function cancelSubscription(Store $store, Subscription $subscription): void
+    {
+        if ($subscription->charge_id === Subscription::CHARGE_CANCELLD) {
+            throw new Exception('Subscription already cancelled');
+        }
+
+        $this->shopifyService->cancelSubscription($store, $subscription->charge_id);
     }
 }

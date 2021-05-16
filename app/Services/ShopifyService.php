@@ -17,7 +17,10 @@ use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
+use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
+use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePaymentConfirmationFailed;
@@ -33,6 +36,7 @@ class ShopifyService extends Service
     const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
     const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
     const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
+    const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
 
     /** @var Client */
     private $client;
@@ -165,6 +169,40 @@ class ShopifyService extends Service
             ]);
 
             throw new AcceptPaymentFailed();
+        }
+    }
+    
+    /**
+     * @throws CancelSubscriptionFailed
+     */
+    public function cancelSubscription(Store $store, string $chargeId): bool
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $chargeURL = $this->getStoreURL($store->slug);
+            $chargeURL .= Str::replace("{id}", $chargeId, self::DELETE_CHARGE_ENDPOINT);
+            $chargeURL .= "?access_token={$accessToken}";
+
+            $response = $this->client->request('DELETE', $chargeURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json'
+                    ]
+                ]
+            );
+
+            return $response->getStatusCode() === Response::HTTP_OK;
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:cancel-billing',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CancelSubscriptionFailed();
         }
     }
 
