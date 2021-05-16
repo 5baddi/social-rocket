@@ -43,11 +43,8 @@ class CancelSubscriptionController extends DashboardController
                         );
         } catch (Throwable $ex) {
             return redirect()
-                        ->back()
-                        ->with(
-                            'alert',
-                            new Alert('Something going wrong during cancel subscription')
-                        );
+                        ->route('subscription.select.pack')
+                        ->with('error', 'Something going wrong during cancel subscription');
         }
     }
 }

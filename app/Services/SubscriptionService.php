@@ -117,6 +117,8 @@ class SubscriptionService extends Service
 
         $this->subscriptionRepository->delete($subscription->id);
 
-        $this->user->notify(new SubscriptionCancelled($subscription));
+        $subscription->load('pack');
+
+        $user->notify(new SubscriptionCancelled($subscription));
     }
 }
