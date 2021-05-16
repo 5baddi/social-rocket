@@ -11,17 +11,18 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Entities\Alert;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
+use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
+use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 
 class BillingConfirmationController extends Controller
 {
@@ -67,7 +68,7 @@ class BillingConfirmationController extends Controller
                                 'alert',
                                 new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
                             );
-        } catch (AcceptPaymentFailed $ex) {
+        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $ex) {
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',

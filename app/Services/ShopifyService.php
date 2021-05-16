@@ -162,16 +162,8 @@ class ShopifyService extends Service
             $this->createScriptTag($store);
 
             return $data['recurring_application_charge'];
-        } catch (CancelSubscriptionFailed $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'store:cancel-billing',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
-
-            throw new CancelSubscriptionFailed();
+        } catch (IntegateAppLayoutToThemeFailed $ex) {
+            throw new IntegateAppLayoutToThemeFailed();
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
                 'context'   =>  'store:get-billing',
@@ -227,7 +219,7 @@ class ShopifyService extends Service
             $scriptTagURL = $this->getStoreURL($store->slug);
             $scriptTagURL .= self::POST_SCRIPT_TAG_ENDPOINT;
 
-            $requestBody = [
+            $requestBody['script_tag'] = [
                 'event'         =>  'onload',
                 'display_scope' =>  'order_status',
                 'src'           =>  asset('order_status.js')
@@ -245,7 +237,8 @@ class ShopifyService extends Service
                 ]
             );
 
-            if (!isset($data['usage_charge'], $data['usage_charge']['id'])) {
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['script_tag'], $data['script_tag']['id'])) {
                 throw new IntegateAppLayoutToThemeFailed();
             }
 
