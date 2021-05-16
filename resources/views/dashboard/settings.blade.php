@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.settings.save') }}" method="POST">
+    <form action="{{ route('dashboard.settings.save', ['tab' => $tab]) }}" method="POST">
         @csrf
         <div class="col">
             <div class="card">

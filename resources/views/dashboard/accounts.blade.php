@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <form action="{{ route('dashboard.account.save') }}" method="POST">
+    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST">
         @csrf
         <div class="col">
             <div class="card">

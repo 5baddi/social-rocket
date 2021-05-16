@@ -33,7 +33,7 @@ class SettingsController extends Controller
             $store->load('setting');
             $setting = $store->setting;
 
-            return view('dashboard.settings.index', [
+            return view('dashboard.settings', [
                 'title'         =>  'Settings',
                 'tab'           =>  $request->query('tab', 'methods'),
                 'setting'       =>  $setting
