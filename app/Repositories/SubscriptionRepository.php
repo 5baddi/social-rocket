@@ -23,8 +23,8 @@ class SubscriptionRepository
         return Subscription::query()
                     ->updateOrCreate(
                         [
+                            Subscription::USER_ID_COLUMN    => $userId,
                             Subscription::STORE_ID_COLUMN   => $storeId,
-                            Subscription::PACK_ID_COLUMN    => $packId,
                         ],
                         $attributes
                     );

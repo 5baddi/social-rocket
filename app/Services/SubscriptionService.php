@@ -83,14 +83,19 @@ class SubscriptionService extends Service
 
         $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
 
-        if (is_null($store->script_tag)) {
+        $this->createScriptTag($store);
+
+        return $subscription;
+    }
+
+    public function createScriptTag(Store $store)
+    {
+        if (is_null($store->script_tag_id)) {
             $scriptTag = collect($this->shopifyService->createScriptTag($store));
             $this->storeService->udpate($store, [
                 Store::SCRIPT_TAG_ID_COLUMN => $scriptTag->get('id')
             ]);
         }
-
-        return $subscription;
     }
     
     public function confirmUsageBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
@@ -115,6 +120,8 @@ class SubscriptionService extends Service
 
         $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
         $subscription->load(['user', 'pack']);
+
+        $this->createScriptTag($store);
 
         return $subscription;
     }

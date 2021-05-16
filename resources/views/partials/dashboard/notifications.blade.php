@@ -2,7 +2,7 @@
     <div class="col-12">
       @if ($unreadNotifications->count() > 0)
       @foreach ($unreadNotifications as $notification)
-      <div class="card">
+      <div class="card mb-2">
         <div class="card-header">
           <h5 class="card-title">{{ $notification->data['subject'] }}</h5>
         </div>

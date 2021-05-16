@@ -26,7 +26,7 @@
                     <div class="col-content-pricing col-lg-9">
                         <h2 class="title2">{{ !$currentPack ? 'Chose A Plan To Start Your 7 Day Trial' : 'Upgrade your plan' }}</h2>
                         <div class="text-center">
-                            @if($alert && $alert->type == 'error')
+                            @if(isset($alert) && $alert->type == 'error')
                             <p class="invalid-feedback">{{ $alert->message }}</p>
                             @endif
                             @if(Session::has('success'))
