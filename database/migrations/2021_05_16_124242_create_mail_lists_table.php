@@ -19,7 +19,7 @@ class CreateMailListsTable extends Migration
             $table->string('first_name', 100)->nullable(false);
             $table->string('last_name', 100)->nullable(false);
             $table->string('email')->unique();
-            $table->boolean('confirmed')->default(false);
+            $table->string('coupon', 100)->nullable(false);
             $table->timestamps();
         });
     }

@@ -13,6 +13,7 @@ class AppSetting extends Model
     /** @var string */
     public const INSTAGRAM_USERNAME = 'instagram_username';
     public const TWITTER_USERNAME = 'twitter_username';
+    public const FACEBOOK_USERNAME = 'facebook_username';
 
     /** @var array */
     protected $fillable = [

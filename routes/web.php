@@ -22,7 +22,6 @@ use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateSignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateConfirmController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
@@ -62,7 +61,6 @@ Route::name('affiliate')
 
         Route::get('/{store}', AffiliateController::class);
         Route::post('/{store}/signup', AffiliateSignUpController::class)->name('.signup');
-        Route::post('/confirm/{id}', AffiliateConfirmController::class)->name('.confirm');
     });
 
 Route::middleware('guest')

@@ -23,6 +23,7 @@ class SettingsSeeder extends Seeder
         AppSetting::create([
             AppSetting::INSTAGRAM_USERNAME    =>  'trysocialrocket',
             AppSetting::TWITTER_USERNAME      =>  'TrySocialRocket',
+            AppSetting::FACEBOOK_USERNAME     =>  'Trysocialrocketapp-103039265306555',
         ]);
     }
 }

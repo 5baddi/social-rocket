@@ -8,11 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\StoreRepository;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Repositories\StoreRepository;
 
 class StoreService extends Service
 {

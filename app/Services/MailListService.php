@@ -12,6 +12,7 @@ use App\Models\User;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Models\MailList;
+use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Repositories\MailListRepository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
 
@@ -20,9 +21,13 @@ class MailListService extends Service
     /** @var MailListRepository */
     private $mailListRepository;
 
-    public function __construct(MailListRepository $mailListRepository)
+    /** @var CouponService */
+    private $couponService;
+
+    public function __construct(MailListRepository $mailListRepository, CouponService $couponService)
     {
         $this->mailListRepository = $mailListRepository;
+        $this->couponService = $couponService;
     }
 
     public function exists(string $email): bool
@@ -33,6 +38,10 @@ class MailListService extends Service
     public function create(Store $store, array $attributes): MailList
     {
         $attributes[MailList::STORE_ID_COLUMN] = $store->id;
+
+        $coupon = $this->couponService->generateDiscountCode($store, $attributes[MailList::FIRST_NAME_COLUMN]);
+
+        $attributes[MailList::COUPON_COLUMN] = $coupon;
 
         return $this->mailListRepository->create($attributes);
     }

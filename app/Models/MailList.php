@@ -17,7 +17,7 @@ class MailList extends Model
     public const EMAIL_COLUMN = 'email';
     public const LAST_NAME_COLUMN = 'last_name';
     public const FIRST_NAME_COLUMN = 'first_name';
-    public const CONFIRMED_COLUMN = 'confirmed';
+    public const COUPON_COLUMN = 'coupon';
 
     /** @var array */
     protected $fillable = [
@@ -25,12 +25,7 @@ class MailList extends Model
         self::FIRST_NAME_COLUMN,
         self::LAST_NAME_COLUMN,
         self::EMAIL_COLUMN,
-        self::CONFIRMED_COLUMN,
-    ];
-
-    /** @var array */
-    protected $casts = [
-        self::CONFIRMED_COLUMN => 'boolean',
+        self::COUPON_COLUMN,
     ];
 
     public function store(): HasOne

@@ -8,12 +8,12 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
+use Throwable;
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Services\MailListService;
 use BADDIServices\SocialRocket\Http\Requests\AffiliateSignInRequest;
-use BADDIServices\SocialRocket\Models\MailList;
-use Throwable;
 
 class AffiliateSignUpController extends Controller
 {
