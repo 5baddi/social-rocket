@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
@@ -61,11 +62,23 @@ class BillingConfirmationController extends Controller
             $subscription = $this->subscriptionService->loadRelations($subscription);
             $user->notify(new SubscriptionActivated($subscription));
 
-            return redirect()->route('dashboard')->with('success', ucwords($pack->name) . ' plan activated successfully');
+            return redirect()->route('dashboard')
+                            ->with(
+                                'alert',
+                                new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
+                            );
         } catch (AcceptPaymentFailed $ex) {
-            return redirect()->route('subscription.select.pack')->with('error', $ex->getMessage()); 
+            return redirect()->route('subscription.select.pack')
+                            ->with(
+                                'alert',
+                                new Alert($ex->getMessage())
+                            ); 
         } catch (Throwable $ex) {
-            return redirect()->route('subscription.select.pack')->with('error', 'Internal server error'); 
+            return redirect()->route('subscription.select.pack')
+                            ->with(
+                                'alert',
+                                new Alert('Internal server error')
+                            ); 
         }
     }
 }
