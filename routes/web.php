@@ -49,6 +49,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomiz
 
 Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
+Route::redirect('/guide/affiliate/setup', 'https://socialsnowball.zendesk.com/hc/en-us/articles/360056865074-How-to-add-your-affiliate-registration-page-to-Shopify', 301)->name('guide.affiliate.setup');
 
 Route::get('/affiliate/{store}', AffiliateController::class)->name('affiliate');
 Route::post('/affiliate', AffiliateController::class)->name('affiliate.signup');

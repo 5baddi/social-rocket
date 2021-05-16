@@ -22,8 +22,22 @@
                 <div class="card-body">
                     <div class="row">
                         <p class="text-muted">Embed a custom form on your website to attract new affiliates</p>
-                        <div class="col">
-                            <input type="text" value="{{ route('affiliate', ['store' => $store]) }}" class="form-control" readonly/>
+                        <a href="{{ route('guide.affiliate.setup') }}">How to add your sign up form to Shopify</a>
+                        <div class="col mt-2">
+                            <label class="form-label">Copy this code and paste on a page</label>
+                            <div class="input-group input-group-flat">
+                                <textarea id="iframe" rows="1" class="form-control text-start" style="resize: none;" readonly><iframe src="{{ route('affiliate', ['store' => $store]) }}" frameborder="0" width="100%" height="550px" scrolling="no"></iframe></textarea>
+                                <span class="input-group-text">
+                                    <a id="copy-iframe" href="#" class="input-group-link" style="padding-left:.5rem;" title="copy">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                            <rect x="8" y="8" width="12" height="12" rx="2"></rect>
+                                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2"></path>
+                                        </svg>
+                                    </a>
+                                </span>
+                            </div>
+                            <div class="valid-feedback" id="valid-copy">Your iframe has been copied successfully</div>
                         </div>
                     </div>
                 </div>
@@ -48,4 +62,29 @@
         </div>
     </form>
 </div>
+@endsection
+
+@section('scripts')
+    @include('partials.dashboard.scripts.form')
+@endsection
+
+@section('script')
+    document.addEventListener("DOMContentLoaded", function() {
+        var el = document.getElementById('iframe');
+        var actionBtn = document.getElementById('copy-iframe');
+        var copyMsg = document.getElementById('valid-copy');
+
+        actionBtn.addEventListener("click", function() {
+            iframe.select();
+            iframe.setSelectionRange(0, 99999);
+
+            document.execCommand("copy");
+
+            copyMsg.style.display = "block";
+            window.setTimeout(function() {
+                copyMsg.style.display = "none";
+                document.getSelection().removeAllRanges();
+            }, 5000);
+        });
+    });
 @endsection
