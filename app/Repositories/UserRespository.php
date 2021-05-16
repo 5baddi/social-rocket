@@ -15,6 +15,7 @@ class UserRespository
     public function findByEmail(string $email): ?User
     {
         return User::query()
+                    ->with(['store', 'subscription'])
                     ->where([
                         User::EMAIL_COLUMN => strtolower($email)
                     ])

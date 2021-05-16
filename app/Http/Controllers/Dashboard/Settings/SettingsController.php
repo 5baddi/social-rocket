@@ -14,6 +14,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SettingsController extends Controller
@@ -32,6 +34,9 @@ class SettingsController extends Controller
 
             $store->load('setting');
             $setting = $store->setting;
+            if(!$setting instanceof Setting) {
+                $setting = new StoreSetting();
+            }
 
             return view('dashboard.settings', [
                 'title'         =>  'Settings',

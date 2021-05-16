@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 
 class IntegrationsController extends Controller
 {
@@ -30,7 +31,7 @@ class IntegrationsController extends Controller
         $store->load('setting');
         $setting = $store->setting;
         if (!$setting instanceof Setting) {
-            abort_unless($setting instanceof Setting, Response::HTTP_NOT_FOUND, 'Setting not loaded!');
+            $setting = new StoreSetting();
         }
 
         return view('dashboard.customize.integrations', [

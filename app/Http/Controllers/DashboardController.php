@@ -32,12 +32,13 @@ class DashboardController extends BaseController
 
     public function __construct()
     {
-        /** @var User */
-        $this->user = Auth::user();
-        $this->user->load('store');
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
 
-        $this->store = $this->user->store;
-        $this->store->load('subscription');
-        $this->subscription = $this->store->subscription;
+            $this->store = $this->user->store;
+            $this->subscription = $this->user->subscription;
+
+            return $next($request);
+        });
     }
 }

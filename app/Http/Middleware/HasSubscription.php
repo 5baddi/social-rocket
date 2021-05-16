@@ -23,7 +23,6 @@ class HasSubscription
     {
         /** @var User */
         $user = Auth::user();
-        $user->load('subscription');
 
         if (strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
             if(!$user->subscription instanceof Subscription || $user->subscription->trashed()) {

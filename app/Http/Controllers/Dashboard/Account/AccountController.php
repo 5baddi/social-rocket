@@ -11,12 +11,13 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Services\PackService;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
+use BADDIServices\SocialRocket\Services\SettingService;
 
 class AccountController extends Controller
 {
@@ -42,7 +43,7 @@ class AccountController extends Controller
         $store->load('setting');
         $setting = $store->setting;
         if (!$setting instanceof Setting) {
-            abort_unless($setting instanceof Setting, Response::HTTP_NOT_FOUND, 'Setting not loaded!');
+            $setting = new StoreSetting();
         }
 
 
