@@ -20,7 +20,7 @@
                             <label class="form-label">Type</label>
                             <select name="commission_type" class="form-select @if ($errors->has('commission_type')) is-invalid @endif" placeholder="Select a type" id="select-commission-type">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::COMMISSION_TYPES as $type)
-                                <option @if (old('commission_type') == $type || (is_null(old('commission_type')) && \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type)) selected @endif  value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
+                                <option @if (old('commission_type') == $type || (is_null(old('commission_type')) && $setting->commission_type == $type)) selected @endif  value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('commission_type'))
@@ -30,7 +30,7 @@
                         <div class="col-4">
                             <label class="form-label">Amount</label>
                             <div class="input-group input-group-flat">
-                                <input name="commission_amount" type="text" class="form-control text-start pe-0 @if ($errors->has('commission_amount')) is-invalid @endif" value="{{ old('commission_amount') ?? \BADDIServices\SocialRocket\Models\Setting::DFEAULT_COMMISSION }}" autocomplete="off">
+                                <input name="commission_amount" type="text" class="form-control text-start pe-0 @if ($errors->has('commission_amount')) is-invalid @endif" value="{{ old('commission_amount') ?? $setting->commission_amount }}" autocomplete="off">
                                 <span class="input-group-text" id="commission-amount">$</span>
                             </div>
                             @if ($errors->has('commission_amount'))
@@ -53,7 +53,7 @@
                             <label class="form-label">Type</label>
                             <select name="discount_type" class="form-select @if ($errors->has('discount_type')) is-invalid @endif" placeholder="Select a type" id="select-discount-type">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_TYPES as $type)
-                                <option @if (old('discount_type') == $type || (is_null(old('discount_type')) && \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE == $type)) selected @endif value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
+                                <option @if (old('discount_type') == $type || (is_null(old('discount_type')) && $setting->discount_type == $type)) selected @endif value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('discount_type'))
@@ -63,7 +63,7 @@
                         <div class="col-4">
                             <label class="form-label">Amount</label>
                             <div class="input-group input-group-flat">
-                                <input name="discount_amount" type="text" class="form-control text-start pe-0 @if ($errors->has('discount_amount')) is-invalid @endif" value="{{ old('discount_amount') ?? \BADDIServices\SocialRocket\Models\Setting::DFEAULT_DISCOUNT }}" autocomplete="off">
+                                <input name="discount_amount" type="text" class="form-control text-start pe-0 @if ($errors->has('discount_amount')) is-invalid @endif" value="{{ old('discount_amount') ?? $setting->discount_amount }}" autocomplete="off">
                                 <span class="input-group-text" id="discount-amount">$</span>
                             </div>
                             @if ($errors->has('discount_amount'))
@@ -74,7 +74,7 @@
                             <label class="form-label">Format</label>
                             <select name="discount_format" class="form-select @if ($errors->has('discount_format')) is-invalid @endif" placeholder="Select a type" id="select-discount-format">
                                 @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_FORMATS as $key => $format)
-                                <option @if (old('discount_format') == $key || (is_null(old('discount_format')) && \BADDIServices\SocialRocket\Models\Setting::UNIQUE_DISCOUNT_FORMAT == $key)) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
+                                <option @if (old('discount_format') == $key || (is_null(old('discount_format')) && $setting->discount_format == $key)) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('discount_format'))
@@ -95,7 +95,7 @@
                         <p class="text-muted">Customize the appearance of the thank you page feature. Please note: The fonts used here will be consistent with the fonts selected in your Shopify theme editor</p>
                         <div class="col-4">
                             <label class="form-label">Heading color</label>
-                            <input name="color" type="color" id="color" class="form-control form-control-color mb-2 @if ($errors->has('color')) is-invalid @endif" value="{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}" title="Choose your color">
+                            <input name="color" type="color" id="color" class="form-control form-control-color mb-2 @if ($errors->has('color')) is-invalid @endif" value="{{ old('color') ?? $setting->color }}" title="Choose your color">
                             @if ($errors->has('color'))
                             <div class="invalid-feedback">{{ $errors::first('color') }}</div>
                             @endif
@@ -138,7 +138,7 @@
 
 @section('script')
     document.addEventListener("DOMContentLoaded", function () {
-        localStorage.setItem('checkout-color', '{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}');
+        localStorage.setItem('checkout-color', '{{ old('color') ?? $setting->color }}');
 
         var el = document.getElementById('select-commission-type');
         window.Choices && (new Choices(el, {
