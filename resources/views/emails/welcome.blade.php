@@ -3,7 +3,7 @@
 @section('content')
   <tr>
     <td class="sm-px-24" style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 24px; padding: 48px; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));" bgcolor="rgba(255, 255, 255, var(--bg-opacity))" align="left">
-      <p style="font-weight: 600; margin-bottom: 0;">Hi! {{ ucwords($subscription->user->first_name) }} 👋</p>
+      <p style="font-weight: 600; margin-bottom: 0;">Hi! {{ ucwords($user->first_name) }} 👋</p>
       <p class="sm-leading-32" style="font-weight: 600; font-size: 20px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
 		Thanks you for joining <strong>{{ config('app.name') }}</strong>!
       </p>
