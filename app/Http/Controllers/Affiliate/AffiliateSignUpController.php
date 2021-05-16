@@ -15,7 +15,7 @@ use BADDIServices\SocialRocket\Http\Requests\AffiliateSignInRequest;
 use BADDIServices\SocialRocket\Models\MailList;
 use Throwable;
 
-class AffiliateSignInController extends Controller
+class AffiliateSignUpController extends Controller
 {
     /** @var MailListService */
     private $mailListService;

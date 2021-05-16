@@ -20,8 +20,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateSignInController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateSignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateConfirmController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
@@ -53,8 +54,15 @@ Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
 Route::redirect('/guide/affiliate/setup', 'https://socialsnowball.zendesk.com/hc/en-us/articles/360056865074-How-to-add-your-affiliate-registration-page-to-Shopify', 301)->name('guide.affiliate.setup');
 
-Route::get('/affiliate/{store}', AffiliateController::class)->name('affiliate');
-Route::post('/affiliate/signin/{store}', AffiliateSignInController::class)->name('affiliate.signup');
+Route::name('affiliate')
+    ->prefix('affiliate')
+    ->group(function() {
+        Route::redirect('/', '/', 301);
+
+        Route::get('/{store}', AffiliateController::class);
+        Route::post('/{store}/signup', AffiliateSignUpController::class)->name('.signup');
+        Route::post('/confirm/{id}', AffiliateConfirmController::class)->name('.confirm');
+    });
 
 Route::middleware('guest')
     ->group(function() {
