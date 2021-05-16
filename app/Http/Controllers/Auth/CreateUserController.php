@@ -64,8 +64,10 @@ class CreateUserController extends Controller
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
+            dd($ex);
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
+            dd($ex);
             return redirect('/signup')->withInput()->with("error", "Internal server error");
         }
     }
