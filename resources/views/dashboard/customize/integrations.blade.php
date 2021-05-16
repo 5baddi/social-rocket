@@ -7,9 +7,10 @@
 @section('content')
 <div class="row row-cards">
     <form action="{{ route('dashboard.customize.integrations.save') }}" method="POST">
-        <div class="card">
-            <div class="col-12">
-                @csrf
+        @csrf
+
+        <div class="col-12">
+            <div class="card">
                 <div class="card-header">
                     <div class="d-flex align-items-center">
                         <label class="form-check form-check-single form-switch" style="padding-left: 0 !important; padding-right: 1rem">
@@ -40,6 +41,22 @@
                             <div class="valid-feedback" id="valid-copy">Your iframe has been copied successfully</div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col mt-5">
+            <h2 class="page-title">Advanced Settings</h2>
+        </div>
+        <div class="col-12 mt-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <label class="form-check form-check-single form-switch" style="padding-left: 0 !important; padding-right: 1rem">
+                            <input name="thankyou_page" class="form-check-input" value="1" type="checkbox" @if (old('thankyou_page') ?? $setting->thankyou_page)checked @endif/>
+                        </label>
+                        <label class="card-title" style="margin: 0;">Thank You Page</label>
+                    </div>
+                    <p class="text-muted mt-2">Turning this off will disable the thank you page feature (Recommended to keep ON)</p>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;

@@ -33,6 +33,7 @@ class Setting extends Model
     public const NOTIFY_NEW_ACCOUNT_COLUMN = 'notify_new_account';
     public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
     public const AFFILIATE_FORM_COLUMN = 'affiliate_form';
+    public const THANKYOU_PAGE_COLUMN = 'thankyou_page';
 
     /** @var int */
     public const DFEAULT_COMMISSION = 10;
@@ -86,6 +87,7 @@ class Setting extends Model
         self::NOTIFY_NEW_ACCOUNT_COLUMN => 'boolean',
         self::NOTIFY_NEW_OREDR_COLUMN   => 'boolean',
         self::AFFILIATE_FORM_COLUMN     => 'boolean',
+        self::THANKYOU_PAGE_COLUMN      => 'boolean',
         self::PAYOUT_METHODS_COLUMN     => 'json',
     ];
 

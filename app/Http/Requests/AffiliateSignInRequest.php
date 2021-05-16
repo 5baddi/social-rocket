@@ -8,10 +8,10 @@
 
 namespace BADDIServices\SocialRocket\Http\Requests;
 
-use BADDIServices\SocialRocket\Models\Setting;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateIntegrationsSettingsRequest extends FormRequest
+class AffiliateSignInRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,8 +31,9 @@ class UpdateIntegrationsSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            Setting::AFFILIATE_FORM_COLUMN      => ['nullable', 'integer', 'in:1,0'],
-            Setting::THANKYOU_PAGE_COLUMN       => ['nullable', 'integer', 'in:1,0'],
+            User::FIRST_NAME_COLUMN    => 'required|string|min:1',
+            User::LAST_NAME_COLUMN     => 'required|string|min:1',
+            User::EMAIL_COLUMN         => 'required|email'
         ];
     }
 }

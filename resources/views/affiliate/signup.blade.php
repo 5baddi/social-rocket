@@ -19,22 +19,33 @@
                     <div class="title-register-extern">
                         <span class="title-register-form">Register</span>
                     </div>
-                    <form method="POST" action="{{ route('affiliate.signup') }}">
+
+                    @if(Session::has('error'))
+                    <div class="invalid-feedback">
+                        {{ Session::get('error') }}
+                    </div>
+                    @endif
+                    @if(Session::has('success'))
+                    <div class="valid-feedback" style="display: block;">
+                        {{ Session::get('success') }}
+                    </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('affiliate.signup', ['store' => $store->id]) }}">
                         @csrf
 
-                        <input type="hidden" name="store_id" value="{{ $store->id }}"/>
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="first_name">First Name:</label>
-                            <input type="text" class="form-control input-register-form" id="first_name" name="first_name" value="" required>
+                            <input type="text" class="form-control input-register-form" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
                         </div>
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="last_name">Last Name:</label>
-                            <input type="text" class="form-control input-register-form" id="last_name" name="last_name" value="" required>
+                            <input type="text" class="form-control input-register-form" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
                         </div>
                         
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="email">Email:</label>
-                            <input type="email" class="form-control input-register-form" id="email" name="email" value="" required>
+                            <input type="email" class="form-control input-register-form" id="email" name="email" value="{{ old('email') }}" required>
                         </div>
                         
                         <button type="submit" style="display: block; width: 100%;" class="btn-thanks mt-4">Create Account</button>

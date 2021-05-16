@@ -190,6 +190,7 @@ class SettingService extends Service
     {
         $attributes = collect([
             Setting::AFFILIATE_FORM_COLUMN      => $attributes[Setting::AFFILIATE_FORM_COLUMN] ?? false,
+            Setting::THANKYOU_PAGE_COLUMN       => $attributes[Setting::THANKYOU_PAGE_COLUMN] ?? false,
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {
