@@ -38,6 +38,7 @@ class ShopifyService extends Service
     const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
+    const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
 
     /** @var Client */
     private $client;
@@ -159,11 +160,7 @@ class ShopifyService extends Service
                 throw new Exception();
             }
 
-            $this->createScriptTag($store);
-
             return $data['recurring_application_charge'];
-        } catch (IntegateAppLayoutToThemeFailed $ex) {
-            throw new IntegateAppLayoutToThemeFailed();
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
                 'context'   =>  'store:get-billing',
@@ -211,7 +208,7 @@ class ShopifyService extends Service
         }
     }
     
-    public function createScriptTag(Store $store): bool
+    public function createScriptTag(Store $store): array
     {
         try {
             $accessToken = $this->hasAccessToken($store);
@@ -242,7 +239,7 @@ class ShopifyService extends Service
                 throw new IntegateAppLayoutToThemeFailed();
             }
 
-            return true;
+            return $data['script_tag'];
         } catch (Exception | ClientException | RequestException $ex) {
             Log::error($ex->getMessage(), [
                 'context'   =>  'store:integrate-script-tag',

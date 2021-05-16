@@ -13,9 +13,10 @@ use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
+use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
+use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
 
 class SubscriptionService extends Service
 {
@@ -25,10 +26,14 @@ class SubscriptionService extends Service
     /** @var ShopifyService */
     private $shopifyService;
 
-    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService)
+    /** @var StoreService */
+    private $storeService;
+
+    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService)
     {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->shopifyService = $shopifyService;
+        $this->storeService = $storeService;
     }
 
     public function loadRelations(Subscription &$subscription): Subscription
@@ -77,6 +82,13 @@ class SubscriptionService extends Service
         ]);
 
         $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+
+        if (is_null($store->script_tag)) {
+            $scriptTag = collect($this->shopifyService->createScriptTag($store));
+            $this->storeService->udpate($store, [
+                Store::SCRIPT_TAG_ID_COLUMN => $scriptTag->get('id')
+            ]);
+        }
 
         return $subscription;
     }
