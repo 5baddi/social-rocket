@@ -19,7 +19,6 @@ class Setting extends Model
     public const RANDOM_DISCOUNT_FORMAT = 'random';
     public const DEFAULT_COLOR = '#000000';
     public const DEFAULT_CURRENCY = 'USD';
-    public const DEFAULT_PAYOUT_METHOD = 'paypal';
 
     public const STORE_ID_COLUMN = 'store_id';
     public const CURRENCY_COLUMN = 'currency';
@@ -30,7 +29,7 @@ class Setting extends Model
     public const DISCOUNT_AMOUNT_COLUMN = 'discount_amount';
     public const DISCOUNT_FORMAT_COLUMN = 'discount_format';
     public const COLOR_COLUMN = 'color';
-    public const PAYOUT_METHOD_COLUMN = 'payout_method';
+    public const PAYOUT_METHODS_COLUMN = 'payout_methods';
     public const NOTIFY_NEW_ACCOUNT_COLUMN = 'notify_new_account';
     public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
 
@@ -73,7 +72,7 @@ class Setting extends Model
         self::DISCOUNT_FORMAT_COLUMN,
         self::COLOR_COLUMN,
         self::CURRENCY_COLUMN,
-        self::PAYOUT_METHOD_COLUMN,
+        self::PAYOUT_METHODS_COLUMN,
         self::NOTIFY_NEW_ACCOUNT_COLUMN,
         self::NOTIFY_NEW_OREDR_COLUMN,
     ];
@@ -84,6 +83,7 @@ class Setting extends Model
         self::DISCOUNT_AMOUNT_COLUMN    => 'float',
         self::NOTIFY_NEW_ACCOUNT_COLUMN => 'boolean',
         self::NOTIFY_NEW_OREDR_COLUMN   => 'boolean',
+        self::PAYOUT_METHODS_COLUMN     => 'json',
     ];
 
     public function store(): HasOne
@@ -94,6 +94,13 @@ class Setting extends Model
     public function setCurrencyAttribute($value): self
     {
         $this->attributes[self::CURRENCY_COLUMN] = strtoupper($value);
+
+        return $this;
+    }
+    
+    public function setPayoutMethodsAttribute($value): self
+    {
+        $this->attributes[self::PAYOUT_METHODS_COLUMN] = json_encode($value);
 
         return $this;
     }

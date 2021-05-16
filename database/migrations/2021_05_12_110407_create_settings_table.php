@@ -31,7 +31,7 @@ class CreateSettingsTable extends Migration
             $table->float('discount_amount')->default(Setting::DFEAULT_DISCOUNT);
             $table->enum('discount_format', array_keys(Setting::DISCOUNT_FORMATS))->nullable(false);
             $table->string('color', 10)->default(Setting::DEFAULT_COLOR);
-            $table->string('payout_method', 50)->default(Setting::DEFAULT_PAYOUT_METHOD);
+            $table->json('payout_methods')->nullable();
             $table->boolean('notify_new_account')->default(true);
             $table->boolean('notify_new_order')->default(false);
             $table->timestamps();

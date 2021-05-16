@@ -95,7 +95,7 @@
                         <p class="text-muted">Customize the appearance of the thank you page feature. Please note: The fonts used here will be consistent with the fonts selected in your Shopify theme editor</p>
                         <div class="col-4">
                             <label class="form-label">Heading color</label>
-                            <input type="color" id="color" class="form-control form-control-color mb-2 @if ($errors->has('color')) is-invalid @endif" value="{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}" title="Choose your color">
+                            <input name="color" type="color" id="color" class="form-control form-control-color mb-2 @if ($errors->has('color')) is-invalid @endif" value="{{ old('color') ?? \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}" title="Choose your color">
                             @if ($errors->has('color'))
                             <div class="invalid-feedback">{{ $errors::first('color') }}</div>
                             @endif

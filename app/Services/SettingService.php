@@ -154,11 +154,17 @@ class SettingService extends Service
     public function save(Store $store, $attributes): Setting
     {
         $attributes = collect([
+            Setting::COMMISSION_AMOUNT_COLUMN       => $attributes[Setting::COMMISSION_AMOUNT_COLUMN] ?? null,
+            Setting::COMMISSION_TYPE_COLUMN         => $attributes[Setting::COMMISSION_TYPE_COLUMN] ?? null,
+            Setting::DISCOUNT_TYPE_COLUMN           => $attributes[Setting::DISCOUNT_TYPE_COLUMN] ?? null,
+            Setting::DISCOUNT_FORMAT_COLUMN         => $attributes[Setting::DISCOUNT_FORMAT_COLUMN] ?? null,
+            Setting::DISCOUNT_AMOUNT_COLUMN         => $attributes[Setting::DISCOUNT_AMOUNT_COLUMN] ?? null,
+            Setting::COLOR_COLUMN                   => $attributes[Setting::COLOR_COLUMN] ?? null,
             Setting::BRAND_NAME_COLUMN              => $attributes[Setting::BRAND_NAME_COLUMN] ?? null,
             Setting::CURRENCY_COLUMN                => $attributes[Setting::CURRENCY_COLUMN] ?? null,
-            Setting::PAYOUT_METHOD_COLUMN           => $attributes[Setting::PAYOUT_METHOD_COLUMN] ?? null,
-            Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => $attributes[Setting::NOTIFY_NEW_ACCOUNT_COLUMN] ?? null,
-            Setting::NOTIFY_NEW_OREDR_COLUMN        => $attributes[Setting::NOTIFY_NEW_OREDR_COLUMN] ?? null,
+            Setting::PAYOUT_METHODS_COLUMN          => $attributes[Setting::PAYOUT_METHODS_COLUMN] ?? null,
+            Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => $attributes[Setting::NOTIFY_NEW_ACCOUNT_COLUMN] ?? false,
+            Setting::NOTIFY_NEW_OREDR_COLUMN        => $attributes[Setting::NOTIFY_NEW_OREDR_COLUMN] ?? false,
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {

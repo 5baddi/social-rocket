@@ -32,9 +32,10 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            Setting::PAYOUT_METHOD_COLUMN       => ['nullable', 'string', Rule::in(Setting::PAYOUT_METHODS)],
-            Setting::NOTIFY_NEW_ACCOUNT_COLUMN  => ['nullable', 'integer', 'in:1,0'],
-            Setting::NOTIFY_NEW_OREDR_COLUMN    => ['nullable', 'integer', 'in:1,0'],
+            Setting::PAYOUT_METHODS_COLUMN          => ['nullable', 'array'],
+            Setting::PAYOUT_METHODS_COLUMN . '*'    => ['string', Rule::in(Setting::PAYOUT_METHODS)],
+            Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => ['nullable', 'integer', 'in:1,0'],
+            Setting::NOTIFY_NEW_OREDR_COLUMN        => ['nullable', 'integer', 'in:1,0'],
         ];
     }
 }

@@ -9,13 +9,15 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 
 use Throwable;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
-use Carbon\Carbon;
 
 class AuthenticateController extends Controller
 {
@@ -47,6 +49,9 @@ class AuthenticateController extends Controller
             $this->userService->update($user, [
                 User::LAST_LOGIN    =>  Carbon::now()
             ]);
+
+            Session::forget('slug');
+            Cookie::forget('store');
 
             return redirect('/dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $ex) {

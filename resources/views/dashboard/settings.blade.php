@@ -42,7 +42,7 @@
                         <p class="text-muted">Give your affiliates options on how they can get paid. The more options the better</p>
                         <div class="col-12">
                             <label class="form-check form-switch">
-                                <input name="payout_method" class="form-check-input" type="checkbox" value="bank" @if (old('payout_method') == 'bank' || (is_null(old('payout_method')) && (!is_null($setting) && $setting->payout_method == 'bank')))checked @endif/>
+                                <input name="payout_methods[]" class="form-check-input" type="checkbox" value="bank" @if ((is_array(old('payout_methods')) && in_array('bank', old('payout_methods'))) || (in_array('bank', $setting->payout_methods)))checked @endif/>
                                 <span class="form-label">
                                     <svg version="1.1" height="24" width="24" class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 511.999 511.999" style="enable-background:new 0 0 511.999 511.999;" xml:space="preserve">
                                         <g>
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="form-check form-switch">
-                                <input name="payout_method" class="form-check-input" type="checkbox" value="paypal" @if (old('payout_method') == 'paypal' || (is_null(old('payout_method')) && (!is_null($setting) && $setting->payout_method == 'paypal')))checked @endif/>
+                                <input name="payout_methods[]" class="form-check-input" type="checkbox" value="paypal" @if ((is_array(old('payout_methods')) && in_array('paypal', old('payout_methods'))) || (in_array('paypal', $setting->payout_methods)))checked @endif/>
                                 <span class="form-label">
                                     <svg version="1.1" height="24" width="24" class="icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                         <path style="fill:#002987;" d="M428.876,132.28c0.867-7.045,1.32-14.218,1.32-21.497C430.196,49.6,380.597,0,319.413,0H134.271
@@ -163,7 +163,7 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="form-check form-switch">
-                                <input name="payout_method" class="form-check-input" type="checkbox" value="venmo" @if (old('payout_method') == 'venmo' || (is_null(old('payout_method')) && (!is_null($setting) && $setting->payout_method == 'venmo')))checked @endif/>
+                                <input name="payout_methods[]" class="form-check-input" type="checkbox" value="venmo" @if ((is_array(old('payout_methods')) && in_array('venmo', old('payout_methods'))) || (in_array('venmo', $setting->payout_methods)))checked @endif/>
                                 <span class="form-label">
                                     <svg height="24" width="24" class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 516 516"><defs><style>.a{fill:#3396cd;}.b{fill:#fff;}</style></defs><title>venmo-icon</title><rect class="a" width="516" height="516" rx="61" ry="61"/><path class="b" d="M385.16,105c11.1,18.3,16.08,37.17,16.08,61,0,76-64.87,174.7-117.52,244H163.49L115.28,121.65l105.31-10L246.2,316.82C270,278,299.43,217,299.43,175.44c0-22.77-3.9-38.25-10-51Z"/></svg>
                                     Venmo
@@ -172,7 +172,7 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="form-check form-switch">
-                                <input name="payout_method" class="form-check-input" type="checkbox" value="zelle" @if (old('payout_method') == 'zelle' || (is_null(old('payout_method')) && (!is_null($setting) && $setting->payout_method == 'zelle')))checked @endif>
+                                <input name="payout_methods[]" class="form-check-input" type="checkbox" value="zelle" @if ((is_array(old('payout_methods')) && in_array('zella', old('payout_methods'))) || (in_array('zella', $setting->payout_methods)))checked @endif/>
                                 <span class="form-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="icon" viewBox="0 0 25.656 25.67">
                                         <path id="path3715" d="M4.883,25.569a5.687,5.687,0,0,1-3.141-1.715A4.553,4.553,0,0,1,.655,22.346C-.017,20.954,0,21.194,0,12.848c0-6.4.018-7.461.136-8.034A5.977,5.977,0,0,1,4.643.17C5.325.007,5.662,0,12.849,0c8.5,0,8.226-.02,9.626.7A6.248,6.248,0,0,1,25,3.254c.695,1.417.658.877.658,9.594,0,7.177-.011,7.793-.153,8.306a6.193,6.193,0,0,1-4.3,4.34c-.474.141-1.109.154-8.138.171-6.114.015-7.734,0-8.181-.1Zm9.428-2.958c.152-.081.166-.19.166-1.328V20.044h1.8c1.763,0,2.074-.04,2.242-.291a7.734,7.734,0,0,0,.064-1.3c0-.906-.029-1.245-.12-1.371-.116-.158-.28-.168-3.38-.209l-3.258-.043,1.437-1.842c.79-1.013,2.311-2.96,3.379-4.326l1.942-2.484V7.087c0-1.533.154-1.435-2.226-1.435H14.477V4.428a3.764,3.764,0,0,0-.1-1.328,9.649,9.649,0,0,0-2.878,0,3.764,3.764,0,0,0-.1,1.328V5.652H9.551c-2.349,0-2.184-.119-2.184,1.579,0,1.009.025,1.261.135,1.371.074.074.141.143.15.153s1.392.039,3.075.064l3.06.046-3.36,4.283L7.067,17.43v1.143c0,1.571-.162,1.47,2.365,1.47h1.961v1.238c0,1.089.018,1.248.15,1.325A11.159,11.159,0,0,0,14.311,22.61Z" fill="#6c1cd3"/>
@@ -183,7 +183,7 @@
                         </div>
                         <div class="col-12 mt-2">
                             <label class="form-check form-switch">
-                                <input name="payout_method" class="form-check-input" type="checkbox" value="cashapp" @if (old('payout_method') == 'cashapp' || (is_null(old('payout_method')) && (!is_null($setting) && $setting->payout_method == 'cashapp')))checked @endif/>
+                                <input name="payout_methods[]" class="form-check-input" type="checkbox" value="cashapp" @if ((is_array(old('payout_methods')) && in_array('cashapp', old('payout_methods'))) || (in_array('cashapp', $setting->payout_methods)))checked @endif/>
                                 <span class="form-label">
                                     <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" class="icon" viewBox="0 0 14.003 14.003">
                                         <g id="icons8-cash-app" transform="translate(-6 -6)">
@@ -209,7 +209,7 @@
                         <div class="col">
                             <label class="form-label">New Affiliate Account</label>
                             <label class="form-check form-switch">
-                                <input name="notify_new_account" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_account') || (is_null(old('notify_new_account')) && ($setting && $setting->notify_new_account)))checked @endif/>
+                                <input name="notify_new_account" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_account') || (is_null(old('notify_new_account')) && $setting->notify_new_account))checked @endif/>
                                 <span class="form-check-label">Notify me every time a new affiliate account is created</span>
                             </label>
                             @if ($errors->has('notify_new_account'))
@@ -219,7 +219,7 @@
                         <div class="col">
                             <label class="form-label">New Affiliate Order</label>
                             <label class="form-check form-switch">
-                                <input name="notify_new_order" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_order') || (is_null(old('notify_new_order')) && ($setting && $setting->notify_new_order)))checked @endif/>
+                                <input name="notify_new_order" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_order') || (is_null(old('notify_new_order')) && $setting->notify_new_order))checked @endif/>
                                 <span class="form-check-label">Notify me every time I get a new affiliate order</span>
                             </label>
                             @if ($errors->has('notify_new_order'))
