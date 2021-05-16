@@ -61,4 +61,14 @@
       </div>
       @endif
     </div>
+
+    <div class="col-8 mt-4">
+      <div class="text-end">
+          <div class="d-flex justify-content-end">
+              <a href="{{ route('dashboard.activity.read.all') }}" class="btn btn-ghost-dark">
+                Mark all as read
+              </a>
+          </div>
+      </div>
+    </div>
   </div>

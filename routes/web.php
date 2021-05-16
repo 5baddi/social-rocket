@@ -19,12 +19,11 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
@@ -33,7 +32,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Integrations
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
 /*
@@ -97,6 +98,7 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/help', HelpController::class)->name('.help');
 
         Route::get('/activity', ActivityController::class)->name('.activity');
+        Route::get('/activity/read', ActivityMarkAllAsReadController::class)->name('.activity.read.all');
         Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
 
         Route::get('/preview/checkout', CheckoutPreviewController::class)->name('.preview.checkout');
