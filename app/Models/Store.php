@@ -9,12 +9,15 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends Model
 {
+    use SoftDeletes;
+    
     /** @var string */
     public const SLUG_COLUMN = 'slug';
     public const USER_ID_COLUMN = 'user_id';

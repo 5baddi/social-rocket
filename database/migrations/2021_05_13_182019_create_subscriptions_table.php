@@ -26,6 +26,7 @@ class CreateSubscriptionsTable extends Migration
             $table->date('activated_on')->nullable();
             $table->date('trial_ends_on')->nullable();
             $table->date('cancelled_on')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

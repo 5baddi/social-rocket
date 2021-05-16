@@ -17,6 +17,7 @@ class CreateStoresTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('user_id')->nullable();
             $table->string('slug')->unique()->nullable(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

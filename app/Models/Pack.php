@@ -9,9 +9,12 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Pack extends Model
 {
+    use SoftDeletes;
+    
     /** @var string */
     public const PER_MONTH = 'month';
     public const PER_YEAR = 'year';

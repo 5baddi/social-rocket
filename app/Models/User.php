@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Notifications\Notifiable;
 use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Models\Authenticatable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
     /** @var string */
     public const EMAIL_COLUMN = 'email';

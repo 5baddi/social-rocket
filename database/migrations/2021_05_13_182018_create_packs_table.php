@@ -25,6 +25,7 @@ class CreatePacksTable extends Migration
             $table->boolean('is_popular')->default(false);
             $table->string('currency', 10)->default('usd');
             $table->string('symbol', 10)->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
