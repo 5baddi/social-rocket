@@ -60,7 +60,6 @@ class UpdateSettingsController extends Controller
                             )
                             ->withInput();
         } catch (Throwable $ex){
-            dd($ex);
             return redirect()->route('dashboard.settings')
                             ->with(
                                 'alert', 

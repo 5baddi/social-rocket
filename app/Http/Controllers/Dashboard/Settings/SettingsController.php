@@ -8,16 +8,50 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings;
 
-use App\Http\Controllers\Controller;
+use Throwable;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Entities\Alert;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class SettingsController extends Controller
 {
     public function __invoke(Request $request)
     {
-        return view('dashboard.settings.index', [
-            'title'         =>  'Settings',
-            'tab'           =>  $request->query('tab', 'methods'),
-        ]);
+        try {
+            /** @var User */
+            $user = Auth::user();
+            $user->load('store');
+
+            $store = $user->store;
+            if (!$store instanceof Store) {
+                throw new NotFoundHttpException('Store not found!');
+            }
+
+            $store->load('setting');
+            $setting = $store->setting;
+
+            return view('dashboard.settings.index', [
+                'title'         =>  'Settings',
+                'tab'           =>  $request->query('tab', 'methods'),
+                'setting'       =>  $setting
+            ]);
+        } catch (NotFoundHttpException $ex){
+            return redirect()->route('dashboard.settings')
+                            ->with(
+                                'alert', 
+                                new Alert($ex->getMessage())
+                            )
+                            ->withInput();
+        } catch (Throwable $ex){
+            return redirect()->route('dashboard.settings')
+                            ->with(
+                                'alert', 
+                                new Alert('Error saving settings')
+                            )
+                            ->withInput();
+        }
     }
 }
