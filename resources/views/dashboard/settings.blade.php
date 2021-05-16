@@ -209,7 +209,7 @@
                         <div class="col">
                             <label class="form-label">New Affiliate Account</label>
                             <label class="form-check form-switch">
-                                <input name="notify_new_account" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_account'))checked @endif/>
+                                <input name="notify_new_account" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_account') || (is_null(old('notify_new_account')) && ($setting && $setting->notify_new_account)))checked @endif/>
                                 <span class="form-check-label">Notify me every time a new affiliate account is created</span>
                             </label>
                             @if ($errors->has('notify_new_account'))
@@ -219,7 +219,7 @@
                         <div class="col">
                             <label class="form-label">New Affiliate Order</label>
                             <label class="form-check form-switch">
-                                <input name="notify_new_order" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_order'))checked @endif/>
+                                <input name="notify_new_order" class="form-check-input" value="1" type="checkbox" @if (old('notify_new_order') || (is_null(old('notify_new_order')) && ($setting && $setting->notify_new_order)))checked @endif/>
                                 <span class="form-check-label">Notify me every time I get a new affiliate order</span>
                             </label>
                             @if ($errors->has('notify_new_order'))
