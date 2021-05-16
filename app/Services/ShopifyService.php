@@ -222,7 +222,7 @@ class ShopifyService extends Service
             $requestBody['script_tag'] = [
                 'event'         =>  'onload',
                 'display_scope' =>  'order_status',
-                'src'           =>  asset('order_status.js')
+                'src'           =>  url('/order_status.js')
             ];
 
             $requestBody['access_token'] = $accessToken;

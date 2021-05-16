@@ -99,7 +99,7 @@ style="overflow: visible; height: auto;">
                             data-order-summary-section="toggle-total-recap">
                             <dt class="visually-hidden"><span>Original price</span></dt>
                             <dd><s class="total-recap__original-price remove-while-loading"
-                                    data-checkout-original-payment-due-target="">$114.49</s></dd>
+                                    data-checkout-original-payment-due-target="">{{ $price }}</s></dd>
                             <dt class="visually-hidden"><span>Sale price</span></dt>
                             <dd>
                                 <span class="order-summary__emphasis total-recap__final-price skeleton-while-loading"
@@ -402,7 +402,7 @@ style="overflow: visible; height: auto;">
                                                                         </svg>
                                                                     </i>
                                                                     <span class="payment-method-list__item__info">ending with 1</span>
-                                                                    <span class="payment-method-list__item__amount emphasis"> - {{ $card }}</span>
+                                                                    <span class="payment-method-list__item__amount emphasis"> - {{ $price }}</span>
                                                                 </li>
                                                             </ul>
                                                             <h3 class="heading-3">Billing address</h3>
