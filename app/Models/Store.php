@@ -22,12 +22,14 @@ class Store extends Model
     public const SLUG_COLUMN = 'slug';
     public const USER_ID_COLUMN = 'user_id';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
+    public const COUPON_COLUMN = 'coupon';
 
     /** @var array */
     protected $fillable = [
         self::USER_ID_COLUMN,
         self::SLUG_COLUMN,
-        self::SCRIPT_TAG_ID_COLUMN
+        self::SCRIPT_TAG_ID_COLUMN,
+        self::COUPON_COLUMN
     ];
 
     public function user(): BelongsTo

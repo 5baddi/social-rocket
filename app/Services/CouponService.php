@@ -26,14 +26,14 @@ class CouponService extends Service
                         <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"> </animateTransform>
                         </circle>
                     </svg>
-                    <span class="scode" id="scode" style="font-weight: bold;">E2477D54</span> and receive 
+                    <span class="scode" id="scode" style="font-weight: bold;">{coupon}</span> and receive 
                     <b style="font-weight: bold;">
                         <svg class="sloading_merchant_commission" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: none; vertical-align: middle;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                         <circle cx="50" cy="50" fill="none" stroke="#2c407d" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(336.538 50 50)">
                             <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
                         </circle>
                         </svg>
-                        <span class="smerchant_commission" style="font-weight: bold;"> 23% </span>
+                        <span class="smerchant_commission" style="font-weight: bold;"> {amount} </span>
                     </b>
                     every time someone purchases using your code!
                 </p>

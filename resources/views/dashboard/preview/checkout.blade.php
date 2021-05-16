@@ -402,7 +402,7 @@ style="overflow: visible; height: auto;">
                                                                         </svg>
                                                                     </i>
                                                                     <span class="payment-method-list__item__info">ending with 1</span>
-                                                                    <span class="payment-method-list__item__amount emphasis"> - {{ $price }}</span>
+                                                                    <span class="payment-method-list__item__amount emphasis"> - ${{ $price }}</span>
                                                                 </li>
                                                             </ul>
                                                             <h3 class="heading-3">Billing address</h3>
