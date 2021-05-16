@@ -154,8 +154,11 @@ class SettingService extends Service
     public function save(Store $store, $attributes): Setting
     {
         $attributes = collect([
-            Setting::BRAND_NAME_COLUMN      => $attributes[Setting::BRAND_NAME_COLUMN] ?? null,
-            Setting::CURRENCY_COLUMN        => $attributes[Setting::CURRENCY_COLUMN] ?? null,
+            Setting::BRAND_NAME_COLUMN              => $attributes[Setting::BRAND_NAME_COLUMN] ?? null,
+            Setting::CURRENCY_COLUMN                => $attributes[Setting::CURRENCY_COLUMN] ?? null,
+            Setting::PAYOUT_METHOD_COLUMN           => $attributes[Setting::PAYOUT_METHOD_COLUMN] ?? null,
+            Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => $attributes[Setting::NOTIFY_NEW_ACCOUNT_COLUMN] ?? null,
+            Setting::NOTIFY_NEW_OREDR_COLUMN        => $attributes[Setting::NOTIFY_NEW_OREDR_COLUMN] ?? null,
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {

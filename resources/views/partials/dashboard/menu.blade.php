@@ -71,8 +71,8 @@
                 <span class="nav-link-title">Account</span>
             </a>
           </li>
-          <li class="nav-item {{ request()->routeIs('dashboard.setting') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.setting') }}">
+          <li class="nav-item {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.settings') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -80,11 +80,11 @@
                         <circle cx="12" cy="12" r="3"></circle>
                     </svg>
                 </span>
-                <span class="nav-link-title">Setting</span>
+                <span class="nav-link-title">Settings</span>
             </a>
           </li>
-          {{-- <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.help') }}">
+          <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -95,7 +95,7 @@
                 </span>
                 <span class="nav-link-title">Help</span>
             </a>
-          </li> --}}
+          </li>
         </ul>
         <div class="row mb-4">
             <div class="col-12">

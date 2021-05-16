@@ -19,6 +19,7 @@ class Setting extends Model
     public const RANDOM_DISCOUNT_FORMAT = 'random';
     public const DEFAULT_COLOR = '#000000';
     public const DEFAULT_CURRENCY = 'USD';
+    public const DEFAULT_PAYOUT_METHOD = 'paypal';
 
     public const STORE_ID_COLUMN = 'store_id';
     public const CURRENCY_COLUMN = 'currency';
@@ -29,6 +30,9 @@ class Setting extends Model
     public const DISCOUNT_AMOUNT_COLUMN = 'discount_amount';
     public const DISCOUNT_FORMAT_COLUMN = 'discount_format';
     public const COLOR_COLUMN = 'color';
+    public const PAYOUT_METHOD_COLUMN = 'payout_method';
+    public const NOTIFY_NEW_ACCOUNT_COLUMN = 'notify_new_account';
+    public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
 
     /** @var int */
     public const DFEAULT_COMMISSION = 10;
@@ -40,16 +44,22 @@ class Setting extends Model
         self::PERCENTAGE_TYPE,
     ];
     
-    /** @var array */
     public const DISCOUNT_TYPES = [
         self::FIXED_TYPE,
         self::PERCENTAGE_TYPE,
     ];
-    
-    /** @var array */
+
     public const DISCOUNT_FORMATS = [
         self::UNIQUE_DISCOUNT_FORMAT    =>  'First Name + Unique Number',
         self::RANDOM_DISCOUNT_FORMAT    =>  'Random Letters + Numbers'
+    ];
+
+    public const PAYOUT_METHODS = [
+        'bank',
+        'paypal',
+        'venmo',
+        'zelle',
+        'cashapp'
     ];
 
     /** @var array */
@@ -63,6 +73,17 @@ class Setting extends Model
         self::DISCOUNT_FORMAT_COLUMN,
         self::COLOR_COLUMN,
         self::CURRENCY_COLUMN,
+        self::PAYOUT_METHOD_COLUMN,
+        self::NOTIFY_NEW_ACCOUNT_COLUMN,
+        self::NOTIFY_NEW_OREDR_COLUMN,
+    ];
+
+    /** @var array */
+    protected $casts = [
+        self::COMMISSION_AMOUNT_COLUMN  => 'float',
+        self::DISCOUNT_AMOUNT_COLUMN    => 'float',
+        self::NOTIFY_NEW_ACCOUNT_COLUMN => 'boolean',
+        self::NOTIFY_NEW_OREDR_COLUMN   => 'boolean',
     ];
 
     public function store(): HasOne

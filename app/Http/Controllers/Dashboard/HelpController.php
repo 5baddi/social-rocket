@@ -14,8 +14,6 @@ class HelpController extends Controller
 {
     public function __invoke()
     {
-        return view('dashboard.help', [
-            'title'     =>  'Help'
-        ]);
+        return redirect(env('HELP_URL'));
     }
 }

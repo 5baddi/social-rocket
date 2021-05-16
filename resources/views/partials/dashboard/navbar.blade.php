@@ -66,11 +66,10 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{ route('dashboard.account') }}" class="dropdown-item">Account info</a>
                 <a href="{{ route('dashboard.plan') }}" class="dropdown-item">Your plan</a>
                 <div class="dropdown-divider"></div>
+                <a href="{{ route('dashboard.account') }}" class="dropdown-item">Account</a>
                 <a href="{{ route('dashboard.activity') }}" class="dropdown-item">Activity</a>
-                <a href="{{ route('dashboard.account') }}" class="dropdown-item">Settings</a>
                 <a href="{{ route('dashboard.signout') }}" class="dropdown-item">Logout</a>
               </div>
             </div>

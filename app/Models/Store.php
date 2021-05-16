@@ -20,8 +20,8 @@ class Store extends Model
 
     /** @var array */
     protected $fillable = [
-        'user_id',
-        'slug',
+        self::USER_ID_COLUMN,
+        self::SLUG_COLUMN,
     ];
 
     public function user(): BelongsTo
