@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications;
+namespace BADDIServices\SocialRocket\Notifications\Subscription;
 
 use BADDIServices\SocialRocket\Models\Subscription;
 use Illuminate\Bus\Queueable;
@@ -14,7 +14,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SubscriptionActivated extends Notification implements ShouldQueue
+class SubscriptionCancelled extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -22,7 +22,7 @@ class SubscriptionActivated extends Notification implements ShouldQueue
     private $subscription;
 
     /** @var string */
-    public const SUBJECT = 'Your subscription has been activated!';
+    public const SUBJECT = 'Your subscription has been cancelled!';
 
     /**
      * Create a new notification instance.
@@ -55,7 +55,7 @@ class SubscriptionActivated extends Notification implements ShouldQueue
     {
         return (new MailMessage)
                     ->subject(self::SUBJECT)
-                    ->view('emails.subscription.activated', ['subject' => self::SUBJECT, 'subscription' => $this->subscription]);
+                    ->view('emails.subscription.cancelled', ['subject' => self::SUBJECT, 'subscription' => $this->subscription]);
     }
 
     /**
@@ -69,16 +69,11 @@ class SubscriptionActivated extends Notification implements ShouldQueue
         return [
             'subject'           => self::SUBJECT,
             'subscription_id'   => $this->subscription->id, 
-            'pack_id'           => $this->subscription->pack_id, 
-            'type'              => $this->subscription->pack->price_type,
-            'price'             => $this->subscription->pack->price,
             'name'              => $this->subscription->pack->name,
-            'cycle'             => $this->subscription->pack->payment_cycle,
-            'currency_symbol'   => $this->subscription->pack->currency_symbol,
-            'is_paid'           => !is_null($this->subscription->paid_at),
+            'cancelled_at'      => $this->subscription->delete_at,
             'link'              =>  [
-                'url'           =>  route('dashboard.customize.integrations'),
-                'label'         =>  'Getting started'
+                'url'           =>  route('subscription.select.pack'),
+                'label'         =>  'Choose a plan'
             ]
         ];
     }

@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Notifications\SubscriptionActivated;
+use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
 

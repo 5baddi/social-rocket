@@ -13,7 +13,7 @@ use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Repositories\MailListRepository;
-use BADDIServices\SocialRocket\Notifications\Affiliate\NewAccount;
+use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
 
 class MailListService extends Service
 {
@@ -52,6 +52,6 @@ class MailListService extends Service
         /** @var Setting */
         $setting = $store->setting;
 
-        $user->notify(new NewAccount($user, $mailList, $setting));
+        $user->notify(new NewAffiliateAccount($user, $mailList, $setting));
     }
 }

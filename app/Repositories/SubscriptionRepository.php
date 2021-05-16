@@ -29,4 +29,11 @@ class SubscriptionRepository
                         $attributes
                     );
     }
+
+    public function delete(string $id): bool
+    {
+        return Subscription::query()
+                    ->where(Subscription::ID_COLUMN, $id)
+                    ->delete() === 1;
+    }
 }

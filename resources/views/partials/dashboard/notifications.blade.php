@@ -62,6 +62,7 @@
       @endif
     </div>
 
+    @if ($unreadNotifications->count() > 0)
     <div class="col-8 mt-4">
       <div class="text-end">
           <div class="d-flex justify-content-end">
@@ -71,4 +72,5 @@
           </div>
       </div>
     </div>
+    @endif
   </div>

@@ -29,7 +29,7 @@ class CancelSubscriptionController extends DashboardController
     public function __invoke()
     {
         try {
-            $this->subscriptionService->cancelSubscription($this->store, $this->subscription);
+            $this->subscriptionService->cancelSubscription($this->user, $this->store, $this->subscription);
 
             return redirect()
                         ->route('subscription.select.pack')

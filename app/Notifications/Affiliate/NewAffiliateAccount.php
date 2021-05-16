@@ -16,7 +16,7 @@ use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Models\MailList;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class NewAccount extends Notification implements ShouldQueue
+class NewAffiliateAccount extends Notification implements ShouldQueue
 {
     use Queueable;
 

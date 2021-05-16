@@ -18,6 +18,8 @@ class StoreSetting
     /** @var bool */
     public $notify_new_account = false;
     public $notify_new_order = false;
+    public $affiliate_form = false;
+    public $thankyou_page = false;
     
     /** @var string */
     public $brand_name;

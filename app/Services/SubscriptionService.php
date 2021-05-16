@@ -13,6 +13,7 @@ use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 
@@ -106,12 +107,16 @@ class SubscriptionService extends Service
         return $subscription;
     }
 
-    public function cancelSubscription(Store $store, Subscription $subscription): void
+    public function cancelSubscription(User $user, Store $store, Subscription $subscription): void
     {
         if ($subscription->charge_id === Subscription::CHARGE_CANCELLD) {
             throw new Exception('Subscription already cancelled');
         }
 
         $this->shopifyService->cancelSubscription($store, $subscription->charge_id);
+
+        $this->subscriptionRepository->delete($subscription->id);
+
+        $this->user->notify(new SubscriptionCancelled($subscription));
     }
 }
