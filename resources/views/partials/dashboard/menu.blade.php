@@ -105,6 +105,11 @@
                         Upgrade plan
                     </a>
                 </div>
+                <div class="col-auto align-self-center mt-1">
+                    <a href="{{ route('dashboard.signout') }}" class="btn btn-dark w-100">
+                        Logout
+                    </a>
+                </div>
             </div>
         </div>
       </div>
