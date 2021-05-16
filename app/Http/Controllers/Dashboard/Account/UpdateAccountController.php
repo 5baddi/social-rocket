@@ -69,25 +69,25 @@ class UpdateAccountController extends Controller
 
             $setting = $this->settingService->save($store, $request->input());
 
-            return redirect()->route('dashboard.account')
+            return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                             ->with('setting', $setting)
                             ->with(
                                 'alert', 
                                 new Alert('Account settings changed successfully', 'success')
                             );
         } catch (ValidationException $ex){
-            return redirect()->route('dashboard.account')
+            return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                             ->withErrors($ex->errors)
                             ->withInput();
         } catch (NotFoundHttpException $ex){
-            return redirect()->route('dashboard.account')
+            return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                             ->with(
                                 'alert', 
                                 new Alert($ex->getMessage())
                             )
                             ->withInput();
         } catch (Throwable $ex){
-            return redirect()->route('dashboard.account')
+            return redirect()->route('dashboard.account', ['tab' => $request->query('tab', 'settings')])
                             ->with(
                                 'alert', 
                                 new Alert('Error saving account settings')

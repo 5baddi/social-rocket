@@ -42,25 +42,25 @@ class UpdateSettingsController extends Controller
 
             $setting = $this->settingService->save($store, $request->input());
 
-            return redirect()->route('dashboard.settings')
+            return redirect()->route('dashboard.settings', ['tab' => $request->query('tab', 'methods')])
                             ->with('setting', $setting)
                             ->with(
                                 'alert', 
                                 new Alert('Settings changed successfully', 'success')
                             );
         } catch (ValidationException $ex){
-            return redirect()->route('dashboard.settings')
+            return redirect()->route('dashboard.settings', ['tab' => $request->query('tab', 'methods')])
                             ->withErrors($ex->errors)
                             ->withInput();
         } catch (NotFoundHttpException $ex){
-            return redirect()->route('dashboard.settings')
+            return redirect()->route('dashboard.settings', ['tab' => $request->query('tab', 'methods')])
                             ->with(
                                 'alert', 
                                 new Alert($ex->getMessage())
                             )
                             ->withInput();
         } catch (Throwable $ex){
-            return redirect()->route('dashboard.settings')
+            return redirect()->route('dashboard.settings', ['tab' => $request->query('tab', 'methods')])
                             ->with(
                                 'alert', 
                                 new Alert('Error saving settings')
