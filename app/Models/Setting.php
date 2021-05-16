@@ -32,6 +32,7 @@ class Setting extends Model
     public const PAYOUT_METHODS_COLUMN = 'payout_methods';
     public const NOTIFY_NEW_ACCOUNT_COLUMN = 'notify_new_account';
     public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
+    public const AFFILIATE_FORM_COLUMN = 'affiliate_form';
 
     /** @var int */
     public const DFEAULT_COMMISSION = 10;
@@ -75,6 +76,7 @@ class Setting extends Model
         self::PAYOUT_METHODS_COLUMN,
         self::NOTIFY_NEW_ACCOUNT_COLUMN,
         self::NOTIFY_NEW_OREDR_COLUMN,
+        self::AFFILIATE_FORM_COLUMN,
     ];
 
     /** @var array */
@@ -83,6 +85,7 @@ class Setting extends Model
         self::DISCOUNT_AMOUNT_COLUMN    => 'float',
         self::NOTIFY_NEW_ACCOUNT_COLUMN => 'boolean',
         self::NOTIFY_NEW_OREDR_COLUMN   => 'boolean',
+        self::AFFILIATE_FORM_COLUMN     => 'boolean',
         self::PAYOUT_METHODS_COLUMN     => 'json',
     ];
 

@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
+use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
@@ -28,9 +29,11 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeCon
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
 /*
@@ -46,6 +49,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomiz
 
 Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
+
+Route::get('/affiliate/{store}', AffiliateController::class)->name('affiliate');
+Route::post('/affiliate', AffiliateController::class)->name('affiliate.signup');
 
 Route::middleware('guest')
     ->group(function() {
@@ -76,7 +82,8 @@ Route::middleware(['auth', 'has.subscription'])
 
         Route::get('/customize', CustomizeController::class)->name('.customize');
         Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
-        Route::get('/customize/integrations', CustomizeController::class)->name('.customize.integrations');
+        Route::get('/customize/integrations', IntegrationsController::class)->name('.customize.integrations');
+        Route::post('/customize/integrations', UpdateIntegrationsController::class)->name('.customize.integrations.save');
         
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
 

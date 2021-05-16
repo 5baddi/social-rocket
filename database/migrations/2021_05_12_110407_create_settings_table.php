@@ -34,6 +34,7 @@ class CreateSettingsTable extends Migration
             $table->json('payout_methods')->nullable();
             $table->boolean('notify_new_account')->default(true);
             $table->boolean('notify_new_order')->default(false);
+            $table->boolean('affiliate_form')->default(false);
             $table->timestamps();
         });
     }

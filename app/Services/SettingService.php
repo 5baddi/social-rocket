@@ -162,9 +162,34 @@ class SettingService extends Service
             Setting::COLOR_COLUMN                   => $attributes[Setting::COLOR_COLUMN] ?? null,
             Setting::BRAND_NAME_COLUMN              => $attributes[Setting::BRAND_NAME_COLUMN] ?? null,
             Setting::CURRENCY_COLUMN                => $attributes[Setting::CURRENCY_COLUMN] ?? null,
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
+    }
+    
+    public function savePayoutSetting(Store $store, $attributes): Setting
+    {
+        $attributes = collect([
             Setting::PAYOUT_METHODS_COLUMN          => $attributes[Setting::PAYOUT_METHODS_COLUMN] ?? null,
             Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => $attributes[Setting::NOTIFY_NEW_ACCOUNT_COLUMN] ?? false,
             Setting::NOTIFY_NEW_OREDR_COLUMN        => $attributes[Setting::NOTIFY_NEW_OREDR_COLUMN] ?? false,
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
+    }
+    
+    public function saveIntegrationsSetting(Store $store, $attributes): Setting
+    {
+        $attributes = collect([
+            Setting::AFFILIATE_FORM_COLUMN      => $attributes[Setting::AFFILIATE_FORM_COLUMN] ?? false,
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {
