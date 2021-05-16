@@ -15,16 +15,16 @@ use BADDIServices\SocialRocket\Events\WelcomeMail;
 class WelcomeMailFired
 {
     /** @var string */
-    public const SUBJECT = "Welcome to " . config('app.name');
+    public const SUBJECT = "Welcome to ";
 
     public function handle(WelcomeMail $event)
     {
         /** @var User */
         $user = $event->user;
 
-        Mail::send('emails.welcome', ['user' => $user, 'subject' => self::SUBJECT], function($message) use ($user) {
+        Mail::send('emails.welcome', ['user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
             $message->to($user->email);
-            $message->subject(self::SUBJECT);
+            $message->subject(self::SUBJECT . config('app.name'));
         });
     }
 }
