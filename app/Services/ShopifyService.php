@@ -18,6 +18,7 @@ use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
@@ -29,7 +30,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureExcepti
 class ShopifyService extends Service
 {
     /** @var string */
-    const SCOPES = "read_orders,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
+    const SCOPES = "read_orders,read_customers,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
@@ -39,6 +40,8 @@ class ShopifyService extends Service
     const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
     const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
+    const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
+    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
 
     /** @var Client */
     private $client;
@@ -171,6 +174,45 @@ class ShopifyService extends Service
             ]);
 
             throw new AcceptPaymentFailed();
+        }
+    }
+    
+    /**
+     * @throws CustomerNotFound
+     */
+    public function getCustomer(Store $store, string $customerId): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $customerURL = $this->getStoreURL($store->slug);
+            $customerURL .= Str::replace("{id}", $customerId, self::GET_CUSTOMER_ENDPOINT);
+            $customerURL .= "?access_token={$accessToken}";
+
+            $response = $this->client->request('GET', $customerURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json'
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['customer']) || $response->getStatusCode() !== Response::HTTP_OK) {
+                throw new CustomerNotFound();
+            }
+
+            return $data['customer'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:get-customer',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CustomerNotFound();
         }
     }
     

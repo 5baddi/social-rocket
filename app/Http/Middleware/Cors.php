@@ -51,6 +51,8 @@ class Cors
             abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
+        $request->merge(['slug' => $originSlug]);
+
         return $next($request);
     }
 }
