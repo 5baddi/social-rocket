@@ -19,6 +19,7 @@ use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
+use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
@@ -33,6 +34,7 @@ class ShopifyService extends Service
     /** @var string */
     const SCOPES = "read_orders,read_customers,read_products,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
+    const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
     const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
@@ -42,6 +44,7 @@ class ShopifyService extends Service
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
     const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
     const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
+    const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
     const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
 
     /** @var Client */
@@ -55,6 +58,14 @@ class ShopifyService extends Service
     public function getStoreURL(string $storeName): string
     {
         return (string)Str::replace("{store}", $storeName, self::STORE_ENDPOINT);
+    }
+
+    public function getProductURL($store, string $slug): string
+    {
+        $productURL = $this->getStoreURL($store->slug);
+        $productURL .= Str::replace("{slug}", $slug, self::PRODUCT_ENDPOINT);
+
+        return $productURL;
     }
     
     public function getOAuthURL(string $storeName): string
@@ -256,6 +267,47 @@ class ShopifyService extends Service
             ]);
 
             throw new OrderNotFound();
+        }
+    }
+    
+    /**
+     * @throws ProductNotFound
+     */
+    public function getProduct(Store $store, string $productId): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $productURL = $this->getStoreURL($store->slug);
+            $productURL .= Str::replace("{id}", $productId, self::GET_PRODUCT_ENDPOINT);
+            $productURL .= "?access_token={$accessToken}";
+
+            $response = $this->client->request('GET', $productURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json'
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+
+            if (!isset($data['product']) || $response->getStatusCode() !== Response::HTTP_OK) {
+                throw new CustomerNotFound();
+            }
+
+            return $data['product'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            return [$ex->getMessage()];
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:get-order',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new ProductNotFound();
         }
     }
     

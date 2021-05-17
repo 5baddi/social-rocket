@@ -32,7 +32,7 @@ class AffiliateController extends BaseController
 
     public function __construct(StoreService $storeService, ShopifyService $shopifyService)
     {
-        $this->middleware(function ($request, $next) use ($storeService, $shopifyService){
+        $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 
             return $next($request);

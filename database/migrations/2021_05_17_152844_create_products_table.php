@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->bigInteger('product_id');
-            $table->string('name');
-            $table->string('product_slug');
+            $table->string('title');
+            $table->string('slug');
             $table->softDeletes();
             $table->timestamps();
         });

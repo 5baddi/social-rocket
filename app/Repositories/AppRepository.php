@@ -12,7 +12,7 @@ use BADDIServices\SocialRocket\Models\AppSetting;
 
 class AppRepository
 {
-    public function first(): AppSetting
+    public function first(): ?AppSetting
     {
         return AppSetting::query()
                     ->first();

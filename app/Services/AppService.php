@@ -21,7 +21,7 @@ class AppService extends Service
         $this->appRepository = $appRepository;
     }
 
-    public function settings(): AppSetting
+    public function settings(): ?AppSetting
     {
         return $this->appRepository->first();
     }

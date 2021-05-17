@@ -25,7 +25,6 @@ class CreateTrackersTable extends Migration
             $table->float('total_price');
             $table->float('total_price_usd');
             $table->string('currency', 10)->default(Setting::DEFAULT_CURRENCY);
-            $table->float('total_price');
             $table->json('discount_codes')->nullable();
             $table->float('total_discounts');
             $table->boolean('confirmed')->default(false);
