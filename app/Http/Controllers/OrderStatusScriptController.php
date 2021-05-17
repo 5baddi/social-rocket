@@ -11,9 +11,13 @@ namespace BADDIServices\SocialRocket\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
+use Symfony\Component\HttpFoundation\Response;
+use Throwable;
 
 class OrderStatusScriptController extends Controller
 {
@@ -35,18 +39,31 @@ class OrderStatusScriptController extends Controller
     
     public function __invoke(Request $request)
     {
-        $storeName = $this->shopifyService->getStoreName($request->query('shop'));
-        if (is_null($storeName)) {
-            return '';
-        }
+        try {
+            $storeName = $this->shopifyService->getStoreName($request->query('shop'));
+            if (is_null($storeName)) {
+                return '';
+            }
 
-        $store = $this->storeService->findBySlug($storeName);
-        if (!$store instanceof Store) {
-            return '';
-        }
+            $store = $this->storeService->findBySlug($storeName);
+            if (!$store instanceof Store) {
+                return '';
+            }
 
-        return view('script', [
-            'html'      =>  $this->couponService->getScriptTag($store->coupon)
-        ]);
+            $store->load('setting');
+
+            /** @var Setting */
+            $setting = $store->setting;
+            if (!$setting instanceof Setting) {
+                $setting = new StoreSetting();
+            }
+
+            return view('script', [
+                'html'      =>  $this->couponService->getScriptTag($store->coupon, $setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
+            ]);
+        } catch (Throwable $ex) {
+            return $ex->getMessage();
+            return response('', Response::HTTP_NO_CONTENT);
+        }
     }
 }

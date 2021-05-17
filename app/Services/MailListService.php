@@ -30,15 +30,18 @@ class MailListService extends Service
         $this->couponService = $couponService;
     }
 
-    public function exists(string $email): ?MailList
+    public function exists(int $id): ?MailList
     {
-        return $this->mailListRepository->exists($email);
+        return $this->mailListRepository->exists($id);
     }
     
     public function create(Store $store, array $attributes): MailList
     {
+        $attributes[MailList::CUSTOMER_ID_COLUMN] = $attributes['id'];
+
         $attributes = collect($attributes);
         $attributes = $attributes->only([
+            MailList::CUSTOMER_ID_COLUMN,
             MailList::EMAIL_COLUMN,
             MailList::FIRST_NAME_COLUMN,
             MailList::LAST_NAME_COLUMN,

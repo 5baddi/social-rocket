@@ -25,10 +25,10 @@ class MailListRepository
                     ->create($attributes);
     }
     
-    public function exists(string $email): ?MailList
+    public function exists(int $id): ?MailList
     {
         return MailList::query()
-                    ->where(MailList::EMAIL_COLUMN, $email)
+                    ->where(MailList::CUSTOMER_ID_COLUMN, $id)
                     ->first();
     }
 }

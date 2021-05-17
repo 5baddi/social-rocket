@@ -16,6 +16,7 @@ class CreateMailListsTable extends Migration
         Schema::create('mail_lists', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
+            $table->bigInteger('customer_id');
             $table->string('first_name', 100)->nullable(false);
             $table->string('last_name', 100)->nullable(false);
             $table->string('email')->unique();

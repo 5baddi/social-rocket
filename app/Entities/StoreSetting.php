@@ -23,9 +23,9 @@ class StoreSetting
     
     /** @var string */
     public $brand_name;
-    public $commission_type;
-    public $discount_type;
-    public $discount_format;
+    public $commission_type = Setting::FIXED_TYPE;
+    public $discount_type = Setting::FIXED_TYPE;
+    public $discount_format = Setting::UNIQUE_DISCOUNT_FORMAT;
     public $color = Setting::DEFAULT_COLOR;
     public $currency = Setting::DEFAULT_CURRENCY;
 

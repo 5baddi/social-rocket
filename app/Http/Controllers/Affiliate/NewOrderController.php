@@ -11,14 +11,15 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 use Throwable;
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\MailListService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
 use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
-use BADDIServices\SocialRocket\Models\MailList;
 
 class NewOrderController extends AffiliateController
 {
@@ -39,14 +40,23 @@ class NewOrderController extends AffiliateController
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
             $customer = $this->shopifyService->getCustomer($store, $request->input(User::CUSTOMER_ID_COLUMN));
 
-            if (isset($customer[MailList::EMAIL_COLUMN])) {
-                $mailList = $this->mailListService->exists($customer[MailList::EMAIL_COLUMN]);
+            if (isset($customer['id'])) {
+                $mailList = $this->mailListService->exists($customer['id']);
                 if (!$mailList instanceof MailList) {
                     $mailList = $this->mailListService->create($store, $customer);
                 }
 
+                // $amount = Setting::DISCOUNT_AMOUNT_COLUMN;
+                // $type = Setting::FIXED_TYPE;
+                // $currency = Setting::DEFAULT_CURRENCY;
+                // $color = Setting::DEFAULT_COLOR;
+
+                // /** @var Setting */
+                // $setting = $store->load('setting');
+
                 return response()->json([
-                    MailList::COUPON_COLUMN => $mailList->coupon
+                    MailList::COUPON_COLUMN => $mailList->coupon,
+                    // 'amount'                =>  $amount
                 ]);
             }
 

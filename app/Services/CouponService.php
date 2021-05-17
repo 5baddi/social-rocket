@@ -14,12 +14,12 @@ use BADDIServices\SocialRocket\Models\Setting;
 
 class CouponService extends Service
 {
-    public function getScriptTag(string $coupon, float $discount = Setting::DFEAULT_DISCOUNT, string $format = Setting::FIXED_TYPE)
+    public function getScriptTag(string $coupon, float $discount = Setting::DFEAULT_DISCOUNT, string $type = Setting::FIXED_TYPE, string $currency = Setting::DEFAULT_CURRENCY, $color = Setting::DEFAULT_COLOR)
     {
         $html = '<div id="app-affiliate-section" class="section__content srow" style="display:none;">
             <div class="section__content__column scolumn-text" style="width: 65%;">
             <div class="text-container">
-                <h2 id="offer_header" style="font-weight: 600; font-size: 23px; color: rgb(0, 0, 0);"> You can make money promoting our products!</h2>
+                <h2 id="offer_header" style="font-weight: 600; font-size: 23px; color: {color};"> You can make money promoting our products!</h2>
                 <p class="os-step__description">
                     Simply share the discount code we created just for you 
                     <svg class="sloading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: none; vertical-align: middle;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
@@ -73,14 +73,17 @@ class CouponService extends Service
             </div>
         </div>';
 
+        $amount = number_format(floatval($discount), 2);
+
+        if ($type === Setting::FIXED_TYPE) {
+            $amount .= ' ' . $currency;
+        }
+
         $html = Str::replace('{coupon}', $coupon, $html);
+        $html = Str::replace('{color}', $color, $html);
+        $html = Str::replace('{amount}', $amount, $html);
 
         return $html;
-    }
-
-    public function getDiscount(float $amount, string $type)
-    {
-
     }
 
     public function generateDiscountCode(Store $store, string $first_name): string

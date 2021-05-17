@@ -14,6 +14,7 @@ class MailList extends Model
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';
+    public const CUSTOMER_ID_COLUMN = 'customer_id';
     public const EMAIL_COLUMN = 'email';
     public const LAST_NAME_COLUMN = 'last_name';
     public const FIRST_NAME_COLUMN = 'first_name';
@@ -21,6 +22,7 @@ class MailList extends Model
 
     /** @var array */
     protected $fillable = [
+        self::CUSTOMER_ID_COLUMN,
         self::STORE_ID_COLUMN,
         self::FIRST_NAME_COLUMN,
         self::LAST_NAME_COLUMN,
