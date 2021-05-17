@@ -14,6 +14,7 @@ use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
@@ -29,11 +30,15 @@ class SubscriptionService extends Service
     /** @var StoreService */
     private $storeService;
 
-    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService)
+    /** @var CouponService */
+    private $couponService;
+
+    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService, CouponService $couponService)
     {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
+        $this->couponService = $couponService;
     }
 
     public function loadRelations(Subscription &$subscription): Subscription
@@ -85,6 +90,13 @@ class SubscriptionService extends Service
 
         $this->createScriptTag($store);
 
+        if (is_null($store->coupon)) {
+            $coupon = $this->couponService->generateDiscountCode($store, $user->first_name ?? $store->slug);
+            $this->storeService->update($store, [
+                Store::COUPON_COLUMN => $coupon
+            ]);
+        }
+
         return $subscription;
     }
 
@@ -92,7 +104,7 @@ class SubscriptionService extends Service
     {
         if (is_null($store->script_tag_id)) {
             $scriptTag = collect($this->shopifyService->createScriptTag($store));
-            $this->storeService->udpate($store, [
+            $this->storeService->update($store, [
                 Store::SCRIPT_TAG_ID_COLUMN => $scriptTag->get('id')
             ]);
         }

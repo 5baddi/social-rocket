@@ -46,7 +46,7 @@ class OrderStatusScriptController extends Controller
         }
 
         return view('script', [
-            'html'      =>  $this->couponService->getScriptTag()
+            'html'      =>  $this->couponService->getScriptTag($store->coupon)
         ]);
     }
 }

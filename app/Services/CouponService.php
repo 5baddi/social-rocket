@@ -8,12 +8,13 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Illuminate\Support\Str;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 
 class CouponService extends Service
 {
-    public function getScriptTag()
+    public function getScriptTag(string $coupon, float $discount = Setting::DFEAULT_DISCOUNT, string $format = Setting::FIXED_TYPE)
     {
         $html = '<div class="section__content srow">
             <div class="section__content__column scolumn-text" style="width: 65%;">
@@ -72,7 +73,14 @@ class CouponService extends Service
             </div>
         </div>';
 
+        $html = Str::replace('{coupon}', $coupon, $html);
+
         return $html;
+    }
+
+    public function getDiscount(float $amount, string $type)
+    {
+
     }
 
     public function generateDiscountCode(Store $store, string $first_name): string
@@ -82,7 +90,7 @@ class CouponService extends Service
         /** @var Setting */
         $setting = $store->setting;
 
-        $uniqueNumber = substr(uniqid(mt_rand()), 0, 8);
+        $uniqueNumber = substr(uniqid(mt_rand()), 0, 6);
 
         if (is_null($setting) || $setting->discount_amount === Setting::UNIQUE_DISCOUNT_FORMAT) {
             return strtoupper($first_name . $uniqueNumber);

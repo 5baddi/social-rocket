@@ -58,7 +58,7 @@ class StoreService extends Service
         return $this->storeRepository->create($attributes);
     }
     
-    public function udpate(Store $store, array $attributes): Store
+    public function update(Store $store, array $attributes): Store
     {
         return $this->storeRepository->update($store, $attributes);
     }
