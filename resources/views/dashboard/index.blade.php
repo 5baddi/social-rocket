@@ -7,7 +7,8 @@
 @section('content')
     <div class="row align-items-center pt-2 pb-4">
         <div class="col-auto ms-auto d-print-none">
-            <div class="btn-list">
+          <input type="text" id="period"/>
+            {{-- <div class="btn-list">
                 <div class="ms-auto lh-1">
                     <div class="dropdown">
                         <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last {{ $period ? $period : '7 days' }}</a>
@@ -18,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <div class="row row-deck row-cards">
@@ -77,5 +78,11 @@
 @endsection
 
 @section('scripts')
-    @include('partials.dashboard.scripts.form')
+    @include('partials.dashboard.scripts.analytics')
+@endsection
+
+@section('script')
+  document.addEventListener("DOMContentLoaded", function () {
+    $('#dates').daterangepicker(); 
+  });
 @endsection

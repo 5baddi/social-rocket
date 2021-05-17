@@ -24,7 +24,8 @@ class AnalyticsRequest extends FormRequest
     public function rules()
     {
         return [
-            'period'    =>  ['string', 'in:7_days,30_days,current_year']
+            // 'period'    =>  ['string', 'in:7_days,30_days,current_year']
+            'period'    =>  []
         ];
     }
 }
