@@ -30,7 +30,7 @@ class NewOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'shop'                  =>  ['required', 'url'],
+            'shop'                  =>  ['required', 'string'],
             'order_id'              =>  ['required', 'integer'],
             'customer_id'           =>  ['required', 'integer'],
         ];

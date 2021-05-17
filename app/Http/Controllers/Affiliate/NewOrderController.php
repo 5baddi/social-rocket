@@ -27,7 +27,8 @@ class NewOrderController extends Controller
     public function __invoke(NewOrderRequest $request)
     {
         try {
-            dd($request->all());
+
+            return response()->json($request->all());
         } catch (Throwable $ex) {
             return response()->json('Internal server error', Response::HTTP_INTERNAL_SERVER_ERROR);
         }

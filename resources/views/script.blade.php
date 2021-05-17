@@ -1,23 +1,25 @@
-console.log(Shopify.checkout)
-if (typeof Shopify.checkout !== 'undefined') {
+console.log(Shopify)
+if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefined') {
     var checkout = Shopify.checkout;
     var order = {
         order_id: checkout.order_id,
         customer_id: checkout.customer_id,
     };
 
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", '{{  route('rest.affiliate.order') }}', true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
-    xhr.send(JSON.stringify(order));
-    {{-- jQuery.ajax({
-        method: 'POST',
-        url: '{{ route('rest.affiliate.order') }}',
-        dataType: 'json'
-      })
-      .done(function(data){
-          console.log(data)
-      }); --}}
+    (async () => {
+        const rawResponse = await fetch('{{  route('rest.affiliate.order') }}?shop=' + Shopify.shop, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(order)
+        });
+        const content = await rawResponse.json();
+      
+        console.log(content);
+    })();
+
     {{-- Shopify.Checkout.OrderStatus.addContentBox(
         `{!! $html !!}`
     ) --}}

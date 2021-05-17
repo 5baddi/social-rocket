@@ -10,11 +10,11 @@ namespace BADDIServices\SocialRocket\Http\Middleware;
 
 use Closure;
 use App\Models\User;
+use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
-class AffiliateAccount
+class StoreOwner
 {
     /**
      * Handle an incoming request.
@@ -28,8 +28,8 @@ class AffiliateAccount
         /** @var User */
         $user = Auth::user();
 
-        if (!$user->isAffiliateAccount()) {
-            abort(Response::HTTP_UNAUTHORIZED, "Unauthorized action");
+        if ($user->isAffiliateAccount() && !$user->store instanceof Store) {
+            return redirect()->route('affiliate.analytics');
         }
 
         return $next($request);

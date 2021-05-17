@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
+namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList;
 
 use Throwable;
 use App\Http\Controllers\Controller;
@@ -15,7 +15,7 @@ use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Services\MailListService;
 use BADDIServices\SocialRocket\Http\Requests\AffiliateSignInRequest;
 
-class AffiliateSignUpController extends Controller
+class CreateAccountController extends Controller
 {
     /** @var MailListService */
     private $mailListService;

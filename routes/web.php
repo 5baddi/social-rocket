@@ -18,9 +18,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateController;
+use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\AffiliateSignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityController;
@@ -28,6 +27,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsContr
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
@@ -38,7 +38,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkA
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
-use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList\SignUpController as AffiliateSignUpController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,19 +56,21 @@ Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
 Route::redirect('/guide/affiliate/setup', 'https://socialsnowball.zendesk.com/hc/en-us/articles/360056865074-How-to-add-your-affiliate-registration-page-to-Shopify', 301)->name('guide.affiliate.setup');
 
-Route::get('/order_status.js', OrderStatusScriptController::class);
+Route::middleware(['cors'])->group(function() {
+    Route::get('/order_status.js', OrderStatusScriptController::class);
+});
 
 Route::name('affiliate')
     ->prefix('affiliate')
     ->group(function() {
         Route::redirect('/', '/', 301);
 
-        Route::get('/{store}', AffiliateController::class);
-        Route::post('/{store}/signup', AffiliateSignUpController::class)->name('.signup');
+        Route::get('/{store}', AffiliateSignUpController::class);
+        Route::post('/{store}/signup', CreateAccountController::class)->name('.signup');
 
         Route::middleware(['auth', 'is.affiliate'])
             ->group(function() {
-                Route::get('/analytics', AffiliateController::class)->name('.analytics');
+                Route::get('/analytics', AnalyticsController::class)->name('.analytics');
             });
     });
 
@@ -92,7 +95,7 @@ Route::middleware(['auth', 'has.subscription'])
         Route::get('/billing/{pack}/confirmation', BillingConfirmationController::class)->name('.billing.confirmation');
     });
 
-Route::middleware(['auth', 'has.subscription'])
+Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('dashboard')
     ->prefix('dashboard')
     ->group(function() {

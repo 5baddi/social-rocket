@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
         'api' => [
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            'cors'
         ],
     ];
 
@@ -68,5 +69,6 @@ class Kernel extends HttpKernel
         'has.subscription' => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
         'cors' => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
         'is.affiliate' => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
+        'store-owner' => \BADDIServices\SocialRocket\Http\Middleware\StoreOwner::class,
     ];
 }

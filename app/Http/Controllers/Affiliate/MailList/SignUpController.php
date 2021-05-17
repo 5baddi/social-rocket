@@ -6,14 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
+namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Services\StoreService;
 
-class AffiliateController extends Controller
+class SignUpController extends Controller
 {
     /** @var StoreService */
     private $storeService;

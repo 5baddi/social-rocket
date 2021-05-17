@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
+use Symfony\Component\HttpFoundation\Response;
 
 class Cors
 {
@@ -37,16 +38,17 @@ class Cors
      */
     public function handle(Request $request, Closure $next)
     {
-        $origin = $request->server('HTTP_ORIGIN');
-        $slug = $this->shopifyService->getStoreName($origin);
-        dd($slug);
-        $store = $this->storeService->findBySlug($slug);
+        $origin = $request->server('HTTP_REFERER') ?? $request->server('HTTP_ORIGIN');
+        $originSlug = $this->shopifyService->getStoreName($origin);
+        $slug = $this->shopifyService->getStoreName($request->query('shop'));
+        if (is_null($originSlug) || is_null($slug) || $originSlug !== $slug) {
+            abort(Response::HTTP_FORBIDDEN, 'Forbidden');
+        }
+        
+        $store = $this->storeService->findBySlug($originSlug);
 
-        if ($store instanceof Store) {
-            return $next($request)
-                ->header('Access-Control-Allow-Origin', $origin)
-                ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-                ->header('Access-Control-Allow-Headers', 'Content-Type');
+        if (!$store instanceof Store) {
+            abort(Response::HTTP_FORBIDDEN, 'Forbidden');
         }
 
         return $next($request);
