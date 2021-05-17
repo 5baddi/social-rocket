@@ -21,9 +21,9 @@ class CreateTrackersTable extends Migration
             $table->bigInteger('checkout_id');
             $table->bigInteger('customer_id');
             $table->string('name');
-            $table->string('product_slug');
             $table->float('total_price');
             $table->float('total_price_usd');
+            $table->float('profit')->default(0.0);
             $table->string('currency', 10)->default(Setting::DEFAULT_CURRENCY);
             $table->json('discount_codes')->nullable();
             $table->float('total_discounts');
