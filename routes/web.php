@@ -100,6 +100,7 @@ Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->prefix('dashboard')
     ->group(function() {
         Route::get('/', IndexController::class);
+        Route::post('/', IndexController::class);
 
         Route::get('/customize', CustomizeController::class)->name('.customize');
         Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');

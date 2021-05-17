@@ -25,7 +25,8 @@ class AnalyticsRequest extends FormRequest
     {
         return [
             // 'period'    =>  ['string', 'in:7_days,30_days,current_year']
-            'period'    =>  []
+            'start-date'    =>  ['nullable', 'date', 'date_format:Y-m-d'],
+            'end-date'      =>  ['nullable', 'date', 'date_format:Y-m-d'],
         ];
     }
 }

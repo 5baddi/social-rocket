@@ -8,10 +8,20 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Carbon\Carbon;
+use Carbon\CarbonPeriod;
+
 class StatsService extends Service
 {
-    public function getPeriod(string $period = '')
+    public function getLast7DaysPeriod(): CarbonPeriod
     {
+        $now = Carbon::now();
+        $queryInterval = new CarbonPeriod();
+        $startDate = $now->copy()->subDays(7)->startOfDay();
+        $endDate = $now->copy()->endOfDay();
 
+        return $queryInterval
+                    ->setStartDate($startDate)
+                    ->setEndDate($endDate);
     }
 }
