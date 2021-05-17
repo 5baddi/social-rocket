@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'app.notconnected' => \BADDIServices\SocialRocket\Http\Middleware\AppNotConnected::class,
         'has.subscription' => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
         'cors' => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
+        'is.affiliate' => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
     ];
 }

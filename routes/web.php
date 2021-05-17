@@ -64,6 +64,11 @@ Route::name('affiliate')
 
         Route::get('/{store}', AffiliateController::class);
         Route::post('/{store}/signup', AffiliateSignUpController::class)->name('.signup');
+
+        Route::middleware(['auth', 'is.affiliate'])
+            ->group(function() {
+                Route::get('/analytics', AffiliateController::class)->name('.analytics');
+            });
     });
 
 Route::middleware('guest')
@@ -77,7 +82,7 @@ Route::middleware('guest')
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
     });
-
+        
 Route::middleware(['auth', 'has.subscription'])
     ->name('subscription')
     ->prefix('subscription')

@@ -20,7 +20,8 @@ class User extends Authenticatable
     public const FIRST_NAME_COLUMN = 'first_name';
     public const PHONE_COLUMN = 'phone';
     public const PASSWORD_COLUMN = 'password';
-    public const LAST_LOGIN = 'last_login';
+    public const CUSTOMER_ID_COLUMN = 'customer_id';
+    public const LAST_LOGIN_COLUMN = 'last_login';
     public const REMEMBER_TOLEN = 'remember_token';
 
     /** @var array */
@@ -30,7 +31,8 @@ class User extends Authenticatable
         self::EMAIL_COLUMN,
         self::PHONE_COLUMN,
         self::PASSWORD_COLUMN,
-        self::LAST_LOGIN,
+        self::LAST_LOGIN_COLUMN,
+        self::CUSTOMER_ID_COLUMN,
     ];
 
     /** @var array */
@@ -61,5 +63,10 @@ class User extends Authenticatable
         $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
 
         return $this;
+    }
+
+    public function isAffiliateAccount(): bool
+    {
+        return !is_null($this->attributes[self::CUSTOMER_ID_COLUMN]);
     }
 }

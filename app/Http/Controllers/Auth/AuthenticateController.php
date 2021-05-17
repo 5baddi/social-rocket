@@ -47,7 +47,7 @@ class AuthenticateController extends Controller
             }
 
             $this->userService->update($user, [
-                User::LAST_LOGIN    =>  Carbon::now()
+                User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
 
             Session::forget('slug');
