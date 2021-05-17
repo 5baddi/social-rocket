@@ -17,12 +17,20 @@ class CreateTrackersTable extends Migration
         Schema::create('trackers', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
-            $table->bigInteger('customer_id');
             $table->bigInteger('order_id');
-            $table->float('payment_due', 50);
-            $table->string('presentment_currency', 10)->default(Setting::DEFAULT_CURRENCY);
-            $table->float('total_price', 50);
-            $table->float('discount', 50)->nullable();
+            $table->bigInteger('checkout_id');
+            $table->bigInteger('customer_id');
+            $table->string('name');
+            $table->string('product_slug');
+            $table->float('total_price');
+            $table->float('total_price_usd');
+            $table->string('currency', 10)->default(Setting::DEFAULT_CURRENCY);
+            $table->float('total_price');
+            $table->json('discount_codes')->nullable();
+            $table->float('total_discounts');
+            $table->boolean('confirmed')->default(false);
+            $table->timestamp('cancelled_at')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

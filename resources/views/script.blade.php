@@ -15,6 +15,7 @@ if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefine
           body: JSON.stringify(order)
         });
         const content = await rawResponse.json();
+        console.log(Shopify.checkout);
         console.log(content);
       
         if (typeof content === 'object') {

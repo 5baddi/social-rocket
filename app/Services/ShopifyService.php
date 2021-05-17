@@ -18,6 +18,7 @@ use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
@@ -41,7 +42,7 @@ class ShopifyService extends Service
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
     const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
     const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
-    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
+    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
 
     /** @var Client */
     private $client;
@@ -214,6 +215,47 @@ class ShopifyService extends Service
             ]);
 
             throw new CustomerNotFound();
+        }
+    }
+    
+    /**
+     * @throws OrderNotFound
+     */
+    public function getOrder(Store $store, string $orderId): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $orderURL = $this->getStoreURL($store->slug);
+            $orderURL .= Str::replace("{id}", $orderId, self::GET_ORDER_ENDPOINT);
+            $orderURL .= "&access_token={$accessToken}";
+
+            $response = $this->client->request('GET', $orderURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json'
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+
+            if (!isset($data['order']) || $response->getStatusCode() !== Response::HTTP_OK) {
+                throw new CustomerNotFound();
+            }
+
+            return $data['order'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            return [$ex->getMessage()];
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:get-order',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new OrderNotFound();
         }
     }
     

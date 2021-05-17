@@ -32,7 +32,6 @@ class NewOrderRequest extends FormRequest
         return [
             'shop'                  =>  ['required', 'string'],
             'order_id'              =>  ['required', 'integer'],
-            'customer_id'           =>  ['required', 'integer'],
         ];
     }
 }

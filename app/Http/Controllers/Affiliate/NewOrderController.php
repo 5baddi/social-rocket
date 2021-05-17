@@ -9,7 +9,6 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
 use Throwable;
-use App\Models\User;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,6 +19,7 @@ use BADDIServices\SocialRocket\Services\MailListService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
 use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
+use BADDIServices\SocialRocket\Models\Tracker;
 
 class NewOrderController extends AffiliateController
 {
@@ -38,12 +38,13 @@ class NewOrderController extends AffiliateController
     {
         try {
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
-            $customer = $this->shopifyService->getCustomer($store, $request->input(User::CUSTOMER_ID_COLUMN));
+            $order = $this->shopifyService->getOrder($store, $request->input(Tracker::ORDER_ID_COLUMN));
+            return $order;
 
-            if (isset($customer['id'])) {
-                $mailList = $this->mailListService->exists($customer['id']);
+            if (is_array($order) && isset($order['customer'])) {
+                $mailList = $this->mailListService->exists($order['customer']['id']);
                 if (!$mailList instanceof MailList) {
-                    $mailList = $this->mailListService->create($store, $customer);
+                    $mailList = $this->mailListService->create($store, $order['customer']);
                 }
 
                 // $amount = Setting::DISCOUNT_AMOUNT_COLUMN;
