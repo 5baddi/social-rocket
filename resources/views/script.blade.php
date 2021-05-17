@@ -1,4 +1,3 @@
-console.log(Shopify)
 if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefined') {
     var checkout = Shopify.checkout;
     var order = {
@@ -16,11 +15,15 @@ if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefine
           body: JSON.stringify(order)
         });
         const content = await rawResponse.json();
-      
         console.log(content);
-    })();
+      
+        if (typeof content === 'object') {
+            Shopify.Checkout.OrderStatus.addContentBox(
+                `{!! $html !!}`
+            )
 
-    {{-- Shopify.Checkout.OrderStatus.addContentBox(
-        `{!! $html !!}`
-    ) --}}
+            var el = document.getElementById('app-affiliate-section');
+            el.style.display = "block";
+        }
+    })();
 }

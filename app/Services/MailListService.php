@@ -30,13 +30,21 @@ class MailListService extends Service
         $this->couponService = $couponService;
     }
 
-    public function exists(string $email): bool
+    public function exists(string $email): ?MailList
     {
         return $this->mailListRepository->exists($email);
     }
     
     public function create(Store $store, array $attributes): MailList
     {
+        $attributes = collect($attributes);
+        $attributes = $attributes->only([
+            MailList::EMAIL_COLUMN,
+            MailList::FIRST_NAME_COLUMN,
+            MailList::LAST_NAME_COLUMN,
+        ]);
+        $attributes = $attributes->toArray();
+
         $attributes[MailList::STORE_ID_COLUMN] = $store->id;
 
         $coupon = $this->couponService->generateDiscountCode($store, $attributes[MailList::FIRST_NAME_COLUMN]);

@@ -30,7 +30,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureExcepti
 class ShopifyService extends Service
 {
     /** @var string */
-    const SCOPES = "read_orders,read_customers,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
+    const SCOPES = "read_orders,read_customers,read_products,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
@@ -198,6 +198,7 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
+
             if (!isset($data['customer']) || $response->getStatusCode() !== Response::HTTP_OK) {
                 throw new CustomerNotFound();
             }

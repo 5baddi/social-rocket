@@ -18,6 +18,7 @@ use BADDIServices\SocialRocket\Services\MailListService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
 use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
+use BADDIServices\SocialRocket\Models\MailList;
 
 class NewOrderController extends AffiliateController
 {
@@ -37,9 +38,19 @@ class NewOrderController extends AffiliateController
         try {
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
             $customer = $this->shopifyService->getCustomer($store, $request->input(User::CUSTOMER_ID_COLUMN));
-            return $customer;
 
-            return response()->json($request->all());
+            if (isset($customer[MailList::EMAIL_COLUMN])) {
+                $mailList = $this->mailListService->exists($customer[MailList::EMAIL_COLUMN]);
+                if (!$mailList instanceof MailList) {
+                    $mailList = $this->mailListService->create($store, $customer);
+                }
+
+                return response()->json([
+                    MailList::COUPON_COLUMN => $mailList->coupon
+                ]);
+            }
+
+            return response()->json([], Response::HTTP_NO_CONTENT);
         } catch (CustomerNotFound $ex) {
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
