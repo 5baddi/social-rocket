@@ -26,9 +26,14 @@ class ProductRepository
                     ->get();
     }
     
-    public function create(array $attributes): Product
+    public function save(array $attributes): Product
     {
         return Product::query()
-                    ->create($attributes);
+                    ->updateOrCreate(
+                        [
+                            Product::PRODUCT_ID_COLUMN => $attributes[Product::PRODUCT_ID_COLUMN]
+                        ],
+                        $attributes
+                    );
     }
 }

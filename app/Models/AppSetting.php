@@ -8,7 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-class AppSetting extends Model
+class AppSetting extends BaseModel
 {
     /** @var string */
     public const INSTAGRAM_USERNAME = 'instagram_username';

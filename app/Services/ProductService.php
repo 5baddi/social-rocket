@@ -37,13 +37,22 @@ class ProductService extends Service
                     ->first();
     }
     
-    public function create(Store $store, array $attributes): Product
+    public function save(Store $store, array $attributes): Product
     {
         Arr::set($attributes, Product::STORE_ID_COLUMN, $store->id);
         Arr::set($attributes, Product::PRODUCT_ID_COLUMN, $attributes[Product::ID_COLUMN]);
         Arr::set($attributes, Product::SLUG_COLUMN, $attributes['handle']);
 
+        $attributes = collect($attributes)
+                        ->only([
+                            Product::STORE_ID_COLUMN,
+                            Product::PRODUCT_ID_COLUMN,
+                            Product::TITLE_COLUMN,
+                            Product::SLUG_COLUMN
+                        ])
+                        ->toArray();
+
         return $this->productRepository
-                    ->create($attributes);
+                    ->save($attributes);
     }
 }

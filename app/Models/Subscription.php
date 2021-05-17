@@ -12,7 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Subscription extends Model
+class Subscription extends BaseModel
 {
     use SoftDeletes;
 

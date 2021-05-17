@@ -10,7 +10,7 @@ namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class Setting extends Model
+class Setting extends BaseModel
 {
     /** @var string */
     public const FIXED_TYPE = 'fixed';

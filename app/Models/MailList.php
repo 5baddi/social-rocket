@@ -10,7 +10,7 @@ namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class MailList extends Model
+class MailList extends BaseModel
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';

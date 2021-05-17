@@ -16,6 +16,7 @@ use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
@@ -62,8 +63,15 @@ class OrderStatusScriptController extends Controller
                 'html'      =>  $this->couponService->getScriptTag($store->coupon, $setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
             ]);
         } catch (Throwable $ex) {
-            return $ex->getMessage();
-            return response('', Response::HTTP_NO_CONTENT);
+            Log::error($ex->getMessage(), [
+                'context'   =>  'affiliate:script-tag',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            return response('', Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

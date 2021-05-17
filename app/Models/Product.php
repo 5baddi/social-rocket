@@ -8,7 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-class Product extends Model
+class Product extends BaseModel
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';

@@ -52,7 +52,10 @@ class ShopifyService extends Service
 
     public function __construct()
     {
-        $this->client = new Client([]);
+        $this->client = new Client([
+            'debug'         => false,
+            'http_errors'   => false,
+        ]);
     }
 
     public function getStoreURL(string $storeName): string

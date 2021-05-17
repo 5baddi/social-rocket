@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTrackersTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateTrackersTable extends Migration
      */
     public function up()
     {
-        Schema::create('trackers', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->bigInteger('order_id');
@@ -23,7 +23,6 @@ class CreateTrackersTable extends Migration
             $table->string('name');
             $table->float('total_price');
             $table->float('total_price_usd');
-            $table->float('profit')->default(0.0);
             $table->string('currency', 10)->default(Setting::DEFAULT_CURRENCY);
             $table->json('discount_codes')->nullable();
             $table->float('total_discounts');
@@ -41,6 +40,6 @@ class CreateTrackersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trackers');
+        Schema::dropIfExists('orders');
     }
 }
