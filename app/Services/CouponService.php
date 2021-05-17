@@ -16,7 +16,7 @@ class CouponService extends Service
 {
     public function getScriptTag(string $coupon, float $discount = Setting::DFEAULT_DISCOUNT, string $format = Setting::FIXED_TYPE)
     {
-        $html = '<div class="section__content srow">
+        $html = '<div class="section__content srow" style="display:none;">
             <div class="section__content__column scolumn-text" style="width: 65%;">
             <div class="text-container">
                 <h2 id="offer_header" style="font-weight: 600; font-size: 23px; color: rgb(0, 0, 0);"> You can make money promoting our products!</h2>
