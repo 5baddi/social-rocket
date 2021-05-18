@@ -122,7 +122,7 @@ class CouponService extends Service
         /** @var Setting */
         $setting = $store->setting;
 
-        $uniqueNumber = substr(uniqid(mt_rand()), 0, 6);
+        $uniqueNumber = substr(uniqid(mt_rand()), 0, 4);
 
         if (is_null($setting) || $setting->discount_amount === Setting::UNIQUE_DISCOUNT_FORMAT) {
             return strtoupper($first_name . $uniqueNumber);

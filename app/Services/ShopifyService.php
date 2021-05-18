@@ -22,6 +22,8 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
+use BADDIServices\SocialRocket\Exceptions\Shopify\CreateDiscountFailed;
+use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenException;
@@ -43,6 +45,7 @@ class ShopifyService extends Service
     const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
     const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
+    const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-04/price_rules/{id}/discount_codes.json";
     const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
     const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
     const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
@@ -393,6 +396,95 @@ class ShopifyService extends Service
         }
     }
 
+    /**
+     * @throws CreatePriceRuleFailed
+     */
+    public function createPriceRule(Store $store, array $priceRule): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $priceRuleURL = $this->getStoreURL($store->slug);
+            $priceRuleURL .= self::POST_PRICE_RULE_ENDPOINT;
+
+            $requestBody['access_token'] = $accessToken;
+
+            $requestBody['price_rule'] = $priceRule;
+
+            $response = $this->client->request('POST', $priceRuleURL, 
+                [
+                    'form_params'      => $requestBody,
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['price_rule'], $data['price_rule']['id'])) {
+                throw new CreatePriceRuleFailed();
+            }
+
+            return $this->createDiscount($store, $data['price_rule']);
+        } catch (CreateDiscountFailed $ex) {
+            throw $ex;
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:create-price-rule',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CreatePriceRuleFailed();
+        }
+    }
+    
+    /**
+     * @throws CreateDiscountFailed
+     */
+    public function createDiscount(Store $store, array $priceRule): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $discountURL = $this->getStoreURL($store->slug);
+            $discountURL .= Str::replace("{id}", $priceRule['id'], self::POST_DISCOUNT_ENDPOINT);
+            
+            $requestBody['access_token'] = $accessToken;
+            $requestBody['discount_code'] = $priceRule['title'];
+
+            $response = $this->client->request('POST', $discountURL, 
+                [
+                    'form_params'      => $requestBody,
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                    ]
+                ]
+            );
+
+            return $data = json_decode($response->getBody(), true);
+            if (!isset($data['discount_code'], $data['discount_code']['id'])) {
+                throw new CreateDiscountFailed();
+            }
+
+            return $data['discount_code'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:create-discount',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new CreateDiscountFailed();
+        }
+    }
+
     public function getStoreName(string $storeURL = null): ?string
     {
         if (!is_null($storeURL)) {
@@ -493,7 +585,7 @@ class ShopifyService extends Service
 
         return $store->oauth->access_token;
     }
-
+    
     private function createBillingChargeApplication(Store $store, array $charge): array
     {
         $accessToken = $this->hasAccessToken($store);

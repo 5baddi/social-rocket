@@ -9,6 +9,8 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
 use Throwable;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
@@ -27,6 +29,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
 use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
+use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
 
 class NewOrderController extends AffiliateController
 {
@@ -55,14 +58,39 @@ class NewOrderController extends AffiliateController
     public function __invoke(NewOrderRequest $request)
     {
         try {
+            DB::beginTransaction();
+            
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
             $shopifyOrder = collect($this->shopifyService->getOrder($store, $request->input(Order::ORDER_ID_COLUMN)));
 
             if ($shopifyOrder->has('customer') && $shopifyOrder->has('line_items')) {
+                $store->load('setting');
+
+                /** @var Setting */
+                $setting = $store->setting;
+                if (!$setting instanceof Setting) {
+                    $setting = new StoreSetting(); 
+                }
+
                 $customer = collect($shopifyOrder->get('customer'), []);
                 $mailList = $this->mailListService->exists($customer->get('id'));
                 if (!$mailList instanceof MailList) {
                     $mailList = $this->mailListService->create($store, $customer->toArray());
+
+                    $priceRule = $this->shopifyService->createPriceRule(
+                        $store, 
+                        [
+                            'title'                 =>  $mailList->coupon,
+                            'value_type'            =>  $setting->discount_type === Setting::FIXED_TYPE ? 'fixed_amount' : $setting->discount_type,
+                            'value'                 =>  - $setting->discount_amount,
+                            'target_selection'      =>  'all',
+                            'customer_selection'    =>  'all',
+                            'allocation_method'     =>  'across',
+                            'target_type'           =>  'line_item',
+                            'starts_at'             =>  Carbon::now()->toIso8601String()
+                        ]
+                    );
+                    return $priceRule;
                 }
                 
                 $order = $this->orderService->save($store, $shopifyOrder->toArray());
@@ -73,13 +101,7 @@ class NewOrderController extends AffiliateController
                     $shopifyProduct = $this->shopifyService->getProduct($store, $productData->get('product_id'));
                     $product = $this->productService->save($store, $shopifyProduct);
 
-                    $store->load('setting');
-
-                    /** @var Setting */
-                    $setting = $store->setting;
-                    if (!$setting instanceof Setting) {
-                        $setting = new StoreSetting(); 
-                    }
+                    DB::commit();
 
                     return response()->json([
                         MailList::COUPON_COLUMN => $mailList->coupon,
@@ -91,9 +113,13 @@ class NewOrderController extends AffiliateController
             }
 
             return response()->json([], Response::HTTP_NO_CONTENT);
-        } catch (CustomerNotFound | OrderNotFound | ProductNotFound $ex) {
+        } catch (CustomerNotFound | OrderNotFound | ProductNotFound | CreatePriceRuleFailed $ex) {
+            DB::rollBack();
+
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
+            DB::rollBack();
+            
             Log::error($ex->getMessage(), [
                 'context'   =>  'affiliate:new-order',
                 'code'      =>  $ex->getCode(),
