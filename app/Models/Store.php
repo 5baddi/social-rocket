@@ -19,6 +19,7 @@ class Store extends BaseModel
     use SoftDeletes;
     
     /** @var string */
+    public const TABLE_NAME = 'stores';
     public const SLUG_COLUMN = 'slug';
     public const USER_ID_COLUMN = 'user_id';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
@@ -45,6 +46,11 @@ class Store extends BaseModel
     public function oauth(): HasOne
     {
         return $this->hasOne(OAuth::class);
+    }
+
+    public function subscription(): HasOne
+    {
+        return $this->hasOne(Subscription::class);
     }
 
     public function mailList(): HasMany

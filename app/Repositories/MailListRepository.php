@@ -31,4 +31,13 @@ class MailListRepository
                     ->where(MailList::CUSTOMER_ID_COLUMN, $id)
                     ->first();
     }
+
+    public function coupons(string $storeId): array
+    {
+        return MailList::query()
+                    ->where(MailList::STORE_ID_COLUMN, $storeId)
+                    ->get()
+                    ->pluck(MailList::COUPON_COLUMN)
+                    ->toArray();
+    }
 }

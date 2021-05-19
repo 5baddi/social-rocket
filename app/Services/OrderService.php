@@ -12,7 +12,6 @@ use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
-use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Repositories\OrderRepository;
 
 class OrderService extends Service

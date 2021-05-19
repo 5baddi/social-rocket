@@ -24,6 +24,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreateDiscountFailed;
+use BADDIServices\SocialRocket\Exceptions\Shopify\FetchResourcesFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
@@ -50,6 +51,7 @@ class ShopifyService extends Service
     const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
     const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
     const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
+    const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
 
     /** @var Client */
     private $client;
@@ -259,7 +261,7 @@ class ShopifyService extends Service
             $data = json_decode($response->getBody(), true);
 
             if (!isset($data['order']) || $response->getStatusCode() !== Response::HTTP_OK) {
-                throw new CustomerNotFound();
+                throw new OrderNotFound();
             }
 
             return $data['order'];
@@ -274,6 +276,46 @@ class ShopifyService extends Service
             ]);
 
             throw new OrderNotFound();
+        }
+    }
+    
+    /**
+     * @throws FetchResourcesFailed
+     */
+    public function getOrders(Store $store): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $orderURL = $this->getStoreURL($store->slug);
+            $orderURL .= self::GET_ORDERS_ENDPOINT;
+            $orderURL .= "&access_token={$accessToken}";
+
+            $response = $this->client->request('GET', $orderURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json'
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['orders']) || $response->getStatusCode() !== Response::HTTP_OK) {
+                throw new FetchResourcesFailed();
+            }
+
+            return $data['orders'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            return [$ex->getMessage()];
+            Log::error($ex->getMessage(), [
+                'context'   =>  'store:get-orders',
+                'code'      =>  $ex->getCode(),
+                'line'      =>  $ex->getLine(),
+                'file'      =>  $ex->getFile(),
+                'trace'     =>  $ex->getTrace()
+            ]);
+
+            throw new FetchResourcesFailed();
         }
     }
     

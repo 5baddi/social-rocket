@@ -8,6 +8,8 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
+use Illuminate\Support\Collection;
+
 class Order extends BaseModel
 {
     /** @var string */
@@ -47,4 +49,9 @@ class Order extends BaseModel
         self::CHECKOUT_ID_COLUMN    => 'integer',
         self::DISCOUNT_CODES_COLUMN => 'json',
     ];
+
+    public function getDiscount(): Collection
+    {
+        return collect($this->getAttribute(self::DISCOUNT_CODES_COLUMN) ?? []);
+    }
 }

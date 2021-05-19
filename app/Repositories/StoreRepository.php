@@ -8,12 +8,20 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
-use Illuminate\Support\Arr;
 
 class StoreRepository
 {
+    public function all(): Collection
+    {
+        return Store::query()
+                    ->with(['subscription'])
+                    ->get();
+    }
+    
     public function findById(string $id): ?Store
     {
         return Store::query()

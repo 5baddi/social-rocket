@@ -30,6 +30,11 @@ class MailListService extends Service
         $this->couponService = $couponService;
     }
 
+    public function coupons(Store $store): array
+    {
+        return $this->mailListRepository->coupons($store->id);
+    }
+    
     public function exists(int $id): ?MailList
     {
         return $this->mailListRepository->exists($id);
