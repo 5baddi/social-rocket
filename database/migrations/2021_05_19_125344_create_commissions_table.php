@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Commission;
+use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,9 @@ class CreateCommissionsTable extends Migration
             $table->uuid('affiliate_id');
             $table->float('amount');
             $table->enum('status', Commission::STATUSES)->default(Commission::DEFAULT_STATUS);
+            $table->string('payout_reference')->nullable();
+            $table->enum('payout_method', Setting::PAYOUT_METHODS)->nullable();
+            $table->timestamp('paid_at')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
