@@ -9,8 +9,8 @@
         <div class="col-auto ms-auto d-print-none">
           <form id="periodForm" action="{{ route('dashboard') }}" method="POST">
             @csrf
-            <input type="hidden" id="startDate" name="start-date" value="{{ $startDate }}"/>
-            <input type="hidden" id="endDate" name="end-date" value="{{ $endDate }}"/>
+            <input type="hidden" id="startDate" name="start-date"/>
+            <input type="hidden" id="endDate" name="end-date"/>
           </form>
           <div class="input-icon mb-2">
             <input type="text" id="period" name="period" class="form-control " placeholder="Select a date"/>

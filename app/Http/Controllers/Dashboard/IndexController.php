@@ -30,7 +30,7 @@ class IndexController extends DashboardController
     {
         $last7Days = $this->statsService->getLast7DaysPeriod();
         $startDate = $request->input('start-date', $last7Days->copy()->getStartDate()->format('Y/m/d'));
-        $endDate = $request->input('end-date', $last7Days->copy()->getStartDate()->format('Y/m/d'));
+        $endDate = $request->input('end-date', $last7Days->copy()->getEndDate()->format('Y/m/d'));
 
         $period = $this->statsService->getPeriod(Carbon::parse($startDate), Carbon::parse($endDate));
 

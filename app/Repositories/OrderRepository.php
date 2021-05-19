@@ -35,9 +35,15 @@ class OrderRepository
             ->where([
                 Order::STORE_ID_COLUMN => $storeId
             ])
-            ->whereBetween(
+            ->whereDate(
                 Order::CREATED_AT,
-                [$startDate, $endDate]
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
             )
             ->sum(Order::TOTAL_PRICE_USD_COLUMN);
     }
@@ -48,9 +54,15 @@ class OrderRepository
             ->where([
                 Order::STORE_ID_COLUMN => $storeId
             ])
-            ->whereBetween(
+            ->whereDate(
                 Order::CREATED_AT,
-                [$startDate, $endDate]
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
             )
             ->count();
     }
