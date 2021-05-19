@@ -8,15 +8,17 @@
 
 namespace BADDIServices\SocialRocket\Console\Commands\Shopify;
 
+use BADDIServices\SocialRocket\Models\Product;
 use Throwable;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SocialRocket\Services\ProductService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\MailListService;
-use Illuminate\Support\Facades\Log;
 
 class SyncOrders extends Command
 {
@@ -43,6 +45,9 @@ class SyncOrders extends Command
     /** @var OrderService */
     private $orderService;
     
+    /** @var ProductService */
+    private $productService;
+    
     /** @var MailListService */
     private $mailListService;
 
@@ -55,6 +60,7 @@ class SyncOrders extends Command
         StoreService $storeService, 
         ShopifyService $shopifyService, 
         OrderService $orderService,
+        ProductService $productService,
         MailListService $mailListService
     )
     {
@@ -63,6 +69,7 @@ class SyncOrders extends Command
         $this->storeService = $storeService;
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
+        $this->productService = $productService;
         $this->mailListService = $mailListService;
     }
 
@@ -87,14 +94,23 @@ class SyncOrders extends Command
                 $orders->map(function ($order) use ($store, $coupons) {
                     $order = collect($order);
                     $discounts = collect($order->get('discount_codes', []));
-                    
-                    $exists = $discounts
-                        ->whereIn('code', $coupons)
-                        ->firstWhere('code', $store->coupon);
-                    if (!is_null($exists)) {
-                        $this->orderService->save($store, $order->toArray());
+                    $products = collect($order->get('line_items'), []);
 
-                        // TODO: Save order customer and product
+                    $existsByCoupons = $discounts
+                        ->whereIn('code', $coupons)
+                        ->first();
+                        
+                    $existsByCoupon = $discounts->firstWhere('code', $store->coupon);
+
+                    if (!is_null($existsByCoupons) || !is_null($existsByCoupon)) {
+                        $this->orderService->save($store, $order->toArray());
+                        $products->map(function ($item) use ($store) {
+                            if (isset($item[Product::PRODUCT_ID_COLUMN])) {
+                                $product = $this->shopifyService->getProduct($store, $item[Product::PRODUCT_ID_COLUMN]);
+                                
+                                $this->productService->save($store, $product);
+                            }
+                        });
                     }
                 });
             });
