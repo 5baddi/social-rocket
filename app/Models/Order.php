@@ -21,6 +21,7 @@ class Order extends BaseModel
     public const TOTAL_PRICE_COLUMN = 'total_price';
     public const TOTAL_PRICE_USD_COLUMN = 'total_price_usd';
     public const CURRENCY_COLUMN = 'currency';
+    public const PRODUCTS_IDS_COLUMN = 'products_ids';
     public const DISCOUNT_CODES_COLUMN = 'discount_codes';
     public const TOTAL_DISCOUNTS_COLUMN = 'total_discounts';
     public const CONFIRMED_COLUMN = 'confirmed';
@@ -36,6 +37,7 @@ class Order extends BaseModel
         self::TOTAL_PRICE_COLUMN,
         self::TOTAL_PRICE_USD_COLUMN,
         self::CURRENCY_COLUMN,
+        self::PRODUCTS_IDS_COLUMN,
         self::DISCOUNT_CODES_COLUMN,
         self::TOTAL_DISCOUNTS_COLUMN,
         self::CONFIRMED_COLUMN,
@@ -47,11 +49,17 @@ class Order extends BaseModel
         self::CUSTOMER_ID_COLUMN    => 'integer',
         self::ORDER_ID_COLUMN       => 'integer',
         self::CHECKOUT_ID_COLUMN    => 'integer',
+        self::PRODUCTS_IDS_COLUMN   => 'json',
         self::DISCOUNT_CODES_COLUMN => 'json',
     ];
 
     public function getDiscount(): Collection
     {
         return collect($this->getAttribute(self::DISCOUNT_CODES_COLUMN) ?? []);
+    }
+    
+    public function getDiscountsIds(): Collection
+    {
+        return collect($this->getAttribute(self::PRODUCTS_IDS_COLUMN) ?? []);
     }
 }

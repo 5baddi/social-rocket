@@ -41,9 +41,12 @@ class OrderService extends Service
 
     public function save(Store $store, array $attributes): Order
     {
+        $productsIds = collect($attributes['line_items'], [])->only('product_id');
+
         Arr::set($attributes, Order::STORE_ID_COLUMN, $store->id);
         Arr::set($attributes, Order::ORDER_ID_COLUMN, $attributes[Order::ID_COLUMN]);
         Arr::set($attributes, Order::CUSTOMER_ID_COLUMN, $attributes['customer'][Order::ID_COLUMN]);
+        Arr::set($attributes, Order::PRODUCTS_IDS_COLUMN, $productsIds->toArray());
 
         $attributes = collect($attributes)
                         ->only([
@@ -55,6 +58,7 @@ class OrderService extends Service
                             Order::TOTAL_PRICE_COLUMN,
                             Order::TOTAL_PRICE_USD_COLUMN,
                             Order::CURRENCY_COLUMN,
+                            Order::PRODUCTS_IDS_COLUMN,
                             Order::DISCOUNT_CODES_COLUMN,
                             Order::TOTAL_DISCOUNTS_COLUMN,
                             Order::CONFIRMED_COLUMN,

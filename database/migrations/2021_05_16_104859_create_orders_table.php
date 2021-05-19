@@ -24,6 +24,7 @@ class CreateOrdersTable extends Migration
             $table->float('total_price');
             $table->float('total_price_usd');
             $table->string('currency', 10)->default(Setting::DEFAULT_CURRENCY);
+            $table->json('products_ids')->nullable();
             $table->json('discount_codes')->nullable();
             $table->float('total_discounts');
             $table->boolean('confirmed')->default(false);
