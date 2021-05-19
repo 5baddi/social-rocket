@@ -39,6 +39,7 @@ class IndexController extends DashboardController
             'startDate'                         =>  $startDate,
             'endDate'                           =>  $endDate,
             'ordersEarnings'                    =>  $this->statsService->getOrdersEarnings($this->store, $period),
+            'ordersEarningsChart'               =>  $this->statsService->getOrdersEarningsChart($this->store, $period),
             'newOrdersCount'                    =>  $this->statsService->getNewOrdersCount($this->store, $period),
             'paidOrdersCommissions'             =>  $this->statsService->getPaidOrdersCommissions($this->store, $period),
             'unreadNotifications'               =>  $this->user->unreadNotifications,

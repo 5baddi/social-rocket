@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Services;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
+use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\CommissionService;
@@ -51,6 +52,20 @@ class StatsService extends Service
             '%.2f',
             $this->orderService->getOrdersEarnings($store, $period)
         );
+    }
+    
+    public function getOrdersEarningsChart(Store $store, CarbonPeriod $period): array
+    {
+        $orders = $this->orderService->whereInPeriod($store, $period);
+
+        $filteredOrders = $orders->map(function (Order $order) {
+            return [
+                $order->created_at->timestamp,
+                $order->total_price_usd
+            ];
+        });
+        
+        return $filteredOrders->toArray();
     }
     
     public function getNewOrdersCount(Store $store, CarbonPeriod $period): int

@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Repositories;
 
 use BADDIServices\SocialRocket\Models\Order;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderRepository
 {
@@ -39,6 +40,16 @@ class OrderRepository
                     );
     }
 
+    public function where(string $storeId, array $attributes): Collection
+    {
+        return Order::query()
+            ->where([
+                Order::STORE_ID_COLUMN => $storeId
+            ])
+            ->where($attributes)
+            ->get();
+    }
+    
     public function getOrdersEarnings(string $storeId, Carbon $startDate, carbon $endDate): float
     {
         return Order::query()

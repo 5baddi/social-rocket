@@ -13,6 +13,7 @@ use Illuminate\Support\Arr;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Repositories\OrderRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class OrderService extends Service
 {
@@ -71,6 +72,17 @@ class OrderService extends Service
         );
     }
 
+    public function whereInPeriod(Store $store, CarbonPeriod $period): Collection
+    {
+        return $this->orderRepository->where(
+            $store->id,
+            [
+                [Order::CREATED_AT, '>=', $period->copy()->getStartDate()],
+                [Order::CREATED_AT, '<=', $period->copy()->getEndDate()],
+            ]
+        );
+    }
+    
     public function getOrdersEarnings(Store $store, CarbonPeriod $period): float
     {
         return $this->orderRepository->getOrdersEarnings(

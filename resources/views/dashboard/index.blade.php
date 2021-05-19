@@ -86,6 +86,18 @@
             </div>
         </div>
     </div>
+    <div class="row row-cards">
+      <div class="col-12 mt-4">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex align-items-center">
+              <div class="subheader">Overview</div>
+            </div>
+            <div class="chart-lg mt-4" id="earnings-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -106,6 +118,80 @@
       $('#startDate').val(picker.startDate.format('YYYY-MM-DD'));
       $('#endDate').val(picker.endDate.format('YYYY-MM-DD'));
       $('#periodForm').submit();
-    })
+    });
+
+
+
+    window.ApexCharts && (new ApexCharts(document.getElementById('earnings-chart'), {
+      chart: {
+        type: "area",
+        fontFamily: 'inherit',
+        height: 340,
+        parentHeightOffset: 0,
+        toolbar: {
+          show: false,
+        },
+        animations: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      fill: {
+        opacity: .16,
+        type: 'solid'
+      },
+      stroke: {
+        width: 2,
+        lineCap: "round",
+        curve: "smooth",
+      },
+      series: [{
+        name: "Revenue",
+        data: {{ json_encode($ordersEarningsChart) }}
+      }],
+      grid: {
+        padding: {
+          top: -20,
+          right: 0,
+          left: -4,
+          bottom: -4
+        },
+        strokeDashArray: 4,
+      },
+      xaxis: {
+        labels: {
+          padding: 0,
+        },
+        tooltip: {
+          enabled: false
+        },
+        axisBorder: {
+          show: false,
+        },
+        type: 'datetime',
+      },
+      yaxis: {
+        labels: {
+          padding: 4
+        },
+      },
+      colors: ["#000000"],
+      legend: {
+        show: true,
+        position: 'bottom',
+        offsetY: 12,
+        markers: {
+          width: 10,
+          height: 10,
+          radius: 100,
+        },
+        itemMargin: {
+          horizontal: 8,
+          vertical: 8
+        },
+      },
+    })).render();
   });
 @endsection
