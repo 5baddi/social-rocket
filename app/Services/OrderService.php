@@ -41,7 +41,7 @@ class OrderService extends Service
 
     public function save(Store $store, array $attributes): Order
     {
-        $productsIds = collect($attributes['line_items'], [])->only('product_id');
+        $productsIds = collect($attributes['line_items'], [])->pluck('product_id');
 
         Arr::set($attributes, Order::STORE_ID_COLUMN, $store->id);
         Arr::set($attributes, Order::ORDER_ID_COLUMN, $attributes[Order::ID_COLUMN]);
