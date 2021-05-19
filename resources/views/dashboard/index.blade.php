@@ -89,10 +89,15 @@
     <div class="row row-cards">
       <div class="col-12 mt-4">
         <div class="card">
-          <div class="card-body">
-            <div class="d-flex align-items-center">
-              <div class="subheader">Overview</div>
+          <div class="card-header align-items-center">
+            <div class="col-auto">
+              <h4 class="card-title">Overview</h4>
             </div>
+            <div class="col-auto ms-auto">
+              <h4 class="card-title text-muted">{{ \Carbon\Carbon::parse($startDate)->format('d F') }} - {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}</h4>
+            </div>
+          </div>
+          <div class="card-body">
             <div class="chart-lg mt-4" id="earnings-chart"></div>
           </div>
         </div>
