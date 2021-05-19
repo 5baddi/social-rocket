@@ -18,15 +18,24 @@ class OrderService extends Service
 {
     /** @var OrderRepository */
     private $orderRepository;
+    
+    /** @var CommissionService */
+    private $commissionService;
 
-    public function __construct(OrderRepository $orderRepository)
+    public function __construct(OrderRepository $orderRepository, CommissionService $commissionService)
     {
         $this->orderRepository = $orderRepository;
+        $this->commissionService = $commissionService;
     }
 
-    public function latest(): Order
+    public function latest(): ?Order
     {
         return $this->orderRepository->latest();
+    }
+    
+    public function exists(Store $store, string $orderId): ?Order
+    {
+        return $this->orderRepository->exists($store->id, $orderId);
     }
 
     public function save(Store $store, array $attributes): Order

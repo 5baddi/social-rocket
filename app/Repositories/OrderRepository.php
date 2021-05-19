@@ -13,10 +13,20 @@ use Carbon\Carbon;
 
 class OrderRepository
 {
-    public function latest(): Order
+    public function latest(): ?Order
     {
         return Order::query()
                     ->latest()
+                    ->first();
+    }
+    
+    public function exists(string $storeId, string $orderId): ?Order
+    {
+        return Order::query()
+                    ->where([
+                        Order::STORE_ID_COLUMN => $storeId,
+                        Order::ORDER_ID_COLUMN => $orderId
+                    ])
                     ->first();
     }
     

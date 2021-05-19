@@ -8,17 +8,18 @@
 
 namespace BADDIServices\SocialRocket\Console\Commands\Shopify;
 
-use BADDIServices\SocialRocket\Models\Product;
 use Throwable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Product;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ProductService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\MailListService;
+use BADDIServices\SocialRocket\Services\CommissionService;
 
 class SyncOrders extends Command
 {
@@ -50,6 +51,9 @@ class SyncOrders extends Command
     
     /** @var MailListService */
     private $mailListService;
+    
+    /** @var CommissionService */
+    private $commissionService;
 
     /**
      * Create a new command instance.
@@ -61,7 +65,8 @@ class SyncOrders extends Command
         ShopifyService $shopifyService, 
         OrderService $orderService,
         ProductService $productService,
-        MailListService $mailListService
+        MailListService $mailListService,
+        CommissionService $commissionService
     )
     {
         parent::__construct();
@@ -71,6 +76,7 @@ class SyncOrders extends Command
         $this->orderService = $orderService;
         $this->productService = $productService;
         $this->mailListService = $mailListService;
+        $this->commissionService = $commissionService;
     }
 
     /**
@@ -95,6 +101,7 @@ class SyncOrders extends Command
                     $order = collect($order);
                     $discounts = collect($order->get('discount_codes', []));
                     $products = collect($order->get('line_items'), []);
+                    $customer = collect($order->get('customer'), []);
 
                     $existsByCoupons = $discounts
                         ->whereIn('code', $coupons)
@@ -103,11 +110,21 @@ class SyncOrders extends Command
                     $existsByCoupon = $discounts->firstWhere('code', $store->coupon);
 
                     if (!is_null($existsByCoupons) || !is_null($existsByCoupon)) {
-                        $this->orderService->save($store, $order->toArray());
+                        $order = $this->orderService->save($store, $order->toArray());
+
+                        $customerId = $customer->get('id');
+                        $affiliate = $this->mailListService->exists($customerId);
+                        
+                        if (is_null($affiliate)) {
+                            $customer = $this->mailListService->create($store, $customer->toArray());
+                        }
+
+                        $this->commissionService->calculate($store, $affiliate, $order);
+                        
                         $products->map(function ($item) use ($store) {
                             if (isset($item[Product::PRODUCT_ID_COLUMN])) {
                                 $product = $this->shopifyService->getProduct($store, $item[Product::PRODUCT_ID_COLUMN]);
-                                
+
                                 $this->productService->save($store, $product);
                             }
                         });

@@ -19,5 +19,6 @@ class AppSetting extends BaseModel
     protected $fillable = [
         self::INSTAGRAM_USERNAME,
         self::TWITTER_USERNAME,
+        self::FACEBOOK_USERNAME,
     ];
 }
