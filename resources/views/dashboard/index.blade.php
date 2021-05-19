@@ -53,7 +53,7 @@
                 <div class="d-flex align-items-center">
                   <div class="subheader">Commission Paid</div>
                 </div>
-                <div class="h1 mb-3">$0.00</div>
+                <div class="h1 mb-3">${{ $paidOrdersCommissions }}</div>
                 <div class="d-flex">
                     <a href="{{ route('dashboard.payouts') }}">
                       View Payouts

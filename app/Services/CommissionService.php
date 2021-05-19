@@ -8,14 +8,15 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
-use App\Models\Commission;
 use App\Models\User;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Models\MailList;
+use Carbon\CarbonPeriod;
+use App\Models\Commission;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Models\MailList;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Repositories\CommissionRepository;
 
 class CommissionService extends Service
@@ -62,5 +63,14 @@ class CommissionService extends Service
         }
 
         return $this->create($store, $mailList, $order, $amount);
+    }
+
+    public function getPaidOrdersCommissions(Store $store, CarbonPeriod $period): float
+    {
+        return $this->commissionRepository->getPaidOrdersCommissions(
+            $store->id, 
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
     }
 }
