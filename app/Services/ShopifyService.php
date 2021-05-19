@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use Exception;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -34,7 +35,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureExcepti
 class ShopifyService extends Service
 {
     /** @var string */
-    const SCOPES = "read_orders,read_customers,read_products,read_checkouts,write_price_rules,read_script_tags,write_script_tags";
+    const SCOPES = "read_orders,read_customers,read_products,read_checkouts,read_price_rules,write_price_rules,read_discounts,write_discounts,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
     const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
@@ -409,6 +410,16 @@ class ShopifyService extends Service
 
             $requestBody['access_token'] = $accessToken;
 
+            $priceRule = array_merge(
+                $priceRule, 
+                [
+                    'target_selection'      =>  'all',
+                    'customer_selection'    =>  'all',
+                    'allocation_method'     =>  'across',
+                    'target_type'           =>  'line_item',
+                    'starts_at'             =>  Carbon::now()->toIso8601String()
+                ]
+            );
             $requestBody['price_rule'] = $priceRule;
 
             $response = $this->client->request('POST', $priceRuleURL, 
@@ -422,6 +433,7 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
+
             if (!isset($data['price_rule'], $data['price_rule']['id'])) {
                 throw new CreatePriceRuleFailed();
             }
@@ -452,21 +464,24 @@ class ShopifyService extends Service
 
             $discountURL = $this->getStoreURL($store->slug);
             $discountURL .= Str::replace("{id}", $priceRule['id'], self::POST_DISCOUNT_ENDPOINT);
+            $discountURL .= "?access_token={$accessToken}";
             
-            $requestBody['access_token'] = $accessToken;
-            $requestBody['discount_code'] = $priceRule['title'];
+            $requestBody['discount_code'] = [
+                'code' => $priceRule['title']
+            ];
 
             $response = $this->client->request('POST', $discountURL, 
                 [
-                    'form_params'      => $requestBody,
+                    'body'      => json_encode($requestBody),
                     'headers'   => [
                         'Accept'        => 'application/json',
-                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                        'Content-Type'  => 'application/json',
                     ]
                 ]
             );
 
-            return $data = json_decode($response->getBody(), true);
+            $data = json_decode($response->getBody(), true);
+
             if (!isset($data['discount_code'], $data['discount_code']['id'])) {
                 throw new CreateDiscountFailed();
             }
