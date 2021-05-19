@@ -43,9 +43,7 @@ class OrderRepository
     public function where(string $storeId, array $attributes): Collection
     {
         return Order::query()
-            ->where([
-                Order::STORE_ID_COLUMN => $storeId
-            ])
+            ->where(Order::STORE_ID_COLUMN, $storeId)
             ->where($attributes)
             ->get();
     }
