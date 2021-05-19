@@ -40,9 +40,9 @@
                 <div class="d-flex align-items-center">
                   <div class="subheader">Total Revenue</div>
                 </div>
-                <div class="h1 mb-3 text-green">+$0.00</div>
+                <div class="h1 mb-3 text-green">+${{ $ordersEarnings }}</div>
                 <div class="d-flex">
-                    <div>0 orders</div>
+                    <div>{{ $newOrdersCount }} orders</div>
                 </div>
               </div>
             </div>
@@ -97,7 +97,6 @@
     $('#period').daterangepicker({
       "startDate": "{{ $startDate }}",
       "endDate": "{{ $endDate }}",
-      "applyButtonClasses": "btn-black",
       locale: {
         format: 'YYYY/MM/DD'
       }

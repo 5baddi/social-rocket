@@ -35,7 +35,8 @@ class CreateSettingsTable extends Migration
             $table->boolean('notify_new_account')->default(true);
             $table->boolean('notify_new_order')->default(false);
             $table->boolean('affiliate_form')->default(false);
-            $table->boolean('thankyou_page')->default(false);
+            $table->boolean('thankyou_page')->default(true);
+            $table->text('custom_share_text')->nullable();
             $table->timestamps();
         });
     }

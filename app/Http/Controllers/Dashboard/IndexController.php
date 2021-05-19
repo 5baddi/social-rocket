@@ -29,13 +29,19 @@ class IndexController extends DashboardController
     public function __invoke(AnalyticsRequest $request)
     {
         $last7Days = $this->statsService->getLast7DaysPeriod();
+        $startDate = $request->input('start-date', $last7Days->copy()->getStartDate()->format('Y/m/d'));
+        $endDate = $request->input('end-date', $last7Days->copy()->getStartDate()->format('Y/m/d'));
+
+        $period = $this->statsService->getPeriod(Carbon::parse($startDate), Carbon::parse($endDate));
 
         return view('dashboard.index', [
             'title'                             =>  'Dashboard',
-            'startDate'                         =>  $request->input('start-date', $last7Days->getStartDate()->format('Y/m/d')),
-            'endDate'                           =>  $request->input('end-date', $last7Days->getEndDate()->format('Y/m/d')),
+            'startDate'                         =>  $startDate,
+            'endDate'                           =>  $endDate,
+            'ordersEarnings'                    =>  $this->statsService->getOrdersEarnings($this->store, $period),
+            'newOrdersCount'                    =>  $this->statsService->getNewOrdersCount($this->store, $period),
             'unreadNotifications'               =>  $this->user->unreadNotifications,
-            'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30))
+            'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);
     }
 }

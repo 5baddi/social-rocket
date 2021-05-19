@@ -34,6 +34,7 @@ class Setting extends BaseModel
     public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
     public const AFFILIATE_FORM_COLUMN = 'affiliate_form';
     public const THANKYOU_PAGE_COLUMN = 'thankyou_page';
+    public const CUSTOM_SHARE_TEXT_COLUMN = 'custom_share_text';
 
     /** @var int */
     public const DFEAULT_COMMISSION = 10;
@@ -79,6 +80,7 @@ class Setting extends BaseModel
         self::NOTIFY_NEW_OREDR_COLUMN,
         self::AFFILIATE_FORM_COLUMN,
         self::THANKYOU_PAGE_COLUMN,
+        self::CUSTOM_SHARE_TEXT_COLUMN,
     ];
 
     /** @var array */

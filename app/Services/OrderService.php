@@ -8,10 +8,12 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Repositories\OrderRepository;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
+use BADDIServices\SocialRocket\Models\Order;
+use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Repositories\OrderRepository;
 
 class OrderService extends Service
 {
@@ -58,6 +60,24 @@ class OrderService extends Service
                 Order::CUSTOMER_ID_COLUMN => $attributes[Order::CUSTOMER_ID_COLUMN]
             ],
             $attributes
+        );
+    }
+
+    public function getOrdersEarnings(Store $store, CarbonPeriod $period): float
+    {
+        return $this->orderRepository->getOrdersEarnings(
+            $store->id, 
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
+    public function getNewOrdersCount(Store $store, CarbonPeriod $period): int
+    {
+        return $this->orderRepository->getNewOrdersCount(
+            $store->id, 
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
         );
     }
 }

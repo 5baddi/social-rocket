@@ -59,6 +59,10 @@ class OrderStatusScriptController extends Controller
                 $setting = new StoreSetting();
             }
 
+            if (!$setting->thankyou_page) {
+                return response(null, Response::HTTP_NO_CONTENT);
+            }
+
             return view('script', [
                 'html'      =>  $this->couponService->getScriptTag($store->coupon, $setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
             ]);
@@ -71,7 +75,7 @@ class OrderStatusScriptController extends Controller
                 'trace'     =>  $ex->getTrace()
             ]);
 
-            return response('', Response::HTTP_INTERNAL_SERVER_ERROR);
+            return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

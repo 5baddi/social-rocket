@@ -82,15 +82,9 @@ class NewOrderController extends AffiliateController
                         [
                             'title'                 =>  $mailList->coupon,
                             'value_type'            =>  $setting->discount_type === Setting::FIXED_TYPE ? 'fixed_amount' : $setting->discount_type,
-                            'value'                 =>  - $setting->discount_amount,
-                            'target_selection'      =>  'all',
-                            'customer_selection'    =>  'all',
-                            'allocation_method'     =>  'across',
-                            'target_type'           =>  'line_item',
-                            'starts_at'             =>  Carbon::now()->toIso8601String()
+                            'value'                 =>  -$setting->discount_amount
                         ]
                     );
-                    return $priceRule;
                 }
                 
                 $order = $this->orderService->save($store, $shopifyOrder->toArray());

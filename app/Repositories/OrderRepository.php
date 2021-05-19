@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use BADDIServices\SocialRocket\Models\Order;
+use Carbon\Carbon;
 
 class OrderRepository
 {
@@ -26,5 +27,31 @@ class OrderRepository
                         $attributes,
                         $values
                     );
+    }
+
+    public function getOrdersEarnings(string $storeId, Carbon $startDate, carbon $endDate): float
+    {
+        return Order::query()
+            ->where([
+                Order::STORE_ID_COLUMN => $storeId
+            ])
+            ->whereBetween(
+                Order::CREATED_AT,
+                [$startDate, $endDate]
+            )
+            ->sum(Order::TOTAL_PRICE_USD_COLUMN);
+    }
+    
+    public function getNewOrdersCount(string $storeId, Carbon $startDate, carbon $endDate): int
+    {
+        return Order::query()
+            ->where([
+                Order::STORE_ID_COLUMN => $storeId
+            ])
+            ->whereBetween(
+                Order::CREATED_AT,
+                [$startDate, $endDate]
+            )
+            ->count();
     }
 }
