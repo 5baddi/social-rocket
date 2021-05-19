@@ -88,10 +88,13 @@ class SyncOrders extends Command
                     $order = collect($order);
                     $discounts = collect($order->get('discount_codes', []));
                     
-                    $existsByCounpons = $discounts->whereIn('code', $coupons);
-                    $existsByStoreCoupon = $discounts->where('code', $store->coupon);
-                    if (!is_null($existsByCounpons) || !is_null($existsByStoreCoupon)) {
+                    $exists = $discounts
+                        ->whereIn('code', $coupons)
+                        ->firstWhere('code', $store->coupon);
+                    if (!is_null($exists)) {
                         $this->orderService->save($store, $order->toArray());
+
+                        // TODO: Save order customer and product
                     }
                 });
             });
