@@ -103,6 +103,28 @@
         </div>
       </div>
     </div>
+    <div class="row row-cards">
+      <div class="col-6 mt-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Top Affiliates</h4>
+          </div>
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-6 mt-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Top Products</h4>
+          </div>
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -133,9 +155,6 @@
         fontFamily: 'inherit',
         height: 340,
         parentHeightOffset: 0,
-        toolbar: {
-          show: false,
-        },
         zoom: {
           enabled: false
         }
@@ -148,17 +167,34 @@
       },
       series: [{
         name: "Revenue",
-        data: {{ json_encode($ordersEarningsChart) }}
+        data: {!! json_encode($ordersEarningsChart) !!}
       }],
-      labels: {
-        format: 'MM/dd',
-        show: true,
-        hideOverlappingLabels: true,
-      },
       markers: {
         size: 0
       },
+      tooltip: {
+        enabled: true,
+        shared: true,
+        followCursor: false,
+        intersect: false,
+        inverseOrder: false,
+        fillSeriesColor: false,
+      },
+      grid: {
+        row: {
+            colors: ['#f3f3f3', 'transparent'],
+            opacity: 0.5
+        },
+      },
       colors: ["#000000"],
+      xaxis: {
+        type: 'datetime',
+        labels: {
+          format: 'dd MMM',
+          show: true,
+          hideOverlappingLabels: true,
+        },
+      },
     })).render();
   });
 @endsection

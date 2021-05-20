@@ -40,11 +40,13 @@ class OrderRepository
                     );
     }
 
-    public function where(string $storeId, array $attributes): Collection
+    public function whereInPeriod(string $storeId, Carbon $startDate, Carbon $endDate): Collection
     {
         return Order::query()
             ->where(Order::STORE_ID_COLUMN, $storeId)
-            ->where($attributes)
+            ->where(Order::CREATED_AT, '>=', $startDate)
+            ->where(Order::CREATED_AT, '<=', $endDate)
+            ->orderBy(Order::CREATED_AT, 'DESC')
             ->get();
     }
     

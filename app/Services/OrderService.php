@@ -78,12 +78,10 @@ class OrderService extends Service
 
     public function whereInPeriod(Store $store, CarbonPeriod $period): Collection
     {
-        return $this->orderRepository->where(
+        return $this->orderRepository->whereInPeriod(
             $store->id,
-            [
-                [Order::CREATED_AT, '>=', $period->copy()->getStartDate()],
-                [Order::CREATED_AT, '<=', $period->copy()->getEndDate()],
-            ]
+            $period->getStartDate(),
+            $period->getEndDate()
         );
     }
     
