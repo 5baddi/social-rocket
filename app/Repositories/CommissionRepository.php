@@ -48,4 +48,24 @@ class CommissionRepository
             )
             ->sum(Commission::AMOUNT_COLUMN);
     }
+    
+    public function getUnpaidOrdersCommissions(string $storeId, Carbon $startDate, carbon $endDate): float
+    {
+        return Commission::query()
+            ->where([
+                Commission::STORE_ID_COLUMN => $storeId
+            ])
+            ->whereDate(
+                Commission::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Commission::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->where(Commission::STATUS_COLUMN, Commission::DEFAULT_STATUS)
+            ->sum(Commission::AMOUNT_COLUMN);
+    }
 }

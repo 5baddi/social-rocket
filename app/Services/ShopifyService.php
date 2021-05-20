@@ -50,8 +50,8 @@ class ShopifyService extends Service
     const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-04/price_rules/{id}/discount_codes.json";
     const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
     const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
-    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
-    const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items";
+    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
+    const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
 
     /** @var Client */
     private $client;

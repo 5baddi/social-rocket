@@ -14,13 +14,15 @@ class Commission extends BaseModel
     public const STATUS_COLUMN = 'status';
     public const DEFAULT_STATUS = 'pending'; 
     public const PAID_STATUS = 'paid'; 
+    public const REJECTED_STATUS = 'rejected'; 
+    public const CANCELLED_STATUS = 'cancelled'; 
 
         /** @var array */
         public const STATUSES = [
             self::DEFAULT_STATUS,
             self::PAID_STATUS,
-            'rejected',
-            'cancelled',
+            self::REJECTED_STATUS,
+            self::CANCELLED_STATUS
         ];
 
     /** @var array */

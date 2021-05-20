@@ -26,6 +26,15 @@ class ProductRepository
                     ->get();
     }
     
+    public function getTopByIds(array $ids, int $limit = 5): Collection
+    {
+        return Product::query()
+                    ->whereIn(Product::PRODUCT_ID_COLUMN, $ids)
+                    ->groupBy(Product::ID_COLUMN)
+                    ->take($limit)
+                    ->get();
+    }
+    
     public function save(array $attributes): Product
     {
         return Product::query()

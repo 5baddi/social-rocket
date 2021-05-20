@@ -65,6 +65,15 @@ class CommissionService extends Service
         return $this->create($store, $mailList, $order, $amount);
     }
 
+    public function getUnpaidOrdersCommissions(Store $store, CarbonPeriod $period): float
+    {
+        return $this->commissionRepository->getUnpaidOrdersCommissions(
+            $store->id, 
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
     public function getPaidOrdersCommissions(Store $store, CarbonPeriod $period): float
     {
         return $this->commissionRepository->getPaidOrdersCommissions(

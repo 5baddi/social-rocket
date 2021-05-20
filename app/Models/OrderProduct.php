@@ -8,22 +8,22 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-class Product extends BaseModel
+class OrderProduct extends BaseModel
 {
     /** @var string */
-    public const TABLE_NAME = 'products';
+    public const TABLE_NAME = 'order_products';
     public const STORE_ID_COLUMN = 'store_id';
+    public const ORDER_ID_COLUMN = 'order_id';
     public const PRODUCT_ID_COLUMN = 'product_id';
-    public const TITLE_COLUMN = 'title';
-    public const SLUG_COLUMN = 'slug';
-    public const IMAGE_COLUMN = 'image';
+    public const PRICE_COLUMN = 'price';
+    public const CURRENCY_COLUMN = 'currency';
 
     /** @var array */
     protected $fillable = [
         self::STORE_ID_COLUMN,
+        self::ORDER_ID_COLUMN,
         self::PRODUCT_ID_COLUMN,
-        self::TITLE_COLUMN,
-        self::SLUG_COLUMN,
-        self::IMAGE_COLUMN,
+        self::PRICE_COLUMN,
+        self::CURRENCY_COLUMN,
     ];
 }

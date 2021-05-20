@@ -51,7 +51,7 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div class="subheader">Commission Paid</div>
+                  <div class="subheader">Commissions Paid</div>
                 </div>
                 <div class="h1 mb-3">${{ $paidOrdersCommissions }}</div>
                 <div class="d-flex">
@@ -70,9 +70,9 @@
             <div class="card">
               <div class="card-body">
                 <div class="d-flex align-items-center">
-                  <div class="subheader">Commission own</div>
+                  <div class="subheader">Commissions owed</div>
                 </div>
-                <div class="h1 mb-3">$0.00</div>
+                <div class="h1 mb-3 text-red">${{ $unpaidOrdersCommissions }}</div>
                 <div class="d-flex">
                     <a href="{{ route('dashboard.payouts', ['action' => 'send']) }}">
                       Send Payouts
@@ -120,7 +120,21 @@
             <h4 class="card-title">Top Products</h4>
           </div>
           <div class="card-body">
-
+            <table class="table card-table table-vcenter">
+              <tbody>
+                @foreach ($topProducts as $product)
+                <tr>
+                  <td width="100">
+                    <a href="{{ $product['url'] }}" title="Show product" target="_blank">
+                      <span class="avatar avatar-md" style="background-image: url({{ $product['image'] }})"></span>
+                    </a>
+                  </td>
+                  <td class="text-start">{{ ucwords($product['title']) }}</td>
+                  <td class="text-end text-green">$3,550</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

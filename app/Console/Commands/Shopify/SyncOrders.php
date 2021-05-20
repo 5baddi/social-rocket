@@ -121,11 +121,12 @@ class SyncOrders extends Command
 
                         $this->commissionService->calculate($store, $affiliate, $order);
                         
-                        $products->map(function ($item) use ($store) {
+                        $products->map(function ($item) use ($store, $order) {
                             if (isset($item[Product::PRODUCT_ID_COLUMN])) {
                                 $product = $this->shopifyService->getProduct($store, $item[Product::PRODUCT_ID_COLUMN]);
 
-                                $this->productService->save($store, $product);
+                                $product = $this->productService->save($store, $product);
+                                $this->orderService->attachProduct($store, $order, $item);
                             }
                         });
                     }
