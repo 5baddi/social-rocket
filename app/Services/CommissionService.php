@@ -32,6 +32,11 @@ class CommissionService extends Service
     {
         return $this->commissionRepository->all();
     }
+
+    public function exists(Store $store, User $affiliate, Order $order): ?Commission
+    {
+        return $this->commissionRepository->exists($store->id, $affiliate->customer_id, $order->id);
+    }
     
     public function create(Store $store, User $affiliate, Order $order, float $amount): Commission
     {

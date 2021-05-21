@@ -109,6 +109,8 @@ class CouponService extends Service
 
         if ($type === Setting::FIXED_TYPE) {
             $amount .= ' ' . $currency;
+        } else {
+            $amount .= '%';
         }
 
         return $amount;

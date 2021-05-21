@@ -45,9 +45,9 @@
                 </div>
             </div>
         </div>
-        <div class="col mt-5">
+        {{-- <div class="col mt-5">
             <h2 class="page-title">Advanced Settings</h2>
-        </div>
+        </div> --}}
         <div class="col-12 mt-4">
             <div class="card">
                 <div class="card-body">

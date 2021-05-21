@@ -21,6 +21,17 @@ class CommissionRepository
                     ->all();
     }
     
+    public function exists(string $storeId, int $affiliateId, string $orderId): ?Commission
+    {
+        return Commission::query()
+                    ->where([
+                        Commission::STORE_ID_COLUMN     => $storeId,
+                        Commission::AFFILIATE_ID_COLUMN => $affiliateId,
+                        Commission::ORDER_ID_COLUMN     => $orderId,
+                    ])
+                    ->first();
+    }
+    
     public function create(array $attributes): Commission
     {
         return Commission::query()

@@ -8,6 +8,7 @@
 
 namespace App\Console\Commands\Shopify;
 
+use BADDIServices\SocialRocket\Models\Commission;
 use Throwable;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
@@ -117,7 +118,10 @@ class SyncAllOrders extends Command
                             $customer = $this->userService->create($store, $customer->toArray());
                         }
 
-                        $this->commissionService->calculate($store, $affiliate, $order);
+                        $commission = $this->commissionService->exists($store, $affiliate, $order);
+                        if (!$commission instanceof Commission) {
+                            $this->commissionService->calculate($store, $affiliate, $order);
+                        }
                         
                         $products->map(function ($item) use ($store, $order) {
                             if (isset($item[Product::PRODUCT_ID_COLUMN])) {
