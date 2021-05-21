@@ -8,22 +8,24 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
-use App\Models\User;
 use Throwable;
 use Carbon\Carbon;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ProductService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SocialRocket\Services\CommissionService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
@@ -45,7 +47,10 @@ class NewOrderController extends AffiliateController
     /** @var CouponService */
     private $couponService;
 
-    public function __construct(StoreService $storeService, ShopifyService $shopifyService, UserService $userService, OrderService $orderService, ProductService $productService, CouponService $couponService)
+    /** @var CommissionService */
+    private $commissionService;
+
+    public function __construct(StoreService $storeService, ShopifyService $shopifyService, UserService $userService, OrderService $orderService, ProductService $productService, CouponService $couponService, CommissionService $commissionService)
     {
         parent::__construct($storeService, $shopifyService);
 
@@ -53,6 +58,7 @@ class NewOrderController extends AffiliateController
         $this->orderService = $orderService;
         $this->productService = $productService;
         $this->couponService = $couponService;
+        $this->commissionService = $commissionService;
     }
 
     public function __invoke(NewOrderRequest $request)
@@ -95,6 +101,11 @@ class NewOrderController extends AffiliateController
                 }
                 
                 $order = $this->orderService->save($store, $shopifyOrder->toArray());
+
+                $commission = $this->commissionService->exists($store, $affiliate, $order);
+                if (!$commission instanceof Commission) {
+                    $this->commissionService->calculate($store, $affiliate, $order);
+                }
                 
                 $lineItems = collect($shopifyOrder->get('line_items', []));
                 $productData = collect($lineItems->first());
