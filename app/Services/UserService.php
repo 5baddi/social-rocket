@@ -50,8 +50,10 @@ class UserService extends Service
 
     public function create(Store $store, array $attributes): User
     {
-        Arr::set($attributes, User::CUSTOMER_ID_COLUMN, $attributes[User::ID_COLUMN]);
-        
+        if (isset($attributes[User::ID_COLUMN])) {
+            Arr::set($attributes, User::CUSTOMER_ID_COLUMN, $attributes[User::ID_COLUMN]);
+        }
+
         $validator = Validator::make($attributes, [
             User::CUSTOMER_ID_COLUMN   => 'required|integer',
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
