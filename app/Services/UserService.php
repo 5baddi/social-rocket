@@ -14,17 +14,23 @@ use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Repositories\UserRespository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use Illuminate\Support\Arr;
 
 class UserService extends Service
 {
     /** @var UserRespository */
     private $userRepository;
+    
+    /** @var CouponService */
+    private $couponService;
 
-    public function __construct(UserRespository $userRepository)
+    public function __construct(UserRespository $userRepository, CouponService $couponService)
     {
         $this->userRepository = $userRepository;
+        $this->couponService = $couponService;
     }
 
     public function verifyPassword(User $user, string $password): bool
@@ -44,17 +50,23 @@ class UserService extends Service
 
     public function create(Store $store, array $attributes): User
     {
+        Arr::set($attributes, User::CUSTOMER_ID_COLUMN, $attributes[User::ID_COLUMN]);
+        
         $validator = Validator::make($attributes, [
+            User::CUSTOMER_ID_COLUMN   => 'required|integer',
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string',
+            User::PASSWORD_COLUMN      => 'nullable|string',
             User::PHONE_COLUMN         => 'nullable|string|max:50'
         ]);
 
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
+
+        $coupon = $this->couponService->generateDiscountCode($store, $attributes[User::FIRST_NAME_COLUMN]);
+        Arr::set($attributes, User::COUPON_COLUMN, $coupon);
 
         return $this->userRepository->create($store->id, $attributes);
     }

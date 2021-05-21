@@ -14,7 +14,7 @@ use BADDIServices\SocialRocket\Models\Setting;
 
 class CouponService extends Service
 {
-    public function getScriptTag(string $coupon, float $discount = Setting::DFEAULT_DISCOUNT, string $type = Setting::FIXED_TYPE, string $currency = Setting::DEFAULT_CURRENCY, $color = Setting::DEFAULT_COLOR)
+    public function getScriptTag(float $discount = Setting::DFEAULT_DISCOUNT, string $type = Setting::FIXED_TYPE, string $currency = Setting::DEFAULT_CURRENCY, $color = Setting::DEFAULT_COLOR)
     {
         $html = '<div id="app-affiliate-section" class="section__content srow" style="display:none;">
             <div class="section__content__column scolumn-text" style="width: 65%;">
@@ -96,8 +96,7 @@ class CouponService extends Service
         </div>';
 
         $amount = $this->getDiscount($discount, $type, $currency);
-
-        $html = Str::replace('{coupon}', $coupon, $html);
+        
         $html = Str::replace('{color}', $color, $html);
         $html = Str::replace('{amount}', $amount, $html);
 

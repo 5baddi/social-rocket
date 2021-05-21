@@ -101,7 +101,7 @@ class NewOrderController extends AffiliateController
                         User::COUPON_COLUMN     => $affiliate->coupon,
                         'discount'              => $this->couponService->getDiscount($setting->discount_amount, $setting->discount_type, $setting->currency),
                         'color'                 => $setting->color,
-                        'url'                   => $this->shopifyService->getProductURL($store, $product->slug)
+                        'url'                   => $this->shopifyService->getProductWithDiscountURL($store, $product->slug, $affiliate->coupon)
                     ]);
                 }
             }

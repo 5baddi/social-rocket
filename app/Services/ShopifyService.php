@@ -77,6 +77,15 @@ class ShopifyService extends Service
         return $productURL;
     }
     
+    public function getProductWithDiscountURL($store, string $slug, string $coupon): string
+    {
+        $productURL = $this->getStoreURL($store->slug);
+        $productURL .= "/discount/{$coupon}?redirect=";
+        $productURL .= Str::replace("{slug}", $slug, self::PRODUCT_ENDPOINT);
+
+        return $productURL;
+    }
+    
     public function getOAuthURL(string $storeName): string
     {
         $oauthURL = $this->getStoreURL($storeName);

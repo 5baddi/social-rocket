@@ -41,12 +41,7 @@ class OrderStatusScriptController extends Controller
     public function __invoke(Request $request)
     {
         try {
-            $storeName = $this->shopifyService->getStoreName($request->query('shop'));
-            if (is_null($storeName)) {
-                return '';
-            }
-
-            $store = $this->storeService->findBySlug($storeName);
+            $store = $this->storeService->findBySlug($request->query('slug'));
             if (!$store instanceof Store) {
                 return '';
             }
@@ -64,7 +59,7 @@ class OrderStatusScriptController extends Controller
             }
 
             return view('script', [
-                'html'      =>  $this->couponService->getScriptTag($store->coupon, $setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
+                'html'      =>  $this->couponService->getScriptTag($setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
             ]);
         } catch (Throwable $ex) {
             Log::error($ex->getMessage(), [

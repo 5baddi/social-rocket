@@ -57,11 +57,11 @@ if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefine
             }
     
             window.shareFacebook = function () {
-                window.open('http://www.facebook.com/sharer.php?description=You can make money promoting our products!&u=' + content.url, 'sharer'+'target=_blank');
+                window.open('http://www.facebook.com/sharer.php?description=You can make money promoting our products!&u=' + content.url + '?discount=' + content.discount, 'sharer'+'target=_blank');
             }
     
             window.shareTwitter = function () {
-                window.open('https://twitter.com/intent/tweet?text=You can make money promoting our products!&url=' + content.url, 'sharer'+'target=_blank');
+                window.open('https://twitter.com/intent/tweet?text=You can make money promoting our products!&url=' + content.url + '?discount=' + content.discount, 'sharer'+'target=_blank');
             }
         }
     })();
