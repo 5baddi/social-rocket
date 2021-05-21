@@ -54,7 +54,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsCon
 
 Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
-Route::redirect('/guide/affiliate/setup', 'https://socialsnowball.zendesk.com/hc/en-us/articles/360056865074-How-to-add-your-affiliate-registration-page-to-Shopify', 301)->name('guide.affiliate.setup');
+Route::redirect('/guide/affiliate/setup', env('GUIDE_SETUP', '/'), 301)->name('guide.affiliate.setup');
 
 Route::middleware(['cors'])->group(function() {
     Route::get('/order_status.js', OrderStatusScriptController::class);
