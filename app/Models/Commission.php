@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
+use App\Models\User;
 use BADDIServices\SocialRocket\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -44,7 +45,7 @@ class Commission extends BaseModel
 
     public function affiliate(): HasOne
     {
-        return $this->hasOne(MailList::class, Commission::ID_COLUMN, Commission::AFFILIATE_ID_COLUMN);
+        return $this->hasOne(User::class, User::CUSTOMER_ID_COLUMN, Commission::AFFILIATE_ID_COLUMN);
     }
     
     public function order(): HasOne

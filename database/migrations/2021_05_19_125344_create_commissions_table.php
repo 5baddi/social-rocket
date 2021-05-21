@@ -19,7 +19,7 @@ class CreateCommissionsTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->uuid('order_id');
-            $table->uuid('affiliate_id');
+            $table->bigInteger('affiliate_id');
             $table->float('amount');
             $table->enum('status', Commission::STATUSES)->default(Commission::DEFAULT_STATUS);
             $table->string('payout_reference')->nullable();

@@ -51,7 +51,7 @@ class CommissionService extends Service
         $filtredAttributes = [
             Commission::STORE_ID_COLUMN     => $store->id,
             Commission::ORDER_ID_COLUMN     => $order->id,
-            Commission::AFFILIATE_ID_COLUMN => $mailList->id,
+            Commission::AFFILIATE_ID_COLUMN => $mailList->customer_id,
             Commission::AMOUNT_COLUMN       => $amount ?? 0,
             Commission::STATUS_COLUMN       => $attributes[Commission::STATUS_COLUMN] ?? Commission::DEFAULT_STATUS,
         ];

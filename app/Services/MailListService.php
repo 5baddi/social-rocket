@@ -15,6 +15,7 @@ use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Repositories\MailListRepository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use Illuminate\Support\Arr;
 
 class MailListService extends Service
 {
@@ -42,7 +43,7 @@ class MailListService extends Service
     
     public function create(Store $store, array $attributes): MailList
     {
-        $attributes[MailList::CUSTOMER_ID_COLUMN] = $attributes['id'];
+        Arr::set($attributes, MailList::CUSTOMER_ID_COLUMN, $attributes['id']);
 
         $attributes = collect($attributes);
         $attributes = $attributes->only([

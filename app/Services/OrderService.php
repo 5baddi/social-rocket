@@ -75,7 +75,7 @@ class OrderService extends Service
                 Order::STORE_ID_COLUMN    => $attributes[Order::STORE_ID_COLUMN],
                 Order::CUSTOMER_ID_COLUMN => $attributes[Order::CUSTOMER_ID_COLUMN]
             ],
-            $attributes
+            $filteredAttributes
         );
     }
     
