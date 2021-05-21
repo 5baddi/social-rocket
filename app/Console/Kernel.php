@@ -3,8 +3,8 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
+use App\Console\Commands\Shopify\SyncAllOrders;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use BADDIServices\SocialRocket\Console\Commands\Shopify\SyncAllOrders;
 
 class Kernel extends ConsoleKernel
 {

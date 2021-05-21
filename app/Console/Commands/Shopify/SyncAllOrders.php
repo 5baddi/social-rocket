@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Console\Commands\Shopify;
+namespace App\Console\Commands\Shopify;
 
 use Throwable;
 use Illuminate\Console\Command;
