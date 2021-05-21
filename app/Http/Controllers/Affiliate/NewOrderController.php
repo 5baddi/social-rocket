@@ -63,7 +63,14 @@ class NewOrderController extends AffiliateController
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
             $shopifyOrder = collect($this->shopifyService->getOrder($store, $request->input(Order::ORDER_ID_COLUMN)));
 
-            if ($shopifyOrder->has('customer') && $shopifyOrder->has('line_items')) {
+            $coupons = $this->userService->coupons($store);
+            $discounts = collect($shopifyOrder->get('discount_codes', []));
+
+            $existsByCoupons = $discounts
+                ->whereIn('code', $coupons)
+                ->first();
+
+            if ($shopifyOrder->has('customer') && $shopifyOrder->has('line_items') && !is_null($existsByCoupons)) {
                 $store->load('setting');
 
                 /** @var Setting */
@@ -113,7 +120,7 @@ class NewOrderController extends AffiliateController
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
             DB::rollBack();
-            
+
             Log::error($ex->getMessage(), [
                 'context'   =>  'affiliate:new-order',
                 'code'      =>  $ex->getCode(),

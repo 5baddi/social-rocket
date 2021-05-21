@@ -106,10 +106,8 @@ class SyncAllOrders extends Command
                     $existsByCoupons = $discounts
                         ->whereIn('code', $coupons)
                         ->first();
-                        
-                    $existsByCoupon = $discounts->firstWhere('code', $store->coupon);
 
-                    if (!is_null($existsByCoupons) || !is_null($existsByCoupon)) {
+                    if (!is_null($existsByCoupons)) {
                         $order = $this->orderService->save($store, $order->toArray());
 
                         $customerId = $customer->get('id');

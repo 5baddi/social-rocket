@@ -84,4 +84,9 @@ class User extends Authenticatable
     {
         return !is_null($this->attributes[self::CUSTOMER_ID_COLUMN]) || $this->getAttribute(self::ROLE_COLUMN) === self::DEFAULT_ROLE;
     }
+
+    public function getFullName(): ?string
+    {
+        return ucwords($this->getAttribute(self::FIRST_NAME_COLUMN) . ' ' . $this->getAttribute(self::LAST_NAME_COLUMN));
+    }
 }

@@ -8,10 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\OrderProduct;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use BADDIServices\SocialRocket\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Models\OrderProduct;
 
 class OrderRepository
 {

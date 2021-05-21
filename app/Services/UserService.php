@@ -48,6 +48,11 @@ class UserService extends Service
         return $this->userRepository->findByEmail($email);
     }
 
+    public function coupons(Store $store): array
+    {
+        return $this->userRepository->coupons($store->id);
+    }
+
     public function create(Store $store, array $attributes): User
     {
         if (isset($attributes[User::ID_COLUMN])) {

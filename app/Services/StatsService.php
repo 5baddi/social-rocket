@@ -13,7 +13,6 @@ use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
-use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Product;
 use BADDIServices\SocialRocket\Models\OrderProduct;
 use BADDIServices\SocialRocket\Services\OrderService;

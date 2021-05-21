@@ -108,6 +108,6 @@ class CommissionService extends Service
     
     public function getTotalEarned(Store $store, User $affiliate): float
     {
-        return $this->commissionRepository->getTotalEarned($store->id, $affiliate->id);
+        return $this->commissionRepository->getTotalEarned($store->id, $affiliate->customer_id);
     }
 }

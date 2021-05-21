@@ -31,6 +31,15 @@ class UserRespository
                     ->first();
     }
 
+    public function coupons(string $storeId): array
+    {
+        return User::query()
+                    ->where(User::STORE_ID_COLUMN, $storeId)
+                    ->get()
+                    ->pluck(User::COUPON_COLUMN)
+                    ->toArray();
+    }
+
     public function create(string $storeId, array $attributes): User
     {
         Arr::set($attributes, User::STORE_ID_COLUMN, $storeId);
