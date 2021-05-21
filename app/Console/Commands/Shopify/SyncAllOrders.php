@@ -21,7 +21,7 @@ use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\CommissionService;
 
-class SyncOrders extends Command
+class SyncAllOrders extends Command
 {
     /**
      * The name and signature of the console command.
