@@ -10,7 +10,6 @@ namespace BADDIServices\SocialRocket\Repositories;
 
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\OrderProduct;
-use BADDIServices\SocialRocket\Models\Product;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -61,11 +60,10 @@ class OrderRepository
             ->get();
     }
     
-    public function getOrdersProductsIds(string $storeId, Carbon $startDate, Carbon $endDate): Collection
+    public function getOrdersProducts(string $storeId, Carbon $startDate, Carbon $endDate): Collection
     {
         return Order::query()
             ->with('products')
-            ->select(Order::PRODUCTS_IDS_COLUMN)
             ->where(Order::STORE_ID_COLUMN, $storeId)
             ->where(Order::CREATED_AT, '>=', $startDate)
             ->where(Order::CREATED_AT, '<=', $endDate)

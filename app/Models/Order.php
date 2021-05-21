@@ -8,7 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
 class Order extends BaseModel
@@ -54,9 +54,10 @@ class Order extends BaseModel
         self::DISCOUNT_CODES_COLUMN => 'json',
     ];
 
-    public function products(): HasManyThrough
+    public function products(): BelongsToMany
     {
-        return $this->hasManyThrough(Product::class, OrderProduct::class);
+        return $this->belongsToMany(Product::class, OrderProduct::TABLE_NAME)
+                    ->withPivot([OrderProduct::PRICE_COLUMN, OrderProduct::CURRENCY_COLUMN]);
     }
 
     public function getDiscount(): Collection

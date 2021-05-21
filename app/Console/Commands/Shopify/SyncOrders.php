@@ -126,7 +126,7 @@ class SyncOrders extends Command
                                 $product = $this->shopifyService->getProduct($store, $item[Product::PRODUCT_ID_COLUMN]);
 
                                 $product = $this->productService->save($store, $product);
-                                $this->orderService->attachProduct($store, $order, $item);
+                                $this->orderService->attachProduct($store, $order, $product, $item);
                             }
                         });
                     }

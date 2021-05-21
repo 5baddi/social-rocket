@@ -9,7 +9,8 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use Carbon\Carbon;
-use App\Models\Commission;
+use BADDIServices\SocialRocket\Models\Commission;
+use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Collection;
 
 class CommissionRepository
@@ -24,6 +25,12 @@ class CommissionRepository
     {
         return Commission::query()
                     ->create($attributes);
+    }
+    
+    public function save(array $attributes, array $values): Commission
+    {
+        return Commission::query()
+                    ->updateOrCreate($attributes, $values);
     }
 
     public function getPaidOrdersCommissions(string $storeId, Carbon $startDate, carbon $endDate): float
@@ -67,5 +74,26 @@ class CommissionRepository
             )
             ->where(Commission::STATUS_COLUMN, Commission::DEFAULT_STATUS)
             ->sum(Commission::AMOUNT_COLUMN);
+    }
+
+    public function getTopAffiliatesByStore(string $storeId, CarbonPeriod $period, int $limit = 5): Collection
+    {
+        return Commission::query()
+                    ->with(['affiliate', 'order'])
+                    ->where(Commission::STORE_ID_COLUMN, $storeId)
+                    ->whereDate(Commission::CREATED_AT, '>=', $period->getStartDate())
+                    ->whereDate(Commission::CREATED_AT, '<=', $period->getEndDate())
+                    ->groupBy(Commission::AFFILIATE_ID_COLUMN)
+                    ->orderBy(Commission::AMOUNT_COLUMN, 'DESC')
+                    ->take($limit)
+                    ->get();
+    }
+    
+    public function getTotalEarned(string $storeId, string $affiliateId): float
+    {
+        return Commission::query()
+                    ->where(Commission::STORE_ID_COLUMN, $storeId)
+                    ->where(Commission::AFFILIATE_ID_COLUMN, $affiliateId)
+                    ->sum(Commission::AMOUNT_COLUMN);
     }
 }

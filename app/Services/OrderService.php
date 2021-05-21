@@ -79,10 +79,10 @@ class OrderService extends Service
         );
     }
     
-    public function attachProduct(Store $store, Order $order, array $product): OrderProduct
+    public function attachProduct(Store $store, Order $order, Product $product, array $attributes): OrderProduct
     {
-        $product = collect($product);
-        $price = collect($product->get('price_set'));
+        $attributes = collect($attributes);
+        $price = collect($attributes->get('price_set'));
         $money = collect($price->get('shop_money'));
         $currency = $money->get('currency_code', Setting::CURRENCY_COLUMN);
 
@@ -90,13 +90,13 @@ class OrderService extends Service
             [
                 OrderProduct::STORE_ID_COLUMN           => $store->id,
                 OrderProduct::ORDER_ID_COLUMN           => $order->id,
-                OrderProduct::PRODUCT_ID_COLUMN         => $product->get(Product::PRODUCT_ID_COLUMN),
+                OrderProduct::PRODUCT_ID_COLUMN         => $product->id,
             ],
             [
                 OrderProduct::STORE_ID_COLUMN           => $store->id,
                 OrderProduct::ORDER_ID_COLUMN           => $order->id,
-                OrderProduct::PRODUCT_ID_COLUMN         => $product->get(Product::PRODUCT_ID_COLUMN),
-                OrderProduct::PRICE_COLUMN              => $product->get(OrderProduct::PRICE_COLUMN),
+                OrderProduct::PRODUCT_ID_COLUMN         => $product->id,
+                OrderProduct::PRICE_COLUMN              => $attributes->get(OrderProduct::PRICE_COLUMN),
                 OrderProduct::CURRENCY_COLUMN           => $currency
             ]
         );
@@ -111,13 +111,13 @@ class OrderService extends Service
         );
     }
     
-    public function getOrdersProductsIds(Store $store, CarbonPeriod $period): Collection
+    public function getOrdersProducts(Store $store, CarbonPeriod $period): Collection
     {
-        return dd($this->orderRepository->getOrdersProductsIds(
+        return $this->orderRepository->getOrdersProducts(
             $store->id,
             $period->getStartDate(),
             $period->getEndDate()
-        ));
+        );
     }
     
     public function getOrdersEarnings(Store $store, CarbonPeriod $period): float

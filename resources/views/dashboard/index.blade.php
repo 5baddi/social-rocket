@@ -110,7 +110,24 @@
             <h4 class="card-title">Top Affiliates</h4>
           </div>
           <div class="card-body">
-
+            <table class="table card-table table-vcenter">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Sales Generated</th>
+                  <th>Total Earned</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($topAffiliates as $affiliate)
+                <tr>
+                  <td class="text-start">{{ $affiliate['fullname'] }}</td>
+                  <td class="text-end text-green">${{ $affiliate['sales'] }}</td>
+                  <td class="text-end">${{ $affiliate['amount'] }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -130,7 +147,7 @@
                     </a>
                   </td>
                   <td class="text-start">{{ ucwords($product['title']) }}</td>
-                  <td class="text-end text-green">$3,550</td>
+                  <td class="text-end text-green">{{ $product['currency'] === 'USD' ? '$' : '' }}{{ $product['price'] }} {{ $product['currency'] !== 'USD' ? $product['currency'] : '' }}</td>
                 </tr>
                 @endforeach
               </tbody>

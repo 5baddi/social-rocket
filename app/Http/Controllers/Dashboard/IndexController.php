@@ -44,6 +44,7 @@ class IndexController extends DashboardController
             'paidOrdersCommissions'             =>  $this->statsService->getPaidOrdersCommissions($this->store, $period),
             'unpaidOrdersCommissions'           =>  $this->statsService->getUnpaidOrdersCommissions($this->store, $period),
             'topProducts'                       =>  $this->statsService->getOrdersTopProducts($this->store, $period),
+            'topAffiliates'                     =>  $this->statsService->getTopAffiliatesByStore($this->store, $period),
             'unreadNotifications'               =>  $this->user->unreadNotifications,
             'markAsReadNotifications'           =>  $this->user->notifications->whereNotNull('read_at')->where(User::CREATED_AT, '>=', Carbon::now()->subDays(30)),
         ]);

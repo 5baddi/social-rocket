@@ -1,8 +1,15 @@
 <?php
 
-namespace App\Models;
+/**
+ * Social Rocket
+ *
+ * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ */
+
+namespace BADDIServices\SocialRocket\Models;
 
 use BADDIServices\SocialRocket\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Commission extends BaseModel
 {
@@ -34,4 +41,14 @@ class Commission extends BaseModel
         self::AMOUNT_COLUMN,
         self::STATUS_COLUMN,
     ];
+
+    public function affiliate(): HasOne
+    {
+        return $this->hasOne(MailList::class, Commission::ID_COLUMN, Commission::AFFILIATE_ID_COLUMN);
+    }
+    
+    public function order(): HasOne
+    {
+        return $this->hasOne(Order::class, Commission::ID_COLUMN, Commission::ORDER_ID_COLUMN);
+    }
 }

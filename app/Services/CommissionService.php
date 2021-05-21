@@ -8,9 +8,8 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
-use App\Models\User;
 use Carbon\CarbonPeriod;
-use App\Models\Commission;
+use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
@@ -46,6 +45,25 @@ class CommissionService extends Service
 
         return $this->commissionRepository->create($filtredAttributes);
     }
+    
+    public function save(Store $store, MailList $mailList, Order $order, float $amount): Commission
+    {
+        $filtredAttributes = [
+            Commission::STORE_ID_COLUMN     => $store->id,
+            Commission::ORDER_ID_COLUMN     => $order->id,
+            Commission::AFFILIATE_ID_COLUMN => $mailList->id,
+            Commission::AMOUNT_COLUMN       => $amount ?? 0,
+            Commission::STATUS_COLUMN       => $attributes[Commission::STATUS_COLUMN] ?? Commission::DEFAULT_STATUS,
+        ];
+
+        return $this->commissionRepository->save(
+            [
+            Commission::STORE_ID_COLUMN     => $store->id,
+            Commission::ORDER_ID_COLUMN     => $order->id,
+            ],
+            $filtredAttributes
+        );
+    }
 
     public function calculate(Store $store, MailList $mailList, Order $order): Commission
     {
@@ -62,7 +80,7 @@ class CommissionService extends Service
             $amount = ($setting->commission_amount / 100) * $order->total_price_usd;
         }
 
-        return $this->create($store, $mailList, $order, $amount);
+        return $this->save($store, $mailList, $order, $amount);
     }
 
     public function getUnpaidOrdersCommissions(Store $store, CarbonPeriod $period): float
@@ -81,5 +99,15 @@ class CommissionService extends Service
             $period->copy()->getStartDate(),
             $period->copy()->getEndDate()
         );
+    }
+
+    public function getTopAffiliatesByStore(Store $store, CarbonPeriod $period, int $limit = 5): Collection
+    {
+        return $this->commissionRepository->getTopAffiliatesByStore($store->id, $period, $limit);
+    }
+    
+    public function getTotalEarned(Store $store, MailList $affiliate): float
+    {
+        return $this->commissionRepository->getTotalEarned($store->id, $affiliate->id);
     }
 }

@@ -15,7 +15,6 @@ class CreateOrderProductsTable extends Migration
     public function up()
     {
         Schema::create('order_products', function (Blueprint $table) {
-            $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id');
             $table->uuid('order_id');
             $table->uuid('product_id');

@@ -34,4 +34,9 @@ class MailList extends BaseModel
     {
         return $this->hasOne(Store::class);
     }
+
+    public function getFullName(): ?string
+    {
+        return ucwords($this->getAttribute(self::FIRST_NAME_COLUMN) . ' ' . $this->getAttribute(self::LAST_NAME_COLUMN));
+    }
 }

@@ -8,11 +8,14 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use BADDIServices\SocialRocket\Models\Commission;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Product;
+use BADDIServices\SocialRocket\Models\OrderProduct;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\CommissionService;
@@ -25,17 +28,13 @@ class StatsService extends Service
     /** @var OrderService */
     private $orderService;
     
-    /** @var ProductService */
-    private $productService;
-    
     /** @var CommissionService */
     private $commissionService;
 
-    public function __construct(ShopifyService $shopifyService, OrderService $orderService, ProductService $productService, CommissionService $commissionService)
+    public function __construct(ShopifyService $shopifyService, OrderService $orderService, CommissionService $commissionService)
     {
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
-        $this->productService = $productService;
         $this->commissionService = $commissionService;
     }
 
@@ -80,27 +79,41 @@ class StatsService extends Service
     
     public function getOrdersTopProducts(Store $store, CarbonPeriod $period): array
     {
-        $orders = $this->orderService->getOrdersProductsIds($store, $period);
+        $orders = $this->orderService->getOrdersProducts($store, $period);
 
-        $productsIds = [];
+        $products = [];
         
-        $orders->map(function (Order $order) use (&$productsIds) {
-            $productsIds = array_merge($productsIds, $order->products_ids);
+        $orders->map(function (Order $order) use (&$products) {
+            $products = array_merge($products, $order->products->toArray());
         });
 
-        $productsIds = collect($productsIds)->unique()->toArray();
-        
-        $topProducts = $this->productService->getTopByIds($productsIds);
+        $products = collect($products);
+        $productsIds = $products->groupBy(Product::ID_COLUMN)
+                                ->unique()
+                                ->keys()
+                                ->take(5);
 
-        $filteredProducts = $topProducts->map(function (Product $product) use ($store) {
-            return [
-                Product::PRODUCT_ID_COLUMN  => $product->product_id,
-                Product::TITLE_COLUMN       => $product->title,
-                Product::SLUG_COLUMN        => $product->slug,
-                Product::IMAGE_COLUMN       => $product->image,
-                'url'                       => $this->shopifyService->getProductURL($store, $product->slug)
-            ];
-        });
+        $filteredProducts = $productsIds
+            ->map(function (string $id) use ($store, $products) {
+                $product = $products->where(Product::ID_COLUMN, $id)->first();
+
+                if(is_null($product)) {
+                    return null;
+                }
+
+                return [
+                    Product::PRODUCT_ID_COLUMN      => $product[Product::PRODUCT_ID_COLUMN],
+                    Product::TITLE_COLUMN           => $product[Product::TITLE_COLUMN],
+                    Product::SLUG_COLUMN            => $product[Product::SLUG_COLUMN],
+                    Product::IMAGE_COLUMN           => $product[Product::IMAGE_COLUMN],
+                    OrderProduct::PRICE_COLUMN      => sprintf('%.2f', $product['pivot'][OrderProduct::PRICE_COLUMN]),
+                    OrderProduct::CURRENCY_COLUMN   => $product['pivot'][OrderProduct::CURRENCY_COLUMN],
+                    'url'                           => $this->shopifyService->getProductURL($store, $product[Product::SLUG_COLUMN])
+                ];
+            })
+            ->reject(function ($value) {
+                return is_null($value);
+            });
 
         return $filteredProducts->toArray();
     }
@@ -124,5 +137,20 @@ class StatsService extends Service
             '%.2f',
             $this->commissionService->getUnpaidOrdersCommissions($store, $period)
         );
+    }
+
+    public function getTopAffiliatesByStore(Store $store, CarbonPeriod $period, int $limit = 5): array
+    {
+        $affiliates = $this->commissionService->getTopAffiliatesByStore($store, $period, $limit);
+
+        $filteredAfiliates = $affiliates->map(function (Commission $commission) use ($store) {
+            return [
+                'fullname'  =>  $commission->affiliate->getFullName(),
+                'sales'     =>  $commission->order->total_price_usd,
+                'amount'    =>  $this->commissionService->getTotalEarned($store, $commission->affiliate)
+            ];
+        });
+
+        return $filteredAfiliates->toArray();
     }
 }
