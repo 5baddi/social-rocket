@@ -8,11 +8,12 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\StoreRepository;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Repositories\StoreRepository;
 
 class StoreService extends Service
 {
@@ -24,6 +25,16 @@ class StoreService extends Service
         $this->storeRepository = $storeRepository;
     }
 
+    public function all(): Collection
+    {
+        return $this->storeRepository->all();
+    }
+    
+    public function findById(string $id): ?Store
+    {
+        return $this->storeRepository->findById($id);
+    }
+    
     public function findBySlug(string $slug): ?Store
     {
         return $this->storeRepository->findBySlug($slug);
@@ -53,7 +64,7 @@ class StoreService extends Service
         return $this->storeRepository->create($attributes);
     }
     
-    public function udpate(Store $store, array $attributes): Store
+    public function update(Store $store, array $attributes): Store
     {
         return $this->storeRepository->update($store, $attributes);
     }

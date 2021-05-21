@@ -8,6 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Repositories\SettingRepository;
+
 class SettingService extends Service
 {
     /** @var array */
@@ -127,4 +132,72 @@ class SettingService extends Service
         'YER' => 'Yemen Rial',
         'ZWD' => 'Zimbabwe Dollar'
     ];
+
+    /** @var SettingRepository */
+    private $settingRepository;
+
+    public function __construct(SettingRepository $settingRepository)
+    {
+        $this->settingRepository = $settingRepository;
+    }
+
+    public function all(): Collection
+    {
+        return $this->settingRepository->all();
+    }
+    
+    public function findById(string $id): Setting
+    {
+        return $this->settingRepository->findById($id);
+    }
+
+    public function save(Store $store, $attributes): Setting
+    {
+        $attributes = collect([
+            Setting::COMMISSION_AMOUNT_COLUMN       => $attributes[Setting::COMMISSION_AMOUNT_COLUMN] ?? null,
+            Setting::COMMISSION_TYPE_COLUMN         => $attributes[Setting::COMMISSION_TYPE_COLUMN] ?? null,
+            Setting::DISCOUNT_TYPE_COLUMN           => $attributes[Setting::DISCOUNT_TYPE_COLUMN] ?? null,
+            Setting::DISCOUNT_FORMAT_COLUMN         => $attributes[Setting::DISCOUNT_FORMAT_COLUMN] ?? null,
+            Setting::DISCOUNT_AMOUNT_COLUMN         => $attributes[Setting::DISCOUNT_AMOUNT_COLUMN] ?? null,
+            Setting::COLOR_COLUMN                   => $attributes[Setting::COLOR_COLUMN] ?? null,
+            Setting::BRAND_NAME_COLUMN              => $attributes[Setting::BRAND_NAME_COLUMN] ?? null,
+            Setting::CURRENCY_COLUMN                => $attributes[Setting::CURRENCY_COLUMN] ?? null,
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
+    }
+    
+    public function savePayoutSetting(Store $store, $attributes): Setting
+    {
+        $attributes = collect([
+            Setting::PAYOUT_METHODS_COLUMN          => $attributes[Setting::PAYOUT_METHODS_COLUMN] ?? null,
+            Setting::NOTIFY_NEW_ACCOUNT_COLUMN      => $attributes[Setting::NOTIFY_NEW_ACCOUNT_COLUMN] ?? false,
+            Setting::NOTIFY_NEW_OREDR_COLUMN        => $attributes[Setting::NOTIFY_NEW_OREDR_COLUMN] ?? false,
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
+    }
+    
+    public function saveIntegrationsSetting(Store $store, $attributes): Setting
+    {
+        $attributes = collect([
+            Setting::AFFILIATE_FORM_COLUMN      => $attributes[Setting::AFFILIATE_FORM_COLUMN] ?? false,
+            Setting::THANKYOU_PAGE_COLUMN       => $attributes[Setting::THANKYOU_PAGE_COLUMN] ?? false,
+            Setting::CUSTOM_SHARE_TEXT_COLUMN   => $attributes[Setting::CUSTOM_SHARE_TEXT_COLUMN] ?? null,
+        ]);
+
+        $filterAttributes = $attributes->filter(function($value, $key) {
+            return $value !== null;
+        });
+
+        return $this->settingRepository->save($store->id, $filterAttributes->toArray());
+    }
 }

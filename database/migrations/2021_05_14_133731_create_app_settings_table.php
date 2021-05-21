@@ -17,6 +17,7 @@ class CreateAppSettingsTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->string('instagram_username')->nullable();
             $table->string('twitter_username')->nullable();
+            $table->string('facebook_username')->nullable();
             $table->timestamps();
         });
     }

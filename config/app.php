@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Social Rocket'),
+    'name' => ucwords(env('APP_NAME', 'Social Rocket')),
 
     /*
     |--------------------------------------------------------------------------

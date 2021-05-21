@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use Illuminate\Http\Request;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\NewOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::name('rest')
+    ->prefix('v1')
+    ->middleware(['cors'])
+    ->group(function() {
+        Route::post('/affiliate/order', NewOrderController::class)->name('.affiliate.order');
+    });

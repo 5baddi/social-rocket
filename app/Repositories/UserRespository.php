@@ -12,17 +12,28 @@ use App\Models\User;
 
 class UserRespository
 {
+    public function exists(int $customerId): ?User
+    {
+        return User::query()
+                    ->with(['store', 'subscription'])
+                    ->where(User::CUSTOMER_ID_COLUMN, $customerId)
+                    ->first();
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return User::query()
+                    ->with(['store', 'subscription'])
                     ->where([
-                        User::EMAIL_COLUMN => $email
+                        User::EMAIL_COLUMN => strtolower($email)
                     ])
                     ->first();
     }
 
     public function create(array $attributes): User
     {
+        $attributes[User::EMAIL_COLUMN] = strtolower($attributes[User::EMAIL_COLUMN]);
+        
         return User::query()
                     ->create($attributes);
     }

@@ -9,19 +9,25 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Pack extends Model
+class Pack extends BaseModel
 {
+    use SoftDeletes;
+    
     /** @var string */
     public const PER_MONTH = 'month';
     public const PER_YEAR = 'year';
     public const FEATURES_COLUMN = 'features';
+    public const PRICE_COLUMN = 'price';
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
     public const RECURRING_TYPE = 'recurring';
-    public const PERCENTAGE_TYPE = 'percentage';
+    public const USAGE_TYPE = 'usage';
 
     /** @var int */
+    public const DEFAULT_CHARGE_PRICE = 10;
+    public const DEFAULT_MAX_USAGE_PRICE = 1000;
     public const DEFAULT_TRIAL_DAYS = 7;
     public const UNLIMITED_AFFILIATES = 1;
     public const PAYOUT_METHODS = 2;
@@ -39,7 +45,7 @@ class Pack extends Model
     /** @var array */
     public const TYPES = [
         self::RECURRING_TYPE,
-        self::PERCENTAGE_TYPE
+        self::USAGE_TYPE
     ];
 
     public function subscriptions(): HasMany

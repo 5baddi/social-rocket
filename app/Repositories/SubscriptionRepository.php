@@ -8,18 +8,32 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
-use App\Models\User;
-use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Subscription;
 
 class SubscriptionRepository
-{
-    public function createWithPercentage(User $user, Pack $pack): Subscription
+{   
+    public function save(string $userId, string $storeId, string $packId, array $attributes): Subscription
+    {
+        $attributes = array_merge($attributes, [
+            Subscription::USER_ID_COLUMN    => $userId,
+            Subscription::STORE_ID_COLUMN   => $storeId,
+            Subscription::PACK_ID_COLUMN    => $packId,
+        ]);
+
+        return Subscription::query()
+                    ->updateOrCreate(
+                        [
+                            Subscription::USER_ID_COLUMN    => $userId,
+                            Subscription::STORE_ID_COLUMN   => $storeId,
+                        ],
+                        $attributes
+                    );
+    }
+
+    public function delete(string $id): bool
     {
         return Subscription::query()
-                    ->create([
-                        Subscription::USER_ID_COLUMN => $user->id,
-                        Subscription::PACK_ID_COLUMN => $pack->id,
-                    ]);
+                    ->where(Subscription::ID_COLUMN, $id)
+                    ->delete() === 1;
     }
 }

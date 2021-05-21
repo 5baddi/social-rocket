@@ -55,11 +55,22 @@ class OAuthController extends Controller
 
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
+            $this->forgetStore();
+            
             return redirect()->back()->withInput()->withErrors($ex->errors());
         } catch (InvalidStoreURLException | StoreAlreadyLinkedException $ex) {
+            $this->forgetStore();
+
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
+            $this->forgetStore();
+
             return redirect()->back()->withInput()->with("error", "Internal server error");
         }
+    }
+
+    private function forgetStore(): void
+    {
+        Session::forget('slug');
     }
 }

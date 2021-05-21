@@ -21,12 +21,11 @@ class HasSubscription
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::check() && strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
-            /** @var User */
-            $user = Auth::user();
-            $user->load('subscription');
+        /** @var User */
+        $user = Auth::user();
 
-            if(!$user->subscription instanceof Subscription) {
+        if (strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
+            if(!$user->subscription instanceof Subscription || $user->subscription->trashed()) {
                 return redirect()->route('subscription.select.pack');
             }
         }

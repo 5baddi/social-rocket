@@ -45,9 +45,15 @@ class OAuthCallbackController extends Controller
             }
 
             $accessToken = $this->shopifyService->getStoreAccessToken($request->query());
-            $attributes = $request->merge($accessToken)->all();
-            $oauth = $this->storeService->updateStoreOAuth($store, $attributes);
+            $attributes = $request->merge($accessToken)->only([
+                OAuth::STORE_ID_COLUMN,
+                OAuth::CODE_COLUMN,
+                OAuth::ACCESS_TOKEN_COLUMN,
+                OAuth::SCOPE_COLUMN,
+                OAuth::TIMESTAMP_COLUMN,
+            ]);
 
+            $oauth = $this->storeService->updateStoreOAuth($store, $attributes);
             abort_unless($oauth instanceof OAuth, Response::HTTP_BAD_REQUEST, 'Something going wrong during authentification');
 
             return redirect('/signup')->with('store', $store->id);

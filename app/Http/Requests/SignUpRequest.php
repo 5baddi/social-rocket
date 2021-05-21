@@ -34,7 +34,7 @@ class SignUpRequest extends FormRequest
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string',
+            User::PASSWORD_COLUMN      => 'required|string|min:8',
             User::PHONE_COLUMN         => 'nullable|string|max:25'
         ];
     }
