@@ -114,7 +114,7 @@ class StatsService extends Service
                 return is_null($value);
             });
 
-        return $filteredProducts->toArray();
+        return $filteredProducts->sortByDesc(OrderProduct::PRICE_COLUMN)->toArray();
     }
     
     public function getNewOrdersCount(Store $store, CarbonPeriod $period): int
