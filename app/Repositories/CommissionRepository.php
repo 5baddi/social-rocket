@@ -80,14 +80,13 @@ class CommissionRepository
     {
         return Commission::query()
                     ->with(['affiliate', 'order'])
-                    ->select('*')
                     ->where(Commission::STORE_ID_COLUMN, $storeId)
                     ->whereDate(Commission::CREATED_AT, '>=', $period->getStartDate())
                     ->whereDate(Commission::CREATED_AT, '<=', $period->getEndDate())
-                    ->groupBy(Commission::AFFILIATE_ID_COLUMN)
                     ->orderBy(Commission::AMOUNT_COLUMN, 'DESC')
                     ->take($limit)
-                    ->get();
+                    ->get()
+                    ->groupBy(Commission::AFFILIATE_ID_COLUMN);
     }
     
     public function getTotalEarned(string $storeId, string $affiliateId): float
