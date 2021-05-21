@@ -42,7 +42,7 @@ class UserService extends Service
         return $this->userRepository->findByEmail($email);
     }
 
-    public function create(array $attributes): User
+    public function create(Store $store, array $attributes): User
     {
         $validator = Validator::make($attributes, [
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
@@ -56,7 +56,7 @@ class UserService extends Service
             throw new ValidationException($validator);
         }
 
-        return $this->userRepository->create($attributes);
+        return $this->userRepository->create($store->id, $attributes);
     }
 
     public function update(User $user, array $attributes): User

@@ -8,13 +8,13 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use App\Models\User;
 use Carbon\CarbonPeriod;
 use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Repositories\CommissionRepository;
 
@@ -33,12 +33,12 @@ class CommissionService extends Service
         return $this->commissionRepository->all();
     }
     
-    public function create(Store $store, MailList $mailList, Order $order, float $amount): Commission
+    public function create(Store $store, User $affiliate, Order $order, float $amount): Commission
     {
         $filtredAttributes = [
             Commission::STORE_ID_COLUMN     => $store->id,
             Commission::ORDER_ID_COLUMN     => $order->id,
-            Commission::AFFILIATE_ID_COLUMN => $mailList->id,
+            Commission::AFFILIATE_ID_COLUMN => $affiliate->id,
             Commission::AMOUNT_COLUMN       => $amount ?? 0,
             Commission::STATUS_COLUMN       => $attributes[Commission::STATUS_COLUMN] ?? Commission::DEFAULT_STATUS,
         ];
@@ -46,12 +46,12 @@ class CommissionService extends Service
         return $this->commissionRepository->create($filtredAttributes);
     }
     
-    public function save(Store $store, MailList $mailList, Order $order, float $amount): Commission
+    public function save(Store $store, User $affiliate, Order $order, float $amount): Commission
     {
         $filtredAttributes = [
             Commission::STORE_ID_COLUMN     => $store->id,
             Commission::ORDER_ID_COLUMN     => $order->id,
-            Commission::AFFILIATE_ID_COLUMN => $mailList->customer_id,
+            Commission::AFFILIATE_ID_COLUMN => $affiliate->customer_id,
             Commission::AMOUNT_COLUMN       => $amount ?? 0,
             Commission::STATUS_COLUMN       => $attributes[Commission::STATUS_COLUMN] ?? Commission::DEFAULT_STATUS,
         ];
@@ -65,7 +65,7 @@ class CommissionService extends Service
         );
     }
 
-    public function calculate(Store $store, MailList $mailList, Order $order): Commission
+    public function calculate(Store $store, User $affiliate, Order $order): Commission
     {
         $store->load('setting');
 
@@ -80,7 +80,7 @@ class CommissionService extends Service
             $amount = ($setting->commission_amount / 100) * $order->total_price_usd;
         }
 
-        return $this->save($store, $mailList, $order, $amount);
+        return $this->save($store, $affiliate, $order, $amount);
     }
 
     public function getUnpaidOrdersCommissions(Store $store, CarbonPeriod $period): float
@@ -106,7 +106,7 @@ class CommissionService extends Service
         return $this->commissionRepository->getTopAffiliatesByStore($store->id, $period, $limit);
     }
     
-    public function getTotalEarned(Store $store, MailList $affiliate): float
+    public function getTotalEarned(Store $store, User $affiliate): float
     {
         return $this->commissionRepository->getTotalEarned($store->id, $affiliate->id);
     }

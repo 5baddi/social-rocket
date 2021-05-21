@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList;
+namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\SocialRocket\Models\Store;

@@ -27,7 +27,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsContr
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList\CreateAccountController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
@@ -38,7 +38,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkA
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\MailList\SignUpController as AffiliateSignUpController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 
 /*

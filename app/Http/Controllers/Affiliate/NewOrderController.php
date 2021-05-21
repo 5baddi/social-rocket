@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
+use App\Models\User;
 use Throwable;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -16,7 +17,6 @@ use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\MailList;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
@@ -73,14 +73,14 @@ class NewOrderController extends AffiliateController
                 }
 
                 $customer = collect($shopifyOrder->get('customer'), []);
-                $mailList = $this->userService->exists($customer->get('id'));
-                if (!$mailList instanceof MailList) {
-                    $mailList = $this->userService->create($store, $customer->toArray());
+                $affiliate = $this->userService->exists($customer->get('id'));
+                if (!$affiliate instanceof User) {
+                    $affiliate = $this->userService->create($store, $customer->toArray());
 
                     $priceRule = $this->shopifyService->createPriceRule(
                         $store, 
                         [
-                            'title'                 =>  $mailList->coupon,
+                            'title'                 =>  $affiliate->coupon,
                             'value_type'            =>  $setting->discount_type === Setting::FIXED_TYPE ? 'fixed_amount' : $setting->discount_type,
                             'value'                 =>  -$setting->discount_amount
                         ]
@@ -98,7 +98,7 @@ class NewOrderController extends AffiliateController
                     DB::commit();
 
                     return response()->json([
-                        MailList::COUPON_COLUMN => $mailList->coupon,
+                        User::COUPON_COLUMN     => $affiliate->coupon,
                         'discount'              => $this->couponService->getDiscount($setting->discount_amount, $setting->discount_type, $setting->currency),
                         'color'                 => $setting->color,
                         'url'                   => $this->shopifyService->getProductURL($store, $product->slug)

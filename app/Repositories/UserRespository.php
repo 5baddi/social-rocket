@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 
 class UserRespository
 {
@@ -30,9 +31,10 @@ class UserRespository
                     ->first();
     }
 
-    public function create(array $attributes): User
+    public function create(string $storeId, array $attributes): User
     {
-        $attributes[User::EMAIL_COLUMN] = strtolower($attributes[User::EMAIL_COLUMN]);
+        Arr::set($attributes, User::STORE_ID_COLUMN, $storeId);
+        Arr::set($attributes, User::EMAIL_COLUMN, strtolower($attributes[User::EMAIL_COLUMN]));
         
         return User::query()
                     ->create($attributes);
