@@ -63,6 +63,7 @@ class OAuthController extends Controller
 
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
+            dd($ex);
             $this->forgetStore();
 
             return redirect()->back()->withInput()->with("error", "Internal server error");

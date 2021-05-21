@@ -50,7 +50,6 @@ class StoreRepository
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
-                    ->whereNotNull(Store::USER_ID_COLUMN)
                     ->first();
     }
     
