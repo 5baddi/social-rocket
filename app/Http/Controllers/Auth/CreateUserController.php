@@ -48,11 +48,10 @@ class CreateUserController extends Controller
             $store = $this->storeService->findBySlug(Session::get('slug'));
             abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
 
-            $user = $this->userService->create($request->input());
+            $user = $this->userService->create($store, $request->input());
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
             Session::forget('slug');
-            $store = $this->storeService->setUserId($store, $user->id);
             Event::dispatch(new WelcomeMail($user));
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);

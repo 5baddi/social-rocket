@@ -90,13 +90,6 @@ class SubscriptionService extends Service
 
         $this->createScriptTag($store);
 
-        if (is_null($store->coupon)) {
-            $coupon = $this->couponService->generateDiscountCode($store, $user->first_name ?? $store->slug);
-            $this->storeService->update($store, [
-                Store::COUPON_COLUMN => $coupon
-            ]);
-        }
-
         return $subscription;
     }
 

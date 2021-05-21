@@ -52,6 +52,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsCon
 |
 */
 
+// ?hmac=1e0562ac48d089dc7eff26a142c19a84ca4e59df2a8e92d0708799aee2faf108&shop=social-rocket-test-store.myshopify.com&timestamp=1621623778
+
 Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
 Route::redirect('/guide/affiliate/setup', env('GUIDE_SETUP', '/'), 301)->name('guide.affiliate.setup');

@@ -69,13 +69,6 @@ class StoreService extends Service
         return $this->storeRepository->update($store, $attributes);
     }
     
-    public function setUserId(Store $store, string $userId): Store
-    {
-        return $this->storeRepository->update($store, [
-            Store::USER_ID_COLUMN => $userId
-        ]);
-    }
-    
     public function updateStoreOAuth(Store $store, array $attributes): OAuth
     {
         $validator = Validator::make($attributes, [
