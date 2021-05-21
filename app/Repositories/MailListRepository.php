@@ -31,6 +31,13 @@ class MailListRepository
                     ->where(MailList::CUSTOMER_ID_COLUMN, $id)
                     ->first();
     }
+    
+    public function existsByEmail(string $email): ?MailList
+    {
+        return MailList::query()
+                    ->where(MailList::EMAIL_COLUMN, $email)
+                    ->first();
+    }
 
     public function coupons(string $storeId): array
     {

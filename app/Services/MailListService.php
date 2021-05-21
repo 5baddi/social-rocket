@@ -41,6 +41,11 @@ class MailListService extends Service
         return $this->mailListRepository->exists($id);
     }
     
+    public function existsByEmail(string $email): ?MailList
+    {
+        return $this->mailListRepository->existsByEmail($email);
+    }
+    
     public function create(Store $store, array $attributes): MailList
     {
         Arr::set($attributes, MailList::CUSTOMER_ID_COLUMN, $attributes['id']);

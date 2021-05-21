@@ -28,7 +28,7 @@ class CreateAccountController extends Controller
     public function __invoke(Store $store, AffiliateSignInRequest $request)
     {
         try {
-            $exists = $this->mailListService->exists($request->input(MailList::EMAIL_COLUMN));
+            $exists = $this->mailListService->existsByEmail($request->input(MailList::EMAIL_COLUMN));
             if ($exists) {
                 return redirect()->back()->withInput()->with('error', 'Email already registered!');
             }
