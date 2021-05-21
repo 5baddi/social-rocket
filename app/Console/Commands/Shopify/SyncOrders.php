@@ -18,7 +18,7 @@ use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ProductService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\MailListService;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\CommissionService;
 
 class SyncOrders extends Command
@@ -49,8 +49,8 @@ class SyncOrders extends Command
     /** @var ProductService */
     private $productService;
     
-    /** @var MailListService */
-    private $mailListService;
+    /** @var UserService */
+    private $userService;
     
     /** @var CommissionService */
     private $commissionService;
@@ -65,7 +65,7 @@ class SyncOrders extends Command
         ShopifyService $shopifyService, 
         OrderService $orderService,
         ProductService $productService,
-        MailListService $mailListService,
+        UserService $userService,
         CommissionService $commissionService
     )
     {
@@ -75,7 +75,7 @@ class SyncOrders extends Command
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
         $this->productService = $productService;
-        $this->mailListService = $mailListService;
+        $this->userService = $userService;
         $this->commissionService = $commissionService;
     }
 
@@ -94,7 +94,7 @@ class SyncOrders extends Command
                     return false;
                 }
 
-                $coupons = $this->mailListService->coupons($store);
+                $coupons = $this->userService->coupons($store);
 
                 $orders = collect($this->shopifyService->getOrders($store));
                 $orders->map(function ($order) use ($store, $coupons) {
@@ -113,10 +113,10 @@ class SyncOrders extends Command
                         $order = $this->orderService->save($store, $order->toArray());
 
                         $customerId = $customer->get('id');
-                        $affiliate = $this->mailListService->exists($customerId);
+                        $affiliate = $this->userService->exists($customerId);
                         
                         if (is_null($affiliate)) {
-                            $customer = $this->mailListService->create($store, $customer->toArray());
+                            $customer = $this->userService->create($store, $customer->toArray());
                         }
 
                         $this->commissionService->calculate($store, $affiliate, $order);

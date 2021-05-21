@@ -12,6 +12,14 @@ use App\Models\User;
 
 class UserRespository
 {
+    public function exists(int $customerId): ?User
+    {
+        return User::query()
+                    ->with(['store', 'subscription'])
+                    ->where(User::CUSTOMER_ID_COLUMN, $customerId)
+                    ->first();
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return User::query()

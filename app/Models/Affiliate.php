@@ -10,7 +10,7 @@ namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class MailList extends BaseModel
+class Affiliate extends BaseModel
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';
@@ -18,7 +18,6 @@ class MailList extends BaseModel
     public const EMAIL_COLUMN = 'email';
     public const LAST_NAME_COLUMN = 'last_name';
     public const FIRST_NAME_COLUMN = 'first_name';
-    public const COUPON_COLUMN = 'coupon';
 
     /** @var array */
     protected $fillable = [

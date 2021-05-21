@@ -11,8 +11,11 @@ namespace BADDIServices\SocialRocket\Services;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Repositories\UserRespository;
+use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
 
 class UserService extends Service
 {
@@ -27,6 +30,11 @@ class UserService extends Service
     public function verifyPassword(User $user, string $password): bool
     {
         return Hash::check($password, $user->password);
+    }
+
+    public function exists(int $customerId): ?User
+    {
+        return $this->userRepository->exists($customerId);
     }
     
     public function findByEmail(string $email): ?User
@@ -66,5 +74,23 @@ class UserService extends Service
         });
 
         return $this->userRepository->update($user, $filterAttributes->toArray());
+    }
+
+    public function welcomeMail(User $user): void
+    {
+        
+    }
+    
+    public function notifyStoreOwner(Store $store, User $affiliate): void
+    {
+        $store->load(['user', 'setting']);
+        
+        /** @var User */
+        $user = $store->user;
+
+        /** @var Setting */
+        $setting = $store->setting;
+
+        $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
     }
 }

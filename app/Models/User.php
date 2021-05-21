@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Models\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class User extends Authenticatable
 {
@@ -24,6 +25,8 @@ class User extends Authenticatable
     public const LAST_LOGIN_COLUMN = 'last_login';
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
+    public const COUPON_COLUMN = 'coupon';
+    public const STORE_ID_COLUMN = 'store_id';
     public const DEFAULT_ROLE = 'affiliate';
 
     /** @var array */
@@ -43,6 +46,8 @@ class User extends Authenticatable
         self::CUSTOMER_ID_COLUMN,
         self::REMEMBER_TOLEN_COLUMN,
         self::ROLE_COLUMN,
+        self::STORE_ID_COLUMN,
+        self::COUPON_COLUMN,
     ];
 
     /** @var array */
@@ -51,9 +56,9 @@ class User extends Authenticatable
         self::REMEMBER_TOLEN_COLUMN,
     ];
 
-    public function store(): HasOne
+    public function store(): BelongsTo
     {
-        return $this->hasOne(Store::class);
+        return $this->belongsTo(Store::class);
     }
     
     public function subscription(): HasOne

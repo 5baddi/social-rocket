@@ -13,7 +13,6 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Models\MailList;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class NewAffiliateAccount extends Notification implements ShouldQueue
@@ -23,8 +22,8 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
     /** @var User */
     private $user;
     
-    /** @var MailList */
-    private $mailList;
+    /** @var User */
+    private $affiliate;
     
     /** @var Setting */
     private $setting;
@@ -37,10 +36,10 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
      *
      * @return void
      */
-    public function __construct(User $user, MailList $mailList, Setting $setting)
+    public function __construct(User $user, User $affiliate, Setting $setting)
     {
         $this->user = $user;
-        $this->mailList = $mailList;
+        $this->affiliate = $affiliate;
         $this->setting = $setting;
     }
 
@@ -69,7 +68,7 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
     {    
         return (new MailMessage)
                     ->subject(self::SUBJECT)
-                    ->view('emails.affiliate.new', ['subject' => self::SUBJECT, 'user' => $this->user, 'mailList' => $this->mailList]);
+                    ->view('emails.affiliate.new', ['subject' => self::SUBJECT, 'user' => $this->user, 'affiliate' => $this->affiliate]);
     }
 
     /**

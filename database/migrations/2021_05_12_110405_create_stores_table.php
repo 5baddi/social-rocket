@@ -15,10 +15,8 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->uuid('user_id')->nullable();
             $table->string('slug')->unique()->nullable(false);
             $table->bigInteger('script_tag_id')->nullable();
-            $table->string('coupon', 100)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

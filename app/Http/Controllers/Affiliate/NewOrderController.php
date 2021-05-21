@@ -23,7 +23,7 @@ use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ProductService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\MailListService;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
@@ -33,8 +33,8 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
 
 class NewOrderController extends AffiliateController
 {
-    /** @var MailListService */
-    private $mailListService;
+    /** @var UserService */
+    private $userService;
 
     /** @var ProductService */
     private $productService;
@@ -45,11 +45,11 @@ class NewOrderController extends AffiliateController
     /** @var CouponService */
     private $couponService;
 
-    public function __construct(StoreService $storeService, ShopifyService $shopifyService, MailListService $mailListService, OrderService $orderService, ProductService $productService, CouponService $couponService)
+    public function __construct(StoreService $storeService, ShopifyService $shopifyService, UserService $userService, OrderService $orderService, ProductService $productService, CouponService $couponService)
     {
         parent::__construct($storeService, $shopifyService);
 
-        $this->mailListService = $mailListService;
+        $this->userService = $userService;
         $this->orderService = $orderService;
         $this->productService = $productService;
         $this->couponService = $couponService;
@@ -73,9 +73,9 @@ class NewOrderController extends AffiliateController
                 }
 
                 $customer = collect($shopifyOrder->get('customer'), []);
-                $mailList = $this->mailListService->exists($customer->get('id'));
+                $mailList = $this->userService->exists($customer->get('id'));
                 if (!$mailList instanceof MailList) {
-                    $mailList = $this->mailListService->create($store, $customer->toArray());
+                    $mailList = $this->userService->create($store, $customer->toArray());
 
                     $priceRule = $this->shopifyService->createPriceRule(
                         $store, 

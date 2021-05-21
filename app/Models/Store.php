@@ -21,16 +21,12 @@ class Store extends BaseModel
     /** @var string */
     public const TABLE_NAME = 'stores';
     public const SLUG_COLUMN = 'slug';
-    public const USER_ID_COLUMN = 'user_id';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
-    public const COUPON_COLUMN = 'coupon';
 
     /** @var array */
     protected $fillable = [
-        self::USER_ID_COLUMN,
         self::SLUG_COLUMN,
         self::SCRIPT_TAG_ID_COLUMN,
-        self::COUPON_COLUMN
     ];
 
     public function user(): BelongsTo
@@ -53,8 +49,8 @@ class Store extends BaseModel
         return $this->hasOne(Subscription::class);
     }
 
-    public function mailList(): HasMany
+    public function affiliates(): HasMany
     {
-        return $this->hasMany(MailList::class);
+        return $this->hasMany(User::class);
     }
 }
