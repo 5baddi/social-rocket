@@ -80,6 +80,7 @@ class CommissionRepository
     {
         return Commission::query()
                     ->with(['affiliate', 'order'])
+                    ->select('*')
                     ->where(Commission::STORE_ID_COLUMN, $storeId)
                     ->whereDate(Commission::CREATED_AT, '>=', $period->getStartDate())
                     ->whereDate(Commission::CREATED_AT, '<=', $period->getEndDate())
