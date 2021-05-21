@@ -143,7 +143,7 @@
                 <tr>
                   <td width="100">
                     <a href="{{ $product['url'] }}" title="Show product" target="_blank">
-                      <span class="avatar avatar-md" style="background-image: url({{ $product['image'] }})"></span>
+                      <span class="avatar avatar-sm" style="background-image: url({{ $product['image'] }})"></span>
                     </a>
                   </td>
                   <td class="text-start">{{ ucwords($product['title']) }}</td>
