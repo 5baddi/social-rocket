@@ -186,6 +186,8 @@
         fontFamily: 'inherit',
         height: 340,
         parentHeightOffset: 0,
+        stacked: true,
+        redrawOnParentResize: true,
         zoom: {
           enabled: false
         }
@@ -220,10 +222,13 @@
       colors: ["#000000"],
       xaxis: {
         type: 'datetime',
+        min: new Date("{{ $startDate }}").getTime(),
+        max: new Date("{{ $endDate }}").getTime(),
         labels: {
           format: 'dd MMM',
           show: true,
           hideOverlappingLabels: true,
+          showDuplicates: false,
         },
       },
     })).render();

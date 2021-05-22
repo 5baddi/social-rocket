@@ -59,7 +59,7 @@ class OrderRepository
             ->where(Order::CREATED_AT, '>=', $startDate)
             ->where(Order::CREATED_AT, '<=', $endDate)
             ->groupBy('date')
-            ->orderBy(Order::CREATED_AT, 'DESC')
+            ->orderBy(Order::CREATED_AT, 'ASC')
             ->get();
     }
     
