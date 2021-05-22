@@ -20,6 +20,10 @@ class Commission extends BaseModel
     public const AFFILIATE_ID_COLUMN = 'affiliate_id';
     public const AMOUNT_COLUMN = 'amount';
     public const STATUS_COLUMN = 'status';
+    public const REASON_COLUMN = 'reason';
+    public const PAYOUT_REFERENCE_COLUMN = 'payout_reference';
+    public const PAYOUT_METHOD_COLUMN = 'payout_method';
+    public const PAID_AT_COLUMN = 'paid_at';
     public const DEFAULT_STATUS = 'pending'; 
     public const PAID_STATUS = 'paid'; 
     public const REJECTED_STATUS = 'rejected'; 
@@ -40,7 +44,10 @@ class Commission extends BaseModel
         self::ORDER_ID_COLUMN,
         self::AFFILIATE_ID_COLUMN,
         self::AMOUNT_COLUMN,
-        self::STATUS_COLUMN,
+        self::REASON_COLUMN,
+        self::PAID_AT_COLUMN,
+        self::PAYOUT_METHOD_COLUMN,
+        self::PAYOUT_REFERENCE_COLUMN,
     ];
 
     public function affiliate(): HasOne
