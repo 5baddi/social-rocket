@@ -125,12 +125,12 @@ class SyncAllOrders extends Command
                             event();
                         }
                         
-                        $products->map(function ($item) use ($store, $order) {
+                        $products->map(function ($item) use ($store, $order, $products) {
                             if (isset($item[Product::PRODUCT_ID_COLUMN])) {
                                 $product = $this->shopifyService->getProduct($store, $item[Product::PRODUCT_ID_COLUMN]);
 
                                 $product = $this->productService->save($store, $product);
-                                $this->orderService->attachProduct($store, $order, $product, $item);
+                                $this->orderService->attachProduct($store, $order, $product, $products);
                             }
                         });
                     }
