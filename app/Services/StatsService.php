@@ -69,7 +69,7 @@ class StatsService extends Service
         $filteredOrders = $orders->map(function (Order $order) {
             return [
                 $order->created_at->format('Y, m, d'),
-                $order->total_price_usd
+                number_format($order->total, 2)
             ];
         });
         

@@ -8,10 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 
-class Pack extends BaseModel
+class Pack extends ModelEntity
 {
     use SoftDeletes;
     

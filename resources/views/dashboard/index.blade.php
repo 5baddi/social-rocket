@@ -182,7 +182,7 @@
 
     window.ApexCharts && (new ApexCharts(document.getElementById('earnings-chart'), {
       chart: {
-        type: "line",
+        type: "area",
         fontFamily: 'inherit',
         height: 340,
         parentHeightOffset: 0,

@@ -8,7 +8,9 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-class Product extends BaseModel
+use BADDIServices\SocialRocket\Entities\ModelEntity;
+
+class Product extends ModelEntity
 {
     /** @var string */
     public const TABLE_NAME = 'products';

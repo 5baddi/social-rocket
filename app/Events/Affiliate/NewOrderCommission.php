@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events;
+namespace BADDIServices\SocialRocket\Events\Affiliate;
 
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Commission;

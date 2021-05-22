@@ -17,6 +17,7 @@ use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Repositories\OrderRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 
 class OrderService extends Service
 {
@@ -79,12 +80,20 @@ class OrderService extends Service
         );
     }
     
-    public function attachProduct(Store $store, Order $order, Product $product, array $attributes): OrderProduct
+    public function attachProduct(Store $store, Order $order, Product $product, SupportCollection $items): OrderProduct
     {
-        $attributes = collect($attributes);
-        $price = collect($attributes->get('price_set'));
-        $money = collect($price->get('shop_money'));
-        $currency = $money->get('currency_code', Setting::CURRENCY_COLUMN);
+        $amount = 0.0;
+        $currency = Setting::DEFAULT_CURRENCY;
+
+        $items->map(function ($item) use(&$amount, &$currency) {
+            $item = collect($item);
+
+            $priceSet = collect($item->get('price_set'));
+            $money = collect($priceSet->get('shop_money'));
+
+            $currency = $money->get('currency_code', Setting::CURRENCY_COLUMN);
+            $amount .= $money->get('amount', 0.0);
+        });
 
         return $this->orderRepository->attachProduct(
             [
@@ -96,7 +105,7 @@ class OrderService extends Service
                 OrderProduct::STORE_ID_COLUMN           => $store->id,
                 OrderProduct::ORDER_ID_COLUMN           => $order->id,
                 OrderProduct::PRODUCT_ID_COLUMN         => $product->id,
-                OrderProduct::PRICE_COLUMN              => $attributes->get(OrderProduct::PRICE_COLUMN),
+                OrderProduct::PRICE_COLUMN              => $amount,
                 OrderProduct::CURRENCY_COLUMN           => $currency
             ]
         );

@@ -9,10 +9,10 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 
-class Commission extends BaseModel
+class Commission extends ModelEntity
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';

@@ -8,10 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Order extends BaseModel
+class Order extends ModelEntity
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';

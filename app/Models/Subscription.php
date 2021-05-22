@@ -10,9 +10,10 @@ namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Subscription extends BaseModel
+class Subscription extends ModelEntity
 {
     use SoftDeletes;
 

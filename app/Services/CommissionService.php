@@ -17,8 +17,8 @@ use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Events\NewOrderCommission;
 use BADDIServices\SocialRocket\Repositories\CommissionRepository;
+use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
 
 class CommissionService extends Service
 {

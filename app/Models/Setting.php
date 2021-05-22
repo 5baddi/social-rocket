@@ -9,8 +9,9 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 
-class Setting extends BaseModel
+class Setting extends ModelEntity
 {
     /** @var string */
     public const FIXED_TYPE = 'fixed';

@@ -54,9 +54,11 @@ class OrderRepository
     public function whereInPeriod(string $storeId, Carbon $startDate, Carbon $endDate): Collection
     {
         return Order::query()
+            ->select(DB::raw('SUM(total_price_usd) as total'), Order::CREATED_AT, DB::raw('DATE(created_at) as date'))
             ->where(Order::STORE_ID_COLUMN, $storeId)
             ->where(Order::CREATED_AT, '>=', $startDate)
             ->where(Order::CREATED_AT, '<=', $endDate)
+            ->groupBy('date')
             ->orderBy(Order::CREATED_AT, 'DESC')
             ->get();
     }

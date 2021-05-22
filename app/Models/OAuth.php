@@ -2,9 +2,10 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OAuth extends BaseModel
+class OAuth extends ModelEntity
 {
     /** @var string */
     public const TABLE_NAME = 'oauths';

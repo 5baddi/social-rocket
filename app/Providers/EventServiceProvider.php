@@ -4,10 +4,10 @@ namespace App\Providers;
 
 // use Illuminate\Auth\Events\Registered;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Events\NewOrderCommission;
 use BADDIServices\SocialRocket\Listeners\WelcomeMailFired;
+use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
 // use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
-use BADDIServices\SocialRocket\Listeners\NewOrderCommissionFired;
+use BADDIServices\SocialRocket\Listeners\Affiliate\NewOrderCommissionFired;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider

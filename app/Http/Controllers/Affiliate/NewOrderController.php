@@ -112,7 +112,7 @@ class NewOrderController extends AffiliateController
                 if ($productData->has('product_id')) {
                     $shopifyProduct = $this->shopifyService->getProduct($store, $productData->get('product_id'));
                     $product = $this->productService->save($store, $shopifyProduct);
-                    $this->orderService->attachProduct($store, $order, $product, $shopifyProduct);
+                    $this->orderService->attachProduct($store, $order, $product, $lineItems);
 
                     DB::commit();
 

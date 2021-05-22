@@ -9,8 +9,9 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use BADDIServices\SocialRocket\Entities\ModelEntity;
 
-class Affiliate extends BaseModel
+class Affiliate extends ModelEntity
 {
     /** @var string */
     public const STORE_ID_COLUMN = 'store_id';
