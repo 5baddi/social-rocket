@@ -10,12 +10,14 @@ namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
 use Carbon\CarbonPeriod;
-use BADDIServices\SocialRocket\Models\Commission;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
+use BADDIServices\SocialRocket\Events\NewOrderCommission;
 use BADDIServices\SocialRocket\Repositories\CommissionRepository;
 
 class CommissionService extends Service
@@ -85,7 +87,12 @@ class CommissionService extends Service
             $amount = ($setting->commission_amount / 100) * $order->total_price_usd;
         }
 
-        return $this->save($store, $affiliate, $order, $amount);
+        $commission = $this->save($store, $affiliate, $order, $amount);
+        if ($commission instanceof Commission) {
+            Event::dispatch(new NewOrderCommission($store, $affiliate, $commission));
+        }
+
+        return $commission;
     }
 
     public function getUnpaidOrdersCommissions(Store $store, CarbonPeriod $period): float

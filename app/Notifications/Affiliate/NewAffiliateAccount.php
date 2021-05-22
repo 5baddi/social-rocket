@@ -81,10 +81,10 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
     {
         return [
             'subject'           => self::SUBJECT,
-            // 'link'              =>  [
-            //     'url'           =>  route('dashboard'),
-            //     'label'         =>  'Getting started'
-            // ]
+            'link'              =>  [
+                'url'           =>  route('signin'),
+                'label'         =>  'Getting started'
+            ]
         ];
     }
 }

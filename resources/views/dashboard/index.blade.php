@@ -114,8 +114,8 @@
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th>Sales Generated</th>
-                  <th>Total Earned</th>
+                  <th class="text-end">Sales Generated</th>
+                  <th class="text-end">Total Earned</th>
                 </tr>
               </thead>
               <tbody>
@@ -147,7 +147,7 @@
                     </a>
                   </td>
                   <td class="text-start">{{ ucwords($product['title']) }}</td>
-                  <td class="text-end text-green">{{ $product['currency'] === 'USD' ? '$' : '' }}{{ $product['price'] }} {{ $product['currency'] !== 'USD' ? $product['currency'] : '' }}</td>
+                  <td class="text-end text-green">{{ $product['currency'] === 'USD' ? '$' : '' }}{{ $product['sales'] }} {{ $product['currency'] !== 'USD' ? $product['currency'] : '' }}</td>
                 </tr>
                 @endforeach
               </tbody>

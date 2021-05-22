@@ -100,13 +100,15 @@ class StatsService extends Service
                     return null;
                 }
 
+                $sales = $products->where(Product::ID_COLUMN, $id)->sum('pivot.price');
+
                 return [
                     Product::PRODUCT_ID_COLUMN      => $product[Product::PRODUCT_ID_COLUMN],
                     Product::TITLE_COLUMN           => $product[Product::TITLE_COLUMN],
                     Product::SLUG_COLUMN            => $product[Product::SLUG_COLUMN],
                     Product::IMAGE_COLUMN           => $product[Product::IMAGE_COLUMN],
-                    OrderProduct::PRICE_COLUMN      => sprintf('%.2f', $product['pivot'][OrderProduct::PRICE_COLUMN]),
                     OrderProduct::CURRENCY_COLUMN   => $product['pivot'][OrderProduct::CURRENCY_COLUMN],
+                    'sales'                         => $sales,
                     'url'                           => $this->shopifyService->getProductURL($store, $product[Product::SLUG_COLUMN])
                 ];
             })
@@ -114,7 +116,7 @@ class StatsService extends Service
                 return is_null($value);
             });
 
-        return $filteredProducts->sortByDesc(OrderProduct::PRICE_COLUMN)->toArray();
+        return $filteredProducts->sortByDesc('sales')->toArray();
     }
     
     public function getNewOrdersCount(Store $store, CarbonPeriod $period): int

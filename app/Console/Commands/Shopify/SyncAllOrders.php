@@ -121,6 +121,8 @@ class SyncAllOrders extends Command
                         $commission = $this->commissionService->exists($store, $affiliate, $order);
                         if (!$commission instanceof Commission) {
                             $this->commissionService->calculate($store, $affiliate, $order);
+
+                            event();
                         }
                         
                         $products->map(function ($item) use ($store, $order) {

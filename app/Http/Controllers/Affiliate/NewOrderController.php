@@ -104,7 +104,7 @@ class NewOrderController extends AffiliateController
 
                 $commission = $this->commissionService->exists($store, $affiliate, $order);
                 if (!$commission instanceof Commission) {
-                    $this->commissionService->calculate($store, $affiliate, $order);
+                    $commission = $this->commissionService->calculate($store, $affiliate, $order);
                 }
                 
                 $lineItems = collect($shopifyOrder->get('line_items', []));
@@ -112,6 +112,7 @@ class NewOrderController extends AffiliateController
                 if ($productData->has('product_id')) {
                     $shopifyProduct = $this->shopifyService->getProduct($store, $productData->get('product_id'));
                     $product = $this->productService->save($store, $shopifyProduct);
+                    $this->orderService->attachProduct($store, $order, $product, $shopifyProduct);
 
                     DB::commit();
 
