@@ -139,9 +139,9 @@ class CommissionRepository
                     ->whereDate(Commission::CREATED_AT, '>=', $period->getStartDate())
                     ->whereDate(Commission::CREATED_AT, '<=', $period->getEndDate())
                     ->orderBy(Commission::AMOUNT_COLUMN, 'DESC')
-                    ->groupBy(Commission::AFFILIATE_ID_COLUMN)
                     ->take($limit)
-                    ->get();
+                    ->get()
+                    ->groupBy(Commission::AFFILIATE_ID_COLUMN);
     }
     
     public function getTotalEarned(string $storeId, string $affiliateId): float
