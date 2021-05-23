@@ -15,10 +15,12 @@ use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Setting;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Entities\StoreSetting;
 use BADDIServices\SocialRocket\Repositories\CommissionRepository;
 use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
+use Illuminate\Support\Arr;
 
 class CommissionService extends Service
 {
@@ -30,9 +32,14 @@ class CommissionService extends Service
         $this->commissionRepository = $commissionRepository;
     }
 
-    public function all(): Collection
+    public function paginatePaidCommissions(Store $store, CarbonPeriod $period, ?int $page = null): LengthAwarePaginator
     {
-        return $this->commissionRepository->all();
+        return $this->commissionRepository->paginatePaidCommissions($store->id, $period->getStartDate(), $period->getEndDate(), $page);
+    }
+    
+    public function paginateUnpaidCommissions(Store $store, CarbonPeriod $period, ?int $page = null): LengthAwarePaginator
+    {
+        return $this->commissionRepository->paginateUnpaidCommissions($store->id, $period->getStartDate(), $period->getEndDate(), $page);
     }
 
     public function exists(Store $store, User $affiliate, Order $order): ?Commission
@@ -121,5 +128,19 @@ class CommissionService extends Service
     public function getTotalEarned(Store $store, User $affiliate): float
     {
         return $this->commissionRepository->getTotalEarned($store->id, $affiliate->customer_id);
+    }
+
+    public function pay(Commission $commission, array $attributes): bool
+    {
+        return $this->commissionRepository->update(
+            $commission->id,
+            [
+                Commission::PAYOUT_REFERENCE_COLUMN => Arr::get($attributes, Commission::PAYOUT_REFERENCE_COLUMN),
+                Commission::PAYOUT_METHOD_COLUMN    => Arr::get($attributes, Commission::PAYOUT_METHOD_COLUMN),
+                Commission::ADDITIONAL_INFO_COLUMN  => Arr::get($attributes, Commission::ADDITIONAL_INFO_COLUMN),
+                Commission::STATUS_COLUMN           => Commission::PAID_STATUS,
+                Commission::PAID_AT_COLUMN          => now(),
+            ]
+        );
     }
 }

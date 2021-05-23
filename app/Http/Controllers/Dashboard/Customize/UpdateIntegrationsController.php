@@ -9,17 +9,14 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize;
 
 use Throwable;
-use App\Models\User;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use BADDIServices\SocialRocket\Http\Requests\UpdateIntegrationsSettingsRequest;
 
-class UpdateIntegrationsController extends Controller
+class UpdateIntegrationsController extends DashboardController
 {
     /** @var SettingService */
     private $settingService;
@@ -32,16 +29,7 @@ class UpdateIntegrationsController extends Controller
     public function __invoke(UpdateIntegrationsSettingsRequest $request)
     {
         try {
-            /** @var User */
-            $user = Auth::user();
-            $user->load('store');
-
-            $store = $user->store;
-            if (!$store instanceof Store) {
-                throw new NotFoundHttpException('Store not found!');
-            }
-
-            $setting = $this->settingService->saveIntegrationsSetting($store, $request->input());
+            $setting = $this->settingService->saveIntegrationsSetting($this->store, $request->input());
 
             return redirect()->route('dashboard.customize.integrations')
                             ->withInput($setting->toArray())

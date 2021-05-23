@@ -28,6 +28,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\FetchResourcesFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
+use BADDIServices\SocialRocket\Exceptions\Shopify\LoadConfigurationsFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenException;
 use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePaymentConfirmationFailed;
@@ -38,6 +39,7 @@ class ShopifyService extends Service
     /** @var string */
     const SCOPES = "read_orders,read_customers,read_products,read_checkouts,read_price_rules,write_price_rules,read_discounts,write_discounts,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
+    const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-04/shop.json";
     const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
@@ -123,6 +125,40 @@ class ShopifyService extends Service
         }
     }
 
+    /**
+     * @throws LoadConfigurationsFailed
+     */
+    public function loadConfigurations(Store $store): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $configURL = $this->getStoreURL($store->slug);
+            $configURL .= self::STORE_CONFIGS_ENDPOINT;
+            $configURL .= "?access_token={$accessToken}";
+
+            $response = $this->client->request('GET', $configURL, 
+                [
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+
+            if (!isset($data['shop'])) {
+                throw new Exception();
+            }
+
+            return $data['shop'];
+        } catch (Exception | ClientException | RequestException $ex) {
+            AppLogger::error($ex, $store, 'store:load-configurations');
+
+            throw new LoadConfigurationsFailed();
+        }
+    }
+    
     /**
      * @throws AcceptPaymentFailed
      */

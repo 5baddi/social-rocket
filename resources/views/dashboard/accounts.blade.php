@@ -188,8 +188,8 @@
                 activeState: 'show',
                 selectedState: 'active',
             },
-            shouldSort: false,
-            searchEnabled: false,
+            shouldSort: true,
+            searchEnabled: true,
         }));
     });
 @endsection

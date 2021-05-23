@@ -17,29 +17,31 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\SendPayoutController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
+use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\CancelSubscriptionController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails\PurchaseMailController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -86,6 +88,8 @@ Route::middleware('guest')
         Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
+        // Route::get('/reset', ResetPasswordController::class)->name('signin');
+        // Route::post('/auth/reset', ResetPasswordController::class)->name('auth.signin');
     });
         
 Route::middleware(['auth', 'has.subscription'])
@@ -108,8 +112,12 @@ Route::middleware(['auth', 'has.subscription', 'store-owner'])
         Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
         Route::get('/customize/integrations', IntegrationsController::class)->name('.customize.integrations');
         Route::post('/customize/integrations', UpdateIntegrationsController::class)->name('.customize.integrations.save');
+        Route::group(['prefix' => 'customize/integrations', 'name' => '.customize.integrations'], function() {
+            Route::get('/mails/purchase', PurchaseMailController::class)->name('.mails.purchase');
+        });
         
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
+        Route::post('/payouts/{commission}', SendPayoutController::class)->name('.payouts.send');
 
         Route::get('/account', AccountController::class)->name('.account');
         Route::post('/account', UpdateAccountController::class)->name('.account.save');

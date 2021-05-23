@@ -1,4 +1,4 @@
-<aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent d-print-none" style="right: 0; left: unset;">
+<aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent d-print-none" style="right: 0; left: unset; padding-left: 1rem;">
     <div class="container-fluid">
         <div class="row justify-content-center mt-4">
             <div class="col-auto">

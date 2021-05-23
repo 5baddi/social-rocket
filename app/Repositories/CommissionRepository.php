@@ -9,16 +9,51 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use Carbon\Carbon;
-use BADDIServices\SocialRocket\Models\Commission;
 use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use BADDIServices\SocialRocket\Models\Commission;
 
 class CommissionRepository
 {
-    public function all(): Collection
+    public function paginatePaidCommissions(string $storeId, Carbon $startDate, carbon $endDate, ?int $page = null): LengthAwarePaginator
     {
         return Commission::query()
-                    ->all();
+                    ->with(['order', 'affiliate'])
+                    ->where([
+                        Commission::STORE_ID_COLUMN => $storeId,
+                        Commission::STATUS_COLUMN   => Commission::PAID_STATUS
+                    ])
+                    ->whereDate(
+                        Commission::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        Commission::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->paginate(10, ['*'], 'ap', $page);
+    }
+    
+    public function paginateUnpaidCommissions(string $storeId, Carbon $startDate, carbon $endDate, ?int $page = null): LengthAwarePaginator
+    {
+        return Commission::query()
+                    ->with(['order', 'affiliate'])
+                    ->where(Commission::STORE_ID_COLUMN, $storeId)
+                    ->where(Commission::STATUS_COLUMN, '!=', Commission::PAID_STATUS)
+                    ->whereDate(
+                        Commission::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        Commission::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->paginate(10, ['*'], 'pp', $page);
     }
     
     public function exists(string $storeId, int $affiliateId, string $orderId): ?Commission
@@ -42,6 +77,15 @@ class CommissionRepository
     {
         return Commission::query()
                     ->updateOrCreate($attributes, $values);
+    }
+    
+    public function update(string $commissionId, array $values): bool
+    {
+        $commissionUpdated = Commission::query()
+                    ->where(Commission::ID_COLUMN, $commissionId)
+                    ->update($values);
+
+        return $commissionUpdated > 0;
     }
 
     public function getPaidOrdersCommissions(string $storeId, Carbon $startDate, carbon $endDate): float

@@ -13,16 +13,21 @@ use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
 
 class StoreService extends Service
 {
     /** @var StoreRepository */
     private $storeRepository;
+    
+    /** @var ShopifyService */
+    private $shopifyService;
 
-    public function __construct(StoreRepository $storeRepository)
+    public function __construct(StoreRepository $storeRepository, ShopifyService $shopifyService)
     {
         $this->storeRepository = $storeRepository;
+        $this->shopifyService = $shopifyService;
     }
 
     public function all(): Collection
@@ -67,6 +72,21 @@ class StoreService extends Service
     public function update(Store $store, array $attributes): Store
     {
         return $this->storeRepository->update($store, $attributes);
+    }
+    
+    public function updateConfigurations(Store $store): Store
+    {
+        $configurations = collect($this->shopifyService->loadConfigurations($store));
+
+        $attributes = $configurations->only([
+            Store::NAME_COLUMN,
+            Store::EMAIL_COLUMN,
+            Store::DOMAIN_COLUMN,
+            Store::PHONE_COLUMN,
+            Store::COUNTRY_COLUMN,
+        ]);
+
+        return $this->storeRepository->update($store, $attributes->toArray());
     }
     
     public function updateStoreOAuth(Store $store, array $attributes): OAuth

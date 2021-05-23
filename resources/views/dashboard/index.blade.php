@@ -55,7 +55,7 @@
                 </div>
                 <div class="h1 mb-3">${{ $paidOrdersCommissions }}</div>
                 <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts') }}">
+                    <a href="{{ route('dashboard.payouts') }}#paid">
                       View Payouts
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="h1 mb-3 text-red">${{ $unpaidOrdersCommissions }}</div>
                 <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts', ['action' => 'send']) }}">
+                    <a href="{{ route('dashboard.payouts') }}">
                       Send Payouts
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

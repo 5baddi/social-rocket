@@ -24,7 +24,9 @@ class Commission extends ModelEntity
     public const PAYOUT_REFERENCE_COLUMN = 'payout_reference';
     public const PAYOUT_METHOD_COLUMN = 'payout_method';
     public const PAID_AT_COLUMN = 'paid_at';
+    public const ADDITIONAL_INFO_COLUMN = 'additional_info';
     public const DEFAULT_STATUS = 'pending'; 
+    public const IN_PROCESS_STATUS = 'in_process'; 
     public const PAID_STATUS = 'paid'; 
     public const REJECTED_STATUS = 'rejected'; 
     public const CANCELLED_STATUS = 'cancelled'; 
@@ -32,6 +34,7 @@ class Commission extends ModelEntity
         /** @var array */
         public const STATUSES = [
             self::DEFAULT_STATUS,
+            self::IN_PROCESS_STATUS,
             self::PAID_STATUS,
             self::REJECTED_STATUS,
             self::CANCELLED_STATUS
@@ -48,7 +51,14 @@ class Commission extends ModelEntity
         self::PAID_AT_COLUMN,
         self::PAYOUT_METHOD_COLUMN,
         self::PAYOUT_REFERENCE_COLUMN,
+        self::ADDITIONAL_INFO_COLUMN,
     ];
+
+    /** @var array */
+    protected $casts = [
+        self::PAID_AT_COLUMN    => 'datetime',
+    ];
+
 
     public function affiliate(): HasOne
     {

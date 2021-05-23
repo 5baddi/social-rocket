@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Payouts;
 
+use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class AnalyticsRequest extends FormRequest
+class SendPayoutRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +26,9 @@ class AnalyticsRequest extends FormRequest
     public function rules()
     {
         return [
-            'start-date'    =>  ['nullable', 'date', 'date_format:Y-m-d'],
-            'end-date'      =>  ['nullable', 'date', 'date_format:Y-m-d'],
-            'ap'            =>  ['nullable', 'integer'],
-            'pp'            =>  ['nullable', 'integer'],
+            'reference'         => ['required', 'string'],
+            'payout_method'     => ['required', 'string', Rule::in(Setting::PAYOUT_METHODS)],
+            'additional_info'   => ['nullable', 'string'],
         ];
     }
 }
