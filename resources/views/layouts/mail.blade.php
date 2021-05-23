@@ -1,108 +1,103 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-  <head>
-    <meta charset="utf-8">
-    <meta name="x-apple-disable-message-reformatting">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
-    <!--[if mso]>
-    <xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml>
-    <style>
-      td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
-    </style>
-  <![endif]-->
-    <title>{{ __('auth.verify_email') }}</title>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700" rel="stylesheet" media="screen">
-    <style>
-      .hover-underline:hover {
-        text-decoration: underline !important;
-      }
 
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+        <style>
+            @import  url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+        </style>
+    </head>
+    <body style="-webkit-text-size-adjust: none; background-color: #ffffff; color: #718096; height: 100%; line-height: 1.4; margin: 0; padding: 0; width: 100% !important;">
+        <style>
+            .inner-body {
+                font-family: 'Roboto', sans-serif;
+                font-size: 15px;
+                color: #00295a;
+                font-weight: 300;
+            }
 
-      @keyframes ping {
+            a {
+                font-weight: bold;
+                color: #3861f9;
+            }
 
-        75%,
-        100% {
-          transform: scale(2);
-          opacity: 0;
-        }
-      }
+            @media  only screen and (max-width: 600px) {
+                .inner-body {
+                    width: 100% !important;
+                }
 
-      @keyframes pulse {
-        50% {
-          opacity: .5;
-        }
-      }
+                .footer {
+                    width: 100% !important;
+                }
+            }
 
-      @keyframes bounce {
+            @media  only screen and (max-width: 500px) {
+                .button {
+                    width: 100% !important;
+                }
+            }
+        </style>
+        <table class="wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation"
+            style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; margin: 0; padding: 0; width: 100%;">
+            <tr>
+                <td align="center">
+                    <table class="content" width="100%" cellpadding="0" cellspacing="0" role="presentation"
+                        style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; margin: 0; padding: 0; width: 100%;">
+                        <tr>
+                            <td style="padding: 25px 0; text-align: center;">
+                                    <a href="{{ url('/') }}" style="display: inline-block;">
+                                        <img src="{{ asset('assets/img/logo.png') }}" class="logo" width="160">
+                                    </a>
+                            </td>
+                        </tr>
 
-        0%,
-        100% {
-          transform: translateY(-25%);
-          animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-        }
+                        <tr>
+                            <td class="body" width="100%" cellpadding="0" cellspacing="0"
+                                style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 100%; background-color: #edf2f7; /*border-bottom: 1px solid #edf2f7;*/ margin: 0; padding: 0; width: 100%;">
+                                <table class="inner-body" align="center" width="570" cellpadding="0" cellspacing="0"
+                                    role="presentation"
+                                    style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; background-color: #ffffff; border-color: #e8e5ef; border-radius: 2px; border-width: 1px; box-shadow: 0 2px 0 rgba(0, 0, 150, 0.025), 2px 4px 0 rgba(0, 0, 150, 0.015); margin: 0 auto; padding: 0; width: 570px;">
+                                    <tr>
+                                        <td class="content-cell" style="max-width: 100vw; padding: 32px;">
+                                            <table class="subcopy" width="100%" cellpadding="0" cellspacing="0"
+                                                role="presentation">
 
-        50% {
-          transform: none;
-          animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-        }
-      }
+                                                @yield('content')
 
-      @media (max-width: 600px) {
-        .sm-leading-32 {
-          line-height: 32px !important;
-        }
+                                                <tr>
+                                                    <td>
+                                                        <p style="font-size: 14px;">Good luck! I know you’ll crush it.</p>
 
-        .sm-px-24 {
-          padding-left: 24px !important;
-          padding-right: 24px !important;
-        }
+                                                        <p style="font-size: 14px;"><b>{{ ucwords($store->name) }}</b></p>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">
+                                                            <tr>
+                                                                <td class="content-cell" align="center">
+                                                                    <p style="color: #b0adc5; font-size: 12px; font-family: 'Roboto', sans-serif; text-align: center;">© {{ date('Y') }} {{ config('app.name') }}. All rights reserved. <!--<a style="color: #b0adc5; font-size: 12px; font-family: 'Roboto', sans-serif; text-align: center;font-weight: inherit;" href="/mail-unsubscribe/eyJpdiI6ImFDRS9uazF5YlgwcUErcHJVQVd0dmc9PSIsInZhbHVlIjoiN0pBMzcxQ3ZWa3YrOE5jS25XVC9adz09IiwibWFjIjoiM2RhMjk5ZmMwOTk3MDg4ZDRkOGVlOWQxZjcwYWU2YWFiYjY3MWM2MzdkNWU1MzU2ZTlhODEzNjEwMDNlNjNkYyJ9">Unsubscribe</a></p>-->
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
 
-        .sm-py-32 {
-          padding-top: 32px !important;
-          padding-bottom: 32px !important;
-        }
-
-        .sm-w-full {
-          width: 100% !important;
-        }
-      }
-    </style>
-  </head>
-  <body style="margin: 0; padding: 0; width: 100%; word-break: break-word; -webkit-font-smoothing: antialiased; --bg-opacity: 1; background-color: #f4f6fa;">
-    <div style="display: none;">{{ $subject }}</div>
-    <div role="article" aria-roledescription="email" aria-label="{{ $subject }}" lang="en">
-      <table style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; width: 100%;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-        <tr>
-          <td align="center" style="--bg-opacity: 1; background-color: #eceff1; background-color: rgba(236, 239, 241, var(--bg-opacity)); font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif;" bgcolor="rgba(236, 239, 241, var(--bg-opacity))">
-            <table class="sm-w-full" style="font-family: 'Montserrat',Arial,sans-serif; width: 600px;" width="600" cellpadding="0" cellspacing="0" role="presentation">
-              <tr>
-                <td class="sm-py-32 sm-px-24" style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; padding: 48px; text-align: center;" align="center">
-                  <a href="{{ url('/') }}">
-                    <img src="{{ $message->embed('img/logo.png') }}" width="155" alt="{{ config('app.name') }}" style="border: 0; max-width: 100%; line-height: 100%; vertical-align: middle;">
-                  </a>
+                        <tr>
+                            <td style="padding: 50px 0; text-align: center;"></td>
+                        </tr>
+                    </table>
                 </td>
-              </tr>
-              <tr>
-                <td align="center" class="sm-px-24" style="font-family: 'Montserrat',Arial,sans-serif;">
-                  <table style="font-family: 'Montserrat',Arial,sans-serif; width: 100%; background-color: #ffffff;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                    @yield('content')
-                  </table>
-                </td>
-              </tr>
-              <tr>
-                <td class="sm-py-32 sm-px-24" style="font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; padding: 48px; text-align: center;" align="center">&nbsp;</td>
-              </tr>
-            </table>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </body>
+            </tr>
+        </table>
+    </body>
 </html>

@@ -53,7 +53,7 @@ class AuthenticateController extends Controller
             Session::forget('slug');
             Cookie::forget('store');
 
-            return redirect('/dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
+            return redirect()->back()->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $ex) {
             return redirect('/signin')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {

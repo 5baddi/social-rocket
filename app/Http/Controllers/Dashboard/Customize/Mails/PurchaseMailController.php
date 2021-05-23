@@ -8,14 +8,22 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails;
 
+use Illuminate\Notifications\Messages\MailMessage;
 use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\SocialRocket\Http\Requests\Customize\PurchaseMailPreviewRequest;
 
 class PurchaseMailController extends DashboardController
 {
-    public function __invoke()
+    public function __invoke(PurchaseMailPreviewRequest $request)
     {
-        return view('dashboard.customize.mails.purchase', [
-            'store'                 =>  $this->store
-        ]);
+        $template = 'dashboard.customize.mails.purchase.index';
+
+        if (!is_null($request->query('template'))) {
+            $template = 'dashboard.customize.mails.purchase.' . $request->query('template');
+        }
+        
+        return (new MailMessage)
+                    ->view($template, ['store' => $this->store])
+                    ->render();
     }
 }
