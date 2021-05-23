@@ -34,7 +34,7 @@
                 <button class="btn-design1" type="submit">Login</button>
             </div>
             <p class="have-account">
-                <a href="#" class="link-design1">Can’t access your account?</a>
+                <a href="{{ route('reset') }}" class="link-design1">Can’t access your account?</a>
                 <a href="{{ route('signup') }}" class="link-design1">or Register</a>
             </p>
         </div>

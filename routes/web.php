@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Support\Facades\Route;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword  as ResetPassword;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
@@ -90,8 +91,10 @@ Route::middleware('guest')
         Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
-        // Route::get('/reset', ResetPasswordController::class)->name('signin');
-        // Route::post('/auth/reset', ResetPasswordController::class)->name('auth.signin');
+
+        Route::get('/reset', ResetPassword\IndexController::class)->name('reset');
+        Route::post('/auth/token', ResetPassword\ResetTokenController::class)->name('auth.reset.token');
+        // Route::post('/auth/reset', ResetPasswordController::class)->name('auth.reset.password');
     });
         
 Route::middleware(['auth', 'has.subscription'])
