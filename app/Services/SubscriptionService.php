@@ -18,6 +18,7 @@ use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
+use Illuminate\Database\Eloquent\Collection;
 
 class SubscriptionService extends Service
 {
@@ -46,6 +47,11 @@ class SubscriptionService extends Service
         $subscription->load(['user', 'pack']);
         
         return $subscription;
+    }
+    
+    public function getUsageBills(): Collection
+    {
+        return $this->subscriptionRepository->getUsageBills();
     }
     
     public function createBillingConfirmationURL(Store $store, Pack $pack): string

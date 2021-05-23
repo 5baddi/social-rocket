@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Log;
 
 class AppLogger
 {
-    public static function error(Throwable $exception, Store $store, string $context, array $extra = [])
+    public static function error(Throwable $exception, ?Store $store, string $context, array $extra = [])
     {
         Log::error($exception->getMessage(), [
             'context'   =>  $context,

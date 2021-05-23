@@ -9,9 +9,17 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use BADDIServices\SocialRocket\Models\Subscription;
+use Illuminate\Database\Eloquent\Collection;
 
 class SubscriptionRepository
-{   
+{
+    public function getUsageBills(): Collection
+    {
+        return Subscription::query()
+                    ->whereNotNull(Subscription::USAGE_ID_COLUMN)
+                    ->get();
+    }
+
     public function save(string $userId, string $storeId, string $packId, array $attributes): Subscription
     {
         $attributes = array_merge($attributes, [
