@@ -59,6 +59,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpCont
 Route::get('/', LandingPageController::class);
 Route::redirect('/guide', '/', 301)->name('guide');
 Route::redirect('/guide/affiliate/setup', env('GUIDE_SETUP', '/'), 301)->name('guide.affiliate.setup');
+Route::redirect('/privacy.html', '/', 301)->name('privacy');
+Route::redirect('/termsofservice.html', '/', 301)->name('termsofservice');
 
 Route::middleware(['cors'])->group(function() {
     Route::get('/order_status.js', OrderStatusScriptController::class);
