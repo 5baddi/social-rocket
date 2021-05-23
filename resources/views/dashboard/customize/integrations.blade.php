@@ -62,6 +62,83 @@
             </div>
         </div>
 
+        <div class="col-12 mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="d-flex align-items-start">
+                            <label class="card-title">Post Purchase Email Settings</label>
+                        </div>
+                        <p class="text-muted mt-2 mb-0">Select which emails you would like sent to your customers after they make a purchase on your store. All emails will be sent from your store name</p>
+                    </div>
+                </div>
+                <div class="card-body" id="affiliate-form">
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-check form-switch">
+                                <input name="purchase_mail" class="form-check-input" type="checkbox" value="1" @if (old('purchase_mail') ?? $setting->purchase_mail)checked @endif/>
+                                <span class="form-label">
+                                    Post Purchase Email (instant)
+                                </span>
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                    Preview&nbsp;
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 13l4 -4l-4 -4m4 4h-11a4 4 0 0 0 0 8h1"></path>
+                                    </svg>
+                                </a>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-check form-switch">
+                                <input name="purchase_mail_24h" class="form-check-input" type="checkbox" value="1" @if (old('purchase_mail_24h') ?? $setting->purchase_mail_24h)checked @endif/>
+                                <span class="form-label">
+                                    Email 1 (24 hours post purchase)
+                                </span>
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                    Preview&nbsp;
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 13l4 -4l-4 -4m4 4h-11a4 4 0 0 0 0 8h1"></path>
+                                    </svg>
+                                </a>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-check form-switch">
+                                <input name="purchase_mail_48h" class="form-check-input" type="checkbox" value="1" @if (old('purchase_mail_48h') ?? $setting->purchase_mail_48h)checked @endif/>
+                                <span class="form-label">
+                                    Email 2 (48 hours post purchase)
+                                </span>
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                    Preview&nbsp;
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 13l4 -4l-4 -4m4 4h-11a4 4 0 0 0 0 8h1"></path>
+                                    </svg>
+                                </a>
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-check form-switch">
+                                <input name="purchase_mail_120h" class="form-check-input" type="checkbox" value="1" @if (old('purchase_mail_120h') ?? $setting->purchase_mail_120h)checked @endif/>
+                                <span class="form-label">
+                                    Email 3 (120 hours post purchase)
+                                </span>
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                    Preview&nbsp;
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                        <path d="M15 13l4 -4l-4 -4m4 4h-11a4 4 0 0 0 0 8h1"></path>
+                                    </svg>
+                                </a>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row mt-4">
             <div class="col-12 text-end">
                 <div class="d-flex">

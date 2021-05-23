@@ -20,6 +20,11 @@ class StoreSetting
     public $notify_new_order = false;
     public $affiliate_form = false;
     public $thankyou_page = true;
+    public $purchase_mail = true;
+    public $purchase_mail_24h = false;
+    public $purchase_mail_48h = false;
+    public $purchase_mail_120h = false;
+
     
     /** @var string */
     public $brand_name;

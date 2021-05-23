@@ -34,6 +34,10 @@ class Setting extends ModelEntity
     public const NOTIFY_NEW_ACCOUNT_COLUMN = 'notify_new_account';
     public const NOTIFY_NEW_OREDR_COLUMN = 'notify_new_order';
     public const AFFILIATE_FORM_COLUMN = 'affiliate_form';
+    public const PURCHASE_MAIL_COLUMN = 'purchase_mail';
+    public const PURCHASE_MAIL_24H_COLUMN = 'purchase_mail_24h';
+    public const PURCHASE_MAIL_48H_COLUMN = 'purchase_mail_48h';
+    public const PURCHASE_MAIL_120H_COLUMN = 'purchase_mail_120h';
     public const THANKYOU_PAGE_COLUMN = 'thankyou_page';
     public const CUSTOM_SHARE_TEXT_COLUMN = 'custom_share_text';
 
@@ -82,6 +86,10 @@ class Setting extends ModelEntity
         self::AFFILIATE_FORM_COLUMN,
         self::THANKYOU_PAGE_COLUMN,
         self::CUSTOM_SHARE_TEXT_COLUMN,
+        self::PURCHASE_MAIL_COLUMN,
+        self::PURCHASE_MAIL_24H_COLUMN,
+        self::PURCHASE_MAIL_48H_COLUMN,
+        self::PURCHASE_MAIL_120H_COLUMN,
     ];
 
     /** @var array */

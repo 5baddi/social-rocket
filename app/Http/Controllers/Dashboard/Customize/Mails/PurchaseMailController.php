@@ -14,6 +14,11 @@ use BADDIServices\SocialRocket\Http\Requests\Customize\PurchaseMailPreviewReques
 
 class PurchaseMailController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    
     public function __invoke(PurchaseMailPreviewRequest $request)
     {
         $template = 'dashboard.customize.mails.purchase.index';

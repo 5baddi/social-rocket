@@ -12,6 +12,11 @@ use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
 
 class CustomizeController extends DashboardController
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
     public function __invoke()
     {
         return view('dashboard.customize.index', [

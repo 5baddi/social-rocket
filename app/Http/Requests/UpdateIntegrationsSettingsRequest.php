@@ -33,6 +33,10 @@ class UpdateIntegrationsSettingsRequest extends FormRequest
         return [
             Setting::AFFILIATE_FORM_COLUMN      => ['nullable', 'integer', 'in:1,0'],
             Setting::THANKYOU_PAGE_COLUMN       => ['nullable', 'integer', 'in:1,0'],
+            Setting::PURCHASE_MAIL_COLUMN       => ['nullable', 'integer', 'in:1,0'],
+            Setting::PURCHASE_MAIL_24H_COLUMN   => ['nullable', 'integer', 'in:1,0'],
+            Setting::PURCHASE_MAIL_48H_COLUMN   => ['nullable', 'integer', 'in:1,0'],
+            Setting::PURCHASE_MAIL_120H_COLUMN  => ['nullable', 'integer', 'in:1,0'],
         ];
     }
 }

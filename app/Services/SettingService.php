@@ -191,6 +191,10 @@ class SettingService extends Service
         $attributes = collect([
             Setting::AFFILIATE_FORM_COLUMN      => $attributes[Setting::AFFILIATE_FORM_COLUMN] ?? false,
             Setting::THANKYOU_PAGE_COLUMN       => $attributes[Setting::THANKYOU_PAGE_COLUMN] ?? false,
+            Setting::PURCHASE_MAIL_COLUMN       => $attributes[Setting::PURCHASE_MAIL_COLUMN] ?? false,
+            Setting::PURCHASE_MAIL_24H_COLUMN   => $attributes[Setting::PURCHASE_MAIL_24H_COLUMN] ?? false,
+            Setting::PURCHASE_MAIL_48H_COLUMN   => $attributes[Setting::PURCHASE_MAIL_48H_COLUMN] ?? false,
+            Setting::PURCHASE_MAIL_120H_COLUMN  => $attributes[Setting::PURCHASE_MAIL_120H_COLUMN] ?? false,
             Setting::CUSTOM_SHARE_TEXT_COLUMN   => $attributes[Setting::CUSTOM_SHARE_TEXT_COLUMN] ?? null,
         ]);
 

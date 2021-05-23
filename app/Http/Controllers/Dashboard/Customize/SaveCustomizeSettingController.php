@@ -23,6 +23,8 @@ class SaveCustomizeSettingController extends DashboardController
 
     public function __construct(SettingService $settingService)
     {
+        parent::__construct();
+        
         $this->settingService = $settingService;
     }
 

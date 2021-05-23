@@ -112,9 +112,11 @@ Route::middleware(['auth', 'has.subscription', 'store-owner'])
         Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
         Route::get('/customize/integrations', IntegrationsController::class)->name('.customize.integrations');
         Route::post('/customize/integrations', UpdateIntegrationsController::class)->name('.customize.integrations.save');
-        Route::group(['prefix' => 'customize/integrations', 'name' => '.customize.integrations'], function() {
-            Route::get('/mails/purchase', PurchaseMailController::class)->name('.mails.purchase');
-        });
+        Route::prefix('customize/integrations')
+            ->name('.customize.integrations')
+            ->group(function() {
+                Route::get('/mails/purchase', PurchaseMailController::class)->name('.mails.purchase');
+            });
         
         Route::get('/payouts', PayoutsController::class)->name('.payouts');
         Route::post('/payouts/{commission}', SendPayoutController::class)->name('.payouts.send');
