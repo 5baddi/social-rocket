@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
+use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
 
 class WelcomeMailFired
@@ -19,10 +20,13 @@ class WelcomeMailFired
 
     public function handle(WelcomeMail $event)
     {
+        /** @var Store */
+        $store = $event->store;
+
         /** @var User */
         $user = $event->user;
 
-        Mail::send('emails.welcome', ['user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
+        Mail::send('emails.welcome', ['store', $store, 'user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
             $message->to($user->email);
             $message->subject(self::SUBJECT . config('app.name'));
         });

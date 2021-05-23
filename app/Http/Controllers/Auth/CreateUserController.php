@@ -52,7 +52,7 @@ class CreateUserController extends Controller
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
             Session::forget('slug');
-            Event::dispatch(new WelcomeMail($user));
+            Event::dispatch(new WelcomeMail($store, $user));
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (!$authenticateUser) {
