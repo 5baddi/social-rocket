@@ -14,9 +14,9 @@ class AddStoresConfigsColumns extends Migration
     public function up()
     {
         Schema::table('stores', function (Blueprint $table) {
-            $table->string('name')->unqiue()->after('id');
-            $table->string('email')->after('name');
-            $table->string('domain')->unqiue()->after('slug');
+            $table->string('name')->unqiue()->nullable()->after('id');
+            $table->string('email')->nullable()->after('name');
+            $table->string('domain')->unqiue()->nullable()->after('slug');
             $table->string('phone', 50)->nullable()->after('domain');
             $table->string('country', 10)->nullable()->after('phone');
         });
