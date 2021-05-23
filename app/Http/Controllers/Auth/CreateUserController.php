@@ -19,7 +19,6 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Session;
 
@@ -51,15 +50,12 @@ class CreateUserController extends Controller
             $user = $this->userService->create($store, $request->input());
             abort_unless($user instanceof User, Response::HTTP_UNPROCESSABLE_ENTITY, 'Unprocessable user entity');
 
-            Session::forget('slug');
             Event::dispatch(new WelcomeMail($store, $user));
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (!$authenticateUser) {
                 return redirect('/signin')->with('error', 'Something going wrong with the authentification');
             }
-
-            Cookie::put('store', $store->id);
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
@@ -75,6 +71,6 @@ class CreateUserController extends Controller
 
     private function forgetStore(): void
     {
-        Cookie::forget('store');
+        Session::forget('slug');
     }
 }

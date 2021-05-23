@@ -13,8 +13,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
@@ -49,9 +47,6 @@ class AuthenticateController extends Controller
             $this->userService->update($user, [
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
-
-            Session::forget('slug');
-            Cookie::forget('store');
 
             return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $ex) {

@@ -71,7 +71,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                     <td>
                                                         <p style="font-size: 14px;">Good luck! I know you’ll crush it.</p>
 
-                                                        @if ($store)
+                                                        @if (isset($store))
                                                         <p style="font-size: 14px;"><b>{{ ucwords($store->name) }}</b></p>
                                                         @endif
                                                     </td>
