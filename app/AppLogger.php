@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\SocialRocket;
 
 use BADDIServices\SocialRocket\Models\Store;
 use Throwable;

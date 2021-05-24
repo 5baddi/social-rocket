@@ -9,12 +9,15 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
+use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\Auth\ResetTokenRequest;
-use BADDIServices\SocialRocket\Services\AppLogger;
 
 class ResetTokenController extends Controller
 {
@@ -37,16 +40,28 @@ class ResetTokenController extends Controller
                             ->with('error', 'No account registred with this email');
             }
 
+            DB::table('password_resets')->insert([
+                'email'         => $request->email,
+                'token'         => Str::random(60),
+                'created_at'    => Carbon::now()
+            ]);
+
+            $tokenData = DB::table('password_resets')
+                            ->where('email', $request->input(User::EMAIL_COLUMN))->first();
+
+            return redirect()
+                    ->back()
+                    ->with('success', 'A reset link has been sent to your email address.');
         } catch (ValidationException $ex) {
             return redirect()
-                    ->route('reset')
+                    ->back()
                     ->withInput()
                     ->withErrors($ex->errors());
         }  catch (Throwable $ex) {
             AppLogger::error($ex, null, 'auth:send-reset-token', ['playload' => $request->all()]);
 
             return redirect()
-                    ->route('reset')
+                    ->back()
                     ->withInput()
                     ->with("error", "Internal server error");
         }

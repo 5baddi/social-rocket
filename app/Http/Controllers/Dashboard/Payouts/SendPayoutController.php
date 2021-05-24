@@ -13,7 +13,7 @@ use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Payouts\SendPayoutRequest;
 use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Services\AppLogger;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Services\CommissionService;
 use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
 

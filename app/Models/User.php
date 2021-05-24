@@ -25,9 +25,11 @@ class User extends Authenticatable
     public const LAST_LOGIN_COLUMN = 'last_login';
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
+    public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
     public const COUPON_COLUMN = 'coupon';
     public const STORE_ID_COLUMN = 'store_id';
     public const DEFAULT_ROLE = 'affiliate';
+    public const STORE_OWNER_ROLE = 'store-owner';
 
     /** @var array */
     public const ROLES = [
@@ -48,6 +50,7 @@ class User extends Authenticatable
         self::ROLE_COLUMN,
         self::STORE_ID_COLUMN,
         self::COUPON_COLUMN,
+        self::IS_SUPERADMIN_COLUMN,
     ];
 
     /** @var array */

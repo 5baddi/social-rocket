@@ -53,10 +53,20 @@ class UserService extends Service
         return $this->userRepository->coupons($store->id);
     }
 
-    public function create(Store $store, array $attributes): User
+    public function create(Store $store, array $attributes, bool $isAffiliate = false): User
     {
         if (isset($attributes[User::ID_COLUMN])) {
             Arr::set($attributes, User::CUSTOMER_ID_COLUMN, $attributes[User::ID_COLUMN]);
+        }
+
+        if ($isAffiliate) {
+            Arr::set($attributes, User::ROLE_COLUMN, User::DEFAULT_ROLE);
+        } else {
+            if (!isset($attributes[User::IS_SUPERADMIN_COLUMN])) {
+                Arr::set($attributes, User::ROLE_COLUMN, User::STORE_OWNER_ROLE);
+            } else {
+                Arr::set($attributes, User::IS_SUPERADMIN_COLUMN, $attributes[User::IS_SUPERADMIN_COLUMN]);
+            }
         }
 
         $validator = Validator::make($attributes, [

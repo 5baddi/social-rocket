@@ -40,7 +40,8 @@ class OAuthCallbackController extends Controller
 
             $store = $this->storeService->findBySlug($storeName);
             if (!$store instanceof Store) {
-                Session::forget('slug');
+                $this->forgetStore();
+
                 abort(Response::HTTP_NOT_FOUND, 'Store not found');
             }
 
@@ -60,9 +61,18 @@ class OAuthCallbackController extends Controller
 
             return redirect('/signup')->with('store', $store->id);
         } catch (ValidationException $ex) {
+            $this->forgetStore();
+
             return redirect('/connect')->withInput()->withErrors($ex->errors());
         } catch (Throwable $ex) {
+            $this->forgetStore();
+            
             return redirect('/connect')->with('error', $ex->getMessage());
         }
+    }
+
+    private function forgetStore(): void
+    {
+        Session::forget('slug');
     }
 }

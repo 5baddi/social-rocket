@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands\Shopify;
 
-use BADDIServices\SocialRocket\Services\AppLogger;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
 use Illuminate\Console\Command;
 use Throwable;

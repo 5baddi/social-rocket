@@ -9,10 +9,10 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
 
 use Throwable;
-use Carbon\Carbon;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
@@ -67,7 +67,41 @@ class NewOrderController extends AffiliateController
             DB::beginTransaction();
             
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
+            $store->load('setting');
+
+            /** @var Setting */
+            $setting = $store->setting;
+            if (!$setting instanceof Setting) {
+                $setting = new StoreSetting(); 
+            }
+
             $shopifyOrder = collect($this->shopifyService->getOrder($store, $request->input(Order::ORDER_ID_COLUMN)));
+
+            $lineItems = collect($shopifyOrder->get('line_items', []));
+            $productData = collect($lineItems->first());
+
+            if ($productData->has('product_id')) {
+                $shopifyProduct = $this->shopifyService->getProduct($store, $productData->get('product_id'));
+                $productSlug = Arr::get($shopifyProduct, 'handle');
+            }
+
+            $customer = collect($shopifyOrder->get('customer'), []);
+            $affiliate = $this->userService->exists($customer->get('id'));
+
+            if (!$affiliate instanceof User) {
+                $affiliate = $this->userService->create($store, $customer->toArray(), true);
+
+                $priceRule = $this->shopifyService->createPriceRule(
+                    $store, 
+                    [
+                        'title'                 =>  $affiliate->coupon,
+                        'value_type'            =>  $setting->discount_type === Setting::FIXED_TYPE ? 'fixed_amount' : $setting->discount_type,
+                        'value'                 =>  -$setting->discount_amount
+                    ]
+                );
+
+                DB::commit();
+            }
 
             $coupons = $this->userService->coupons($store);
             $discounts = collect($shopifyOrder->get('discount_codes', []));
@@ -75,71 +109,45 @@ class NewOrderController extends AffiliateController
             $existsByCoupons = $discounts
                 ->whereIn('code', $coupons)
                 ->first();
-
-            if ($shopifyOrder->has('customer') && $shopifyOrder->has('line_items') && !is_null($existsByCoupons)) {
-                $store->load('setting');
-
-                /** @var Setting */
-                $setting = $store->setting;
-                if (!$setting instanceof Setting) {
-                    $setting = new StoreSetting(); 
-                }
-
-                $customer = collect($shopifyOrder->get('customer'), []);
-                $affiliate = $this->userService->exists($customer->get('id'));
-                if (!$affiliate instanceof User) {
-                    $affiliate = $this->userService->create($store, $customer->toArray());
-
-                    $priceRule = $this->shopifyService->createPriceRule(
-                        $store, 
-                        [
-                            'title'                 =>  $affiliate->coupon,
-                            'value_type'            =>  $setting->discount_type === Setting::FIXED_TYPE ? 'fixed_amount' : $setting->discount_type,
-                            'value'                 =>  -$setting->discount_amount
-                        ]
-                    );
-                }
                 
+            if (!is_null($existsByCoupons)) {    
                 $order = $this->orderService->save($store, $shopifyOrder->toArray());
 
                 $commission = $this->commissionService->exists($store, $affiliate, $order);
                 if (!$commission instanceof Commission) {
                     $commission = $this->commissionService->calculate($store, $affiliate, $order);
                 }
-                
-                $lineItems = collect($shopifyOrder->get('line_items', []));
-                $productData = collect($lineItems->first());
+
                 if ($productData->has('product_id')) {
-                    $shopifyProduct = $this->shopifyService->getProduct($store, $productData->get('product_id'));
                     $product = $this->productService->save($store, $shopifyProduct);
                     $this->orderService->attachProduct($store, $order, $product, $lineItems);
 
-                    DB::commit();
-
-                    return response()->json([
-                        User::COUPON_COLUMN     => $affiliate->coupon,
-                        'discount'              => $this->couponService->getDiscount($setting->discount_amount, $setting->discount_type, $setting->currency),
-                        'color'                 => $setting->color,
-                        'url'                   => $this->shopifyService->getProductWithDiscountURL($store, $product->slug, $affiliate->coupon)
-                    ]);
+                    $productSlug = $product->slug;
                 }
+
+                DB::commit();
+            }
+
+            if ($setting->thankyou_page) {
+                return response()->json([
+                    User::COUPON_COLUMN     => $affiliate->coupon,
+                    'discount'              => $this->couponService->getDiscount($setting->discount_amount, $setting->discount_type, $setting->currency),
+                    'color'                 => $setting->color,
+                    'url'                   => $this->shopifyService->getProductWithDiscountURL($store, $productSlug, $affiliate->coupon)
+                ]);
             }
 
             return response()->json([], Response::HTTP_NO_CONTENT);
         } catch (CustomerNotFound | OrderNotFound | ProductNotFound | CreatePriceRuleFailed $ex) {
             DB::rollBack();
 
+            AppLogger::error($ex, $store, 'affiliate:new-order', ['playload' => $request->all()]);
+
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
             DB::rollBack();
 
-            Log::error($ex->getMessage(), [
-                'context'   =>  'affiliate:new-order',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+            AppLogger::error($ex, $store, 'affiliate:new-order', ['playload' => $request->all()]);
             
             return response()->json('Internal server error', Response::HTTP_INTERNAL_SERVER_ERROR);
         }

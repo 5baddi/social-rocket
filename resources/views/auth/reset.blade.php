@@ -8,6 +8,14 @@
     <form method="POST" action="{{ route('auth.reset.token') }}">
         @csrf
         <div class="box-form-design1">
+            <div class="text-start">
+                @if(Session::has('error'))
+                <p class="invalid-feedback">{{ Session::get('error') }}</p>
+                @endif
+                @if(Session::has('success'))
+                <p class="valid-feedback" style="display: block;">{{ Session::get('success') }}</p>
+                @endif
+            </div>
             <div class="form-group-custom1">
                 <label for="email" class="label-custom1">E-mail</label>
                 <input id="email" name="email" value="{{ old('email') }}" type="email" class="input-custom1 @if($errors->has('email')) is-invalid @endif" placeholder="E-mail" autofocus required/>

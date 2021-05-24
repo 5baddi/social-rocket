@@ -14,8 +14,9 @@
               </div>
               <div class="mt-3">
                 <label class="form-label">Payout method</label>
-                <select name="payout_method" class="form-select" id="select-payout-method">
-                  <option value="bank" @if($commission->payout_method === 'bank')selected @endif>Bank Transfer</option>
+                <input type="hidden" name="payout_method" value="{{ $commission->payout_method }}"/>
+                <select class="form-select" id="select-payout-method">
+                  <option value="bank" @if($commission->payout_method === 'bank')selected @endif selected="selected">Bank Transfer</option>
                   <option value="paypal" @if($commission->payout_method === 'paypal')selected @endif>PayPal</option>
                   <option value="venmo" @if($commission->payout_method === 'venmo')selected @endif>Venmo</option>
                   <option value="zelle" @if($commission->payout_method === 'zelle')selected @endif>Zelle</option>
@@ -52,5 +53,10 @@
           shouldSort: false,
           searchEnabled: false
         }));
+
+         $('#select-payout-method').on('change', function() {
+            var value = $("#select-payout-method option:first").val();
+            $('input[name=payout_method]').val(value);
+        });
     });
 @endsection

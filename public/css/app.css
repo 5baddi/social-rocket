@@ -5038,3 +5038,11 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .no-padding{
     padding: 0 !important;
 }
+
+.invalid-feedback {
+    color: #e3342f !important;
+}
+
+.valid-feedback {
+    color: #28a745 !important;
+}
