@@ -17,7 +17,7 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
+        {{-- <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
             <div class="modal-dialog modal-dialog-aside left-4 right-4 bottom-4">
                 <div class="modal-content bg-dark-dark">
                     <div class="modal-body">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container">
@@ -50,7 +50,7 @@
                             <a class="nav-link" href="#">How it works</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">Pricing</a>
+                            <a class="nav-link" href="#pricing">Pricing</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="#">Blog</a>
@@ -550,7 +550,7 @@
         </section> --}}
         <section class="slice slice-lg bg-section-secondary">
             <div class="container text-center">
-                <div class="row justify-content-center mb-6">
+                <div class="row justify-content-center mb-6" id="pricing">
                     <div class="col-lg-8">
                         <!-- Title -->
                         <h2 class="h1 strong-600">
