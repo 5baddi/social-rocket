@@ -1,280 +1,681 @@
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="author" content="Baddi Services"/>
         <title>{{ config('app.name') }}</title>
         <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/aos.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/landing.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/home.responsive.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/baddiservices.landing.css') }}"/>
     </head>
+
     <body>
-        <header>
-            <div class="content-header">
-                <a href="{{ url('/') }}" class="logo-header">
-                    <img src="{{ asset('assets/img/logo.png') }}"/>
+        <!-- Preloader -->
+        <div class="preloader">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-aside left-4 right-4 bottom-4">
+                <div class="modal-content bg-dark-dark">
+                    <div class="modal-body">
+                        <!-- Text -->
+                        <p class="text-sm text-white mb-3">
+                            We use cookies so that our themes work for you. By using our website, you agree to our use of cookies.
+                        </p>
+                        <!-- Buttons -->
+                        <a href="pages/utility/terms.html" class="btn btn-sm btn-white" target="_blank">Learn more</a>
+                        <button type="button" class="btn btn-sm btn-primary mr-2" data-dismiss="modal">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-white">
+            <div class="container">
+                <!-- Brand -->
+                <a class="navbar-brand" href="index.html">
+                    <img alt="Image placeholder" src="{{ asset('assets/img/logo.png') }}" id="navbar-logo">
                 </a>
-                <div class="overlay-menu"></div>
-                <div class="box-links-header">
-                    <ul class="links-header">
-                        <li><a href="#how-it-works" class="link-header">How it works</a></li>
-                        <li><a href="#pricing" class="link-header">Pricing</a></li>
-                        <li><a href="#faqs" class="link-header">FAQ</a></li>
-                        <li><a href="{{ route('guide') }}" class="link-header" target="_blank">Blog</a></li>
-                        @if(!auth()->check())
-                        <li><a href="{{ route('signin') }}" class="link-sign-in btn-design1">Sign In</a></li>
-                        @else
-                        <li><a href="{{ route('dashboard') }}" class="link-sign-in btn-design1">Dashboard</a></li>
-                        @endif
-                    </ul>
-                </div>
-                <button class="btn-mobile">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <!-- Toggler -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
                 </button>
+                <!-- Collapse -->
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">How it works</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Pricing</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                    </ul>
+                    <!-- Button -->
+                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('signin') }}">
+                        Sign in
+                    </a>
+                    <!-- Mobile button -->
+                    <div class="d-lg-none text-center">
+                        <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-sm btn-warning">See more details</a>
+                    </div>
+                </div>
             </div>
-        </header>
-        <div class="preview-load-page"></div>
-
-        <section id="banner">
-            <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/img-banner.png" alt="" class="bg-banner">
-            <div class="container container-banner">
-                <div class="row row-banner">
-                    <div class="col-content-banner col-lg-6">
-                        <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="1500">We convert all of your customers into motivated affiliates</h1>
-                        <div class="box-text1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="1500">
-                            <p>Our custom thank you page + many other included features harmoniously convert your customers and store visitors into affiliates, working around the clock to bring you new sales.</p>
-                        </div>
-                        <div data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="300">
-                            <a href="{{ route('connect') }}" class="btn-design1">Start Free Trial</a>
+        </nav>
+        <!-- Main content -->
+        <section class="slice py-7">
+            <div class="container">
+                <div class="row row-grid align-items-center">
+                    <div class="col-12 col-md-5 col-lg-6 order-md-2 text-center">
+                        <!-- Image -->
+                        <figure class="w-100">
+                            <img alt="Image placeholder" src="assets/img/svg/illustrations/illustration-3.svg" class="img-fluid mw-md-120">
+                        </figure>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
+                        <!-- Heading -->
+                        <h1 class="display-4 text-center text-md-left mb-3">
+                            We convert all of your customers into <strong class="text-primary">motivated affiliates</strong>
+                        </h1>
+                        <!-- Text -->
+                        <p class="lead text-center text-md-left text-muted">
+                            Build a beautiful, modern website with flexible Bootstrap components built from scratch.
+                        </p>
+                        <!-- Buttons -->
+                        <div class="text-center text-md-left mt-5">
+                            <a href="{{ route('connect') }}" class="btn btn-primary btn-icon" target="_blank">
+                                <span class="btn-inner--text">Start Free Trial</span>
+                                <span class="btn-inner--icon"><i data-feather="chevron-right"></i></span>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="how-it-works">
-            <div class="container-fluid">
-                <h6 class="small-title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">How it works</h6>
-                <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Not just another <br>affiliate marketing app</h1>
-            </div>
-        </section>
-
-        <section class="section-custom">
+        <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6 bg-section-secondary">
             <div class="container">
-                <div class="row row-section-custom">
-                    <div class="col-lg-6 col-text-section-custom">
-                        <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Customer buys <br>a product</h1>
-                        <div class="box-text1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">
-                            <p>When a new customer purchases from your store,
-                                they are automatically created an affiliate account
-                                and given materials to promote their custom
-                                discount code right from the thank you page.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-img-section-custom">
-                        <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/section1.png" alt="">
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section-custom">
-            <div class="container">
-                <div class="row row-section-custom row-section-custom-invert">
-                    <div class="col-lg-7 col-img-section-custom">
-                        <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/seccion2-1.png" alt="">
-                    </div>
-                    <div class="col-lg-5 col-text-section-custom">
-                        <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Customer turns <br>into affiliate</h1>
-                        <div class="box-text1">
-                            <p data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Your newly turned affiliate will receive an
-                                email to log into their account and collect
-                                their funds immediately after they get their
-                                first referral purchase.</p>
+                <!-- Title -->
+                <!-- Section title -->
+                <div class="row mb-5 justify-content-center text-center">
+                    <div class="col-lg-6">
+                        <span class="badge badge-soft-success badge-pill badge-lg">
+                            Get started
+                        </span>
+                        <h2 class=" mt-4">Carefuly crafted components ready to use in your project</h2>
+                        <div class="mt-2">
+                            <p class="lead lh-180">Use Atomic Design to build components, sections and, then, pages.</p>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <section class="section-custom">
-            <div class="container">
-                <div class="row row-section-custom">
-                    <div class="col-lg-6 col-text-section-custom">
-                        <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Affiliate brings <br>more affiliates</h1>
-                        <div class="box-text1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">
-                            <p>The customers referred from your affiliates also
-                                become affiliates and share their codes, creating a
-                                rapidly expanding network of micro influencers all
-                                over the world working hard to bring you new
-                                customers!</p>
+                <!-- Card -->
+                <div class="row mt-5">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="assets/img/svg/illustrations/illustration-5.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                </div>
+                                <h5 class="h4 lh-130 mb-3">Unleash you creativity</h5>
+                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-lg-6 col-img-section-custom">
-                        <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/section3.png" alt="">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="assets/img/svg/illustrations/illustration-6.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                </div>
+                                <h5 class="h4 lh-130 mb-3">Get more results</h5>
+                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-custom" id="affiliate-management">
-            <div class="container">
-                <div class="row row-section-custom row-section-custom-invert">
-                    <div class="col-lg-6 col-img-section-custom">
-                        <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/img-afillate.png" alt="">
-                    </div>
-                    <div class="col-lg-6 col-text-section-custom">
-                        <h1 class="title1" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Affiliate management <br>just got a whole lot easier</h1>
-                        <div class="box-text1">
-                            <p data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">With a wide selection of payout solutions and an
-                                impressively simple payout experience, managing
-                                your affiliates has never been so effortless.</p>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="assets/img/svg/illustrations/illustration-7.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                </div>
+                                <h5 class="h4 lh-130 mb-3">Increase your audience</h5>
+                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-        <section id="pricing">
+        <section class="slice slice-lg">
             <div class="container">
-                <div class="row row-pricing">
-                    <div class="col-content-pricing col-lg-9">
-                        <h6 class="title-small" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Pricing</h6>
-                        <h2 class="title2 mb-0" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Our Plans</h2>
-                        <div class="list-plans-pricing" id="monthly">
-                            @foreach ($packs as $pack)
-                            <div class="item-plan">
-                                <h3 class="title-item-plan">{{ ucwords($pack->name) }} @if($pack->is_popular)<span>Most Popular</span>@endif</h3>
-                                <div class="box-price-item-plan">
-                                    <h4 class="title-price-item-plan">{{ $pack->isFixedPrice() ? $pack->symbol : '' }}{{ $pack->price }}{{ !$pack->isFixedPrice() ? '%' : '' }}</h4>
-                                    <div class="text-price-item-plan">
-                                        <p>/ {{ $pack->isFixedPrice() ? 'per month' : 'of revenue share' }}</p>
+                <div class="py-6">
+                    <div class="row row-grid justify-content-between align-items-center">
+                        <div class="col-lg-5 order-lg-2">
+                            <h5 class="h3">Need a quick admin panel for your website?</h5>
+                            <p class="lead my-4">
+                                With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
+                            </p>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0">Perfect for modern startups</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-store-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0">Ready to be customized</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6 order-lg-1">
+                            <div class="card mb-0 mr-lg-5">
+                                <div class="card-body p-2">
+                                    <img alt="Image placeholder" src="assets/img/theme/light/screen-1-1000x800.jpg" class="img-fluid shadow rounded">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="py-6">
+                    <div class="row row-grid justify-content-between align-items-center">
+                        <div class="col-lg-5">
+                            <h5 class="h3">A modern project management dashboard</h5>
+                            <p class="lead my-4">
+                                With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
+                            </p>
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0">Perfect for modern startups</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-store-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0">Ready to be customized</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-store-alt"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0">Designed for every devices</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="card mb-0 ml-lg-5">
+                                <div class="card-body p-2">
+                                    <img alt="Image placeholder" src="assets/img/theme/light/screen-2-1000x800.jpg" class="img-fluid shadow rounded">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slice slice-lg bg-section-dark pt-5 pt-lg-8">
+            <!-- SVG separator -->
+            <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
+                <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class="">
+                    <polygon points="2560 0 2560 100 0 100"></polygon>
+                </svg>
+            </div>
+            <!-- Container -->
+            <div class="container position-relative zindex-100">
+                <div class="col">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 text-center">
+                            <div class="mt-4 mb-6">
+                                <h2 class="h1 text-white">
+                                    Are you ready to grow faster?
+                                </h2>
+                                <h4 class="text-white mt-3">Create your own experience</h4>
+                                <!-- Play button -->
+                                <a href="#" class="btn btn-primary btn-icon mt-4">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slice pt-0">
+            <div class="container position-relative zindex-100">
+                <div class="row">
+                    <div class="col-xl-4 col-sm-6 mt-n7">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-warning badge-pill">New</span>
+                                </div>
+                                <div class="pl-4">
+                                    <h5 class="lh-130">Listen to the nature</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6 mt-sm-n7">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-success badge-pill">Tips</span>
+                                </div>
+                                <div class="pl-4">
+                                    <h5 class="lh-130">Rules not to follow</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12 col-sm-6 mt-xl-n7">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-danger badge-pill">Update</span>
+                                </div>
+                                <div class="pl-3">
+                                    <h5 class="lh-130">Beware the water</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-warning badge-pill">New</span>
+                                </div>
+                                <div class="pl-4">
+                                    <h5 class="lh-130">Listen to the nature</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-success badge-pill">Tips</span>
+                                </div>
+                                <div class="pl-4">
+                                    <h5 class="lh-130">Rules not to follow</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-12 col-sm-6">
+                        <div class="card">
+                            <div class="d-flex p-5">
+                                <div>
+                                    <span class="badge badge-danger badge-pill">Update</span>
+                                </div>
+                                <div class="pl-3">
+                                    <h5 class="lh-130">Beware the water</h5>
+                                    <p class="text-muted mb-0">
+                                        Design made simple with a clean and smart HTML markup.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slice slice-lg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <span class="badge badge-primary badge-pill">Key features</span>
+                        <h5 class="lh-180 mt-4 mb-6">Quick is a premium HTML template that includes adaptable components and pages for various industries, plus new ones each month.</h5>
+                    </div>
+                </div>
+                <!-- Features -->
+                <div class="row mx-lg-n4">
+                    <!-- Features - Col 1 -->
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
+                                        <i data-feather="check"></i>
                                     </div>
                                 </div>
-                                {{-- <p class="text-discount-item-plan">+ 10% of revenue generated by {{ config('app.name') }}</p> --}}
-                                <div class="separate-line"></div>
-                                <ul class="list-benefics-item-plan">
+                                <div>
+                                    <span class="h6">100% Responsive</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Based on Bootstrap 4</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Built with SASS</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-success text-white mr-4">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">300+ components</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">23+ widgets</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
+                                        <i data-feather="check"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Bootstrap Flexbox Grid</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Features - Col 3 -->
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div>
+                                        <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
+                                            <i data-feather="check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Animate CSS</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div>
+                                        <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
+                                            <i data-feather="check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Integrated plugins</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 px-lg-4">
+                        <div class="card shadow-none">
+                            <div class="p-3 d-flex">
+                                <div>
+                                    <div>
+                                        <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
+                                            <i data-feather="check"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="h6">Smart HTML markup</span>
+                                    <p class="text-sm text-muted mb-0">
+                                        Built to be customized.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="slice slice-lg bg-section-secondary">
+            <div class="container text-center">
+                <div class="row justify-content-center mb-6">
+                    <div class="col-lg-8">
+                        <!-- Title -->
+                        <h2 class="h1 strong-600">
+                            Our Plans
+                        </h2>
+                        <!-- Text -->
+                        <p class="text-muted">
+                            Pricing
+                        </p>
+                    </div>
+                </div>
+                <!-- Pricing -->
+                <div class="row justify-content-center">
+                    @foreach ($packs as $pack)
+                    <div class="col-lg-4 col-md">
+                        <div class="card card-pricing @if($pack->is_popular)bg-dark @endif text-center px-3 hover-scale-110">
+                            <div class="card-header border-0 delimiter-bottom">
+                                <h5 class="@if($pack->is_popular)text-white @else text-muted @endif">{{ ucwords($pack->name) }}</h5>
+                                <div class="h1 text-center mb-0 @if($pack->is_popular)text-white @endif">
+                                    {{ $pack->isFixedPrice() ? $pack->symbol : '' }}<span class="price font-weight-bolder">{{ $pack->price }}</span>{{ !$pack->isFixedPrice() ? '%' : '' }} 
+                                    <p class="text-sm">{{ $pack->isFixedPrice() ? 'per month' : 'of revenue share' }}</p>
+                                </div>
+                                <hr/>
+                            </div>
+                            <div class="card-body">
+                                <ul class="list-unstyled text-sm mb-4 @if($pack->is_popular)text-white @endif">
                                     @foreach ($pack->features as $feature)
                                     <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>
                                     @endforeach
                                 </ul>
-                                <div class="box-btn-item-plan">
-                                    <a href="{{ route('signin') }}" class="btn-item-plan btn-design1">Start Free Trial</a>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="faqs">
-            <div class="container">
-                <div class="row row-faqs">
-                    <div class="col-lg-9 col-content-faqs">
-                        <h6 class="title-small" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">FAQ</h6>
-                        <h2 class="title2" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">Have more questions?</h2>
-                        <div class="items-faqs" data-aos="fade-in" data-aos-easing="linear" data-aos-duration="500" data-aos-delay="100">
-                            <div class="item-faq">
-                                <button class="btn-item-faq">What is the “{{ config('app.name') }} effect”? <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/arrow-down.svg" alt=""></button>
-                                <div class="content-item-faq">
-                                    <p>
-                                        The {{ config('app.name') }} effect is a tangible application of the “Snowball Effect”, defined by Merriam-Webster as: “a situation in which one action or event causes many other similar actions or events”. The {{ config('app.name') }} effect involves the event of acquiring a new customer as a catalyst to the acquisition of many new customers. This is accomplished by our custom thank you page, as well as many other included features. To better explain just how powerful the {{ config('app.name') }} effect is, let's compare and contrast an example store with and without {{ config('app.name') }} installed:
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;i. You run a facebook ad and get a sale. The customer is happy with the product and brand experience, yet has no way to share their positive experience or help your brand. You have an affiliate sign up form on your website, yet only about 1 in 50 customers sign up. The few affiliates you do have do not know how to effectively bring you more customers, and give up promoting your products after a couple weeks.
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. Ad spend to acquire the customer: 10$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. Customer’s lifetime value: 40$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3. Affiliate revenue generated from customer: 0$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4. Profit: 30$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp;ii. You run a facebook ad and get a sale. Without any additional action, the customer is created an affiliate account and is given a discount code to share across social media to their friends, family, and followers, with the incentive that they will get paid commision off of the sales they generate. This new affiliate is provided with practical, easy to consume content that teaches them how to be the most effective ambassador they can be. The affiliate shares their code and gets 3 new sales for your store. These 3 customers are also automatically created affiliate accounts, and bring you in a total of 12 new customers, who likewise bring in even more customers and your network of affiliates exponentially grows. You only paid to acquire that first customer, yet now you have a massive network of customers growing on autopilot. This is what’s called the {{ config('app.name') }} effect, and it will make your marketing dollars go significantly further than ever before.
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1. Ad spend to acquire the customer: 10$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2. Customer’s lifetime value: 40$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3. Affiliate revenue generated directly from customer: 120$
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4. Affiliate revenue generated from the {{ config('app.name') }} effect: Unlimited
-                                        <br>
-                                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5. Profit: Unlimited
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="item-faq">
-                                <button class="btn-item-faq">Why is {{ config('app.name') }} more effective than other affiliate apps? <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/arrow-down.svg" alt=""></button>
-                                <div class="content-item-faq">
-                                    <p>Unlike other affiliate marketing apps that leave almost every happy customer without a way to share their love for your brand, {{ config('app.name') }} will convert all of your customers, and even a big percentage of non-buying store visitors, into motivated affiliates. On top of that, we equip your affiliates with straightforward, easy to consume content that teaches them how to be the best affiliate possible.</p>
-                                </div>
-                            </div>
-                            <div class="item-faq">
-                                <button class="btn-item-faq">What if I already use a different affiliate marketing app? <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/arrow-down.svg" alt=""></button>
-                                <div class="content-item-faq">
-                                    <p>We understand you may already be using another affiliate marketing program. For this reason, we have created a seamless and easy process to transfer all of your affiliates from your current affiliate marketing app into {{ config('app.name') }}.  For more detailed instructions on how to import existing affiliates, click here.</p>
-                                </div>
-                            </div>
-                            <div class="item-faq">
-                                <button class="btn-item-faq">Can I still acquire affiliates through a traditional sign-up form?  <img src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/home/img/arrow-down.svg" alt=""></button>
-                                <div class="content-item-faq">
-                                    <p>Absolutely! Beyond our thank you page sharing feature we provide our merchants with an affiliate sign-up form they can add to their website. Even better, our merchants can activate an on-site pop-up for browsing visitors that will transport visitors directly to the affiliate sign-up form. </p>
-                                </div>
+                                <a href="{{ route('connect') }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Start Free Trial</a>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                 </div>
             </div>
         </section>
-
-        <footer>
-            <img src="{{ asset('assets/img/bg-footer.svg') }}" class="bg-footer"/>
-            <img src="{{ asset('assets/img/bg-footer-mobile.svg') }}" class="bg-footer bg-footer-mobile"/>
-            <div class="content-footer">
-                <a href="{{ url('/') }}" class="logo-footer">
-                    <img src="{{ asset('img/white-mini-logo.png') }}" style="max-width: 48px;"/>
-                </a>
-                <div class="break-point-footer"></div>
-                <ul class="links-booter">
-                    <li><a href="{{ env('HELP_URL') }}">Contact Us</a></li>
-                    {{-- <li><a href="#">FAQ</a></li> --}}
-                    {{-- <li><a href="https://socialsnowball.io/privacy">Privacy</a></li> --}}
-                    {{-- <li><a href="https://socialsnowball.io/terms">Terms Of Use</a></li> --}}
-                    {{-- <li><a href="#">Pricing</a></li> --}}
-                </ul>
-                <ul class="links-rd">
-                    <li>
-                        <a href="https://facebook.com/{{ $appSettings->facebook_username }}">
-                            <img src="{{ asset('img/facebook.svg') }}"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://instagram.com/{{ $appSettings->instagram_username }}">
-                            <img src="{{ asset('img/instagram.svg') }}"/>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="https://twitter.com/{{ $appSettings->twitter_username }}">
-                            <img src="{{ asset('img/twitter.svg') }}"/>
-                        </a>
-                    </li>
-                </ul>
+        <footer class="position-relative" id="footer-main">
+            <div class="footer pt-lg-7 footer-dark bg-dark">
+                <!-- SVG shape -->
+                <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
+                    <svg width="2560px" height="100px" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" viewBox="0 0 2560 100" style="enable-background:new 0 0 2560 100;" xml:space="preserve" class=" fill-section-secondary">
+                        <polygon points="2560 0 2560 100 0 100"></polygon>
+                    </svg>
+                </div>
+                <!-- Footer -->
+                <div class="container pt-4">
+                    <div class="row">
+                        <div class="col-lg-4 mb-5 mb-lg-0">
+                            <!-- Theme's logo -->
+                            <a href="index.html">
+                                <img class="footer-logo" alt="Image placeholder" src="{{ asset('assets/img/logo-white.png') }}" id="footer-logo"/>
+                            </a>
+                            <!-- Social -->
+                            <ul class="nav mt-4">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $appSettings->facebook_username }}" target="_blank">
+                                        <img src="{{ asset('assets/img/facebook.svg') }}"/>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $appSettings->instagram_username }}" target="_blank">
+                                        <img src="{{ asset('assets/img/instagram.svg') }}"/>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ $appSettings->twitter_username }}" target="_blank">
+                                        <img src="{{ asset('assets/img/twitter.svg') }}"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <hr class="divider divider-fade divider-dark my-4">
+                    <div class="row align-items-center justify-content-md-between pb-4">
+                        <div class="col-md-6">
+                            <div class="copyright text-sm font-weight-bold text-center text-md-left">
+                                &copy; {{ date('Y') }} <a href="{{ url('/') }}" class="font-weight-bold" target="_blank">{{ config('app.name') }}</a>. All rights reserved
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Terms
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Privacy
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        Cookies
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
         </footer>
-
-        <script src="{{ asset('js/jquery.min.js') }}"></script>
-        <script src="{{ asset('js/popper.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-        <script src="{{ asset('js/aos.js') }}"></script>
-        <script src="{{ asset('js/home.main.js') }}"></script>
+        <!-- Core JS  -->
+        <script>
+            window.addEventListener("load", function() {
+                setTimeout(function() {
+                    document.querySelector('body').classList.add('loaded');
+                }, 300);
+            });
+        </script>
+        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+        <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="assets/libs/svg-injector/dist/svg-injector.min.js"></script>
+        <script src="assets/libs/feather-icons/dist/feather.min.js"></script>
+        <!-- Quick JS -->
+        <script src="assets/js/quick-website.js"></script>
+        <!-- Feather Icons -->
+        <script>
+            feather.replace({
+                'width': '1em',
+                'height': '1em'
+            })
+        </script>
     </body>
 </html>

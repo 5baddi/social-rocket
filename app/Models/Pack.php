@@ -25,6 +25,7 @@ class Pack extends ModelEntity
     public const INTERVAL_COLUMN = 'interval';
     public const RECURRING_TYPE = 'recurring';
     public const USAGE_TYPE = 'usage';
+    public const IS_POPULAR_TYPE = 'is_popular';
 
     /** @var int */
     public const DEFAULT_CHARGE_PRICE = 10;

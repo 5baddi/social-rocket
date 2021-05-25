@@ -65,6 +65,7 @@ class PacksSeeder extends Seeder
             'name'          =>  'Asteroid',
             'price'         =>  10,
             'type'          =>  Pack::TYPES[1],
+            'is_popular'    =>  true,
             'features'      =>  [
                 [
                     'key'       =>  Pack::UNLIMITED_AFFILIATES,
