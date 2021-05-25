@@ -60,8 +60,11 @@ To see all defined routes and corresponding controllers methods use `php artisan
 
 `MAIL_FROM_ADDRESS=`noreply@trysocialrocket.com
 
-
+---
 ## Preparing to submit your app
+
+![App screenshot](./screenshots/shopify_app.png)
+
 The official shopify building apps documentation include how to prepare your shopify app for review.
 
 You can follow next [steps](https://www.shopify.co.uk/partners/blog/how-to-build-a-shopify-app#prepare-submit) to get approved.
