@@ -655,26 +655,10 @@
                 </div>
             </div>
         </footer>
-        <!-- Core JS  -->
-        <script>
-            window.addEventListener("load", function() {
-                setTimeout(function() {
-                    document.querySelector('body').classList.add('loaded');
-                }, 300);
-            });
-        </script>
-        <script src="assets/libs/jquery/dist/jquery.min.js"></script>
-        <script src="assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/libs/svg-injector/dist/svg-injector.min.js"></script>
-        <script src="assets/libs/feather-icons/dist/feather.min.js"></script>
-        <!-- Quick JS -->
-        <script src="assets/js/quick-website.js"></script>
-        <!-- Feather Icons -->
-        <script>
-            feather.replace({
-                'width': '1em',
-                'height': '1em'
-            })
-        </script>
+
+        <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+        <script src="{{ asset('assets/js/popper.js') }}"></script>
+        <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('assets/js/baddiservices.landing.js') }}"></script>
     </body>
 </html>
