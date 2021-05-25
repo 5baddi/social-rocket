@@ -6,8 +6,8 @@
         <meta name="author" content="Baddi Services"/>
         <title>{{ config('app.name') }}</title>
         <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
-        <link rel="stylesheet" href="{{ asset('assets/css/landing.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('assets/css/baddiservices.landing.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/baddiservices.main.css') }}"/>
     </head>
 
     <body>
@@ -56,13 +56,27 @@
                             <a class="nav-link" href="#">Blog</a>
                         </li>
                     </ul>
-                    <!-- Button -->
+                    @guest
                     <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('signin') }}">
                         Sign in
                     </a>
-                    <!-- Mobile button -->
+                    @endguest
+                    @auth
+                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('dashboard') }}">
+                        Dashboard
+                    </a>
+                    @endauth
                     <div class="d-lg-none text-center">
-                        <a href="https://webpixels.io/themes/quick-website-ui-kit" class="btn btn-block btn-sm btn-warning">See more details</a>
+                        @guest
+                        <a href="{{ route('signin') }}" class="btn btn-block btn-sm btn-warning">
+                            Sign in
+                        </a>
+                        @endguest
+                        @auth
+                        <a href="{{ route('dashboard') }}" class="btn btn-block btn-sm btn-warning">
+                            Dashboard
+                        </a>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -659,6 +673,6 @@
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/js/popper.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ asset('assets/js/baddiservices.landing.js') }}"></script>
+        <script src="{{ asset('assets/js/baddiservices.main.js') }}"></script>
     </body>
 </html>
