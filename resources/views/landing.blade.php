@@ -84,7 +84,7 @@
                         </h1>
                         <!-- Text -->
                         <p class="lead text-center text-md-left text-muted">
-                            Build a beautiful, modern website with flexible Bootstrap components built from scratch.
+                            Our custom thank you page + many other included features harmoniously convert your customers and store visitors into affiliates, working around the clock to bring you new sales.
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </section>
-        <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6 bg-section-secondary">
+        {{-- <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6 bg-section-secondary">
             <div class="container">
                 <!-- Title -->
                 <!-- Section title -->
@@ -548,7 +548,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <section class="slice slice-lg bg-section-secondary">
             <div class="container text-center">
                 <div class="row justify-content-center mb-6">
