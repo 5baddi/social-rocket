@@ -47,6 +47,11 @@ class UserService extends Service
     {
         return $this->userRepository->findByEmail($email);
     }
+    
+    public function getStoreOwner(Store $store): ?User
+    {
+        return $this->userRepository->getStoreOwner($store->id);
+    }
 
     public function coupons(Store $store): array
     {

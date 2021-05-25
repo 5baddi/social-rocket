@@ -30,6 +30,16 @@ class UserRespository
                     ])
                     ->first();
     }
+    
+    public function getStoreOwner(string $storeId): ?User
+    {
+        return User::query()
+                    ->where([
+                        User::STORE_ID_COLUMN   => $storeId,
+                        User::ROLE_COLUMN       =>  User::STORE_OWNER_ROLE
+                    ])
+                    ->first();
+    }
 
     public function coupons(string $storeId): array
     {
