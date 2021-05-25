@@ -42,7 +42,7 @@
     }
     
     .logo-header img {
-        height: 56px;
+        max-height: 40px;
     }
     
     .col-content-how-it-works {
