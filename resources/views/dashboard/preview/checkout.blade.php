@@ -9,7 +9,7 @@ style="overflow: visible; height: auto;">
             content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
         <meta name="referrer" content="origin">
         <title> Thank you for your purchase! - {{ config('app.name') }} Store - Checkout</title>
-        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
         <meta data-browser="chrome" data-browser-major="87">
         <meta
             data-body-font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
@@ -281,7 +281,7 @@ style="overflow: visible; height: auto;">
                                             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
                                             <div
                                                 style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
-                                                <img src="{{ asset('img/logo.png') }}"
+                                                <img src="{{ asset('assets/img/logo.png') }}"
                                                     id="offer-details-logo"
                                                     style="display: none; vertical-align: middle; width: 60%;">
                                                 <p style="font-weight: 600">Affiliate Program</p>

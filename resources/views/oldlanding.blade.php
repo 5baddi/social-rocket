@@ -240,7 +240,7 @@
             <img src="{{ asset('assets/img/bg-footer-mobile.svg') }}" class="bg-footer bg-footer-mobile"/>
             <div class="content-footer">
                 <a href="{{ url('/') }}" class="logo-footer">
-                    <img src="{{ asset('img/white-mini-logo.png') }}" style="max-width: 48px;"/>
+                    <img src="{{ asset('assets/img/logo-white.mini.jpg') }}" style="max-width: 48px;"/>
                 </a>
                 <div class="break-point-footer"></div>
                 <ul class="links-booter">

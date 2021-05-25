@@ -76,9 +76,9 @@ class CouponService extends Service
             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
             <div
                 style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
-                <img src="' . asset('img/logo.png') . '"
+                <img src="' . asset('assets/img/logo.png') . '"
                     id="offer-details-logo"
-                    style="vertical-align: middle; width: 60%;">
+                    style="vertical-align: middle; width: 60%; margin-bottom: 1.5rem;">
                 <p style="font-weight: 600">Affiliate Program</p>
                 <hr>
                 <p

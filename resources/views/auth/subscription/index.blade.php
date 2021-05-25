@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width"/>
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name') }} &mdash; Choose a plan</title>
-        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
@@ -16,7 +16,7 @@
     <body>
         <header>
             <div class="content-header">
-                <a href="{{ route('dashboard') }}" class="logo-header"><img src="{{ asset('img/logo.png') }}" alt=""></a>
+                <a href="{{ route('dashboard') }}" class="logo-header"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
             </div>
         </header>
 

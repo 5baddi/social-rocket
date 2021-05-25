@@ -120,7 +120,7 @@
                               <div class="row">
                                 <div class="col-auto">
                                   <span class="avatar rounded">
-                                      <img src="{{ asset('img/mini-logo.png') }}"/>
+                                      <img src="{{ asset('assets/img/logo.mini.png') }}"/>
                                   </span>
                                 </div>
                                 <div class="col">

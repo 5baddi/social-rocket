@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>{{ config('app.name') }} &mdash; @yield('title')</title>
-    <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+    <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
     <!-- CSS files -->
     <link href="{{ asset('assets/css/tabler.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/tabler-flags.min.css') }}" rel="stylesheet"/>
