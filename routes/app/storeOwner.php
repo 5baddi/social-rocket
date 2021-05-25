@@ -8,6 +8,7 @@
 
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
@@ -15,14 +16,14 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityContr
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\SendPayoutController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\CustomizeController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\SubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingPaymentController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\IntegrationsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview\CheckoutPreviewController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\CancelSubscriptionController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\BillingConfirmationController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAsReadController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails\PurchaseMailController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegrationsController;
