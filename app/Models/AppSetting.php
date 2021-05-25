@@ -23,4 +23,19 @@ class AppSetting extends ModelEntity
         self::TWITTER_USERNAME,
         self::FACEBOOK_USERNAME,
     ];
+
+    public function getFacebookUsernameAttribute(): string
+    {
+        return "https://facebook.com/" . $this->getAttribute(self::FACEBOOK_USERNAME);
+    }
+    
+    public function getTwitterUsernameAttribute(): string
+    {
+        return "https://twitter.com/" . $this->getAttribute(self::TWITTER_USERNAME);
+    }
+    
+    public function getInstagramUsernameAttribute(): string
+    {
+        return "https://instagram.com/" . $this->getAttribute(self::INSTAGRAM_USERNAME);
+    }
 }
