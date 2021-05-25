@@ -10,7 +10,6 @@ namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
 
 use Throwable;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
@@ -51,26 +50,15 @@ class OAuthController extends Controller
                 'slug'  =>  $storeName
             ]);
 
-            Session::put('slug', $storeName);
-
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
             $this->forgetStore();
             
             return redirect()->back()->withInput()->withErrors($ex->errors());
         } catch (InvalidStoreURLException | StoreAlreadyLinkedException $ex) {
-            $this->forgetStore();
-
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
-            $this->forgetStore();
-
             return redirect()->back()->withInput()->with("error", "Internal server error");
         }
-    }
-
-    private function forgetStore(): void
-    {
-        Session::forget('slug');
     }
 }

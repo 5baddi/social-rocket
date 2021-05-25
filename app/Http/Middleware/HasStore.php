@@ -10,7 +10,6 @@ namespace BADDIServices\SocialRocket\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cookie;
 
 class HasStore
 {
@@ -19,8 +18,8 @@ class HasStore
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Cookie::has('store') && !is_null(Cookie::get('store'))) {
-            return redirect('/signin');
+        if(!is_null($request->query('store'))) {
+            return redirect()->route('signin');
         }
 
         return $next($request);

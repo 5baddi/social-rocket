@@ -84,12 +84,12 @@ Route::name('affiliate')
 
 Route::middleware('guest')
     ->group(function() {
-        Route::get('/connect', ConnectController::class)->middleware(['has.store', 'app.connected'])->name('connect');
+        Route::get('/connect', ConnectController::class)->name('connect');
         Route::post('/connect', OAuthController::class)->name('oauth.connect');
         Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
 
-        Route::get('/signup', SignUpController::class)->middleware(['has.store', 'app.notconnected'])->name('signup');
-        Route::post('/auth/signup', CreateUserController::class)->name('auth.signup');
+        Route::get('/signup', SignUpController::class)->middleware(['has.store'])->name('signup');
+        Route::post('/auth/signup', CreateUserController::class)->middleware(['has.store'])->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
 

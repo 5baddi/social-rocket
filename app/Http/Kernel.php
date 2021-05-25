@@ -64,8 +64,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'has.store' => \BADDIServices\SocialRocket\Http\Middleware\HasStore::class,
-        'app.connected' => \BADDIServices\SocialRocket\Http\Middleware\AlreadyAppConnected::class,
-        'app.notconnected' => \BADDIServices\SocialRocket\Http\Middleware\AppNotConnected::class,
         'has.subscription' => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
         'cors' => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
         'is.affiliate' => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
