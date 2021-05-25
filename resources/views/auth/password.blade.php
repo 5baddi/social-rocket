@@ -34,7 +34,7 @@
                 <button class="btn-design1" type="submit">Reset password</button>
             </div>
             <p class="have-account">
-                back to <a href="{{ route('signin') }}" class="link-design1">Sign in</a> page
+                back to <a href="{{ route('signin') }}" class="link-design1">login</a> page
             </p>
         </div>
     </form> 
