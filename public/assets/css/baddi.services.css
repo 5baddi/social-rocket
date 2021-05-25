@@ -3,7 +3,8 @@
 }
 
 .navbar-brand-image{
-    height: 3rem !important;
+    height: auto !important;
+    width: 100% !important;
 }
 
 .antialiased{
