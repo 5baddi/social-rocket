@@ -90,7 +90,6 @@
                         <div class="text-center text-md-left mt-5">
                             <a href="{{ route('connect') }}" class="btn btn-primary btn-icon" target="_blank">
                                 <span class="btn-inner--text">Start Free Trial</span>
-                                <span class="btn-inner--icon"><i data-feather="chevron-right"></i></span>
                             </a>
                         </div>
                     </div>
