@@ -15,6 +15,8 @@ use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 
 class StoreService extends Service
 {
@@ -85,6 +87,8 @@ class StoreService extends Service
             Store::PHONE_COLUMN,
             Store::COUNTRY_COLUMN,
         ]);
+
+        Arr::set($attributes, Store::CONNECTED_AT, Carbon::now());
 
         return $this->storeRepository->update($store, $attributes->toArray());
     }

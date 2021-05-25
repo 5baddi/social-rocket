@@ -50,6 +50,7 @@ class StoreRepository
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
+                    ->whereNotNull(Store::CONNECTED_AT)
                     ->first();
     }
     

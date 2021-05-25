@@ -8,7 +8,10 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
 
+use Throwable;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
@@ -16,7 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
-use Throwable;
 
 class OAuthCallbackController extends Controller
 {
@@ -36,11 +38,8 @@ class OAuthCallbackController extends Controller
     {
         try {
             $storeName = $this->shopifyService->getStoreName($request->query('shop'));
-
             $store = $this->storeService->findBySlug($storeName);
             if (!$store instanceof Store) {
-                $this->forgetStore();
-
                 abort(Response::HTTP_NOT_FOUND, 'Store not found');
             }
 
@@ -59,12 +58,20 @@ class OAuthCallbackController extends Controller
             $this->storeService->updateConfigurations($store);
 
             return redirect()
-                        ->route('signup', ['store' => $storeName])
-                        ->with('store', $store);
+                        ->route('signup', ['store' => $store->id]);
         } catch (ValidationException $ex) {
-            return redirect('/connect')->withInput()->withErrors($ex->errors());
+            AppLogger::error($ex, $store ?? null, 'store:oauth-callback', $request->all());
+            
+            return redirect()
+                        ->route('connect')
+                        ->withInput()
+                        ->withErrors($ex->errors());
         } catch (Throwable $ex) {
-            return redirect('/connect')->with('error', $ex->getMessage());
+            AppLogger::error($ex, $store ?? null, 'store:oauth-callback', $request->all());
+            
+            return redirect()
+                        ->route('connect')
+                        ->with('error', $ex->getMessage());
         }
     }
 }

@@ -88,9 +88,9 @@ class ShopifyService extends Service
         return $productURL;
     }
     
-    public function getOAuthURL(string $storeName): string
+    public function getOAuthURL(Store $store): string
     {
-        $oauthURL = $this->getStoreURL($storeName);
+        $oauthURL = $this->getStoreURL($store->slug);
         $oauthURL .= self::OAUTH_AUTHORIZE_ENDPOINT;
         $oauthURL .= "?client_id=" . config('shopify.api_key');
         $oauthURL .= "&scope=" . self::SCOPES;

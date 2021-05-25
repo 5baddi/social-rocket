@@ -28,6 +28,7 @@ class Store extends ModelEntity
     public const PHONE_COLUMN = 'phone';
     public const COUNTRY_COLUMN = 'country';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
+    public const CONNECTED_AT = 'connected_at';
 
     /** @var array */
     protected $fillable = [
@@ -38,6 +39,7 @@ class Store extends ModelEntity
         self::PHONE_COLUMN,
         self::COUNTRY_COLUMN,
         self::SCRIPT_TAG_ID_COLUMN,
+        self::CONNECTED_AT,
     ];
 
     public function user(): BelongsTo

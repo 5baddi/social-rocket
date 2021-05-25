@@ -22,8 +22,8 @@ Route::middleware('guest')
         Route::post('/connect', OAuthController::class)->name('oauth.connect');
         Route::get('/oauth/callback', OAuthCallbackController::class)->name('oauth.callback');
 
-        Route::get('/signup', SignUpController::class)->middleware(['has.store'])->name('signup');
-        Route::post('/auth/signup', CreateUserController::class)->middleware(['has.store'])->name('auth.signup');
+        Route::get('/signup/{store}', SignUpController::class)->middleware(['has.store'])->name('signup');
+        Route::post('/auth/signup/{store}', CreateUserController::class)->middleware(['has.store'])->name('auth.signup');
         Route::get('/signin', SignInController::class)->name('signin');
         Route::post('/auth/signin', AuthenticateController::class)->name('auth.signin');
 

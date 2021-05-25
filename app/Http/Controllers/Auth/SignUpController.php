@@ -9,11 +9,21 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Services\StoreService;
 
 class SignUpController extends Controller
 {
-    public function __invoke()
+    /** @var StoreService */
+    private $storeService;
+
+    public function __construct(StoreService $storeService)
     {
-        return view('auth.signup');
+        $this->storeService = $storeService;
+    }
+
+    public function __invoke(Store $store)
+    {
+        return view('auth.signup', ['store' => $store]);
     }
 }
