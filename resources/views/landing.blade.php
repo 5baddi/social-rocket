@@ -608,17 +608,17 @@
                             <!-- Social -->
                             <ul class="nav mt-4">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $appSettings->facebook_username }}" target="_blank">
+                                    <a class="nav-link" href="{{ $appSettings->getFacebookUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/facebook.svg') }}"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $appSettings->instagram_username }}" target="_blank">
+                                    <a class="nav-link" href="{{ $appSettings->getInstagramUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/instagram.svg') }}"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $appSettings->twitter_username }}" target="_blank">
+                                    <a class="nav-link" href="{{ $appSettings->getTwitterUsername() }}" target="_blank">
                                         <img src="{{ asset('assets/img/twitter.svg') }}"/>
                                     </a>
                                 </li>
