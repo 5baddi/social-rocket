@@ -25,6 +25,11 @@
                 </tr>
               </thead>
               <tbody>
+                  @if ($unpaidCommissions->count() === 0)
+                  <tr>
+                    <td colspan="7" class="text-center text-xs text-muted">No data</td>
+                  </tr>
+                  @endif
                   @foreach ($unpaidCommissions as $commission)
                     <tr>
                         <td>{{ $commission->created_at->format('d/m/Y') }}</td>
@@ -77,6 +82,11 @@
                 </tr>
               </thead>
               <tbody>
+                  @if ($paidCommissions->count() === 0)
+                  <tr>
+                    <td colspan="7" class="text-center text-xs text-muted">No data</td>
+                  </tr>
+                  @endif
                   @foreach ($paidCommissions as $commission)
                     <tr>
                         <td>{{ $commission->created_at->format('d/m/Y') }}</td>

@@ -74,7 +74,7 @@
                     <div class="col-12 col-md-5 col-lg-6 order-md-2 text-center">
                         <!-- Image -->
                         <figure class="w-100">
-                            <img alt="Image placeholder" src="assets/img/svg/illustrations/illustration-3.svg" class="img-fluid mw-md-120">
+                            <img alt="Dashboard" src="{{ asset('assets/img/dashboard.png') }}" class="img-fluid rounded mw-md-120"/>
                         </figure>
                     </div>
                     <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
