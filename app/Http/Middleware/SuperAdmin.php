@@ -27,8 +27,8 @@ class SuperAdmin
         /** @var User */
         $user = Auth::user();
 
-        if ($user->isSuperAdmin()) {
-            return redirect()->route('admin');
+        if (!$user->isSuperAdmin()) {
+            return redirect()->route('dashboard');
         }
 
         return $next($request);

@@ -10,7 +10,6 @@ namespace BADDIServices\SocialRocket\Http\Middleware;
 
 use Closure;
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,7 +27,7 @@ class StoreOwner
         /** @var User */
         $user = Auth::user();
 
-        if ($user->isAffiliateAccount() && !$user->store instanceof Store) {
+        if ($user->isAffiliateAccount()) {
             return redirect()->route('affiliate.analytics');
         }
 
