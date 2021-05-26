@@ -92,4 +92,9 @@ class User extends Authenticatable
     {
         return ucwords($this->getAttribute(self::FIRST_NAME_COLUMN) . ' ' . $this->getAttribute(self::LAST_NAME_COLUMN));
     }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->getAttribute(self::IS_SUPERADMIN_COLUMN) === true;
+    }
 }
