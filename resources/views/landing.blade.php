@@ -102,7 +102,7 @@
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
-                            <a href="{{ route('connect') }}" class="btn btn-primary btn-icon" target="_blank">
+                            <a href="{{ route('connect') }}" class="btn btn-primary btn-icon">
                                 <span class="btn-inner--text">Start Free Trial</span>
                             </a>
                         </div>
