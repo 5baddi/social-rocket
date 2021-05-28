@@ -5,9 +5,9 @@
 @section('form')
     <div class="card-body px-md-5 py-5">
         <div class="mb-2 text-center">
-            <img src="{{ asset('assets/img/connect-app.png') }}" style="max-width: 200px;"/>
+            <img src="{{ asset('assets/img/shopify.svg') }}" style="max-width: 200px;"/>
         </div>
-        <div class="mb-5">
+        <div class="mb-5 mt-4">
             <h6 class="h3">Connect your store</h6>
             <p class="text-muted mb-0">Please enter your Shopify store URL and we’ll redirect you to Shopify to finish connecting your store to {{ config('app.name') }} App</p>
             @if(Session::has('error'))
