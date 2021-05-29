@@ -22,7 +22,7 @@ class AppLogger
             'code'      =>  $exception->getCode(),
             'line'      =>  $exception->getLine(),
             'file'      =>  $exception->getFile(),
-            'trace'     =>  $exception->getTrace(),
+            'trace'     =>  $exception->getTraceAsString(),
             'extra'     =>  json_encode($extra)
         ]);
     }
