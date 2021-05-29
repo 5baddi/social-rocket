@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
@@ -55,11 +56,13 @@ class CreateUserController extends Controller
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
+            AppLogger::error($ex, $store ?? null, 'store:create-account', $request->all());
 
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
+            AppLogger::error($ex, $store ?? null, 'store:create-account', $request->all());
             
-            return redirect('/signup')->withInput()->with("error", "Internal server error");
+            return redirect()->route('signup', ['store' => $store->id])->withInput()->with("error", "Internal server error");
         }
     }
 }
