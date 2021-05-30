@@ -12,5 +12,5 @@ Route::get('/', LandingPageController::class)->name('landing')->middleware(['sig
 
 Route::redirect('/guide', '/', 301)->name('guide');
 Route::redirect('/guide/affiliate/setup', env('GUIDE_SETUP', '/'), 301)->name('guide.affiliate.setup');
-Route::redirect('/privacy.html', '/', 301)->name('privacy');
+Route::get('/privacy.html', [LandingPageController::class, 'privacy'])->name('privacy');
 Route::redirect('/termsofservice.html', '/', 301)->name('termsofservice');

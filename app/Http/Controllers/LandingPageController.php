@@ -33,4 +33,11 @@ class LandingPageController extends Controller
             'packs'         =>  $this->packService->all()
         ]);
     }
+
+    public function privacy()
+    {
+        return view('privacy', [
+            'appSettings'   =>  $this->appService->settings(),
+        ]);
+    }
 }
