@@ -21,7 +21,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container">
                 <!-- Brand -->
-                <a class="navbar-brand" href="index.html">
+                <a class="navbar-brand" href="{{ url('/') }}">
                     <img  src="{{ asset('assets/img/logo.png') }}" id="navbar-logo">
                 </a>
                 <!-- Toggler -->
