@@ -37,7 +37,7 @@
             <div class="container">
                 <!-- Brand -->
                 <a class="navbar-brand" href="index.html">
-                    <img alt="Image placeholder" src="{{ asset('assets/img/logo.png') }}" id="navbar-logo">
+                    <img  src="{{ asset('assets/img/logo.png') }}" id="navbar-logo">
                 </a>
                 <!-- Toggler -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,7 +47,7 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
                         <li class="nav-item ">
-                            <a class="nav-link" href="#">How it works</a>
+                            <a class="nav-link" href="#how-it-work">How it works</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="#pricing">Pricing</a>
@@ -99,174 +99,19 @@
                         <!-- Text -->
                         <p class="lead text-center text-md-left text-muted">
                             Our app offers you easy tools to shape your affiliate program and win more and 
-more affiliates. With SocialRocket, you can step back and see your newest 
+more affiliates. With {{ config('app.name') }}, you can step back and see your newest 
 customers bring in more shoppers. And this cycle continues. 
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
                             <a href="{{ route('connect') }}" class="btn btn-primary btn-icon">
-                                <span class="btn-inner--text">Start Free Trial</span>
+                                <span class="btn-inner--text">Get {{ config('app.name') }} Now!</span>
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        {{-- <section class="slice slice-lg pt-lg-6 pb-0 pb-lg-6 bg-section-secondary">
-            <div class="container">
-                <!-- Title -->
-                <!-- Section title -->
-                <div class="row mb-5 justify-content-center text-center">
-                    <div class="col-lg-6">
-                        <span class="badge badge-soft-success badge-pill badge-lg">
-                            Get started
-                        </span>
-                        <h2 class=" mt-4">Carefuly crafted components ready to use in your project</h2>
-                        <div class="mt-2">
-                            <p class="lead lh-180">Use Atomic Design to build components, sections and, then, pages.</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Card -->
-                <div class="row mt-5">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body pb-5">
-                                <div class="pt-4 pb-5">
-                                    <img src="assets/img/svg/illustrations/illustration-5.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
-                                </div>
-                                <h5 class="h4 lh-130 mb-3">Unleash you creativity</h5>
-                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body pb-5">
-                                <div class="pt-4 pb-5">
-                                    <img src="assets/img/svg/illustrations/illustration-6.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
-                                </div>
-                                <h5 class="h4 lh-130 mb-3">Get more results</h5>
-                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body pb-5">
-                                <div class="pt-4 pb-5">
-                                    <img src="assets/img/svg/illustrations/illustration-7.svg" class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
-                                </div>
-                                <h5 class="h4 lh-130 mb-3">Increase your audience</h5>
-                                <p class="text-muted mb-0">Quick Website UI Kit (FREE) contains components and pages that are easy to customize and change.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="slice slice-lg">
-            <div class="container">
-                <div class="py-6">
-                    <div class="row row-grid justify-content-between align-items-center">
-                        <div class="col-lg-5 order-lg-2">
-                            <h5 class="h3">Need a quick admin panel for your website?</h5>
-                            <p class="lead my-4">
-                                With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
-                            </p>
-                            <ul class="list-unstyled mb-0">
-                                <li class="py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                                <i class="fas fa-file-invoice"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="h6 mb-0">Perfect for modern startups</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                                <i class="fas fa-store-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="h6 mb-0">Ready to be customized</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6 order-lg-1">
-                            <div class="card mb-0 mr-lg-5">
-                                <div class="card-body p-2">
-                                    <img alt="Image placeholder" src="assets/img/theme/light/screen-1-1000x800.jpg" class="img-fluid shadow rounded">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="py-6">
-                    <div class="row row-grid justify-content-between align-items-center">
-                        <div class="col-lg-5">
-                            <h5 class="h3">A modern project management dashboard</h5>
-                            <p class="lead my-4">
-                                With Quick you get components and examples, including tons of variables that will help you customize this theme with ease.
-                            </p>
-                            <ul class="list-unstyled mb-0">
-                                <li class="py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                                <i class="fas fa-file-invoice"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="h6 mb-0">Perfect for modern startups</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                                <i class="fas fa-store-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="h6 mb-0">Ready to be customized</span>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="py-2">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <div class="icon icon-shape bg-primary text-white icon-sm rounded-circle mr-3">
-                                                <i class="fas fa-store-alt"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <span class="h6 mb-0">Designed for every devices</span>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="card mb-0 ml-lg-5">
-                                <div class="card-body p-2">
-                                    <img alt="Image placeholder" src="assets/img/theme/light/screen-2-1000x800.jpg" class="img-fluid shadow rounded">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section> --}}
         <section class="slice slice-lg bg-section-dark pt-5 pt-lg-8">
             <!-- SVG separator -->
             <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
@@ -350,7 +195,7 @@ customers bring in more shoppers. And this cycle continues.
                                             </div>
                                         </div>
                                         <div>
-                                            <span class="h6 mb-0 text-white">Track and analyze progress with a friendly and clean SocialRocket dashboard.</span>
+                                            <span class="h6 mb-0 text-white">Track and analyze progress with a friendly and clean {{ config('app.name') }} dashboard.</span>
                                         </div>
                                     </div>
                                 </li>
@@ -360,180 +205,108 @@ customers bring in more shoppers. And this cycle continues.
                 </div>
             </div>
         </section>
-        {{-- <section class="slice slice-lg">
+        <section class="slice slice-lg">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <span class="badge badge-primary badge-pill">Key features</span>
-                        <h5 class="lh-180 mt-4 mb-6">Quick is a premium HTML template that includes adaptable components and pages for various industries, plus new ones each month.</h5>
+                <div class="row mb-2 justify-content-center text-center">
+                    <div class="col" id="how-it-work">
+                        <h2>How {{ config('app.name') }} Becomes a Gamechanger? </h2>
                     </div>
                 </div>
-                <!-- Features -->
-                <div class="row mx-lg-n4">
-                    <!-- Features - Col 1 -->
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
+                <div class="row mt-5">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="{{ asset('assets/img/people.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <div>
-                                    <span class="h6">100% Responsive</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
+                                <h5 class="h4 lh-130 mb-3">Design the Best Affiliate Program Effortlessly</h5>
+                                <p class="text-muted mb-0">Convert your customers and visitors into affiliates with our most innovative tools. 
+                                    Simply copy our given code and paste it on your website to display an affiliate 
+                                    form. This will attract more visitors to become affiliates and earn you some extra 
+                                    cash. You can also set up an email flow for your shoppers after they purchase 
+                                    something. These automated mails will allow you to stay connected with your 
+                                    customers. We recommend inviting your shoppers to become your affiliate using 
+                                    the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win 
+                                    more affiliates.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="{{ asset('assets/img/dashboard.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <div>
-                                    <span class="h6">Based on Bootstrap 4</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
+                                <h5 class="h4 lh-130 mb-3">Offer Something Interesting for Your Affiliates</h5>
+                                <p class="text-muted mb-0">{{ config('app.name') }} is not just offering some discount codes. Your visitors and customers 
+                                    can make real money from you. They can use dashboards to track their sales. On 
+                                    top of that, you can offer up to 6 payout methods that make their money-making 
+                                    process much more manageable. That means, by doing the bare minimum, you 
+                                    can run an extensive network of affiliates.</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="{{ asset('assets/img/manage.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <div>
-                                    <span class="h6">Built with SASS</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
+                                <h5 class="h4 lh-130 mb-3">Manage Unlimited Affiliates Without a Hitch</h5>
+                                <p class="text-muted mb-0">{{ config('app.name') }} lets you create automatic affiliate codes and links that your affiliates 
+                                    can share and earn with every successful purchase. {{ config('app.name') }} enables you to 
+                                    create a bunch of affiliate soldiers and maintain this program effortlessly. You can 
+                                    use our dashboard to see the best-selling products, your top affiliates and track 
+                                    revenue and commissions.
                                     </p>
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-success text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src="{{ asset('assets/img/settings.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <div>
-                                    <span class="h6">300+ components</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
+                                <h5 class="h4 lh-130 mb-3">Set Your Rates & Tailor Settings</h5>
+                                <p class="text-muted mb-0">With our super accessible settings, you can customize your commissions and apply 
+                                    them automatically. Turn on the Notifications, if you wish to stay updated 
+                                    whenever a new affiliate joins your program, or each time you manage a sale. 
+                                    {{ config('app.name') }} helps you build your affiliate network, set commissions, manage 
+                                    payouts and monitor revenues. With us, you can get more sales by turning your 
+                                    visitors and customers into affiliates. And this does not require a whole lot of effort 
+                                    or time from you. 
                                     </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="h6">23+ widgets</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
-                                        <i data-feather="check"></i>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="h6">Bootstrap Flexbox Grid</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Features - Col 3 -->
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div>
-                                        <div class="icon icon-shape rounded-circle bg-info text-white mr-4">
-                                            <i data-feather="check"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="h6">Animate CSS</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div>
-                                        <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
-                                            <i data-feather="check"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="h6">Integrated plugins</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 px-lg-4">
-                        <div class="card shadow-none">
-                            <div class="p-3 d-flex">
-                                <div>
-                                    <div>
-                                        <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
-                                            <i data-feather="check"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <span class="h6">Smart HTML markup</span>
-                                    <p class="text-sm text-muted mb-0">
-                                        Built to be customized.
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                {{-- <div class="py-4">
+                    <div class="row row-grid justify-content-between align-items-center">
+                        <div class="col-lg-5 order-lg-2">
+                            <h5 class="h3">Design the Best Affiliate Program Effortlessly</h5>
+                            <p class="lead my-4">
+                                Convert your customers and visitors into affiliates with our most innovative tools. 
+Simply copy our given code and paste it on your website to display an affiliate 
+form. This will attract more visitors to become affiliates and earn you some extra 
+cash. You can also set up an email flow for your shoppers after they purchase 
+something. These automated mails will allow you to stay connected with your 
+customers. We recommend inviting your shoppers to become your affiliate using 
+the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win 
+more affiliates. 
+                            </p>
+                        </div>
+                        <div class="col-lg-6 order-lg-1">
+                            <div class="card mb-0 mr-lg-5">
+                                <div class="card-body p-2">
+                                    <img  src="{{ asset('assets/img/dashboard.png') }}" class="img-fluid shadow rounded"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> --}}
             </div>
-        </section> --}}
+        </section>
         <section class="slice slice-lg bg-section-secondary">
             <div class="container text-center">
                 <div class="row justify-content-center mb-6" id="pricing">
@@ -589,7 +362,7 @@ customers bring in more shoppers. And this cycle continues.
                         <div class="col-lg-4 mb-5 mb-lg-0">
                             <!-- Theme's logo -->
                             <a href="index.html">
-                                <img class="footer-logo" alt="Image placeholder" src="{{ asset('assets/img/logo-white.png') }}" id="footer-logo"/>
+                                <img class="footer-logo"  src="{{ asset('assets/img/logo-white.png') }}" id="footer-logo"/>
                             </a>
                             <!-- Social -->
                             <ul class="nav mt-4">
