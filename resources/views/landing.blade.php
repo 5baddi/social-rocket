@@ -94,11 +94,13 @@
                     <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
                         <!-- Heading -->
                         <h1 class="display-4 text-center text-md-left mb-3">
-                            We convert all of your customers into <strong class="text-primary">motivated affiliates</strong>
+                            Let's bring more affiliates for <br/><strong class="text-primary">More sales</strong>
                         </h1>
                         <!-- Text -->
                         <p class="lead text-center text-md-left text-muted">
-                            Our custom thank you page + many other included features harmoniously convert your customers and store visitors into affiliates, working around the clock to bring you new sales.
+                            Our app offers you easy tools to shape your affiliate program and win more and 
+more affiliates. With SocialRocket, you can step back and see your newest 
+customers bring in more shoppers. And this cycle continues. 
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
@@ -264,7 +266,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> --}}
         <section class="slice slice-lg bg-section-dark pt-5 pt-lg-8">
             <!-- SVG separator -->
             <div class="shape-container shape-line shape-position-top shape-orientation-inverse">
@@ -279,116 +281,86 @@
                         <div class="col-md-10 text-center">
                             <div class="mt-4 mb-6">
                                 <h2 class="h1 text-white">
-                                    Are you ready to grow faster?
+                                    Why is {{ config('app.name') }} Better?
                                 </h2>
-                                <h4 class="text-white mt-3">Create your own experience</h4>
-                                <!-- Play button -->
-                                <a href="#" class="btn btn-primary btn-icon mt-4">Learn more</a>
+                                </h2>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-white text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0 text-white">No restriction on the number of affiliates, watch your revenue skyrocket with limitless affiliates.</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-white text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0 text-white">Offer up to 6 Payout methods to your affiliates for speedy withdrawal.</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-white text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0 text-white">Enjoy our Live chat support whenever you need us.</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-6">
+                            <ul class="list-unstyled mb-0">
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-white text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0 text-white">Customize the entire affiliate program with easy tools.</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="py-2">
+                                    <div class="d-flex align-items-center">
+                                        <div>
+                                            <div class="icon icon-shape bg-white text-white icon-sm rounded-circle mr-3">
+                                                <i class="fas fa-file-invoice"></i>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <span class="h6 mb-0 text-white">Track and analyze progress with a friendly and clean SocialRocket dashboard.</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="slice pt-0">
-            <div class="container position-relative zindex-100">
-                <div class="row">
-                    <div class="col-xl-4 col-sm-6 mt-n7">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-warning badge-pill">New</span>
-                                </div>
-                                <div class="pl-4">
-                                    <h5 class="lh-130">Listen to the nature</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6 mt-sm-n7">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-success badge-pill">Tips</span>
-                                </div>
-                                <div class="pl-4">
-                                    <h5 class="lh-130">Rules not to follow</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-12 col-sm-6 mt-xl-n7">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-danger badge-pill">Update</span>
-                                </div>
-                                <div class="pl-3">
-                                    <h5 class="lh-130">Beware the water</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-warning badge-pill">New</span>
-                                </div>
-                                <div class="pl-4">
-                                    <h5 class="lh-130">Listen to the nature</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-success badge-pill">Tips</span>
-                                </div>
-                                <div class="pl-4">
-                                    <h5 class="lh-130">Rules not to follow</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-md-12 col-sm-6">
-                        <div class="card">
-                            <div class="d-flex p-5">
-                                <div>
-                                    <span class="badge badge-danger badge-pill">Update</span>
-                                </div>
-                                <div class="pl-3">
-                                    <h5 class="lh-130">Beware the water</h5>
-                                    <p class="text-muted mb-0">
-                                        Design made simple with a clean and smart HTML markup.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="slice slice-lg">
+        {{-- <section class="slice slice-lg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
