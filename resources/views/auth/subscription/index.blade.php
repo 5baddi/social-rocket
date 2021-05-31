@@ -10,7 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}"/>
+        <link rel="stylesheet" href="{{ asset('assets/css/dashboard.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/responsive.css') }}"/>
     </head>
     <body>
@@ -36,7 +36,7 @@
                         <div class="list-plans-pricing" id="monthly">
                             @foreach ($packs as $pack)
                             <div class="item-plan">
-                                <h3 class="title-item-plan">{{ ucwords($pack->name) }} @if($pack->is_popular)<span>Most Popular</span>@endif</h3>
+                                <h3 class="title-item-plan">{{ ucwords($pack->name) }} @if($pack->is_popular)<span style="display: none;">Most Popular</span>@endif</h3>
                                 <div class="box-price-item-plan">
                                     <h4 class="title-price-item-plan">{{ $pack->isFixedPrice() ? $pack->symbol : '' }}{{ $pack->price }}{{ !$pack->isFixedPrice() ? '%' : '' }}</h4>
                                     <div class="text-price-item-plan">
