@@ -99,7 +99,7 @@
         </ul>
         <div class="row mb-4">
             <div class="col-12">
-                <img src="{{ asset('img/banner.png') }}"/>
+                <img src="{{ asset('assets/img/logo-white.mini.jpg') }}"/>
                 <div class="col-auto align-self-center mt-3">
                     <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-dark w-100">
                         Upgrade plan
