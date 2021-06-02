@@ -105,6 +105,11 @@
                         Upgrade plan
                     </a>
                 </div>
+                <div class="col-auto align-self-center mt-3">
+                    <a href="mailto:{{ env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }}" class="btn btn-white w-100">
+                        Contact Us
+                    </a>
+                </div>
                 <div class="col-auto align-self-center mt-1">
                     <a href="{{ route('dashboard.signout') }}" class="btn btn-white w-100">
                         Logout

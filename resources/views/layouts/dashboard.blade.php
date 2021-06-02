@@ -64,7 +64,7 @@
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     @yield('scripts')
     <script src="{{ asset('assets/js/tabler.min.js') }}"></script>
-    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={{ env('ZENDESK_KEY') }}"></script>
+    {{-- <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key={{ env('ZENDESK_KEY') }}"></script> --}}
     <script type="text/javascript">
     @yield('script')
     </script>
