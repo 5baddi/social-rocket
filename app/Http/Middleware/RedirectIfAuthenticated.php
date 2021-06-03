@@ -3,7 +3,6 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -36,10 +35,6 @@ class RedirectIfAuthenticated
             if (Auth::guard($guard)->check()) {
                 /** @var User */
                 $user = Auth::user();
-
-                $this->userService->update($user, [
-                    User::LAST_LOGIN_COLUMN    =>  Carbon::now()
-                ]);
 
                 if ($user->isSuperAdmin()) {
                     return redirect()->route('admin.stats');
