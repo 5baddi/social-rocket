@@ -61,6 +61,7 @@ class User extends Authenticatable
 
     /** @var array */
     protected $casts = [
+        self::LAST_LOGIN_COLUMN         => 'timestamp',
         self::IS_SUPERADMIN_COLUMN      => 'boolean',
     ];
 

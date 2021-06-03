@@ -25,7 +25,8 @@ class UsersSeeder extends Seeder
             User::LAST_LOGIN_COLUMN     =>  "trysocialrocket",
             User::EMAIL_COLUMN          =>  "webmaster@trysocialrocket.com",
             User::PASSWORD_COLUMN       =>  "trysocialrocket@test2021",  
-            User::IS_SUPERADMIN_COLUMN  =>  true
+            User::IS_SUPERADMIN_COLUMN  =>  true,
+            User::LAST_LOGIN_COLUMN     =>  null
         ]);
     }
 }
