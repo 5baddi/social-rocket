@@ -7,7 +7,7 @@
           <div class="page-pretitle">
             &nbsp;
           </div>
-          <h2 class="page-title">
+          <h2 class="page-title mt-4">
               @yield('title')
           </h2>
           @if (!request()->routeIs('dashboard'))
