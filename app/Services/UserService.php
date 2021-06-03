@@ -96,11 +96,12 @@ class UserService extends Service
     public function update(User $user, array $attributes): User
     {
         $attributes = collect([
-            User::FIRST_NAME_COLUMN     => $attributes[User::FIRST_NAME_COLUMN],
-            User::LAST_NAME_COLUMN      => $attributes[User::LAST_NAME_COLUMN],
-            User::EMAIL_COLUMN          => $attributes[User::EMAIL_COLUMN],
-            User::PHONE_COLUMN          => $attributes[User::PHONE_COLUMN],
-            User::PASSWORD_COLUMN       => $attributes[User::PASSWORD_COLUMN],
+            User::FIRST_NAME_COLUMN     => Arr::get($attributes, User::FIRST_NAME_COLUMN),
+            User::LAST_NAME_COLUMN      => Arr::get($attributes, User::LAST_NAME_COLUMN),
+            User::EMAIL_COLUMN          => Arr::get($attributes, User::EMAIL_COLUMN),
+            User::PHONE_COLUMN          => Arr::get($attributes, User::PHONE_COLUMN),
+            User::PASSWORD_COLUMN       => Arr::get($attributes, User::PASSWORD_COLUMN),
+            User::LAST_LOGIN_COLUMN     => Arr::get($attributes, User::LAST_LOGIN_COLUMN)
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {

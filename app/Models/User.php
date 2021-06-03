@@ -59,6 +59,11 @@ class User extends Authenticatable
         self::REMEMBER_TOLEN_COLUMN,
     ];
 
+    /** @var array */
+    protected $casts = [
+        self::IS_SUPERADMIN_COLUMN      => 'boolean',
+    ];
+
     public function store(): BelongsTo
     {
         return $this->belongsTo(Store::class);
@@ -95,6 +100,6 @@ class User extends Authenticatable
 
     public function isSuperAdmin(): bool
     {
-        return $this->getAttribute(self::IS_SUPERADMIN_COLUMN) === true;
+        return $this->getAttribute(self::IS_SUPERADMIN_COLUMN) === true && is_null($this->getAttribute(self::ROLE_COLUMN));
     }
 }

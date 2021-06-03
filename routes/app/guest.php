@@ -10,8 +10,8 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword as ResetPassword;
@@ -31,4 +31,9 @@ Route::middleware('guest')
         Route::post('/auth/token', ResetPassword\ResetTokenController::class)->name('auth.reset.token');
         Route::get('/reset/{token}', ResetPassword\EditController::class)->name('password');
         Route::post('/auth/password', ResetPassword\ResetPasswordController::class)->name('auth.reset.password');
+    });
+
+Route::middleware(['auth'])
+    ->group(function() {
+        Route::get('/logout', SignOutController::class)->name('.signout');
     });

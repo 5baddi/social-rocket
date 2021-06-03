@@ -6,7 +6,6 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
@@ -79,6 +78,4 @@ Route::middleware(['auth', 'has.subscription', 'store-owner'])
         })->name('.plan');
         Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
         Route::get('/plan/cancel', CancelSubscriptionController::class)->name('.plan.cancel');
-
-        Route::get('/logout', SignOutController::class)->name('.signout');
     });
