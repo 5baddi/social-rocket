@@ -14,6 +14,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use BADDIServices\SocialRocket\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\SocialRocket\Models\OAuth;
@@ -153,7 +154,7 @@ class ShopifyService extends Service
 
             return $data['shop'];
         } catch (Exception | ClientException | RequestException $ex) {
-            AppLogger::error($ex, $store, 'store:load-configurations');
+            AppLogger::setStore($store)->error($ex, 'store:load-configurations');
 
             throw new LoadConfigurationsFailed();
         }

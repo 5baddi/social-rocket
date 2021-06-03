@@ -42,7 +42,7 @@ class ResetPasswordController extends Controller
                     ->withInput()
                     ->withErrors($ex->errors());
         }  catch (Throwable $ex) {
-            AppLogger::error($ex, null, 'auth:send-reset-password', ['playload' => $request->all()]);
+            AppLogger::error($ex, 'auth:send-reset-password', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()

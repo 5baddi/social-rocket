@@ -48,7 +48,7 @@ class SendPayoutController extends DashboardController
                                 new Alert($errors->first())
                             );
         } catch (Throwable $ex) {
-            AppLogger::error($ex, $this->store, 'store:send-payment', ['playload' => $request->all()]);
+            AppLogger::error($ex, 'store:send-payment', ['playload' => $request->all()]);
 
             return redirect()->back()
                             ->with(

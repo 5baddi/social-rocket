@@ -48,6 +48,10 @@ class AuthenticateController extends Controller
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
 
+            if ($user->isSuperAdmin()) {
+                return redirect()->route('admin');
+            }
+
             return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $ex) {
             return redirect('/signin')->withInput()->withErrors($ex->errors());

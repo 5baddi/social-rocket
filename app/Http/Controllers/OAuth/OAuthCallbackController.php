@@ -60,14 +60,14 @@ class OAuthCallbackController extends Controller
             return redirect()
                         ->route('signup', ['store' => $store->id]);
         } catch (ValidationException $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:oauth-callback', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
             
             return redirect()
                         ->route('connect')
                         ->withInput()
                         ->withErrors($ex->errors());
         } catch (Throwable $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:oauth-callback', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
             
             return redirect()
                         ->route('connect')

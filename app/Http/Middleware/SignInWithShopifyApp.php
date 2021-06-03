@@ -81,7 +81,7 @@ class SignInWithShopifyApp
 
                         return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($storeOwner->getFullName()));
                     } catch (InvalidRequestSignatureException $ex) {
-                        AppLogger::error($ex, $store, 'store:login-via-app', ['playload' => $request->all()]);
+                        AppLogger::setStore($store)->error($ex, 'store:login-via-app', ['playload' => $request->all()]);
                     }
                 }
             }

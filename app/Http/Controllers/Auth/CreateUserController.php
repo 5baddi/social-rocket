@@ -56,11 +56,11 @@ class CreateUserController extends Controller
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:create-account', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
 
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:create-account', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
             
             return redirect()->route('signup', ['store' => $store->id])->withInput()->with("error", "Internal server error");
         }

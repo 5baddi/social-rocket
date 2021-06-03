@@ -141,13 +141,13 @@ class NewOrderController extends AffiliateController
         } catch (CustomerNotFound | OrderNotFound | ProductNotFound | CreatePriceRuleFailed $ex) {
             DB::rollBack();
 
-            AppLogger::error($ex, $store, 'affiliate:new-order', ['playload' => $request->all()]);
+            AppLogger::setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
 
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
             DB::rollBack();
 
-            AppLogger::error($ex, $store, 'affiliate:new-order', ['playload' => $request->all()]);
+            AppLogger::setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
             
             return response()->json('Internal server error', Response::HTTP_INTERNAL_SERVER_ERROR);
         }

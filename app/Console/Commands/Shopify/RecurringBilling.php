@@ -50,7 +50,7 @@ class RecurringBilling extends Command
 
             // TODO: to be impelement
         } catch (Throwable $ex) {
-            AppLogger::error($ex, null, 'command:shopify-get-paid');
+            AppLogger::error($ex, 'command:shopify-get-paid');
 
             return 0;
         }

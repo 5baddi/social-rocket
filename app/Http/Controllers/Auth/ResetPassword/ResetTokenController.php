@@ -58,7 +58,7 @@ class ResetTokenController extends Controller
                     ->withInput()
                     ->withErrors($ex->errors());
         }  catch (Throwable $ex) {
-            AppLogger::error($ex, null, 'auth:send-reset-token', ['playload' => $request->all()]);
+            AppLogger::error($ex, 'auth:send-reset-token', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()
