@@ -24,12 +24,4 @@ require 'app/landing.php';
 require 'app/guest.php';
 require 'app/affiliate.php';
 require 'app/storeOwner.php';
-
-Route::name('admin')
-    ->prefix('admin')
-    ->middleware(['admin'])
-    ->group(function() {
-        require 'admin/stats.php';
-        require 'admin/users.php';
-        require 'admin/webhooks.php';
-    });
+require 'admin.php';

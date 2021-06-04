@@ -6,6 +6,6 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Admin as Admin;
+use BADDIServices\SocialRocket\Http\Controllers\Admin\Stats as Stats;
 
-Route::get('/', Admin\Stats\IndexController::class)->name('.stats');
+Route::get('/', Stats\IndexController::class);

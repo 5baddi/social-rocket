@@ -35,5 +35,5 @@ Route::middleware('guest')
 
 Route::middleware(['auth'])
     ->group(function() {
-        Route::get('/logout', SignOutController::class)->name('.signout');
+        Route::get('/logout', SignOutController::class)->name('signout');
     });

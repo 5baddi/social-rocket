@@ -111,7 +111,7 @@
                     </a>
                 </div>
                 <div class="col-auto align-self-center mt-1">
-                    <a href="{{ route('dashboard.signout') }}" class="btn btn-white w-100">
+                    <a href="{{ route('signout') }}" class="btn btn-white w-100">
                         Logout
                     </a>
                 </div>
