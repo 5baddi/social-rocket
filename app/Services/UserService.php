@@ -9,15 +9,16 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Repositories\UserRespository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
-use Illuminate\Support\Arr;
 
 class UserService extends Service
 {
@@ -31,6 +32,11 @@ class UserService extends Service
     {
         $this->userRepository = $userRepository;
         $this->couponService = $couponService;
+    }
+
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return $this->userRepository->paginateWithRelations($page);
     }
 
     public function verifyPassword(User $user, string $password): bool

@@ -57,6 +57,11 @@ class Subscription extends ModelEntity
         self::CREATED_AT_COLUMN
     ];
 
+    /** @var array */
+    protected $casts = [
+        self::ACTIVATED_ON_COLUMN   => 'date',
+    ];
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -65,5 +70,10 @@ class Subscription extends ModelEntity
     public function pack(): BelongsTo
     {
         return $this->belongsTo(Pack::class);
+    }
+    
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class);
     }
 }

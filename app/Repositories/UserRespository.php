@@ -10,9 +10,17 @@ namespace BADDIServices\SocialRocket\Repositories;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRespository
 {
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return User::query()
+                    ->with(['store'])
+                    ->paginate(10, ['*'], 'ap', $page);
+    }
+
     public function exists(int $customerId): ?User
     {
         return User::query()

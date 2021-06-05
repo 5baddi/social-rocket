@@ -26,11 +26,13 @@
                     <div class="col-content-pricing col-lg-9">
                         <h2 class="title2">{{ !$currentPack ? 'Choose A Plan To Start Your 7 Day Trial' : 'Upgrade your plan' }}</h2>
                         <div class="text-center">
+                            @php
+                                if (Session::has('alert')) {
+                                    $alert = Session::get('alert');
+                                }
+                            @endphp
                             @if(isset($alert) && $alert->type == 'error')
-                            <p class="invalid-feedback">{{ $alert->message }}</p>
-                            @endif
-                            @if(Session::has('success'))
-                            <p class="valid-feedback" style="display: block;">{{ Session::get('success') }}</p>
+                            <p class="invalid-feedback" style="display: block;">{{ $alert->message }}</p>
                             @endif
                         </div>
                         <div class="list-plans-pricing" id="monthly">

@@ -54,7 +54,7 @@ class OrderStatusScriptController extends Controller
                 $setting = new StoreSetting();
             }
 
-            if (!$setting->thankyou_page) {
+            if (!$setting->thankyou_page || is_null($store->script_tag_id) || !$store->isEnabled()) {
                 return response(null, Response::HTTP_NO_CONTENT);
             }
 

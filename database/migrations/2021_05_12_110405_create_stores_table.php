@@ -18,6 +18,7 @@ class CreateStoresTable extends Migration
             $table->string('slug')->unique()->nullable(false);
             $table->bigInteger('script_tag_id')->nullable();
             $table->timestamp('connected_at')->nullable();
+            $table->boolean('enabled')->default(false);
             $table->softDeletes();
             $table->timestamps();
         });

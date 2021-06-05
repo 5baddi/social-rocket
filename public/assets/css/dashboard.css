@@ -382,6 +382,8 @@ header {
 }
 .uncheck:after {
     background-image: url("../img/uncheck.svg") !important;
+    width: 13px !important;
+    height: 13px !important;
 }
 
 .box-action-check {

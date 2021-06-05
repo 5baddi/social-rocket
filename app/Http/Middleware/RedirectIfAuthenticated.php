@@ -37,7 +37,7 @@ class RedirectIfAuthenticated
                 $user = Auth::user();
 
                 if ($user->isSuperAdmin()) {
-                    return redirect()->route('admin.stats');
+                    return redirect()->route('admin');
                 }
                 
                 return redirect(RouteServiceProvider::HOME)->with('success', 'Welcome back ' . strtoupper($user->first_name));

@@ -26,6 +26,7 @@ class User extends Authenticatable
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
+    public const BANNED_COLUMN = 'banned';
     public const COUPON_COLUMN = 'coupon';
     public const STORE_ID_COLUMN = 'store_id';
     public const DEFAULT_ROLE = 'affiliate';
@@ -61,8 +62,11 @@ class User extends Authenticatable
 
     /** @var array */
     protected $casts = [
-        self::LAST_LOGIN_COLUMN         => 'timestamp',
+        self::CREATED_AT                => 'datetime',
+        self::UPDATED_AT                => 'datetime',
+        self::LAST_LOGIN_COLUMN         => 'datetime',
         self::IS_SUPERADMIN_COLUMN      => 'boolean',
+        self::BANNED_COLUMN             => 'boolean',
     ];
 
     public function store(): BelongsTo
@@ -102,5 +106,10 @@ class User extends Authenticatable
     public function isSuperAdmin(): bool
     {
         return $this->getAttribute(self::IS_SUPERADMIN_COLUMN) === true && is_null($this->getAttribute(self::ROLE_COLUMN));
+    }
+    
+    public function isBanned(): bool
+    {
+        return $this->getAttribute(self::BANNED_COLUMN) === true;
     }
 }

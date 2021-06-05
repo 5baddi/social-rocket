@@ -12,13 +12,14 @@ use Exception;
 use App\Models\User;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
-use Illuminate\Database\Eloquent\Collection;
 
 class SubscriptionService extends Service
 {
@@ -150,5 +151,10 @@ class SubscriptionService extends Service
         $subscription->load('pack');
 
         $user->notify(new SubscriptionCancelled($subscription));
+    }
+
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return $this->subscriptionRepository->paginateWithRelations($page);
     }
 }

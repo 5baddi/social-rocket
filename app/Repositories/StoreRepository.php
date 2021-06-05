@@ -37,11 +37,18 @@ class StoreRepository
                     ->first();
     }
     
-    public function where(array $conditions): ?Store
+    public function first(array $conditions): ?Store
     {
         return Store::query()
                     ->where($conditions)
                     ->first();
+    }
+    
+    public function where(array $conditions): Collection
+    {
+        return Store::query()
+                    ->where($conditions)
+                    ->get();
     }
     
     public function isLinked(string $slug): ?Store
@@ -50,7 +57,7 @@ class StoreRepository
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
-                    ->whereNotNull(Store::CONNECTED_AT)
+                    ->whereNotNull(Store::CONNECTED_AT_COLUMN)
                     ->first();
     }
     

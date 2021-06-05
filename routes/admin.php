@@ -11,6 +11,7 @@ Route::name('admin')
     ->middleware(['auth', 'admin'])
     ->group(function() {
         require 'admin/stats.php';
+        require 'admin/stores.php';
         require 'admin/users.php';
         require 'admin/settings.php';
         require 'admin/webhooks.php';

@@ -76,6 +76,20 @@ class StoreService extends Service
         return $this->storeRepository->update($store, $attributes);
     }
     
+    public function enableStore(Store $store): Store
+    {
+        return $this->storeRepository->update($store, [
+            Store::ENABLED_COLUMN => true
+        ]);
+    }
+    
+    public function disableStore(Store $store): Store
+    {
+        return $this->storeRepository->update($store, [
+            Store::ENABLED_COLUMN => false
+        ]);
+    }
+    
     public function updateConfigurations(Store $store): Store
     {
         $configurations = collect($this->shopifyService->loadConfigurations($store));
@@ -88,7 +102,7 @@ class StoreService extends Service
             Store::COUNTRY_COLUMN,
         ]);
 
-        Arr::set($attributes, Store::CONNECTED_AT, Carbon::now());
+        Arr::set($attributes, Store::CONNECTED_AT_COLUMN, Carbon::now());
 
         return $this->storeRepository->update($store, $attributes->toArray());
     }
@@ -107,5 +121,12 @@ class StoreService extends Service
         }
 
         return $this->storeRepository->oauth($store->id, $attributes);
+    }
+
+    public function activeStores(): Collection
+    {
+        return $this->storeRepository->where([
+            [Store::CONNECTED_AT_COLUMN, '!=', null]
+        ]);
     }
 }

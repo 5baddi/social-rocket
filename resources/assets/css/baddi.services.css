@@ -90,3 +90,7 @@
 .navbar-vertical.navbar-expand-lg .navbar-brand {
     padding: 2.3rem 0 !important;
 }
+
+svg {
+    margin: 0 !important;
+}

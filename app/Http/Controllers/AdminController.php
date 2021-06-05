@@ -30,7 +30,7 @@ class AdminController extends BaseController
     /** @var StatsService */
     protected $statsService;
 
-    public function __construct(UserService $userService, StatsService $statsService)
+    public function __construct()
     {
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
@@ -38,7 +38,7 @@ class AdminController extends BaseController
             return $next($request);
         });
 
-        $this->userService = $userService;
-        $this->statsService = $statsService;
+        $this->userService = app(UserService::class);
+        $this->statsService = app(StatsService::class);
     }
 }
