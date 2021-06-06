@@ -31,12 +31,14 @@
                 <!-- Collapse -->
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                        @if (request()->routeIs('landing'))
                         <li class="nav-item ">
                             <a class="nav-link" href="#how-it-work">How it works</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="#pricing">Pricing</a>
                         </li>
+                        @endif
                         <li class="nav-item ">
                             <a class="nav-link" href="#">Blog</a>
                         </li>

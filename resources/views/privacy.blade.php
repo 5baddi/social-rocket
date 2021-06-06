@@ -127,12 +127,8 @@ We strive to take appropriate security measures to protect against unauthorized 
                         {{ config('app.name') }} welcomes your questions or comments regarding this Statement of Privacy. If you believe that {{ config('app.name') }} has not adhered to this Statement, please contact {{ config('app.name') }} at:
                     </p>
                     <p>{{ config('app.name') }}</p>
-                    <p>here</p>
-                    <p>here zip</p>
                     <p>Email Address:</p>
-                    <p>here</p>
-                    <p>Telephone number:</p>
-                    <p>here</p>
+                    <p><a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }} target="_blank"><strong>{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }}</strong></a></p>
                     <p>Effective as of May 30, 2021</p>
                 </p>
             </div>
