@@ -14,6 +14,8 @@ class IndexController extends ControllersAdminController
 {
     public function __invoke()
     {
-        return view('admin.users.index');
+        return view('admin.settings.index', [
+            'title'     =>  'Application settings'
+        ]);
     }
 }

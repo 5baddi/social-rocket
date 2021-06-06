@@ -15,4 +15,6 @@ Route::name('admin')
         require 'admin/users.php';
         require 'admin/settings.php';
         require 'admin/webhooks.php';
+
+        Route::get('/logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index')->name('.logs');
     });

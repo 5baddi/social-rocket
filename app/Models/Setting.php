@@ -20,6 +20,7 @@ class Setting extends ModelEntity
     public const RANDOM_DISCOUNT_FORMAT = 'random';
     public const DEFAULT_COLOR = '#000000';
     public const DEFAULT_CURRENCY = 'USD';
+    public const DEFAULT_PAYMENT_METHOD = 'paypal';
 
     public const STORE_ID_COLUMN = 'store_id';
     public const CURRENCY_COLUMN = 'currency';

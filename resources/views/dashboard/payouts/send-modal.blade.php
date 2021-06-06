@@ -14,7 +14,7 @@
               </div>
               <div class="mt-3">
                 <label class="form-label">Payout method</label>
-                <input type="hidden" name="payout_method" value="{{ $commission->payout_method }}"/>
+                <input type="hidden" name="payout_method" value="{{ $commission->payout_method ?? 'bank' }}"/>
                 <select class="form-select" id="select-payout-method">
                   <option value="bank" @if($commission->payout_method === 'bank')selected @endif selected="selected">Bank Transfer</option>
                   <option value="paypal" @if($commission->payout_method === 'paypal')selected @endif>PayPal</option>

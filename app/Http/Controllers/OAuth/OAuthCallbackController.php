@@ -56,6 +56,7 @@ class OAuthCallbackController extends Controller
             abort_unless($oauth instanceof OAuth, Response::HTTP_BAD_REQUEST, 'Something going wrong during authentification');
 
             $this->storeService->updateConfigurations($store);
+            $this->storeService->enableStore($store);
 
             return redirect()
                         ->route('signup', ['store' => $store->id]);

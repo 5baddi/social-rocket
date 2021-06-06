@@ -50,6 +50,28 @@
                                 </svg>
                             </a>
                             @endif
+                            <form action="{{ route('admin.users.ban', ['user' => $user->id]) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @if(!$user->isBanned())
+                            <button class="btn btn-danger" title="Ban">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <circle cx="12" cy="16" r="1"></circle>
+                                <path d="M8 11v-4a4 4 0 0 1 8 0v4"></path>
+                              </svg>
+                            </button>
+                            @else
+                            <button type="submit" class="btn btn-dark" title="Cancel the ban">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock-open" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <rect x="5" y="11" width="14" height="10" rx="2"></rect>
+                                <circle cx="12" cy="16" r="1"></circle>
+                                <path d="M8 11v-5a4 4 0 0 1 8 0"></path>
+                              </svg>
+                            </button>
+                            @endif
+                            </form>
                         </td>
                     </tr>
                   @endforeach

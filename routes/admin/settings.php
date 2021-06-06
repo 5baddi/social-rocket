@@ -8,4 +8,9 @@
 
 use BADDIServices\SocialRocket\Http\Controllers\Admin\Settings as Settings;
 
-Route::get('/settings', Settings\IndexController::class)->name('.settings');
+
+Route::prefix('settings')
+    ->name('.settings')
+    ->group(function() {
+        Route::get('/', Settings\IndexController::class);
+    });

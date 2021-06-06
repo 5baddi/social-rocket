@@ -116,6 +116,13 @@ class UserService extends Service
 
         return $this->userRepository->update($user, $filterAttributes->toArray());
     }
+    
+    public function ban(User $user): User
+    {
+        return $this->userRepository->update($user, [
+            User::BANNED_COLUMN => !$user->isBanned()
+        ]);
+    }
 
     public function welcomeMail(User $user): void
     {

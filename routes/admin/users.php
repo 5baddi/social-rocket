@@ -8,4 +8,10 @@
 
 use BADDIServices\SocialRocket\Http\Controllers\Admin\Users as Users;
 
-Route::get('/accounts', Users\IndexController::class)->name('.users');
+
+Route::prefix('accounts')
+    ->name('.users')
+    ->group(function() {
+        Route::get('/', Users\IndexController::class);
+        Route::post('/{user}/ban', Users\BanController::class)->name('.ban');
+    });
