@@ -114,6 +114,10 @@ class UserService extends Service
             return $value !== null;
         });
 
+        if ($attributes->has(User::PASSWORD_COLUMN)) {
+            $attributes->put(User::PASSWORD_COLUMN, Hash::make($attributes->get(User::PASSWORD_COLUMN)));
+        }
+
         return $this->userRepository->update($user, $filterAttributes->toArray());
     }
     

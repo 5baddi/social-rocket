@@ -213,35 +213,44 @@ style="overflow: visible; height: auto;">
                                                                 <li class="payment-method-list__item"
                                                                     style="text-align: center; ">
                                                                     <div style="width: 100%;">
-                                                                        <p style="">Share now and start earning
-                                                                            <img
-                                                                                src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/icon-arrow-bottom2.png"
-                                                                                alt="Arrow pointing down"
-                                                                                style="display: inline-block; vertical-align: middle; width: 13px; " />
+                                                                        <p style="">
+                                                                            Share now and start earning
+                                                                            <br/>
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-down" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                                                <line x1="18" y1="13" x2="12" y2="19"></line>
+                                                                                <line x1="6" y1="13" x2="12" y2="19"></line>
+                                                                            </svg>
                                                                         </p>
                                                                     </div>
                                                                 </li>
                                                                 <li class="payment-method-list__item"
                                                                     style="text-align: center; ">
-                                                                    <div style="width: 100%;"><a
-                                                                            style="color: #fff; display: inline-block; padding: 8px 16px 8px 13px; background-color: #3C57B3; border-radius: 30px; cursor: pointer; width: 88%;"
-                                                                            onclick="window.shareFacebook()">
-                                                                            <img
-                                                                                src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/facebook.svg"
-                                                                                alt="Facebook logo"
-                                                                                style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle;">
-                                                                                Share
-                                                                                </a>
-                                                                            </img>
+                                                                    <div style="width: 100%;">
+                                                                        <a
+                                                                        style="color: #fff; display: inline-block; padding: 8px 16px 8px 13px; background-color: #3C57B3; border-radius: 30px; cursor: pointer; width: 88%;"
+                                                                        onclick="window.shareFacebook()">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-facebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                                <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+                                                                            </svg>
+                                                                            Share
+                                                                        </a>
+                                                                    </div>
                                                                 </li>
                                                                 <li class="payment-method-list__item"
                                                                     style="text-align: center; ">
-                                                                    <div style="width: 100%;"><a
+                                                                    <div style="width: 100%;">
+                                                                        <a
                                                                             style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #000000; border-radius: 30px; cursor: pointer; width: 88%;"
-                                                                            onclick="window.shareTwitter()"><img
-                                                                                src="https://d2x5l5rgp1imsp.cloudfront.net/6b57444d-e66e-46f8-92f7-0cf65870724a/img/twitter.svg"
-                                                                                alt="Twitter logo"
-                                                                                style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; ">Share</a>
+                                                                            onclick="window.shareTwitter()">
+                                                                            <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                                <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+                                                                            </svg>
+                                                                            Share
+                                                                        </a>
                                                                     </div>
                                                                 </li>
                                                                 <li class="payment-method-list__item"
