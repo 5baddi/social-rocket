@@ -17,7 +17,6 @@ use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -27,13 +26,9 @@ class CreateUserController extends Controller
     /** @var UserService */
     private $userService;
 
-    /** @var StoreService */
-    private $storeService;
-
-    public function __construct(UserService $userService, StoreService $storeService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->storeService = $storeService;
     }
 
     public function __invoke(Store $store, SignUpRequest $request)
