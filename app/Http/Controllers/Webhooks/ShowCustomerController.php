@@ -43,8 +43,12 @@ class ShowCustomerController extends BaseController
             abort(Response::HTTP_NOT_FOUND, 'Shop not found');
         }
 
-        return response()->json([
+        // TODO: fetch requested orders
 
+        return response()->json([
+            'shop'      =>  [],
+            'customer'  =>  [],
+            // TODO: return response data
         ]);
     }
 }
