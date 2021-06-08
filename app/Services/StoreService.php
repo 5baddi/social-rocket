@@ -129,4 +129,9 @@ class StoreService extends Service
             [Store::CONNECTED_AT_COLUMN, '!=', null]
         ]);
     }
+    
+    public function delete(Store $store): bool
+    {
+        return $this->storeRepository->delete($store->id);
+    }
 }

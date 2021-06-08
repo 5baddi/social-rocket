@@ -54,6 +54,11 @@ class UserService extends Service
         return $this->userRepository->findByEmail($email);
     }
     
+    public function findByCustomerId(int $customerId): ?User
+    {
+        return $this->userRepository->findByCustomerId($customerId);
+    }
+    
     public function getStoreOwner(Store $store): ?User
     {
         return $this->userRepository->getStoreOwner($store->id);
@@ -119,6 +124,11 @@ class UserService extends Service
         }
 
         return $this->userRepository->update($user, $filterAttributes->toArray());
+    }
+    
+    public function delete(User $user): bool
+    {
+        return $this->userRepository->delete($user->id);
     }
     
     public function ban(User $user): User

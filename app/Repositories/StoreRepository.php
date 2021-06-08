@@ -31,6 +31,7 @@ class StoreRepository
     public function findBySlug(string $slug): ?Store
     {
         return Store::query()
+                    ->with(['user'])
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
@@ -103,5 +104,12 @@ class StoreRepository
                         ], 
                         $attributes
                     );
+    }
+
+    public function delete(string $id): bool
+    {
+        return Store::query()
+                    ->find($id)
+                    ->delete();
     }
 }

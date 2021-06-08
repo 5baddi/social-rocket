@@ -32,7 +32,7 @@ class SignInWithShopifyApp
     /** @var UserService */
     private $userService;
 
-    public function __construct(ShopifyService $shopifyService, storeService $storeService, UserService $userService)
+    public function __construct(ShopifyService $shopifyService, StoreService $storeService, UserService $userService)
     {
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;

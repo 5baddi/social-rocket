@@ -39,6 +39,16 @@ class UserRespository
                     ->first();
     }
     
+    public function findByCustomerId(int $customerId): ?User
+    {
+        return User::query()
+                    ->with(['store'])
+                    ->where([
+                        User::CUSTOMER_ID_COLUMN => $customerId
+                    ])
+                    ->first();
+    }
+    
     public function getStoreOwner(string $storeId): ?User
     {
         return User::query()
@@ -85,5 +95,12 @@ class UserRespository
         }
 
         return false;
+    }
+    
+    public function delete(string $id): bool
+    {
+        return User::query()
+                    ->find($id)
+                    ->delete();
     }
 }
