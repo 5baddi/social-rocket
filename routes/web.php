@@ -25,3 +25,4 @@ require 'app/guest.php';
 require 'app/affiliate.php';
 require 'app/storeOwner.php';
 require 'admin.php';
+require 'webhooks.php';
