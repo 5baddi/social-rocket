@@ -1,8 +1,15 @@
 {
-    "name": "laravel/laravel",
+    "name": "baddiservices/socialrocket",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "Easy tools to shape your affiliate program.",
+    "keywords": ["tool", "shopify", "affiliate"],
+    "authors": [
+        {
+            "name": "BADDI Services",
+            "email": "services@baddi.info",
+            "homepage": "https://baddi.info"
+        }
+    ],
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
