@@ -83,6 +83,7 @@
                 <span class="nav-link-title">Settings</span>
             </a>
           </li>
+          @if (config('rocket.help_url'))
           <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -96,6 +97,7 @@
                 <span class="nav-link-title">Help</span>
             </a>
           </li>
+          @endif
         </ul>
         <div class="row mb-4">
             <div class="col-12">

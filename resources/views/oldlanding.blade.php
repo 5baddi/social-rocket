@@ -244,7 +244,7 @@
                 </a>
                 <div class="break-point-footer"></div>
                 <ul class="links-booter">
-                    <li><a href="{{ env('HELP_URL') }}">Contact Us</a></li>
+                    <li><a href="{{ config('rocket.help_url') }}">Contact Us</a></li>
                     {{-- <li><a href="#">FAQ</a></li> --}}
                     {{-- <li><a href="https://socialsnowball.io/privacy">Privacy</a></li> --}}
                     {{-- <li><a href="https://socialsnowball.io/terms">Terms Of Use</a></li> --}}

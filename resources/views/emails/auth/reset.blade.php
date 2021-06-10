@@ -61,7 +61,7 @@
 
         <p style="font-size: 14px;">Want to get your first sale but don’t
             know where to start? Check out this epic blog post we wrote on
-            how to make BANK as a brand affiliate: <a href="{{ env('HELP_URL') }}" target="_blank">{{ env('HELP_URL') }}</a>
+            how to make BANK as a brand affiliate: <a href="{{ config('rocket.help_url') }}" target="_blank">{{ config('rocket.help_url') }}</a>
         </p>
 
         <p style="font-size: 14px;">Have more questions? Feel free to send

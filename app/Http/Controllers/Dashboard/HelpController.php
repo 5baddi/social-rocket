@@ -14,6 +14,10 @@ class HelpController extends Controller
 {
     public function __invoke()
     {
-        return redirect(env('HELP_URL'));
+        if (!config('rocket.help_url')) {
+            return redirect()->route('landing');
+        }
+        
+        return redirect(config('rocket.help_url'));
     }
 }

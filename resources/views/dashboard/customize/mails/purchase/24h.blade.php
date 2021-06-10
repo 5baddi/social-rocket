@@ -46,7 +46,7 @@
                                                                     <b>10%</b>
                                                                 to a payout method of your choice! It’s that easy.</p>
 
-        <p style="font-size: 14px;">Make sure you check out the super quick and easy to read blog post we wrote on how to make BANK as a brand affiliate: <a href="{{ env('HELP_URL') }}" target="_blank">{{ env('HELP_URL') }}</a></p>
+        <p style="font-size: 14px;">Make sure you check out the super quick and easy to read blog post we wrote on how to make BANK as a brand affiliate: <a href="{{ config('rocket.help_url') }}" target="_blank">{{ config('rocket.help_url') }}</a></p>
 
         <p style="font-size: 14px;">Once you get your first sale, we will email you with instructions to finish setting up your account and collect your money!</p>
     </td>
