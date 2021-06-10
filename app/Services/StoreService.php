@@ -8,15 +8,17 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
 
 class StoreService extends Service
 {
@@ -26,10 +28,14 @@ class StoreService extends Service
     /** @var ShopifyService */
     private $shopifyService;
 
-    public function __construct(StoreRepository $storeRepository, ShopifyService $shopifyService)
+    /** @var UserService */
+    private $userService;
+
+    public function __construct(StoreRepository $storeRepository, ShopifyService $shopifyService, UserService $userService)
     {
         $this->storeRepository = $storeRepository;
         $this->shopifyService = $shopifyService;
+        $this->userService = $userService;
     }
 
     public function all(): Collection
@@ -51,7 +57,12 @@ class StoreService extends Service
     {
         $store = $this->storeRepository->isLinked($slug);
 
-        if(!$store instanceof Store) {
+        if (!$store instanceof Store) {
+            return false;
+        }
+
+        $user = $this->userService->getStoreOwner($store);
+        if (!$user instanceof User) {
             return false;
         }
 
