@@ -48,11 +48,11 @@
                                         Privacy
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     <a class="nav-link" href="{{ route('privacy') }}">
                                         Terms
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </div>
