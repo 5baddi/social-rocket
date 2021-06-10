@@ -15,7 +15,7 @@ class CreateStoresTable extends Migration
     {
         Schema::create('stores', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->string('slug')->nullable(false);
+            $table->string('slug')->unique()->nullable(false);
             $table->bigInteger('script_tag_id')->nullable();
             $table->timestamp('connected_at')->nullable();
             $table->boolean('enabled')->default(false);

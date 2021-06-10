@@ -9,16 +9,13 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends ModelEntity
-{
-    use SoftDeletes;
-    
+{   
     /** @var string */
     public const TABLE_NAME = 'stores';
     public const NAME_COLUMN = 'name';
