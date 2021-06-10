@@ -91,7 +91,7 @@ class StoreService extends Service
     {
         return $this->storeRepository->update($store, [
             Store::ENABLED_COLUMN => true
-        ]);
+        ]) !== false;
     }
     
     public function disableStore(Store $store): Store
