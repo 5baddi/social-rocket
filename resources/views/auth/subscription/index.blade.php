@@ -58,6 +58,11 @@
                             </div>
                             @endforeach
                         </div>
+                        @if (!$currentPack)
+                        <div class="text-center">
+                            <a href="{{ route('subscription.cancel') }}" onclick="return confirm('Are you sure you want to delete your account?')">Delete your account!</a>
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
