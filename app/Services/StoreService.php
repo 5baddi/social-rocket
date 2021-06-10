@@ -87,7 +87,7 @@ class StoreService extends Service
         return $this->storeRepository->update($store, $attributes);
     }
     
-    public function enableStore(Store $store): Store
+    public function enableStore(Store $store): bool
     {
         return $this->storeRepository->update($store, [
             Store::ENABLED_COLUMN => true

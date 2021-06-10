@@ -72,7 +72,7 @@ class OAuthCallbackController extends Controller
             
             return redirect()
                         ->route('connect')
-                        ->with('error', $ex->getMessage());
+                        ->with('error', 'Internal server error');
         }
     }
 }
