@@ -7,5 +7,8 @@
  */
 
 return [
-    'help_url'  =>  config('rocket.help_url')
+    'support_email'     =>  env('SUPPORT_EMAIL'),
+    'help_url'          =>  env('HELP_URL'),
+    'setup_guide'       =>  env('SETUP_GUIDE'),
+    'zendesk_key'       =>  env('ZENDESK_KEY')
 ];

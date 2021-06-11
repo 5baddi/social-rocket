@@ -83,6 +83,6 @@ You can follow next [steps](https://www.shopify.co.uk/partners/blog/how-to-build
 
     `Set your zendesk help/guide page url`
 
-- GUIDE_SETUP
+- SETUP_GUIDE
 
     `Set setup guide page url will be included in affiliate iframe settings`

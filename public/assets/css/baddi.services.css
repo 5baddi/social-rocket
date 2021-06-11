@@ -94,3 +94,7 @@
 svg {
     margin: 0 !important;
 }
+
+.invalid-feedback {
+    display: block !important;
+}

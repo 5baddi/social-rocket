@@ -13,4 +13,5 @@ Route::prefix('settings')
     ->name('.settings')
     ->group(function() {
         Route::get('/', Settings\IndexController::class);
+        Route::post('/', Settings\UpdateSettingsController::class)->name('.update');
     });
