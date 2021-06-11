@@ -72,6 +72,11 @@ class Store extends ModelEntity
         return $this->hasMany(User::class);
     }
 
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function isEnabled(): bool
     {
         return $this->getAttribute(self::ENABLED_COLUMN) === true;

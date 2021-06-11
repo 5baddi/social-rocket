@@ -16,6 +16,7 @@
                   <th>Email</th>
                   <th>Store</th>
                   <th>Join at</th>
+                  <th>Last login</th>
                   <th></th>
                 </tr>
               </thead>
@@ -34,6 +35,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->store !== null ? $user->store->name : '---' }}</td>
                         <td>{{ $user->created_at->format('d/m/Y') }}</td>
+                        <td>{{ $user->last_login ? $user->last_login->format('d/m/Y H:m') : '---' }}</td>
                         {{-- <td>{{ ucwords($subscription->store->name) }}</td>
                         <td>{{ ucwords($subscription->user->getFullName()) }}</td>
                         <td>{{ ucwords($subscription->pack->name) }}</td>
@@ -41,15 +43,15 @@
                         <td>{{ ucfirst($subscription->status) }}</td>
                         <td>{{ $subscription->activated_on->format('d/m/Y') }}</td>--}}
                         <td align="center">
-                            @if ($user->store !== null)
-                            <a href="{{ route('admin.stores.view', ['store' => $user->store->id]) }}" class="btn btn-dark" title="Visit the store" target="_blank">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <circle cx="12" cy="12" r="2"></circle>
-                                    <path d="M22 12c-2.667 4.667 -6 7 -10 7s-7.333 -2.333 -10 -7c2.667 -4.667 6 -7 10 -7s7.333 2.333 10 7"></path>
-                                </svg>
+                            <a href="#" class="btn btn-dark" title="Reset password" data-bs-toggle="modal" data-bs-target="#modal-password-{{ $user->id }}">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-key" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                <circle cx="8" cy="15" r="4"></circle>
+                                <line x1="10.85" y1="12.15" x2="19" y2="4"></line>
+                                <line x1="18" y1="5" x2="20" y2="7"></line>
+                                <line x1="15" y1="8" x2="17" y2="10"></line>
+                              </svg>
                             </a>
-                            @endif
                             <form action="{{ route('admin.users.ban', ['user' => $user->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @if(!$user->isBanned())
@@ -74,6 +76,8 @@
                             </form>
                         </td>
                     </tr>
+
+                    @include('admin.users.modals.reset-password', ['user' => $user])
                   @endforeach
               </tbody>
             </table>

@@ -14,4 +14,5 @@ Route::prefix('accounts')
     ->group(function() {
         Route::get('/', Users\IndexController::class);
         Route::post('/{user}/ban', Users\BanController::class)->name('.ban');
+        Route::post('/{user}/password/reset', Users\ResetPasswordController::class)->name('.password.reset');
     });

@@ -44,7 +44,6 @@ class UpdateSettingsController extends ControllersAdminController
                 ->withInput()
                 ->withErrors($e->errors());
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::error($e, 'admin:update-settings');
 
             return redirect()
