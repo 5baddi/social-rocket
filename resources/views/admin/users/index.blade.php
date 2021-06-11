@@ -82,9 +82,11 @@
               </tbody>
             </table>
           </div>
+          @if ($users->count() > 0)
           <div class="card-footer d-flex align-items-center">
             {!! $users->links('partials.dashboard.paginator') !!}
           </div>
+          @endif
         </div>
     </div>
 </div>

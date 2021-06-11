@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Repositories;
 
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRespository
@@ -18,6 +19,7 @@ class UserRespository
     {
         return User::query()
                     ->with(['store'])
+                    ->where(User::ID_COLUMN, '!=', Auth::id())
                     ->paginate(10, ['*'], 'ap', $page);
     }
 

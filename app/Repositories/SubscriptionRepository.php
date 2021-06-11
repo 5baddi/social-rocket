@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Repositories;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Models\Subscription;
+use Illuminate\Support\Facades\Auth;
 
 class SubscriptionRepository
 {
@@ -18,6 +19,7 @@ class SubscriptionRepository
     {
         return Subscription::query()
                     ->with(['user', 'pack', 'store'])
+                    ->where(Subscription::USER_ID_COLUMN, '!=', Auth::id())
                     ->paginate(10, ['*'], 'ap', $page);
     }
 

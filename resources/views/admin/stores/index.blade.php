@@ -76,9 +76,11 @@
               </tbody>
             </table>
           </div>
+          @if ($subscriptions->count() > 0)
           <div class="card-footer d-flex align-items-center">
             {!! $subscriptions->links('partials.dashboard.paginator') !!}
           </div>
+          @endif
         </div>
     </div>
 </div>
