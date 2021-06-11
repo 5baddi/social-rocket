@@ -22,6 +22,7 @@ class User extends Authenticatable
     public const PASSWORD_COLUMN = 'password';
     public const CUSTOMER_ID_COLUMN = 'customer_id';
     public const LAST_LOGIN_COLUMN = 'last_login';
+    public const VERIFIED_AT_COLUMN = 'verified_at';
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
@@ -45,6 +46,7 @@ class User extends Authenticatable
         self::PHONE_COLUMN,
         self::PASSWORD_COLUMN,
         self::LAST_LOGIN_COLUMN,
+        self::VERIFIED_AT_COLUMN,
         self::CUSTOMER_ID_COLUMN,
         self::REMEMBER_TOLEN_COLUMN,
         self::ROLE_COLUMN,
@@ -64,6 +66,7 @@ class User extends Authenticatable
         self::CREATED_AT                => 'datetime',
         self::UPDATED_AT                => 'datetime',
         self::LAST_LOGIN_COLUMN         => 'datetime',
+        self::VERIFIED_AT_COLUMN        => 'datetime',
         self::IS_SUPERADMIN_COLUMN      => 'boolean',
         self::BANNED_COLUMN             => 'boolean',
     ];

@@ -112,7 +112,8 @@ class UserService extends Service
             User::EMAIL_COLUMN          => Arr::get($attributes, User::EMAIL_COLUMN),
             User::PHONE_COLUMN          => Arr::get($attributes, User::PHONE_COLUMN),
             User::PASSWORD_COLUMN       => Arr::get($attributes, User::PASSWORD_COLUMN),
-            User::LAST_LOGIN_COLUMN     => Arr::get($attributes, User::LAST_LOGIN_COLUMN)
+            User::LAST_LOGIN_COLUMN     => Arr::get($attributes, User::LAST_LOGIN_COLUMN),
+            User::VERIFIED_AT_COLUMN    => Arr::get($attributes, User::VERIFIED_AT_COLUMN)
         ]);
 
         $filterAttributes = $attributes->filter(function($value, $key) {

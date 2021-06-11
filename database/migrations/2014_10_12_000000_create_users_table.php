@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->string('coupon', 100)->nullable();
             $table->enum('role', User::ROLES)->nullable();
             $table->timestamp('last_login')->nullable();
+            $table->timestamp('verified_at')->nullable();
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();
