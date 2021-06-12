@@ -14,6 +14,7 @@ use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Product;
 use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\SocialRocket\Models\Earning;
 use BADDIServices\SocialRocket\Models\OrderProduct;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\UserService;
@@ -234,5 +235,19 @@ class StatsService extends Service
                 Subscription::STATUS_COLUMN => Subscription::ACTIVE_STATUS
             ]
         );
+    }
+
+    public function getSubscriptionsEarningsChart(CarbonPeriod $period): array
+    {
+        $earnings = $this->earningService->whereInPeriod($period);
+
+        $filteredEarnings = $earnings->map(function (Earning $earning) {
+            return [
+                'x' => $earning->created_at->toDateString(),
+                'y' => number_format($earning->total, 2, '.', '')
+            ];
+        });
+        
+        return $filteredEarnings->toArray();
     }
 }

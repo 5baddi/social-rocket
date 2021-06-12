@@ -9,7 +9,9 @@
 namespace BADDIServices\SocialRocket\Repositories;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Earning;
 use BADDIServices\SocialRocket\Models\Subscription;
 
@@ -77,5 +79,16 @@ class EarningRepository
                 $endDate
             )
             ->sum(Earning::AMOUNT_COLUMN);
+    }
+
+    public function whereInPeriod(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return Earning::query()
+            ->select(DB::raw('SUM(amount) as total'), Earning::CREATED_AT, DB::raw('DATE(created_at) as date'))
+            ->where(Earning::CREATED_AT, '>=', $startDate)
+            ->where(Earning::CREATED_AT, '<=', $endDate)
+            ->groupBy('date')
+            ->orderBy(Earning::CREATED_AT, 'ASC')
+            ->get();
     }
 }

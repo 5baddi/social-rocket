@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Services;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Earning;
 use BADDIServices\SocialRocket\Repositories\EarningRepository;
@@ -81,6 +82,14 @@ class EarningService extends Service
         return $this->earningRepository->getEarnings(
             $period->copy()->getStartDate(),
             $period->copy()->getEndDate()
+        );
+    }
+
+    public function whereInPeriod(CarbonPeriod $period): Collection
+    {
+        return $this->earningRepository->whereInPeriod(
+            $period->getStartDate(),
+            $period->getEndDate()
         );
     }
 }

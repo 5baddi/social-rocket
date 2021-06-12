@@ -182,8 +182,6 @@
       $('#periodForm').submit();
     });
 
-
-
     window.ApexCharts && (new ApexCharts(document.getElementById('earnings-chart'), {
       chart: {
         type: "area",

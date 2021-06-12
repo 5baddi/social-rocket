@@ -34,6 +34,7 @@ class IndexController extends ControllersAdminController
             'active_stores_count'           =>  sprintf('%02d', $this->statsService->getNewActiveStoresCount($period)),
             'earnings'                      =>  $this->statsService->getSubscriptionsEarnings($period),
             'active_subscriptions_count'    =>  sprintf('%02d', $this->statsService->getActiveSubscriptionsCount($period)),
+            'earningsChart'                 =>  $this->statsService->getSubscriptionsEarningsChart($period),
         ]);
     }
 }

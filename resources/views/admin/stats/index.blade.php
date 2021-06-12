@@ -136,6 +136,23 @@
             </div>
         </div>
     </div>
+    <div class="row row-cards">
+      <div class="col-12 mt-4">
+        <div class="card">
+          <div class="card-header align-items-center">
+            <div class="col-auto">
+              <h4 class="card-title">Overview</h4>
+            </div>
+            <div class="col-auto ms-auto">
+              <h4 class="card-title text-muted">{{ \Carbon\Carbon::parse($startDate)->format('d F') }} - {{ \Carbon\Carbon::parse($endDate)->format('d F Y') }}</h4>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="chart-lg mt-4" id="earnings-chart"></div>
+          </div>
+        </div>
+      </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -157,5 +174,58 @@
       $('#endDate').val(picker.endDate.format('YYYY-MM-DD'));
       $('#periodForm').submit();
     });
+
+    window.ApexCharts && (new ApexCharts(document.getElementById('earnings-chart'), {
+      chart: {
+        type: "area",
+        fontFamily: 'inherit',
+        height: 340,
+        parentHeightOffset: 0,
+        stacked: true,
+        redrawOnParentResize: true,
+        zoom: {
+          enabled: false
+        }
+      },
+      dataLabels: {
+        enabled: false
+      },
+      stroke: {
+        curve: 'smooth',
+      },
+      series: [{
+        name: "Revenue",
+        data: {!! json_encode($earningsChart) !!}
+      }],
+      markers: {
+        size: 0
+      },
+      tooltip: {
+        enabled: true,
+        shared: true,
+        followCursor: false,
+        intersect: false,
+        inverseOrder: false,
+        fillSeriesColor: false,
+      },
+      grid: {
+        row: {
+            colors: ['#f3f3f3', 'transparent'],
+            opacity: 0.5
+        },
+      },
+      colors: ["#000000"],
+      xaxis: {
+        type: 'datetime',
+        min: new Date("{{ $startDate }}").getTime(),
+        max: new Date("{{ $endDate }}").getTime(),
+        labels: {
+          format: 'dd MMM',
+          show: true,
+          hideOverlappingLabels: true,
+          showDuplicates: false,
+        },
+      },
+    })).render();
   });
 @endsection
