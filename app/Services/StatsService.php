@@ -55,7 +55,7 @@ class StatsService extends Service
         UserService $userService,
         StoreService $storeService,
         SubscriptionService $subscriptionService,
-        EarningService $earningService,
+        EarningService $earningService
     )
     {
         $this->shopifyService = $shopifyService;
