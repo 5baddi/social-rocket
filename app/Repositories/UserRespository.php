@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
@@ -104,5 +105,22 @@ class UserRespository
         return User::query()
                     ->find($id)
                     ->delete();
+    }
+
+    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
+    {
+        return User::query()
+                    ->whereDate(
+                        User::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        User::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->where($conditions)
+                    ->count();
     }
 }

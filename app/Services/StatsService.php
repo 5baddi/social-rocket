@@ -8,14 +8,16 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
-use BADDIServices\SocialRocket\Models\Commission;
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use BADDIServices\SocialRocket\Models\Order;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Product;
+use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Models\OrderProduct;
+use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\OrderService;
+use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\CommissionService;
 
@@ -29,12 +31,26 @@ class StatsService extends Service
     
     /** @var CommissionService */
     private $commissionService;
+    
+    /** @var UserService */
+    private $userService;
 
-    public function __construct(ShopifyService $shopifyService, OrderService $orderService, CommissionService $commissionService)
+    /** @var StoreService */
+    private $storeService;
+
+    public function __construct(
+        ShopifyService $shopifyService, 
+        OrderService $orderService, 
+        CommissionService $commissionService,
+        UserService $userService,
+        StoreService $storeService
+    )
     {
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
         $this->commissionService = $commissionService;
+        $this->userService = $userService;
+        $this->storeService = $storeService;
     }
 
     public function getLast7DaysPeriod(): CarbonPeriod
@@ -60,6 +76,19 @@ class StatsService extends Service
             '%.2f',
             $this->orderService->getOrdersEarnings($store, $period)
         );
+    }
+    
+    public function getAllOrdersEarnings(CarbonPeriod $period): string
+    {
+        return sprintf(
+            '%.2f',
+            $this->orderService->getAllOrdersEarnings($period)
+        );
+    }
+    
+    public function getAllNewOrdersCount(CarbonPeriod $period): string
+    {
+        return $this->orderService->getAllNewOrdersCount($period);
     }
     
     public function getOrdersEarningsChart(Store $store, CarbonPeriod $period): array
@@ -153,5 +182,34 @@ class StatsService extends Service
         });
 
         return $filteredAfiliates->toArray();
+    }
+
+    public function getAllNewAffiliatesCount(CarbonPeriod $period): string
+    {
+        return $this->userService->getAllNewAffiliatesCount($period);
+    }
+    
+    public function getAllNewVerifiedAffiliatesCount(CarbonPeriod $period): string
+    {
+        return $this->userService->getAllNewVerifiedAffiliatesCount($period);
+    }
+    
+    public function getNewStoresCount(CarbonPeriod $period): string
+    {
+        return $this->storeService->getAllNewStoresCount($period);
+    }
+    
+    public function getNewActiveStoresCount(CarbonPeriod $period): string
+    {
+        return $this->storeService->getAllNewActiveStoresCount($period);
+    }
+
+    public function getSubscriptionsEarnings(CarbonPeriod $period): string
+    {
+        return sprintf(
+            '%.2f',
+            'sss'
+            // $this->subscriptionService->getEarnings($period)
+        );
     }
 }

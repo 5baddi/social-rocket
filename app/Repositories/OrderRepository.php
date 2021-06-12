@@ -92,6 +92,38 @@ class OrderRepository
             ->sum(Order::TOTAL_PRICE_USD_COLUMN);
     }
     
+    public function getAllOrdersEarnings(Carbon $startDate, carbon $endDate): float
+    {
+        return Order::query()
+            ->whereDate(
+                Order::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->sum(Order::TOTAL_PRICE_USD_COLUMN);
+    }
+    
+    public function getAllNewOrdersCount(Carbon $startDate, carbon $endDate): int
+    {
+        return Order::query()
+            ->whereDate(
+                Order::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->count();
+    }
+    
     public function getNewOrdersCount(string $storeId, Carbon $startDate, carbon $endDate): int
     {
         return Order::query()

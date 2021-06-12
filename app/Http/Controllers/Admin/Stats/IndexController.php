@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Stats;
 
+use Carbon\Carbon;
 use App\Http\Requests\AnalyticsRequest;
 use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
 
@@ -19,10 +20,19 @@ class IndexController extends ControllersAdminController
         $startDate = $request->input('start-date', $last7Days->copy()->getStartDate()->format('Y/m/d'));
         $endDate = $request->input('end-date', $last7Days->copy()->getEndDate()->format('Y/m/d'));
 
+        $period = $this->statsService->getPeriod(Carbon::parse($startDate . ' 00:00:00'), Carbon::parse($endDate . ' 23:59:59'));
+
         return view('admin.stats.index', [
-            'title'             =>  'Dashboard',
-            'startDate'         =>  $startDate,
-            'endDate'           =>  $endDate,
+            'title'                         =>  'Dashboard',
+            'startDate'                     =>  $startDate,
+            'endDate'                       =>  $endDate,
+            'sales'                         =>  $this->statsService->getAllOrdersEarnings($period),
+            'orders_count'                  =>  $this->statsService->getAllNewOrdersCount($period),
+            'affiliates_count'              =>  $this->statsService->getAllNewAffiliatesCount($period),
+            'verified_affiliates_count'     =>  $this->statsService->getAllNewVerifiedAffiliatesCount($period),
+            'stores_count'                  =>  $this->statsService->getNewStoresCount($period),
+            'active_stores_count'           =>  $this->statsService->getNewActiveStoresCount($period),
+            'earnings'                      =>  $this->statsService->getSubscriptionsEarnings($period),
         ]);
     }
 }

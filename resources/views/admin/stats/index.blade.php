@@ -52,10 +52,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        78 Stores
+                        {{ $stores_count }} Stores
                       </div>
                       <div class="text-muted">
-                        52 activated
+                        {{ $active_stores_count }} activated
                       </div>
                     </div>
                   </div>
@@ -98,10 +98,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        78 Orders
+                        {{ $orders_count }} Orders
                       </div>
                       <div class="text-muted">
-                        $200 sales
+                        ${{ $sales }} sales
                       </div>
                     </div>
                   </div>
@@ -125,10 +125,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        78 Affiliates
+                        {{ $affiliates_count }} Affiliates
                       </div>
                       <div class="text-muted">
-                        32 confirmed
+                        {{ $verified_affiliates_count }} confirmed
                       </div>
                     </div>
                   </div>

@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Models\OAuth;
@@ -111,5 +112,22 @@ class StoreRepository
         return Store::query()
                     ->find($id)
                     ->delete();
+    }
+
+    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
+    {
+        return Store::query()
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->where($conditions)
+                    ->count();
     }
 }

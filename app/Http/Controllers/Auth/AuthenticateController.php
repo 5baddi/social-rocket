@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use BADDIServices\SocialRocket\AppLogger;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
@@ -32,16 +33,16 @@ class AuthenticateController extends Controller
         try {
             $user = $this->userService->findByEmail($request->input(User::EMAIL_COLUMN));
             if (!$user) {
-                return redirect('/signin')->withInput()->with("error", "No account registred with those credentials");
+                return redirect()->route('signin')->withInput()->with("error", "No account registred with those credentials");
             }
 
             if (!$this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
-                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
+                return redirect()->route('signin')->with('error', 'Incorrect credentials, try again...');
             }
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
             if (!$authenticateUser) {
-                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
+                return redirect()->route('signin')->with('error', 'Something going wrong with the authentification');
             }
 
             $this->userService->update($user, [
@@ -53,10 +54,12 @@ class AuthenticateController extends Controller
             }
             
             return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
-        } catch (ValidationException $ex) {
-            return redirect('/signin')->withInput()->withErrors($ex->errors());
-        }  catch (Throwable $ex) {
-            return redirect('/signin')->withInput()->with("error", "Internal server error");
+        } catch (ValidationException $e) {
+            return redirect()->route('signin')->withInput()->withErrors($e->errors());
+        }  catch (Throwable $e) {
+            AppLogger::error($e, 'auth:signin', ['playload' => $request->all()]);
+
+            return redirect()->route('signin')->withInput()->with("error", "Internal server error");
         }
     }
 }

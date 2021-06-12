@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
@@ -32,15 +31,11 @@ class SubscriptionService extends Service
     /** @var StoreService */
     private $storeService;
 
-    /** @var CouponService */
-    private $couponService;
-
-    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService, CouponService $couponService)
+    public function __construct(SubscriptionRepository $subscriptionRepository, ShopifyService $shopifyService, StoreService $storeService)
     {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
-        $this->couponService = $couponService;
     }
 
     public function loadRelations(Subscription &$subscription): Subscription

@@ -23,14 +23,10 @@ class OrderService extends Service
 {
     /** @var OrderRepository */
     private $orderRepository;
-    
-    /** @var CommissionService */
-    private $commissionService;
 
-    public function __construct(OrderRepository $orderRepository, CommissionService $commissionService)
+    public function __construct(OrderRepository $orderRepository)
     {
         $this->orderRepository = $orderRepository;
-        $this->commissionService = $commissionService;
     }
 
     public function latest(): ?Order
@@ -70,6 +66,7 @@ class OrderService extends Service
                             Order::CREATED_AT,
                         ])
                         ->toArray();
+                        
         return $this->orderRepository->save(
             [
                 Order::ORDER_ID_COLUMN    => $attributes[Order::ORDER_ID_COLUMN],
@@ -133,6 +130,22 @@ class OrderService extends Service
     {
         return $this->orderRepository->getOrdersEarnings(
             $store->id, 
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
+    public function getAllOrdersEarnings(CarbonPeriod $period): float
+    {
+        return $this->orderRepository->getAllOrdersEarnings(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
+    public function getAllNewOrdersCount(CarbonPeriod $period): int
+    {
+        return $this->orderRepository->getAllNewOrdersCount(
             $period->copy()->getStartDate(),
             $period->copy()->getEndDate()
         );

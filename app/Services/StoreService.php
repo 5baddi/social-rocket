@@ -19,6 +19,7 @@ use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
+use Carbon\CarbonPeriod;
 
 class StoreService extends Service
 {
@@ -144,5 +145,24 @@ class StoreService extends Service
     public function delete(Store $store): bool
     {
         return $this->storeRepository->delete($store->id);
+    }
+
+    public function getAllNewStoresCount(CarbonPeriod $period): int
+    {
+        return $this->storeRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
+    public function getAllNewActiveStoresCount(CarbonPeriod $period): int
+    {
+        return $this->storeRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [Store::CONNECTED_AT_COLUMN, '!=', null],
+            ]
+        );
     }
 }

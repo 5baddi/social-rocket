@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -155,5 +156,28 @@ class UserService extends Service
         $setting = $store->setting;
 
         $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
+    }
+
+    public function getAllNewAffiliatesCount(CarbonPeriod $period): int
+    {
+        return $this->userRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [User::ROLE_COLUMN, '=', User::DEFAULT_ROLE]
+            ]
+        );
+    }
+    
+    public function getAllNewVerifiedAffiliatesCount(CarbonPeriod $period): int
+    {
+        return $this->userRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [User::ROLE_COLUMN, '=', User::DEFAULT_ROLE],
+                [User::VERIFIED_AT_COLUMN, '!=', null],
+            ]
+        );
     }
 }
