@@ -191,7 +191,7 @@ class StatsService extends Service
             return [
                 'fullname'  =>  $commission->affiliate->getFullName(),
                 'sales'     =>  $commission->order->total_price_usd,
-                'amount'    =>  $this->commissionService->getTotalEarned($store, $commission->affiliate)
+                'amount'    =>  $this->commissionService->getTotalEarnedByStore($store, $commission->affiliate)
             ];
         });
 
@@ -249,5 +249,63 @@ class StatsService extends Service
         });
         
         return $filteredEarnings->toArray();
+    }
+
+    public function getTopAffiliates(CarbonPeriod $period, int $limit = 5): array
+    {
+        $affiliates = $this->commissionService->getTopAffiliates($period, $limit);
+
+        $filteredAfiliates = $affiliates->map(function (Commission $commission) {
+            return [
+                'fullname'  =>  $commission->affiliate->getFullName(),
+                'sales'     =>  $commission->order->total_price_usd,
+                'amount'    =>  $this->commissionService->getTotalEarned($commission->affiliate)
+            ];
+        });
+
+        return $filteredAfiliates->toArray();
+    }
+
+    public function getTopProducts(CarbonPeriod $period): array
+    {
+        $orders = $this->orderService->getProducts($$period);
+
+        $products = [];
+        
+        $orders->map(function (Order $order) use (&$products) {
+            $products = array_merge($products, $order->products->toArray());
+        });
+
+        $products = collect($products);
+        $productsIds = $products->groupBy(Product::ID_COLUMN)
+                                ->unique()
+                                ->keys()
+                                ->take(5);
+
+        $filteredProducts = $productsIds
+            ->map(function (string $id) use ($products) {
+                $product = $products->where(Product::ID_COLUMN, $id)->first();
+
+                if(is_null($product)) {
+                    return null;
+                }
+
+                $sales = $products->where(Product::ID_COLUMN, $id)->sum('pivot.price');
+
+                return [
+                    Product::PRODUCT_ID_COLUMN      => $product[Product::PRODUCT_ID_COLUMN],
+                    Product::TITLE_COLUMN           => $product[Product::TITLE_COLUMN],
+                    Product::SLUG_COLUMN            => $product[Product::SLUG_COLUMN],
+                    Product::IMAGE_COLUMN           => $product[Product::IMAGE_COLUMN],
+                    OrderProduct::CURRENCY_COLUMN   => $product['pivot'][OrderProduct::CURRENCY_COLUMN],
+                    'sales'                         => $sales,
+                    // 'url'                           => $this->shopifyService->getProductURL($product[Product::SLUG_COLUMN]) TODO: fix URL
+                ];
+            })
+            ->reject(function ($value) {
+                return is_null($value);
+            });
+
+        return $filteredProducts->sortByDesc('sales')->toArray();
     }
 }

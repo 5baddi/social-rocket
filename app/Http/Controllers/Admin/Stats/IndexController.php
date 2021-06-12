@@ -35,6 +35,8 @@ class IndexController extends ControllersAdminController
             'earnings'                      =>  $this->statsService->getSubscriptionsEarnings($period),
             'active_subscriptions_count'    =>  sprintf('%02d', $this->statsService->getActiveSubscriptionsCount($period)),
             'earningsChart'                 =>  $this->statsService->getSubscriptionsEarningsChart($period),
+            'topProducts'                   =>  [],//$this->statsService->getTopProducts($period), TODO: get top products
+            'topAffiliates'                 =>  $this->statsService->getTopAffiliates($period),
         ]);
     }
 }

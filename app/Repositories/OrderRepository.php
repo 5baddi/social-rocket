@@ -63,6 +63,15 @@ class OrderRepository
             ->get();
     }
     
+    public function getProducts(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return Order::query()
+            ->with('products')
+            ->where(Order::CREATED_AT, '>=', $startDate)
+            ->where(Order::CREATED_AT, '<=', $endDate)
+            ->get();
+    }
+    
     public function getOrdersProducts(string $storeId, Carbon $startDate, Carbon $endDate): Collection
     {
         return Order::query()

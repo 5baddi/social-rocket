@@ -117,6 +117,14 @@ class OrderService extends Service
         );
     }
     
+    public function getProducts(CarbonPeriod $period): Collection
+    {
+        return $this->orderRepository->getProducts(
+            $period->getStartDate(),
+            $period->getEndDate()
+        );
+    }
+    
     public function getOrdersProducts(Store $store, CarbonPeriod $period): Collection
     {
         return $this->orderRepository->getOrdersProducts(

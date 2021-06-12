@@ -120,14 +120,24 @@ class CommissionService extends Service
         );
     }
 
+    public function getTopAffiliates(CarbonPeriod $period, int $limit = 5): Collection
+    {
+        return $this->commissionRepository->getTopAffiliates($period, $limit);
+    }
+    
     public function getTopAffiliatesByStore(Store $store, CarbonPeriod $period, int $limit = 5): Collection
     {
         return $this->commissionRepository->getTopAffiliatesByStore($store->id, $period, $limit);
     }
     
-    public function getTotalEarned(Store $store, User $affiliate): float
+    public function getTotalEarned(User $affiliate): float
     {
-        return $this->commissionRepository->getTotalEarned($store->id, $affiliate->customer_id);
+        return $this->commissionRepository->getTotalEarned($affiliate->customer_id);
+    }
+    
+    public function getTotalEarnedByStore(Store $store, User $affiliate): float
+    {
+        return $this->commissionRepository->getTotalEarnedByStore($store->id, $affiliate->customer_id);
     }
 
     public function pay(Commission $commission, array $attributes): bool

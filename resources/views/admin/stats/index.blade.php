@@ -153,6 +153,63 @@
         </div>
       </div>
     </div>
+    <div class="row row-cards">
+      @if (sizeof($topAffiliates) > 0)
+      <div class="col-6 mt-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Top Affiliates</h4>
+          </div>
+          <div class="card-body">
+            <table class="table card-table table-vcenter">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th class="text-end">Sales Generated</th>
+                  <th class="text-end">Total Earned</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($topAffiliates as $affiliate)
+                <tr>
+                  <td class="text-start">{{ $affiliate['fullname'] }}</td>
+                  <td class="text-end text-green">${{ $affiliate['sales'] }}</td>
+                  <td class="text-end">${{ $affiliate['amount'] }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      @endif
+      @if (sizeof($topProducts) > 0)
+      <div class="col-6 mt-4">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Top Products</h4>
+          </div>
+          <div class="card-body">
+            <table class="table card-table table-vcenter">
+              <tbody>
+                @foreach ($topProducts as $product)
+                <tr>
+                  <td width="100">
+                    <a href="{{ $product['url'] }}" title="Show product" target="_blank">
+                      <span class="avatar avatar-sm" style="background-image: url({{ $product['image'] }})"></span>
+                    </a>
+                  </td>
+                  <td class="text-start">{{ ucwords($product['title']) }}</td>
+                  <td class="text-end text-green">{{ $product['currency'] === 'USD' ? '$' : '' }}{{ $product['sales'] }} {{ $product['currency'] !== 'USD' ? $product['currency'] : '' }}</td>
+                </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      @endif
+    </div>
 @endsection
 
 @section('scripts')
