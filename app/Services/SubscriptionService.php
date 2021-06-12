@@ -9,7 +9,9 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
+use Carbon\CarbonPeriod;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
@@ -170,5 +172,22 @@ class SubscriptionService extends Service
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
     {
         return $this->subscriptionRepository->paginateWithRelations($page);
+    }
+
+    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
+    {
+        return Subscription::query()
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->where($conditions)
+                    ->count();
     }
 }

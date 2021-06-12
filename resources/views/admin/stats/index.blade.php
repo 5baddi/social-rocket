@@ -77,7 +77,7 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        Subscriptions
+                        {{ $active_subscriptions_count }} Subscriptions
                       </div>
                       <div class="text-muted">
                         $120 earnings

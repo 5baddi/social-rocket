@@ -27,12 +27,13 @@ class IndexController extends ControllersAdminController
             'startDate'                     =>  $startDate,
             'endDate'                       =>  $endDate,
             'sales'                         =>  $this->statsService->getAllOrdersEarnings($period),
-            'orders_count'                  =>  $this->statsService->getAllNewOrdersCount($period),
-            'affiliates_count'              =>  $this->statsService->getAllNewAffiliatesCount($period),
-            'verified_affiliates_count'     =>  $this->statsService->getAllNewVerifiedAffiliatesCount($period),
-            'stores_count'                  =>  $this->statsService->getNewStoresCount($period),
-            'active_stores_count'           =>  $this->statsService->getNewActiveStoresCount($period),
+            'orders_count'                  =>  sprintf('%02d', $this->statsService->getAllNewOrdersCount($period)),
+            'affiliates_count'              =>  sprintf('%02d', $this->statsService->getAllNewAffiliatesCount($period)),
+            'verified_affiliates_count'     =>  sprintf('%02d', $this->statsService->getAllNewVerifiedAffiliatesCount($period)),
+            'stores_count'                  =>  sprintf('%02d', $this->statsService->getNewStoresCount($period)),
+            'active_stores_count'           =>  sprintf('%02d', $this->statsService->getNewActiveStoresCount($period)),
             'earnings'                      =>  $this->statsService->getSubscriptionsEarnings($period),
+            'active_subscriptions_count'    =>  sprintf('%02d', $this->statsService->getActiveSubscriptionsCount($period)),
         ]);
     }
 }

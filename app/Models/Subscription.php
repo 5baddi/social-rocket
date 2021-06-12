@@ -37,9 +37,10 @@ class Subscription extends ModelEntity
     public const ACTIVATED_ON_COLUMN = 'activated_on';
     public const TRIAL_ENDS_ON_COLUMN = 'trial_ends_on';
     public const CANCELLED_ON_COLUMN = 'cancelled_on';
+    public const ACTIVE_STATUS = 'active';
 
     public const DEFAULT_STATUS = self::STATUSES[0];
-    public const CHARGE_ACCEPTED = self::STATUSES[1];
+    public const CHARGE_ACCEPTED = self::ACTIVE_STATUS;
     public const CHARGE_CANCELLD = self::STATUSES[4];
 
     /** @var array */

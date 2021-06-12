@@ -15,11 +15,13 @@ use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Product;
 use BADDIServices\SocialRocket\Models\Commission;
 use BADDIServices\SocialRocket\Models\OrderProduct;
+use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\CommissionService;
+use BADDIServices\SocialRocket\Services\SubscriptionService;
 
 class StatsService extends Service
 {
@@ -37,13 +39,17 @@ class StatsService extends Service
 
     /** @var StoreService */
     private $storeService;
+    
+    /** @var SubscriptionService */
+    private $subscriptionService;
 
     public function __construct(
         ShopifyService $shopifyService, 
         OrderService $orderService, 
         CommissionService $commissionService,
         UserService $userService,
-        StoreService $storeService
+        StoreService $storeService,
+        SubscriptionService $subscriptionService
     )
     {
         $this->shopifyService = $shopifyService;
@@ -51,6 +57,7 @@ class StatsService extends Service
         $this->commissionService = $commissionService;
         $this->userService = $userService;
         $this->storeService = $storeService;
+        $this->subscriptionService = $subscriptionService;
     }
 
     public function getLast7DaysPeriod(): CarbonPeriod
@@ -210,6 +217,17 @@ class StatsService extends Service
             '%.2f',
             'sss'
             // $this->subscriptionService->getEarnings($period)
+        );
+    }
+
+    public function getActiveSubscriptionsCount(CarbonPeriod $period): int
+    {
+        return $this->subscriptionService->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                Subscription::STATUS_COLUMN => Subscription::ACTIVE_STATUS
+            ]
         );
     }
 }
