@@ -8,26 +8,32 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
-use BADDIServices\SocialRocket\Models\Earning;
 use Carbon\Carbon;
+use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\SocialRocket\Models\Earning;
 
 class EarningRepository
 {
-    public function save(array $values, Carbon $date): Earning
+    public function first(Store $store, Carbon $date): Earning
     {
-        $exists = Earning::query()
-                        ->whereDate(
-                            Earning::CREATED_AT,
-                            '>=',
-                            $date->startOfDay()
-                        )
-                        ->whereDate(
-                            Earning::CREATED_AT,
-                            '<=',
-                            $date->endOfDay()
-                        )
-                        ->first();
+        return Earning::query()
+                    ->where(Earning::STORE_ID_COLUMN, $store->id)
+                    ->whereDate(
+                        Earning::CREATED_AT,
+                        '>=',
+                        $date->startOfDay()
+                    )
+                    ->whereDate(
+                        Earning::CREATED_AT,
+                        '<=',
+                        $date->endOfDay()
+                    )
+                    ->first();
+    }
 
+    public function save(Store $store, array $values, Carbon $date): Earning
+    {
+        $exists = $this->first($store, $date);
         if ($exists instanceof Earning) {
             return $exists->update($values);
         }

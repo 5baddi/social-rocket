@@ -153,8 +153,8 @@ class ShopifyService extends Service
             }
 
             return $data['shop'];
-        } catch (Exception | ClientException | RequestException $ex) {
-            AppLogger::setStore($store)->error($ex, 'store:load-configurations');
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:load-configurations');
 
             throw new LoadConfigurationsFailed();
         }
@@ -192,14 +192,8 @@ class ShopifyService extends Service
             }
 
             return $this->getBilling($store, $data['usage_charge']['id']);
-        } catch (Exception | ClientException | RequestException $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'store:create-usage-billing',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:get-usage-billing');
 
             throw new AcceptPaymentFailed();
         }
@@ -231,14 +225,8 @@ class ShopifyService extends Service
             }
 
             return $data['recurring_application_charge'];
-        } catch (Exception | ClientException | RequestException $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'store:get-billing',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:get-charge-billing');
 
             throw new AcceptPaymentFailed();
         }

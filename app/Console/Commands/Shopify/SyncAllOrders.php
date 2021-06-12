@@ -8,10 +8,10 @@
 
 namespace App\Console\Commands\Shopify;
 
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Commission;
 use Throwable;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Product;
 use BADDIServices\SocialRocket\Models\Subscription;
@@ -136,16 +136,10 @@ class SyncAllOrders extends Command
                     }
                 });
             });
-        } catch (Throwable $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'command:shopify-sync-orders',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+        } catch (Throwable $e) {
+            AppLogger::error($e, 'command:shopify:sync-orders');
 
-            return 0;
+            return;
         }
     }
 }

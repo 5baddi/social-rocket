@@ -24,6 +24,15 @@ class EarningService extends Service
         $this->earningRepository = $earningRepository;
     }
 
+    public function first(Store $store, ?Carbon $date = null): ?Earning
+    {
+        if ($date === null) {
+            $date = Carbon::now();
+        }
+        
+        return $this->earningRepository->first($store, $date);
+    }
+    
     public function save(Store $store, array $attributes, ?Carbon $date = null): Earning
     {
         Arr::set($attributes, Earning::STORE_ID_COLUMN, $store->id);
@@ -38,7 +47,7 @@ class EarningService extends Service
             $date = Carbon::now();
         }
 
-        return $this->earningRepository->save($filteredAttributes, $date);
+        return $this->earningRepository->save($store, $filteredAttributes, $date);
     }
     
     /**

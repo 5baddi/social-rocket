@@ -76,4 +76,14 @@ class Subscription extends ModelEntity
     {
         return $this->belongsTo(Store::class);
     }
+
+    public function isUsageSubscription(): bool
+    {
+        return $this->getAttribute(self::USAGE_ID_COLUMN) !== null;
+    }
+    
+    public function isChargeSubscription(): bool
+    {
+        return $this->getAttribute(self::CHARGE_ID_COLUMN) !== null;
+    }
 }
