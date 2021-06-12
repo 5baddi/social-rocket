@@ -29,7 +29,7 @@ class EarningService extends Service
         if ($date === null) {
             $date = Carbon::now();
         }
-        
+
         return $this->earningRepository->first($store, $date);
     }
     
@@ -39,7 +39,13 @@ class EarningService extends Service
 
         $filteredAttributes = collect($attributes)
                         ->only([
+                            Earning::USER_ID_COLUMN,
                             Earning::STORE_ID_COLUMN,
+                            Earning::SUBSCRIPTION_ID_COLUMN,
+                            Earning::AMOUNT_COLUMN,
+                            Earning::STATUS_COLUMN,
+                            Earning::ACTIVATED_ON_COLUMN,
+                            Earning::CANCELLED_ON_COLUMN,
                         ])
                         ->toArray();
 

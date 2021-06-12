@@ -135,6 +135,8 @@ class SyncAllOrders extends Command
                         });
                     }
                 });
+
+                sleep(10);
             });
         } catch (Throwable $e) {
             AppLogger::error($e, 'command:shopify:sync-orders');

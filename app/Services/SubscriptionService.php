@@ -88,9 +88,28 @@ class SubscriptionService extends Service
             Subscription::CREATED_AT_COLUMN
         ]);
 
-        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription = $this->save($user->id, $store->id, $pack->id, $billing->toArray());
 
         $this->createScriptTag($store);
+
+        return $subscription;
+    }
+    
+    public function save(User $user, Store $store, Pack $pack, array $billing): Subscription
+    {
+        $billing = collect($billing);
+
+        $billing = $billing->only([
+            Subscription::CHARGE_ID_COLUMN,
+            Subscription::STATUS_COLUMN,
+            Subscription::BILLING_ON_COLUMN,
+            Subscription::ACTIVATED_ON_COLUMN,
+            Subscription::TRIAL_ENDS_ON_COLUMN,
+            Subscription::CANCELLED_ON_COLUMN,
+            Subscription::CREATED_AT_COLUMN
+        ]);
+
+        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
 
         return $subscription;
     }

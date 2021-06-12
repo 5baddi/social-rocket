@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('shopify:sync-orders')->dailyAt('00:00');
+        $schedule->command('shopify:sync-subscriptions')->dailyAt('03:00');
     }
 
     /**

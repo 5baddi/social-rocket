@@ -26,7 +26,9 @@ class Earning extends ModelEntity
     public const USER_ID_COLUMN = 'user_id';
     public const STORE_ID_COLUMN = 'store_id';
     public const SUBSCRIPTION_ID_COLUMN = 'subscription_id';
+    public const AMOUNT_COLUMN = 'amount';
     public const STATUS_COLUMN = 'status';
+    public const ACTIVATED_ON_COLUMN = 'activated_on';
     public const CANCELLED_ON_COLUMN = 'cancelled_on';
 
     public const DEFAULT_STATUS = self::STATUSES[0];
@@ -36,12 +38,15 @@ class Earning extends ModelEntity
         self::USER_ID_COLUMN,
         self::STORE_ID_COLUMN,
         self::SUBSCRIPTION_ID_COLUMN,
+        self::AMOUNT_COLUMN,
         self::STATUS_COLUMN,
+        self::ACTIVATED_ON_COLUMN,
         self::CANCELLED_ON_COLUMN
     ];
 
     /** @var array */
     protected $casts = [
+        self::ACTIVATED_ON_COLUMN   => 'datetime',
         self::CANCELLED_ON_COLUMN   => 'datetime',
     ];
 

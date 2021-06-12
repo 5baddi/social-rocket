@@ -14,7 +14,7 @@ use BADDIServices\SocialRocket\Models\Earning;
 
 class EarningRepository
 {
-    public function first(Store $store, Carbon $date): Earning
+    public function first(Store $store, Carbon $date): ?Earning
     {
         return Earning::query()
                     ->where(Earning::STORE_ID_COLUMN, $store->id)
@@ -31,11 +31,21 @@ class EarningRepository
                     ->first();
     }
 
-    public function save(Store $store, array $values, Carbon $date): Earning
+    /**
+     * @return Earning|false
+     */
+    public function save(Store $store, array $values, Carbon $date)
     {
         $exists = $this->first($store, $date);
         if ($exists instanceof Earning) {
-            return $exists->update($values);
+            $updated = $exists->update($values);
+            if (!$updated) {
+                return false;
+            }
+
+            $exists->refresh();
+
+            return $exists;
         }
 
         return Earning::query()
