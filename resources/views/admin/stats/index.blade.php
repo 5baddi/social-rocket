@@ -52,10 +52,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        {{ $stores_count }} Stores
+                        {{ $stores_count > 0 ? $stores_count : '--' }} Stores
                       </div>
                       <div class="text-muted">
-                        {{ $active_stores_count }} activated
+                        {{ $active_stores_count > 0 ? $active_stores_count : '--' }} activated
                       </div>
                     </div>
                   </div>
@@ -77,10 +77,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        {{ $active_subscriptions_count }} Subscriptions
+                        {{ $active_subscriptions_count > 0 ? $active_subscriptions_count : '--' }} Subscriptions
                       </div>
                       <div class="text-muted">
-                        $120 earnings
+                        ${{ $earnings }} earnings
                       </div>
                     </div>
                   </div>
@@ -98,7 +98,7 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        {{ $orders_count }} Orders
+                        {{ $orders_count > 0 ? $orders_count : '--' }} Orders
                       </div>
                       <div class="text-muted">
                         ${{ $sales }} sales
@@ -125,10 +125,10 @@
                     </div>
                     <div class="col">
                       <div class="font-weight-medium">
-                        {{ $affiliates_count }} Affiliates
+                        {{ $affiliates_count > 0 ? $affiliates_count : '--' }} Affiliates
                       </div>
                       <div class="text-muted">
-                        {{ $verified_affiliates_count }} confirmed
+                        {{ $verified_affiliates_count > 0 ? $verified_affiliates_count : '--' }} confirmed
                       </div>
                     </div>
                   </div>

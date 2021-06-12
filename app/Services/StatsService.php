@@ -19,6 +19,7 @@ use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\OrderService;
 use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\SocialRocket\Services\EarningService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\CommissionService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
@@ -43,13 +44,17 @@ class StatsService extends Service
     /** @var SubscriptionService */
     private $subscriptionService;
 
+    /** @var EarningService */
+    private $earningService;
+
     public function __construct(
         ShopifyService $shopifyService, 
         OrderService $orderService, 
         CommissionService $commissionService,
         UserService $userService,
         StoreService $storeService,
-        SubscriptionService $subscriptionService
+        SubscriptionService $subscriptionService,
+        EarningService $earningService,
     )
     {
         $this->shopifyService = $shopifyService;
@@ -58,6 +63,7 @@ class StatsService extends Service
         $this->userService = $userService;
         $this->storeService = $storeService;
         $this->subscriptionService = $subscriptionService;
+        $this->earningService = $earningService;
     }
 
     public function getLast7DaysPeriod(): CarbonPeriod
@@ -215,8 +221,7 @@ class StatsService extends Service
     {
         return sprintf(
             '%.2f',
-            'sss'
-            // $this->subscriptionService->getEarnings($period)
+            $this->earningService->getEarnings($period)
         );
     }
 

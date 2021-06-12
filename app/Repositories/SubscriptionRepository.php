@@ -8,10 +8,10 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Models\Subscription;
-use Illuminate\Support\Facades\Auth;
 
 class SubscriptionRepository
 {

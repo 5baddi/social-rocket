@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Earning;
@@ -73,5 +74,13 @@ class EarningService extends Service
         }
 
         return false;
+    }
+
+    public function getEarnings(CarbonPeriod $period): float
+    {
+        return $this->earningRepository->getEarnings(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
     }
 }

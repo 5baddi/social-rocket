@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Repositories;
 use Carbon\Carbon;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Earning;
+use BADDIServices\SocialRocket\Models\Subscription;
 
 class EarningRepository
 {
@@ -57,5 +58,24 @@ class EarningRepository
         return Earning::query()
                         ->where(Earning::ID_COLUMN, $id)
                         ->update($values) === 1;
+    }
+
+    public function getEarnings(Carbon $startDate, carbon $endDate): float
+    {
+        return Earning::query()
+            ->where([
+                Earning::STATUS_COLUMN => Subscription::ACTIVE_STATUS
+            ])
+            ->whereDate(
+                Earning::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Earning::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->sum(Earning::AMOUNT_COLUMN);
     }
 }
