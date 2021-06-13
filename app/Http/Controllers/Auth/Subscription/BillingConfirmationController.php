@@ -11,6 +11,7 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\AppLogger;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
@@ -72,13 +73,15 @@ class BillingConfirmationController extends Controller
                                 'alert',
                                 new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
                             );
-        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $ex) {
+        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $e) {
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',
-                                new Alert($ex->getMessage())
+                                new Alert($e->getMessage())
                             ); 
-        } catch (Throwable $ex) {
+        } catch (Throwable $e) {
+            AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
+
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',

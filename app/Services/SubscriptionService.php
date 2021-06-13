@@ -90,7 +90,7 @@ class SubscriptionService extends Service
             Subscription::CREATED_AT_COLUMN
         ]);
 
-        $subscription = $this->save($user->id, $store->id, $pack->id, $billing->toArray());
+        $subscription = $this->save($user, $store, $pack, $billing->toArray());
 
         $this->createScriptTag($store);
 

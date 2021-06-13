@@ -42,13 +42,10 @@ class ShowCustomerController extends BaseController
         if (!$store instanceof Store || !$store->user instanceof User) {
             abort(Response::HTTP_NOT_FOUND, 'Shop not found');
         }
-
-        // TODO: fetch requested orders
-
+        
         return response()->json([
-            'shop'      =>  [],
-            'customer'  =>  [],
-            // TODO: return response data
+            'shop'      =>  $store->toArray(),
+            'customer'  =>  $store->user->toArray(),
         ]);
     }
 }
