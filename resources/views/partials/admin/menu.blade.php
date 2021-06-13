@@ -69,6 +69,7 @@
                 <span class="nav-link-title">Settings</span>
             </a>
           </li>
+          @if (config('app.debug'))
           <li class="nav-item {{ request()->routeIs('admin.logs') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('admin.logs') }}" target="_blank">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -88,6 +89,7 @@
                 <span class="nav-link-title">Error Logs</span>
             </a>
           </li>
+          @endif
         </ul>
         <div class="row mb-4">
             <div class="col-12">
