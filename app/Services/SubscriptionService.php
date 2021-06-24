@@ -57,7 +57,7 @@ class SubscriptionService extends Service
         $charge = [
             'name'          =>  ucwords($pack->name),
             'trial_days'    =>  $pack->trial_days,
-            'test'          =>  config('app.debug') ? true : null,
+            'test'          =>  config('shopify.test_enabled'),
             'price'         =>  $pack->price,
             'return_url'    =>  route('subscription.billing.confirmation', ['pack' => $pack->id])
         ];
