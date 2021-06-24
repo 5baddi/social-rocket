@@ -15,7 +15,7 @@ use App\Http\Requests\Webhooks\CustomerRequest;
 use BADDIServices\SocialRocket\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
 
-class DeleteStoreController extends BaseController
+class DeleteCustomerController extends BaseController
 {
     /** @var UserService */
     private $userService;

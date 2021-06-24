@@ -9,7 +9,6 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Webhooks;
 
-use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
