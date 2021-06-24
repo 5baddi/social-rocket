@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Social Rocket
+ *
+ * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ */
+
 namespace App\Console\Commands\Shopify;
 
 use BADDIServices\SocialRocket\AppLogger;
