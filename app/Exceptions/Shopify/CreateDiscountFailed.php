@@ -14,7 +14,7 @@ use Throwable;
 class CreateDiscountFailed extends Exception
 {
     /** @var int */
-    public const CODE = 22;
+    public const CODE = 59;
 
     /** @var string */
     public const MESSAGE = "Failed to create discount";

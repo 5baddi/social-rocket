@@ -139,23 +139,18 @@ class UserService extends Service
             User::BANNED_COLUMN => !$user->isBanned()
         ]);
     }
-
-    public function welcomeMail(User $user): void
-    {
-        
-    }
     
     public function notifyStoreOwner(Store $store, User $affiliate): void
-    {
-        $store->load(['user', 'setting']);
-        
+    {   
         /** @var User */
-        $user = $store->user;
+        $user = $this->getStoreOwner($store);
 
-        /** @var Setting */
-        $setting = $store->setting;
+        if ($user instanceof User) {
+            /** @var Setting */
+            $setting = $store->setting;
 
-        $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
+            $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
+        }
     }
 
     public function getAllNewAffiliatesCount(CarbonPeriod $period): int
@@ -179,5 +174,10 @@ class UserService extends Service
                 [User::VERIFIED_AT_COLUMN, '!=', null],
             ]
         );
+    }
+
+    public function generateResetPasswordToken(User $user): ?string
+    {
+        return $this->userRepository->generateResetPasswordToken($user->email);
     }
 }

@@ -5,15 +5,17 @@
     <td class="sm-px-24" style="--bg-opacity: 1; background-color: #ffffff; background-color: rgba(255, 255, 255, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif; font-size: 14px; line-height: 24px; padding: 48px; text-align: left; --text-opacity: 1; color: #626262; color: rgba(98, 98, 98, var(--text-opacity));" bgcolor="rgba(255, 255, 255, var(--bg-opacity))" align="left">
       <p style="font-weight: 600; margin-bottom: 0;">Hi! {{ ucwords($user->first_name) }} 👋</p>
       <p class="sm-leading-32" style="font-weight: 600; font-size: 20px; margin: 0 0 16px; --text-opacity: 1; color: #263238; color: rgba(38, 50, 56, var(--text-opacity));">
-        {{ $subject }}
+        Thank You and Welcome to Our Affiliate Program.
       </p>
-      <p style="margin: 0 0 16px;">
-        We've received a request to reset the password for the {{ config('app.name') }} account associated with {{ $user->email }}. No changes have been made to your account yet.
-      </p>
-      <p style="margin: 0 0 16px;">
-        You can reset your password by clicking the link below:
-      </p>
-      <a href="{{ route('password', ['token' => $token]) }}" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;">Reset your password</a>
+      <table style="font-family: 'Montserrat',Arial,sans-serif;" cellpadding="0" cellspacing="0" role="presentation">
+        <tr>
+          <td style="mso-padding-alt: 16px 24px; --bg-opacity: 1; background-color: #7367f0; background-color: rgba(115, 103, 240, var(--bg-opacity)); border-radius: 4px; font-family: Montserrat, -apple-system, 'Segoe UI', sans-serif;" bgcolor="rgba(115, 103, 240, var(--bg-opacity))">
+            <p style="margin: 0 0 16px;">Here's your coupon you can share it with your friends and get commission</p>
+            <p style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;">{{ $user->coupon }}</p>
+          </td>
+        </tr>
+      </table>
+      <a href="{{ route('signin') }}" style="display: block; font-weight: 600; font-size: 14px; line-height: 100%; padding: 16px 24px; --text-opacity: 1; color: #ffffff; color: rgba(255, 255, 255, var(--text-opacity)); text-decoration: none;">Sign in now!</a>
       <table style="font-family: 'Montserrat',Arial,sans-serif; width: 100%;" width="100%" cellpadding="0" cellspacing="0" role="presentation">
         <tr>
           <td style="font-family: 'Montserrat',Arial,sans-serif; padding-top: 32px; padding-bottom: 32px;">
@@ -21,6 +23,7 @@
           </td>
         </tr>
       </table>
+      <p style="margin: 0 0 16px;">Best, <br><a href="{{ url('/') }}" target="_blank">{{ ucwords($store->name) }}</a></p>
     </td>
   </tr>
   <tr>

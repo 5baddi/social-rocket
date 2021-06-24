@@ -13,10 +13,11 @@ use Illuminate\Queue\SerializesModels;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Bus\Queueable;
 
 class WelcomeMail
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels, Queueable;
 
     /** @var Store */
     public $store;
@@ -24,10 +25,14 @@ class WelcomeMail
     /** @var User */
     public $user;
 
-    public function __construct(Store $store, User $user)
+    /** @var bool */
+    public $isAffiliate = false;
+
+    public function __construct(Store $store, User $user, bool $isAffiliate = false)
     {
         $this->store = $store;
         $this->user = $user;
+        $this->isAffiliate = $isAffiliate;
     }
 
     /**

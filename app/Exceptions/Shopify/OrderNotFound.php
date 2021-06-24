@@ -14,7 +14,7 @@ use Throwable;
 class OrderNotFound extends Exception
 {
     /** @var int */
-    public const CODE = 19;
+    public const CODE = 69;
 
     /** @var string */
     public const MESSAGE = "Order not found";

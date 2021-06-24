@@ -11,6 +11,8 @@ namespace BADDIServices\SocialRocket\Repositories;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -122,5 +124,26 @@ class UserRespository
                     )
                     ->where($conditions)
                     ->count();
+    }
+
+    public function generateResetPasswordToken(string $email): ?string
+    {
+        DB::table('password_resets')
+                ->where('email', $email)
+                ->delete();
+
+        DB::table('password_resets')
+            ->insert([
+                'email'         => $email,
+                'token'         => Str::random(60),
+                'created_at'    => Carbon::now()
+            ]);
+
+        $tokenData = DB::table('password_resets')
+                        ->where('email', $email)
+                        ->select('token')
+                        ->first();
+
+        return $tokenData->token ?? null;
     }
 }

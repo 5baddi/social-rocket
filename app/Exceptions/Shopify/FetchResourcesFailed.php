@@ -14,7 +14,7 @@ use Throwable;
 class FetchResourcesFailed extends Exception
 {
     /** @var int */
-    public const CODE = 22;
+    public const CODE = 63;
 
     /** @var string */
     public const MESSAGE = "Failed to fetch resources";

@@ -17,7 +17,8 @@ class EditController extends Controller
     public function __invoke(string $token)
     {
         $tokenData = DB::table('password_resets')
-                        ->where('token', $token)->first();
+                        ->where('token', $token)
+                        ->first();
         
         abort_if(is_null($tokenData), Response::HTTP_NOT_FOUND);
 

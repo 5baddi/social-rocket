@@ -6,18 +6,18 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Exceptions\Shopify;
+namespace BADDIServices\SocialRocket\Exceptions\Auth;
 
 use Exception;
 use Throwable;
 
-class LoadConfigurationsFailed extends Exception
+class FailedToGenerateToken extends Exception
 {
     /** @var int */
-    public const CODE = 68;
+    public const CODE = 56;
 
     /** @var string */
-    public const MESSAGE = "Failed to load configurations";
+    public const MESSAGE = "Failed to generate reset password token";
 
     public function __construct(string $message = self::MESSAGE, int $code = self::CODE, Throwable $previous = null)
     {

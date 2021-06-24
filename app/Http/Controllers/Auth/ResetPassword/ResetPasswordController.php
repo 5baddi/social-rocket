@@ -15,6 +15,7 @@ use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\Auth\ResetPasswordRequest;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResetPasswordController extends Controller
@@ -33,16 +34,23 @@ class ResetPasswordController extends Controller
             $user = $this->userService->findByEmail($request->query(User::EMAIL_COLUMN));
             abort_if(!$user instanceof User, Response::HTTP_NOT_FOUND);
 
+            $this->userService->update(
+                $user,
+                [
+                    User::PASSWORD_COLUMN => Hash::make($request->input(User::PASSWORD_COLUMN))
+                ]
+            );
+
             return redirect()
                     ->route('signin')
                     ->with('success', 'Your password has been changed successfully.');
-        } catch (ValidationException $ex) {
+        } catch (ValidationException $e) {
             return redirect()
                     ->back()
                     ->withInput()
-                    ->withErrors($ex->errors());
-        }  catch (Throwable $ex) {
-            AppLogger::error($ex, 'auth:send-reset-password', ['playload' => $request->all()]);
+                    ->withErrors($e->errors());
+        }  catch (Throwable $e) {
+            AppLogger::error($e, 'auth:send-reset-password', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()

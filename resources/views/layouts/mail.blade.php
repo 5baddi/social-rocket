@@ -67,7 +67,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
                                                 @yield('content')
 
-                                                <tr>
+                                                {{-- <tr>
                                                     <td>
                                                         <p style="font-size: 14px;">Good luck! I know you’ll crush it.</p>
 
@@ -86,7 +86,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                             </tr>
                                                         </table>
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
                                             </table>
                                         </td>
                                     </tr>

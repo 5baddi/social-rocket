@@ -42,7 +42,7 @@
                         <label class="form-control-label">Password</label>
                     </div>
                     <div class="mb-2">
-                        <a href="#" class="small text-muted text-underline--dashed border-primary" data-toggle="password-text" data-target="#input-password">Show password</a>
+                        <a href="{{ route('reset') }}" class="small text-muted text-underline--dashed border-primary">Reset password</a>
                     </div>
                 </div>
                 <div class="input-group">

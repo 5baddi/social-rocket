@@ -33,7 +33,8 @@ class AffiliateSignInRequest extends FormRequest
         return [
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
             User::LAST_NAME_COLUMN     => 'required|string|min:1',
-            User::EMAIL_COLUMN         => 'required|email'
+            User::EMAIL_COLUMN         => 'required|email',
+            User::PASSWORD_COLUMN      => 'required|string|min:8'
         ];
     }
 }

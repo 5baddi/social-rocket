@@ -14,7 +14,7 @@ use Throwable;
 class ProductNotFound extends Exception
 {
     /** @var int */
-    public const CODE = 20;
+    public const CODE = 70;
 
     /** @var string */
     public const MESSAGE = "Product not found";
