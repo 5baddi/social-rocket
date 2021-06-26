@@ -180,4 +180,14 @@ class UserService extends Service
     {
         return $this->userRepository->generateResetPasswordToken($user->email);
     }
+    
+    public function verifyResetPasswordToken(string $token): ?User
+    {
+        return $this->userRepository->verifyResetPasswordToken($token);
+    }
+    
+    public function removeResetPasswordToken(string $token): bool
+    {
+        return $this->userRepository->removeResetPasswordToken($token);
+    }
 }

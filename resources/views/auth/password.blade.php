@@ -21,6 +21,7 @@
     <span class="clearfix"></span>
     <form method="POST" action="{{ route('auth.reset.password') }}">
         @csrf
+        <input name="token" type="hidden" value="{{ $token }}"/>
         <div class="form-group">
             <label for="password" class="form-control-label">New password</label>
             <input id="password" name="password" type="password" class="form-control @if($errors->has('password')) is-invalid @endif" placeholder="Enter new password" autofocus required/>
@@ -32,7 +33,7 @@
         </div>
         <div class="form-group">
             <label for="confirm_password" class="form-control-label">Confirm new password</label>
-            <input id="confirm_password" name="confirm_password" type="password" class="form-control @if($errors->has('confirm_password')) is-invalid @endif" placeholder="Confirm new password" autofocus required/>
+            <input id="confirm_password" name="confirm_password" type="password" class="form-control @if($errors->has('confirm_password')) is-invalid @endif" placeholder="Confirm new password" required/>
             @if($errors->has('confirm_password'))
             <div class="invalid-feedback">
                 {{ $errors::first('confirm_password') }}

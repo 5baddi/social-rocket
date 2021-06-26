@@ -80,6 +80,7 @@ class BillingConfirmationController extends Controller
                                 new Alert($e->getMessage())
                             ); 
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
 
             return redirect()->route('subscription.select.pack')

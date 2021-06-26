@@ -31,7 +31,7 @@ class ResetPasswordController extends Controller
     public function __invoke(ResetPasswordRequest $request)
     {
         try {
-            $user = $this->userService->findByEmail($request->query(User::EMAIL_COLUMN));
+            $user = $this->userService->verifyResetPasswordToken($request->input('token'));
             abort_if(!$user instanceof User, Response::HTTP_NOT_FOUND);
 
             $this->userService->update(
@@ -40,6 +40,8 @@ class ResetPasswordController extends Controller
                     User::PASSWORD_COLUMN => Hash::make($request->input(User::PASSWORD_COLUMN))
                 ]
             );
+
+            $this->userService->removeResetPasswordToken($request->input('token'));
 
             return redirect()
                     ->route('signin')

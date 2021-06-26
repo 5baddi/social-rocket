@@ -7,6 +7,11 @@
         <div class="mb-5">
             <h6 class="h3">Welcome back</h6>
             <p class="text-muted mb-0">Sign in to your account to continue</p>
+            @if(Session::has('success'))
+                <div class="valid-feedback">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
             @if(Session::has('error'))
                 <div class="invalid-feedback">
                     {{ Session::get('error') }}

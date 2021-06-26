@@ -146,4 +146,24 @@ class UserRespository
 
         return $tokenData->token ?? null;
     }
+
+    public function verifyResetPasswordToken(string $token): ?User
+    {
+        $token = DB::table('password_resets')
+            ->where('token', $token)
+            ->first();
+
+        if ($token === null || $token->email === null) {
+            return null;
+        }
+
+        return $this->findByEmail($token->email);
+    }
+
+    public function removeResetPasswordToken(string $token): bool
+    {
+        return DB::table('password_resets')
+            ->where('token', $token)
+            ->delete() > 0;
+    }
 }
