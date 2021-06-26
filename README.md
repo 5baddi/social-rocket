@@ -45,6 +45,18 @@ You can now access the server at http://127.0.0.1:8000
 
 To see all defined routes and corresponding controllers methods use `php artisan route:list` console command
 
+Queue listen
+
+``` bash
+php artisan queue:work --timeout=2000 --sleep=3 --tries=3 --daemon
+```
+
+Run scheduled commands
+
+``` bash
+php artisan schedule:run
+```
+
 ## Mail configuration
 `MAIL_MAILER`=smtp
 
