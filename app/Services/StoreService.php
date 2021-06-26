@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\App;
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -164,5 +165,10 @@ class StoreService extends Service
                 [Store::CONNECTED_AT_COLUMN, '!=', null],
             ]
         );
+    }
+
+    public function iterateOnActiveStores(callable $callback, int $chunkSize = App::CHUNK_SIZE): bool
+    {
+        return $this->storeRepository->iterateOnActiveStores($callback, $chunkSize);
     }
 }

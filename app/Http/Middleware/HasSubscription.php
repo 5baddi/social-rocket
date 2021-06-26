@@ -25,7 +25,12 @@ class HasSubscription
         $user = Auth::user();
 
         if (strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
-            if(!$user->subscription instanceof Subscription || $user->subscription->trashed()) {
+            $user->load('subscription');
+
+            /** @var Subscription */
+            $subscription = $user->subscription;
+
+            if(!$subscription instanceof Subscription || $subscription->trashed()) {
                 return redirect()->route('subscription.select.pack');
             }
         }

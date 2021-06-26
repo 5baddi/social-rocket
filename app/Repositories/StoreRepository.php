@@ -130,4 +130,12 @@ class StoreRepository
                     ->where($conditions)
                     ->count();
     }
+
+    public function iterateOnActiveStores(callable $callback, int $chunkSize): bool
+    {
+        return Store::query()
+            ->where(Store::ENABLED_COLUMN, true)
+            ->whereNotNull(Store::CONNECTED_AT_COLUMN)
+            ->chunk($chunkSize, $callback);
+    }
 }

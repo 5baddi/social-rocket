@@ -3,8 +3,9 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\Commands\Shopify\SyncAllOrders;
 use App\Console\Commands\SyncAllSubscriptions;
+use App\Console\Commands\Shopify\SyncAllOrders;
+use App\Console\Commands\Store\PurchaseReminderCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
@@ -17,6 +18,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         SyncAllOrders::class,
         SyncAllSubscriptions::class,
+        PurchaseReminderCommand::class,
     ];
 
     /**

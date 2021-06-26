@@ -61,10 +61,6 @@ class BillingConfirmationController extends Controller
                                 );
             }
 
-            // if ($subscription->pack->type === Pack::USAGE_TYPE) {
-            //     $subscription = $this->subscriptionService->confirmUsageBilling($user, $store, $pack, $request->query('charge_id'));
-            // }
-
             $subscription = $this->subscriptionService->loadRelations($subscription);
             $user->notify(new SubscriptionActivated($subscription));
 
@@ -80,7 +76,6 @@ class BillingConfirmationController extends Controller
                                 new Alert($e->getMessage())
                             ); 
         } catch (Throwable $e) {
-            dd($e);
             AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
 
             return redirect()->route('subscription.select.pack')

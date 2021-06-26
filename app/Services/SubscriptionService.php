@@ -76,11 +76,18 @@ class SubscriptionService extends Service
 
     public function confirmBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
     {
-        $billing = collect($this->shopifyService->getBilling($store, $chargeId));
+        if ($pack->isUsageType()) {
+            $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
 
-        $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
+            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $chargeId));
+        } else {
+            $billing = collect($this->shopifyService->getBilling($store, $chargeId));
+
+            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
+        }
 
         $billing = $billing->only([
+            Subscription::USAGE_ID_COLUMN,
             Subscription::CHARGE_ID_COLUMN,
             Subscription::STATUS_COLUMN,
             Subscription::BILLING_ON_COLUMN,
@@ -102,6 +109,7 @@ class SubscriptionService extends Service
         $billing = collect($billing);
 
         $billing = $billing->only([
+            Subscription::USAGE_ID_COLUMN,
             Subscription::CHARGE_ID_COLUMN,
             Subscription::STATUS_COLUMN,
             Subscription::BILLING_ON_COLUMN,
@@ -124,34 +132,6 @@ class SubscriptionService extends Service
                 Store::SCRIPT_TAG_ID_COLUMN => $scriptTag->get('id')
             ]);
         }
-    }
-    
-    public function confirmUsageBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
-    {
-        $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
-
-        if ($pack->type === Pack::RECURRING_TYPE) {
-            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
-        } else {
-            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $chargeId));
-        }
-
-        $billing = $billing->only([
-            Subscription::CHARGE_ID_COLUMN,
-            Subscription::STATUS_COLUMN,
-            Subscription::BILLING_ON_COLUMN,
-            Subscription::ACTIVATED_ON_COLUMN,
-            Subscription::TRIAL_ENDS_ON_COLUMN,
-            Subscription::CANCELLED_ON_COLUMN,
-            Subscription::CREATED_AT_COLUMN
-        ]);
-
-        $subscription = $this->subscriptionRepository->save($user->id, $store->id, $pack->id, $billing->toArray());
-        $subscription->load(['user', 'pack']);
-
-        $this->createScriptTag($store);
-
-        return $subscription;
     }
 
     public function cancelSubscription(User $user, Store $store, Subscription $subscription): void
