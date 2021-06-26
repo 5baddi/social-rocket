@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
@@ -24,6 +25,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
 use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use Illuminate\Support\Facades\Event;
 
 class BillingConfirmationController extends Controller
 {
@@ -63,6 +65,8 @@ class BillingConfirmationController extends Controller
 
             $subscription = $this->subscriptionService->loadRelations($subscription);
             $user->notify(new SubscriptionActivated($subscription));
+
+            Event::dispatch(new SubscriptionSubscriptionActivated($user, $subscription));
 
             return redirect()->route('dashboard')
                             ->with(
