@@ -53,7 +53,7 @@ class SubscriptionActivated extends Notification
     public function toArray($notifiable)
     {
         return [
-            'subject'           => sprintf(self::SUBJECT, $this->subscription->pack->name),
+            'subject'           => sprintf(self::SUBJECT, ucwords($this->subscription->pack->name)),
             'subscription_id'   => $this->subscription->id, 
             'pack_id'           => $this->subscription->pack_id, 
             'type'              => $this->subscription->pack->price_type,

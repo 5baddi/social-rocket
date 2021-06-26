@@ -216,7 +216,7 @@ class ShopifyService extends Service
             if ($usageId !== null) {
                 $chargeURL .= Str::replace(['{charge_id}', '{usage_id}'], [$chargeId, $usageId], self::GET_USAGE_CHARGE_ENDPOINT);
             } else {
-                $chargeURL .= Str::replace('{charge_id}', $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
+                $chargeURL .= Str::replace('{id}', $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
             }
 
             $chargeURL .= "?access_token={$accessToken}";
