@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 use BADDIServices\SocialRocket\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +48,7 @@ class ShopifyService extends Service
     const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
     const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
     const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
+    const GET_USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{charge_id}/usage_charges/{usage_id}.json";
     const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
     const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
     const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
@@ -163,7 +165,7 @@ class ShopifyService extends Service
     /**
      * @throws AcceptPaymentFailed
      */
-    public function getUsageBilling(Store $store, string $chargeId): array
+    public function getUsageBilling(Store $store, Pack $pack, string $chargeId): array
     {
         try {
             $accessToken = $this->hasAccessToken($store);
@@ -174,6 +176,10 @@ class ShopifyService extends Service
             $requestBody['access_token'] = $accessToken;
 
             $requestBody['recurring_application_charge_id'] = $chargeId;
+            $requestBody['usage_charge'] = [
+                'description'   => $pack->price . '% of revenue share',
+                'price'         => 1.0
+            ];
 
             $response = $this->client->request('POST', $chargeURL, 
                 [
@@ -186,12 +192,11 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-
             if (!isset($data['usage_charge'], $data['usage_charge']['id'])) {
                 throw new Exception();
             }
 
-            return $this->getBilling($store, $data['usage_charge']['id']);
+            return $this->getBilling($store, $chargeId, $data['usage_charge']['id']);
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::setStore($store)->error($e, 'store:get-usage-billing');
 
@@ -202,13 +207,18 @@ class ShopifyService extends Service
     /**
      * @throws AcceptPaymentFailed
      */
-    public function getBilling(Store $store, string $chargeId): array
+    public function getBilling(Store $store, string $chargeId, string $usageId = null): array
     {
         try {
             $accessToken = $this->hasAccessToken($store);
 
             $chargeURL = $this->getStoreURL($store->slug);
-            $chargeURL .= Str::replace("{id}", $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
+            if ($usageId !== null) {
+                $chargeURL .= Str::replace(['{charge_id}', '{usage_id}'], [$chargeId, $usageId], self::GET_USAGE_CHARGE_ENDPOINT);
+            } else {
+                $chargeURL .= Str::replace('{charge_id}', $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
+            }
+
             $chargeURL .= "?access_token={$accessToken}";
 
             $response = $this->client->request('GET', $chargeURL, 
@@ -220,11 +230,11 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            if (!isset($data['recurring_application_charge'])) {
+            if (!isset($data['recurring_application_charge']) && !isset($data['usage_charge'])) {
                 throw new Exception();
             }
 
-            return $data['recurring_application_charge'];
+            return $usageId !== null ? $data['usage_charge'] : $data['recurring_application_charge'];
         } catch (Exception | ClientException | RequestException $e) {
             AppLogger::setStore($store)->error($e, 'store:get-charge-billing');
 

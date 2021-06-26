@@ -77,9 +77,10 @@ class SubscriptionService extends Service
     public function confirmBilling(User $user, Store $store, Pack $pack, string $chargeId): Subscription
     {
         if ($pack->isUsageType()) {
-            $billing = collect($this->shopifyService->getUsageBilling($store, $chargeId));
+            $billing = collect($this->shopifyService->getUsageBilling($store, $pack, $chargeId));
 
-            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $chargeId));
+            $billing->put(Subscription::CHARGE_ID_COLUMN, $billing->get('id', $chargeId));
+            $billing->put(Subscription::USAGE_ID_COLUMN, $billing->get('id', $billing->get('id')));
         } else {
             $billing = collect($this->shopifyService->getBilling($store, $chargeId));
 
