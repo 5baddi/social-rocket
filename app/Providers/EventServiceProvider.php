@@ -10,8 +10,10 @@ use BADDIServices\SocialRocket\Listeners\Auth\ResetPasswordFired;
 // use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
 use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated;
+use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled;
 use BADDIServices\SocialRocket\Listeners\Affiliate\NewOrderCommissionFired;
 use BADDIServices\SocialRocket\Listeners\Subscription\SubscriptionActivatedFired;
+use BADDIServices\SocialRocket\Listeners\Subscription\SubscriptionCancelledFired;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -32,6 +34,10 @@ class EventServiceProvider extends ServiceProvider
 
         SubscriptionActivated::class => [
             SubscriptionActivatedFired::class,
+        ],
+        
+        SubscriptionCancelled::class => [
+            SubscriptionCancelledFired::class,
         ],
 
         NewOrderCommission::class => [

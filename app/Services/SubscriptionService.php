@@ -11,7 +11,7 @@ namespace BADDIServices\SocialRocket\Services;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
-use Carbon\CarbonPeriod;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
@@ -21,6 +21,7 @@ use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
+use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
 
 class SubscriptionService extends Service
 {
@@ -148,6 +149,8 @@ class SubscriptionService extends Service
         $subscription->load('pack');
 
         $user->notify(new SubscriptionCancelled($subscription));
+
+        Event::dispatch(new SubscriptionCancelledEvent($user, $subscription));
     }
 
     public function paginateWithRelations(?int $page = null): LengthAwarePaginator
