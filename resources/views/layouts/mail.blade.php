@@ -75,7 +75,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                         <p style="font-size: 14px;"><b>{{ ucwords($store->name) }}</b></p>
                                                         @endif
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
                                                     <td>
                                                         <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">
@@ -86,7 +86,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                             </tr>
                                                         </table>
                                                     </td>
-                                                </tr> --}}
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>

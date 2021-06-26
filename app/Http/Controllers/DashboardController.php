@@ -50,6 +50,10 @@ class DashboardController extends BaseController
                 $this->setting = new StoreSetting();
             }
 
+            if ($request->has('notification')) {
+                $this->user->unreadNotifications->where('id', $request->query('notification'))->markAsRead();
+            }
+
             return $next($request);
         });
     }

@@ -24,7 +24,7 @@ class ResetPasswordFired implements ShouldQueue
         $user = $event->user;
 
         /** @var string */
-        $token = $event->user;
+        $token = $event->token;
 
         $subject = sprintf(self::SUBJECT, config('app.name'));
 

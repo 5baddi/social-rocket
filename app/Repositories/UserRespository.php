@@ -129,8 +129,8 @@ class UserRespository
     public function generateResetPasswordToken(string $email): ?string
     {
         DB::table('password_resets')
-                ->where('email', $email)
-                ->delete();
+            ->where('email', $email)
+            ->delete();
 
         DB::table('password_resets')
             ->insert([
@@ -140,9 +140,9 @@ class UserRespository
             ]);
 
         $tokenData = DB::table('password_resets')
-                        ->where('email', $email)
-                        ->select('token')
-                        ->first();
+            ->where('email', $email)
+            ->select('token')
+            ->first();
 
         return $tokenData->token ?? null;
     }

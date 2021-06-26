@@ -21,6 +21,7 @@
           </td>
         </tr>
       </table>
+      <p style="margin: 0 0 16px;">Best, <br><a href="{{ url('/') }}" target="_blank">{{ config('app.name') }}</a></p>
     </td>
   </tr>
   <tr>
