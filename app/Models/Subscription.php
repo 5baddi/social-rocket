@@ -17,15 +17,6 @@ class Subscription extends ModelEntity
 {
     use SoftDeletes;
 
-    /** @var array */
-    public const STATUSES = [
-        'pending',
-        'active',
-        'declined',
-        'expired',
-        'cancelled',
-    ];
-
     /** @var string */
     public const USER_ID_COLUMN = 'user_id';
     public const STORE_ID_COLUMN = 'store_id';
@@ -39,9 +30,20 @@ class Subscription extends ModelEntity
     public const CANCELLED_ON_COLUMN = 'cancelled_on';
     public const ACTIVE_STATUS = 'active';
 
-    public const DEFAULT_STATUS = self::STATUSES[0];
-    public const CHARGE_ACCEPTED = self::ACTIVE_STATUS;
-    public const CHARGE_CANCELLD = self::STATUSES[4];
+    public const DEFAULT_STATUS = 'pending';
+    public const CHARGE_ACCEPTED = 'active';
+    public const CHARGE_CANCELLD = 'cancelled';
+    public const CHARGE_DECLINED = 'declined';
+    public const CHARGE_EXPIRED = 'expired';
+
+    /** @var array */
+    public const STATUSES = [
+        self::DEFAULT_STATUS,
+        self::CHARGE_ACCEPTED,
+        self::CHARGE_DECLINED,
+        self::CHARGE_EXPIRED,
+        self::CHARGE_CANCELLD,
+    ];
 
     /** @var array */
     protected $fillable = [

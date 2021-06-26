@@ -9,19 +9,20 @@
 namespace App\Console\Commands;
 
 use Throwable;
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
+use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\SocialRocket\Models\Earning;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\EarningService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Services\SubscriptionService;
-use Carbon\Carbon;
 
 class SyncAllSubscriptions extends Command
 {
@@ -73,53 +74,64 @@ class SyncAllSubscriptions extends Command
 
     public function handle()
     {
-        $stores = $this->storeService->all();
+        $this->info("Start stores purchase reminder");
+        $startTime = microtime(true);
 
-        $stores->each(function (Store $store) {
-            try {
-                if (!$store->subscription instanceof Subscription) {
-                    return false;
-                }
+        try {
+            $this->storeService->iterateOnActiveStores(
+                function (Collection $stores) {
+                    $stores->map(function (Store $store) {
+                        try {
+                            $store->load('subscription');
 
-                $store->subscription->load('user');
-                $store->subscription->load('pack');
+                            /** @var Subscription */
+                            $subscription = $store->subscription;
 
-                /** @var User */
-                $user = $store->subscription->user;
+                            $subscription->load('user');
+                            $subscription->load('pack');
 
-                /** @var Pack */
-                $pack = $store->subscription->pack;
+                            /** @var User */
+                            $user = $subscription->user;
 
-                $billing = [];
-                if ($store->subscription->isChargeSubscription()) {
-                    $billing = $this->shopifyService->getBilling($store, $store->subscription->charge_id);
-                } else {
-                    $billing = $this->shopifyService->getUsageBilling($store, $store->subscription->usage_id);
-                }
+                            /** @var Pack */
+                            $pack = $subscription->pack;
 
-                if (sizeof($billing) === 0) {
-                    return;
-                }
+                            $billing = [];
+                            if ($subscription->isChargeSubscription()) {
+                                $billing = $this->shopifyService->getBilling($store, $subscription->charge_id);
+                            } else {
+                                $billing = $this->shopifyService->getUsageBilling($store, $pack, $subscription->usage_id);
+                            }
 
-                $subscription = $this->subscriptionService->save($user, $store, $pack, $billing);
+                            if (sizeof($billing) === 0) {
+                                return;
+                            }
 
-                $earning = $this->earningService->save(
-                    $store, 
-                    [
-                        Earning::USER_ID_COLUMN         => $user->id,
-                        Earning::SUBSCRIPTION_ID_COLUMN => $subscription->id,
-                        Earning::AMOUNT_COLUMN          => Arr::has($billing, 'trial_ends_on') ? 0.0 : Arr::get($billing, 'price'),
-                        Earning::STATUS_COLUMN          => Arr::get($billing, Subscription::STATUS_COLUMN),
-                        Earning::CANCELLED_ON_COLUMN    => Arr::get($billing, Subscription::CANCELLED_ON_COLUMN),
-                    ]
-                );
+                            $subscription = $this->subscriptionService->save($user, $store, $pack, $billing);
 
-                sleep(10);
-            } catch (Throwable $e) {
-                AppLogger::setStore($store)->error($e, 'command:shopify:sync-subscriptions');
+                            $this->earningService->save(
+                                $store, 
+                                [
+                                    Earning::USER_ID_COLUMN         => $user->id,
+                                    Earning::SUBSCRIPTION_ID_COLUMN => $subscription->id,
+                                    Earning::AMOUNT_COLUMN          => Arr::has($billing, Subscription::TRIAL_ENDS_ON_COLUMN) ? 0.0 : Arr::get($billing, 'price'),
+                                    Earning::STATUS_COLUMN          => Arr::get($billing, Subscription::STATUS_COLUMN),
+                                    Earning::CANCELLED_ON_COLUMN    => Arr::get($billing, Subscription::CANCELLED_ON_COLUMN),
+                                ]
+                            );
 
-                return;
-            }
-        });
+                            sleep(10);
+                        } catch (Throwable $e) {
+                            AppLogger::setStore($store ?? null)->error($e, 'command:shopify:sync-subscriptions');
+                        }
+                    });
+                } 
+            );
+        } catch (Throwable $e) {
+            AppLogger::error($e, 'command:shopify:sync-subscriptions', ['execution_time' => (microtime(true) - $startTime)]);
+            $this->error(sprintf("Error while sync stores subscriptions %s", $e->getMessage()));
+
+            return;
+        }
     }
 }

@@ -37,9 +37,10 @@ class PurchaseReminderCommand extends Command
 
     public function handle()
     {
-        try {
-            $this->info("Start stores purchase reminder");
+        $this->info("Start stores purchase reminder");
+        $startTime = microtime(true);
 
+        try {
             $this->storeService->iterateOnActiveStores(
                 function (Collection $stores) {
                     $stores->map(function (Store $store) {
@@ -51,13 +52,13 @@ class PurchaseReminderCommand extends Command
                     });
                 } 
             );
-
-            $this->info("Done stores purchase reminder");
         } catch (Throwable $e) {
-            AppLogger::error($e, 'command:purchase:reminder');
+            AppLogger::error($e, 'command:purchase:reminder', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sending stores purchase reminder %s", $e->getMessage()));
 
             return;
         }
+
+        $this->info("Done stores purchase reminder");
     }
 }
