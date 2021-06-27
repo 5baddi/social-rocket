@@ -13,8 +13,9 @@ use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
 use Illuminate\Support\Facades\Mail;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Commission;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class NewOrderCommissionFired
+class NewOrderCommissionFired implements ShouldQueue
 {
     /** @var string */
     public const SUBJECT = "Affiliate awaiting commission $";

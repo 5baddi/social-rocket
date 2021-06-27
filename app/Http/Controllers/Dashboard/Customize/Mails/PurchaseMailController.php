@@ -28,7 +28,13 @@ class PurchaseMailController extends DashboardController
         }
         
         return (new MailMessage)
-                    ->view($template, ['store' => $this->store])
+                    ->view(
+                        $template, 
+                        [
+                            'store'     => $this->store,
+                            'setting'   => $this->setting
+                        ]
+                    )
                     ->render();
     }
 }

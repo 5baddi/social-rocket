@@ -13,6 +13,7 @@ use Illuminate\Console\Command;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
+use BADDIServices\SocialRocket\Models\Setting;
 use BADDIServices\SocialRocket\Services\StoreService;
 
 class PurchaseReminderCommand extends Command
@@ -45,7 +46,12 @@ class PurchaseReminderCommand extends Command
                 function (Collection $stores) {
                     $stores->map(function (Store $store) {
                         try {
+                            $store->load('setting');
 
+                            /** @var Setting */
+                            $setting = $store->setting;
+
+                            //purchase_mail_24h purchase_mail_48h purchase_mail_120h
                         } catch (Throwable $e) {
                             AppLogger::setStore($store ?? null)->error($e, 'command:purchase:reminder');
                         }

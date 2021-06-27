@@ -108,6 +108,9 @@ class SyncAllSubscriptions extends Command
                             }
 
                             $subscription = $this->subscriptionService->save($user, $store, $pack, $billing);
+                            if (in_array($subscription->status,  [Subscription::CHARGE_CANCELLD, Subscription::CHARGE_DECLINED, Subscription::CHARGE_EXPIRED])) {
+                                $this->subscriptionService->cancelSubscription($user, $store, $subscription);
+                            }
 
                             $this->earningService->save(
                                 $store, 

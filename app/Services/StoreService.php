@@ -8,19 +8,21 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
-use App\Models\User;
-use BADDIServices\SocialRocket\App;
 use Carbon\Carbon;
+use App\Models\User;
+use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use BADDIServices\SocialRocket\App;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SocialRocket\Services\SettingService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
-use Carbon\CarbonPeriod;
 
 class StoreService extends Service
 {
@@ -33,11 +35,20 @@ class StoreService extends Service
     /** @var UserService */
     private $userService;
 
-    public function __construct(StoreRepository $storeRepository, ShopifyService $shopifyService, UserService $userService)
+    /** @var SettingService */
+    private $settingService;
+
+    public function __construct(
+        StoreRepository $storeRepository, 
+        ShopifyService $shopifyService, 
+        UserService $userService,
+        SettingService $settingService
+    )
     {
         $this->storeRepository = $storeRepository;
         $this->shopifyService = $shopifyService;
         $this->userService = $userService;
+        $this->settingService = $settingService;
     }
 
     public function all(): Collection
@@ -81,7 +92,12 @@ class StoreService extends Service
             throw new ValidationException($validator);
         }
 
-        return $this->storeRepository->create($attributes);
+        $store = $this->storeRepository->create($attributes);
+
+        $setting = collect(new StoreSetting());
+        $this->settingService->save($store, $setting);
+
+        return $store;
     }
     
     public function update(Store $store, array $attributes): Store

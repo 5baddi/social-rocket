@@ -19,6 +19,7 @@ class Affiliate extends ModelEntity
     public const EMAIL_COLUMN = 'email';
     public const LAST_NAME_COLUMN = 'last_name';
     public const FIRST_NAME_COLUMN = 'first_name';
+    public const COUPON_COLUMN = 'coupon';
 
     /** @var array */
     protected $fillable = [
