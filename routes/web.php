@@ -19,8 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('apilogger')
-    ->group(function() {
+Route::group([], function() {
         require 'app/landing.php';
         require 'app/guest.php';
         require 'app/affiliate.php';
