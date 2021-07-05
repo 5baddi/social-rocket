@@ -31,6 +31,10 @@ class StoreOwner
             return redirect()->route('affiliate.analytics');
         }
 
+        if ($user->isSuperAdmin()) {
+            return redirect()->route('admin');
+        }
+
         return $next($request);
     }
 }

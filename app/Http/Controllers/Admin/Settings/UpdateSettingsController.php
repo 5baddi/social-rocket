@@ -9,28 +9,27 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Settings;
 
 use Throwable;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Artisan;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\AppService;
 use BADDIServices\SocialRocket\Http\Requests\Admin\Settings\UpdateSettingsRequest;
 use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
 
 class UpdateSettingsController extends ControllersAdminController
 {
+    /** @var AppService */
+    private $appService;
+
+    public function __construct(AppService $appService)
+    {
+        $this->appService = $appService;
+    }
+
     public function __invoke(UpdateSettingsRequest $request)
     {
         try {
-            $data = $request->validated();
-
-            foreach ($data as $key => $value) {
-                $value = Str::replace(' ', '_', $value);
-
-                Artisan::call(sprintf('env:set %s=%s', strtoupper($key), $value));
-            }
-
-            // Artisan::call('config:clear');
+            // $this->appService->update($request->input());
 
             return redirect()
                 ->back()

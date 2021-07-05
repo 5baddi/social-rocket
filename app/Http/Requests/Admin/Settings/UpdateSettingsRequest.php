@@ -30,7 +30,7 @@ class UpdateSettingsRequest extends FormRequest
     public function rules()
     {
         return [
-            'app_name'              => ['required', 'string', 'min:1'],
+            // 'app_name'              => ['required', 'string', 'min:1'],
             'support_email'         => ['nullable', 'email'],
             'help_url'              => ['nullable', 'url'],
             'setup_guide'           => ['nullable', 'url'],
