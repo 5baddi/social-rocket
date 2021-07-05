@@ -57,6 +57,7 @@ class UserRespository
     public function getStoreOwner(string $storeId): ?User
     {
         return User::query()
+                    ->with(['oauth'])
                     ->where([
                         User::STORE_ID_COLUMN   => $storeId,
                         User::ROLE_COLUMN       =>  User::STORE_OWNER_ROLE

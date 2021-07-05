@@ -20,6 +20,7 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\SocialRocket\Models\OAuth;
 
 class SignInWithShopifyApp
 {
@@ -66,7 +67,11 @@ class SignInWithShopifyApp
                         $this->shopifyService->verifySignature($request->query());
 
                         $storeOwner = $this->userService->getStoreOwner($store);
-                        if (!$storeOwner instanceof User) {
+                        if (!$store->oauth instanceof OAuth) {
+                            return redirect()->route('oauth.connect', ['store' => $store->slug]);
+                        }
+
+                        if (!$storeOwner->user instanceof User) {
                             return redirect()->route('landing');
                         }
 
