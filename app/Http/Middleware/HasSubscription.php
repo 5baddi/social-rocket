@@ -24,7 +24,12 @@ class HasSubscription
         /** @var User */
         $user = Auth::user();
 
-        if (strpos($request->path(), "dashboard") === 0 && strpos($request->path(), "logout") === false) {
+        if (
+            strpos($request->path(), "dashboard") === 0 
+            && strpos($request->path(), "logout") === false
+            && !$user->isSuperAdmin()
+            && !$user->isAffiliateAccount()
+        ) {
             $user->load('subscription');
 
             /** @var Subscription */
