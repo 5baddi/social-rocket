@@ -31,7 +31,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkA
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
 
-Route::middleware(['auth', 'has.subscription'])
+Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('subscription')
     ->prefix('subscription')
     ->group(function() {
