@@ -66,11 +66,11 @@ class SignInWithShopifyApp
                     try {
                         $this->shopifyService->verifySignature($request->query());
 
-                        $storeOwner = $this->userService->getStoreOwner($store);
                         if (!$store->oauth instanceof OAuth) {
                             return redirect()->route('oauth.connect', ['store' => $store->slug]);
                         }
 
+                        $storeOwner = $this->userService->getStoreOwner($store);
                         if (!$storeOwner->user instanceof User) {
                             return redirect()->route('landing');
                         }

@@ -32,7 +32,7 @@ class StoreRepository
     public function findBySlug(string $slug): ?Store
     {
         return Store::query()
-                    ->with(['user'])
+                    ->with(['user', 'oauth'])
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
