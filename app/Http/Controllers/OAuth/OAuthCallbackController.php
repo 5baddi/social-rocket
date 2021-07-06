@@ -10,7 +10,6 @@ namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
 
 use Throwable;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Session;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
