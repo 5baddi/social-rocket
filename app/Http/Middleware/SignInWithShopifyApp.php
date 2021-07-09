@@ -62,34 +62,37 @@ class SignInWithShopifyApp
             if ($slug !== null) {
                 $store = $this->storeService->findBySlug($slug);
 
-                if ($store instanceof Store) {
-                    try {
-                        $this->shopifyService->verifySignature($request->query());
+                if (!$store instanceof Store) {
+                    $store = $this->storeService->create([
+                        'slug'  =>  $slug
+                    ]);
+                }
 
-                        $storeOwner = $this->userService->getStoreOwner($store);
-                        if ($store->oauth instanceof OAuth && $storeOwner->user instanceof User) {
-                            $authenticateUser = Auth::loginUsingId($storeOwner->id);
-                            if ($authenticateUser) {
-                                $this->userService->update($storeOwner, [
-                                    User::LAST_LOGIN_COLUMN    =>  Carbon::now()
-                                ]);
-        
-                                return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($storeOwner->getFullName()));    
-                            }
+                try {
+                    $this->shopifyService->verifySignature($request->query());
+
+                    $storeOwner = $this->userService->getStoreOwner($store);
+                    if ($store->oauth instanceof OAuth && $storeOwner->user instanceof User) {
+                        $authenticateUser = Auth::loginUsingId($storeOwner->id);
+                        if ($authenticateUser) {
+                            $this->userService->update($storeOwner, [
+                                User::LAST_LOGIN_COLUMN    =>  Carbon::now()
+                            ]);
+    
+                            return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($storeOwner->getFullName()));    
                         }
-
-                        return redirect()
-                            ->route('signin')
-                            ->with('error', 'Something going wrong with the authentification');
-                    } catch (InvalidRequestSignatureException $ex) {
-                        AppLogger::setStore($store)
-                        ->error(
-                            $ex, 'store:login-via-app', 
-                            [
-                                'playload' => $request->query()
-                        ]
-                        );
                     }
+
+                    return redirect()
+                        ->route('fast.connect', ['store' => $store->slug]);
+                } catch (InvalidRequestSignatureException $ex) {
+                    AppLogger::setStore($store)
+                    ->error(
+                        $ex, 'store:login-via-app', 
+                        [
+                            'playload' => $request->query()
+                    ]
+                    );
                 }
             }
         }

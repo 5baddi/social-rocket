@@ -36,7 +36,8 @@ class OAuthController extends Controller
     public function __invoke(ConnectStoreRequest $request)
     {
         try {
-            $storeName = $this->shopifyService->getStoreName($request->input('store'));
+            $storeName = $this->shopifyService->getStoreName($request->get('store'));
+
             if (is_null($storeName)) {
                 throw new InvalidStoreURLException();
             }
