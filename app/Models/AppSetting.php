@@ -13,6 +13,7 @@ use BADDIServices\SocialRocket\Entities\ModelEntity;
 class AppSetting extends ModelEntity
 {
     /** @var string */
+    public const TABLE = 'app_settings';
     public const SUPPORT_EMAIL = 'support_email';
     public const INSTAGRAM_USERNAME = 'instagram_username';
     public const TWITTER_USERNAME = 'twitter_username';

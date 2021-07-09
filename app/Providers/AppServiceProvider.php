@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
-use BADDIServices\SocialRocket\Services\AppService;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
+use BADDIServices\SocialRocket\Models\AppSetting;
+use BADDIServices\SocialRocket\Services\AppService;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,9 +32,13 @@ class AppServiceProvider extends ServiceProvider
         
         URL::forceScheme('https');
 
-        /** @var AppService */
-        $appService = app(AppService::class);
-        $settings = $appService->settings();
+        $settings = new AppSetting(); 
+        if (Schema::hasTable(AppSetting::TABLE)) {
+            /** @var AppService */
+            $appService = app(AppService::class);
+            $settings = $appService->settings();
+        }
+        
 
         view()->composer('partials.admin.menu', function ($view) use ($settings) {
             $view->with('settings', $settings);
