@@ -93,7 +93,7 @@
         </ul>
         <div class="row mb-4">
             <div class="col-12">
-                <img src="{{ asset('assets/img/logo.mini.png') }}"/>
+                {{-- <img src="{{ asset('assets/img/logo.mini.png') }}"/> --}}
                 <div class="col-auto align-self-center mt-1">
                     <a href="{{ route('signout') }}" class="btn btn-white w-100">
                         Logout
