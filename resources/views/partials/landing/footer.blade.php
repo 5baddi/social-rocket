@@ -17,8 +17,8 @@
                             <!-- Social -->
                             <ul class="nav mt-4">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ $settings->getFacebookUsername() }}" target="_blank">
-                                        <img src="{{ asset('assets/img/facebook.svg') }}"/>
+                                    <a class="nav-link" href="{{ $settings->getLinkedInUsername() }}" target="_blank">
+                                        <img src="{{ asset('assets/img/linkedin.svg') }}"/>
                                     </a>
                                 </li>
                                 <li class="nav-item">
