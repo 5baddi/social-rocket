@@ -25,6 +25,7 @@ class SettingsSeeder extends Seeder
             AppSetting::INSTAGRAM_USERNAME    =>  'clnkgo',
             AppSetting::TWITTER_USERNAME      =>  'clnkgo',
             AppSetting::FACEBOOK_USERNAME     =>  'clnkgo',
+            AppSetting::LINKEDIN_USERNAME     =>  'clnkgo',
         ]);
     }
 }
