@@ -33,6 +33,7 @@ class AppService extends Service
             AppSetting::INSTAGRAM_USERNAME,
             AppSetting::TWITTER_USERNAME,
             AppSetting::FACEBOOK_USERNAME,
+            AppSetting::LINKEDIN_USERNAME,
             AppSetting::SUPPORT_EMAIL,
         ]);
 

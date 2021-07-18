@@ -25,7 +25,7 @@
     background-color: rgba(0, 0, 0,.06);
 }
 .navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active{
-    color: #206bc4 !important;
+    color: #ffcc29 !important;
 }
 .navbar .navbar-nav .nav-link:hover{
     color: inherit;

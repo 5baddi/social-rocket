@@ -72,7 +72,7 @@ class SignInWithShopifyApp
                     $this->shopifyService->verifySignature($request->query());
 
                     $storeOwner = $this->userService->getStoreOwner($store);
-                    if ($store->oauth instanceof OAuth && $storeOwner->user instanceof User) {
+                    if ($store->oauth instanceof OAuth && $storeOwner instanceof User) {
                         $authenticateUser = Auth::loginUsingId($storeOwner->id);
                         if ($authenticateUser) {
                             $this->userService->update($storeOwner, [

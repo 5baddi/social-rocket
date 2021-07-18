@@ -308,7 +308,7 @@
   box-shadow: none;
   background: none;
   border-radius: 0;
-  color: #206bc4; }
+  color: #ffcc29; }
 
 .noUi-horizontal {
   height: 1.25rem;
@@ -344,11 +344,11 @@
   --litepicker-month-weekday-color: #656d77;
   --litepicker-button-prev-month-color: #656d77;
   --litepicker-button-next-month-color: #656d77;
-  --litepicker-button-prev-month-color-hover: #206bc4;
-  --litepicker-button-next-month-color-hover: #206bc4;
-  --litepicker-day-color-hover: #206bc4;
-  --litepicker-is-end-color-bg: #206bc4;
-  --litepicker-is-today-color: #206bc4;
+  --litepicker-button-prev-month-color-hover: #ffcc29;
+  --litepicker-button-next-month-color-hover: #ffcc29;
+  --litepicker-day-color-hover: #ffcc29;
+  --litepicker-is-end-color-bg: #ffcc29;
+  --litepicker-is-today-color: #ffcc29;
   font: inherit;
   -webkit-user-select: none;
      -moz-user-select: none;
@@ -702,7 +702,7 @@
   .choices:after {
     content: none !important; }
   .choices.is-focused .form-select {
-    border-color: #90b5e2;
+    border-color: #ffcc29;
     box-shadow: 0 0 0 0.25rem rgba(32, 107, 196, 0.25); }
   .choices .dropdown-menu {
     width: 100%;
@@ -717,7 +717,7 @@
         background: transparent;
         color: inherit; }
       .choices .dropdown-menu .dropdown-item.is-highlighted {
-        color: #206bc4;
+        color: #ffcc29;
         background-color: rgba(32, 107, 196, 0.06); }
 
 .choices__placeholder {

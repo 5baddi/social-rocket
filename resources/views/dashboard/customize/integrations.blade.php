@@ -14,14 +14,17 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="d-flex align-items-center">
+                            @if (false !== false)
                             <label class="form-check form-check-single form-switch" style="padding-left: 0 !important; padding-right: 1rem">
                                 <input name="affiliate_form" id="affiliate-form-check" class="form-check-input" value="1" type="checkbox" @if (old('affiliate_form') ?? $setting->affiliate_form)checked @endif/>
                             </label>
-                            <label class="card-title">Afilliate Form</label>
+                            @endif
+                            <label class="card-title">Afilliate Form <span class="badge badge-warning">coming soon..</span></label>
                         </div>
                         <p class="text-muted mt-2 mb-0">Embed a custom form on your website to attract new affiliates</p>
                     </div>
                 </div>
+                @if (false !== false)
                 <div class="card-body" id="affiliate-form" style="display: none;">
                     <div class="row">
                         <a href="{{ route('guide.affiliate.setup') }}" target="_blank">How to add your sign up form to Shopify</a>
@@ -43,6 +46,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
         </div>
         {{-- <div class="col mt-5">
