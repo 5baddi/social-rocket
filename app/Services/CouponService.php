@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Social Rocket
+ * ClnkGO
  *
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
@@ -79,7 +79,7 @@ class CouponService extends Service
                         </div>
                     </li>
                 </ul>
-                <input class="smerchant_name" type="hidden" value="Harper"> <input class="smerchant_discount" type="hidden" value="10%"> <input class="samount_code" type="hidden" value="10%"> <input class="smerchant_store" type="hidden" value="Social Rocket Store"> 
+                <input class="smerchant_name" type="hidden" value="Harper"> <input class="smerchant_discount" type="hidden" value="10%"> <input class="samount_code" type="hidden" value="10%"> <input class="smerchant_store" type="hidden" value="ClnkGO Store"> 
             </div>
             </div>
         </div>

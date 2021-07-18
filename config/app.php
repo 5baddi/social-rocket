@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Social Rocket
+ * ClnkGO
  *
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'name' => ucwords(Str::replace('_', ' ', env('APP_NAME', 'Social Rocket'))),
+    'name' => ucwords(Str::replace('_', ' ', env('APP_NAME', 'ClnkGO'))),
 
     /*
     |--------------------------------------------------------------------------
