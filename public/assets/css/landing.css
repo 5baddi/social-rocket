@@ -15921,7 +15921,7 @@ button.bg-gray-dark:focus
 
 .bg-section-dark
 {
-    background-color: #0e0b2b !important;
+    background-color: #00af91 !important;
 }
 
 .bg-brand-facebook
@@ -16656,12 +16656,12 @@ button.bg-black:focus
 
 .fill-section-dark
 {
-    fill: #0e0b2b !important;
+    fill: #00af91 !important;
 }
 
 .stroke-section-dark
 {
-    stroke: #0e0b2b !important;
+    stroke: #00af91 !important;
 }
 
 .bg-section-fade
