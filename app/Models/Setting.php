@@ -18,7 +18,7 @@ class Setting extends ModelEntity
     public const PERCENTAGE_TYPE = 'percentage';
     public const UNIQUE_DISCOUNT_FORMAT = 'unique';
     public const RANDOM_DISCOUNT_FORMAT = 'random';
-    public const DEFAULT_COLOR = '#000000';
+    public const DEFAULT_COLOR = '#00af91';
     public const DEFAULT_CURRENCY = 'USD';
     public const DEFAULT_PAYMENT_METHOD = 'paypal';
 
