@@ -128,7 +128,7 @@ We strive to take appropriate security measures to protect against unauthorized 
                     </p>
                     <p>{{ config('app.name') }}</p>
                     <p>Email Address:</p>
-                    <p><a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }} target="_blank"><strong>{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }}</strong></a></p>
+                    <p><a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@clnkgo.com') }} target="_blank"><strong>{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@clnkgo.com') }}</strong></a></p>
                     <p>Effective as of May 30, 2021</p>
                 </p>
             </div>

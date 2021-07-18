@@ -106,7 +106,7 @@
                     </a>
                 </div>
                 <div class="col-auto align-self-center mt-1">
-                    <a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@trysocialrocket.com') }}" class="btn btn-white w-100">
+                    <a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'info@clnkgo.com') }}" class="btn btn-white w-100">
                         Contact Us
                     </a>
                 </div>

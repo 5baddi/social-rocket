@@ -21,8 +21,8 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         AppSetting::create([
-            AppSetting::SUPPORT_EMAIL         =>  'info@trysocialrocket.com',
-            AppSetting::INSTAGRAM_USERNAME    =>  'trysocialrocket',
+            AppSetting::SUPPORT_EMAIL         =>  'info@clnkgo.com',
+            AppSetting::INSTAGRAM_USERNAME    =>  'clnkgo',
             AppSetting::TWITTER_USERNAME      =>  'TrySocialRocket',
             AppSetting::FACEBOOK_USERNAME     =>  'Trysocialrocketapp-103039265306555',
         ]);
