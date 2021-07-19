@@ -41,6 +41,7 @@ class ShopifyService extends Service
     /** @var string */
     const SCOPES = "read_orders,read_customers,read_products,read_checkouts,read_price_rules,write_price_rules,read_discounts,write_discounts,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
+    const STORE_APPS_ENDPOINT = "https://{store}.myshopify.com/admin/apps";
     const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-04/shop.json";
     const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
@@ -72,6 +73,11 @@ class ShopifyService extends Service
     public function getStoreURL(string $storeName): string
     {
         return (string)Str::replace("{store}", $storeName, self::STORE_ENDPOINT);
+    }
+    
+    public function getStoreAppsURL(string $storeName): string
+    {
+        return (string)Str::replace("{store}", $storeName, self::STORE_APPS_ENDPOINT);
     }
 
     public function getProductURL($store, string $slug): string
