@@ -243,7 +243,7 @@ style="overflow: visible; height: auto;">
                                                                     style="text-align: center; ">
                                                                     <div style="width: 100%;">
                                                                         <a
-                                                                            style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #00af91; border-radius: 30px; cursor: pointer; width: 88%;"
+                                                                            style="color: #ffffff; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #40ABEE; border-radius: 30px; cursor: pointer; width: 88%;"
                                                                             onclick="window.shareTwitter()">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
