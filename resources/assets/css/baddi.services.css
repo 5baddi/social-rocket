@@ -27,9 +27,12 @@
 .navbar .navbar-nav .active .nav-link .nav-link-title, .nav-link-title:active{
     color: #f58634 !important;
 }
+.navbar .navbar-nav .nav-link{
+    border-radius: 0 !important;
+}
 .navbar .navbar-nav .nav-link:hover{
     color: white;
-    background-color: rgb(255, 204, 41);
+    background-color: rgba(255, 204, 41, 0.8) !important;
 }
 .navbar .navbar-nav .nav-link-icon{
     opacity: 1 !important;
