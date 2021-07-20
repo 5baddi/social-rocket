@@ -8,9 +8,10 @@
 
 namespace BADDIServices\SocialRocket;
 
-use BADDIServices\SocialRocket\Models\Store;
 use Throwable;
 use Illuminate\Support\Facades\Log;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use BADDIServices\SocialRocket\Models\Store;
 
 class AppLogger
 {
@@ -28,6 +29,8 @@ class AppLogger
             self::$instance = new self;
         }
 
+        Bugsnag::setAppVersion(config('app.version'));
+
         return self::$instance;
     }
 
@@ -39,7 +42,7 @@ class AppLogger
         return self::getInstance();
     }
 
-    public static function error(Throwable $exception, string $context, array $extra = [])
+    public static function error(Throwable $exception, string $context, array $extra = []): self
     {
         Log::error($exception->getMessage(), [
             'context'   =>  $context,
@@ -50,14 +53,20 @@ class AppLogger
             'trace'     =>  $exception->getTraceAsString(),
             'extra'     =>  json_encode($extra)
         ]);
+
+        Bugsnag::notifyException($exception);
+
+        return self::getInstance();
     }
     
-    public static function info(string $message, string $context, array $extra = [])
+    public static function info(string $message, string $context, array $extra = []): self
     {
         Log::info($message, [
             'context'   =>  $context,
             'store'     =>  optional(self::$store)->id,
             'extra'     =>  json_encode($extra)
         ]);
+
+        return self::getInstance();
     }
 }

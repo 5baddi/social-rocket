@@ -72,4 +72,12 @@ class Kernel extends HttpKernel
         'signin.with.app'       => \BADDIServices\SocialRocket\Http\Middleware\SignInWithShopifyApp::class,
         'is-shopify-webhook'    => \BADDIServices\SocialRocket\Http\Middleware\IsShopifyWebhook::class,
     ];
+
+    protected function bootstrappers()
+    {
+        return array_merge(
+            [\Bugsnag\BugsnagLaravel\OomBootstrapper::class],
+            parent::bootstrappers(),
+        );
+    }
 }

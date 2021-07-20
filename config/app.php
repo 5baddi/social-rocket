@@ -6,8 +6,6 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use Illuminate\Support\Str;
-
 return [
 
     /*
@@ -21,7 +19,7 @@ return [
     |
     */
 
-    'name' => ucwords(Str::replace('_', ' ', env('APP_NAME', 'ClnkGO'))),
+    'name' => ucwords(str_replace('_', ' ', env('APP_NAME', 'ClnkGO'))),
 
     /*
     |--------------------------------------------------------------------------
@@ -173,6 +171,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,4 +237,5 @@ return [
 
     ],
 
+    'version'   =>  env('APP_VERSION', '1.0.0')
 ];
