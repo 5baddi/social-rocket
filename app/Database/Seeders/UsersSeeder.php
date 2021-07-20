@@ -21,7 +21,7 @@ class UsersSeeder extends Seeder
     public function run()
     {
         User::create([
-            User::FIRST_NAME_COLUMN     =>  "Admin Account",
+            User::FIRST_NAME_COLUMN     =>  "Admin",
             User::EMAIL_COLUMN          =>  "webmaster@clnkgo.com",
             User::PASSWORD_COLUMN       =>  "devapp@2021",  
             User::IS_SUPERADMIN_COLUMN  =>  true,

@@ -24,8 +24,8 @@ class CreateUsersTable extends Migration
             $table->uuid('id')->unqiue()->primary();
             $table->uuid('store_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
-            $table->string('first_name', 100)->nullable(false);
-            $table->string('last_name', 100)->nullable(false);
+            $table->string('first_name', 100)->nullable();
+            $table->string('last_name', 100)->nullable();
             $table->string('phone', 25)->nullable();
             $table->string('email')->unique();
             $table->string('password')->nullable();

@@ -57,9 +57,6 @@
           </div>
         </footer>
       </div>
-      @if (request()->routeIs('dashboard'))
-      @include('partials.dashboard.sidebar')
-      @endif
     </div>
     <script src="{{ asset('assets/libs/jquery/jquery.min.js') }}"></script>
     @yield('scripts')

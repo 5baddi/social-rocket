@@ -90,7 +90,7 @@ class User extends Authenticatable
     
     public function setPasswordAttribute($value): self
     {
-        if ($this->getAttribute(self::PASSWORD_COLUMN) !== null) {
+        if ($value !== null) {
             $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
         }
 
