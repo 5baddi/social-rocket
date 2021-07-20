@@ -79,7 +79,6 @@ class OAuthCallbackController extends Controller
                 $store,
                 [
                     User::FIRST_NAME_COLUMN    => ucwords($store->name),
-                    User::LAST_NAME_COLUMN     => 'Admin',
                     User::EMAIL_COLUMN         => $store->email,
                     User::PHONE_COLUMN         => $store->phone
                 ]
