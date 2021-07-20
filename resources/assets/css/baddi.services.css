@@ -28,8 +28,8 @@
     color: #f58634 !important;
 }
 .navbar .navbar-nav .nav-link:hover{
-    color: inherit;
-    background-color: rgba(255, 204, 41, .06);
+    color: white;
+    background-color: rgb(255, 204, 41);
 }
 
 #period{
