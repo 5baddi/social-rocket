@@ -91,7 +91,7 @@
                     </div>
                     <hr/>
                     <div class="row">
-                        @if (!$user->hasPassword())
+                        @if ($user->hasPassword())
                         <div class="col-4">
                             <label class="form-label">Current password</label>
                             <input type="password" name="current_password" class="form-control @if ($errors->has('current_password')) is-invalid @endif" placeholder="Current password"/>
