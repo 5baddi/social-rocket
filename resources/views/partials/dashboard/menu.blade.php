@@ -18,32 +18,6 @@
                 <span class="nav-link-title">Dashboard</span>
             </a>
           </li>
-          {{-- <li class="nav-item dropdown {{ request()->routeIs('dashboard.customize') ? 'active' : '' }}">
-            <a class="nav-link dropdown-toggle" href="{{ route('dashboard.customize') }}" aria-expanded="false">
-                <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="14" cy="6" r="2"></circle>
-                        <line x1="4" y1="6" x2="12" y2="6"></line>
-                        <line x1="16" y1="6" x2="20" y2="6"></line>
-                        <circle cx="8" cy="12" r="2"></circle>
-                        <line x1="4" y1="12" x2="6" y2="12"></line>
-                        <line x1="10" y1="12" x2="20" y2="12"></line>
-                        <circle cx="17" cy="18" r="2"></circle>
-                        <line x1="4" y1="18" x2="15" y2="18"></line>
-                        <line x1="19" y1="18" x2="20" y2="18"></line>
-                    </svg>
-                </span>
-                <span class="nav-link-title">Customize</span>
-            </a>
-            <div class="dropdown-menu {{ (request()->routeIs('dashboard.customize') || request()->routeIs('dashboard.customize.*')) ? 'show' : '' }}">
-              <div class="dropdown-menu-columns">
-                <div class="dropdown-menu-column">
-                  <a class="dropdown-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}" href="{{ route('dashboard.customize.integrations') }}">Integrations</a>
-                </div>
-              </div>
-            </div>
-          </li> --}}
           <li class="nav-item {{ request()->routeIs('dashboard.customize') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.customize') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -61,6 +35,19 @@
                   </svg>
                 </span>
                 <span class="nav-link-title">Customize</span>
+            </a>
+          </li>
+          <li class="nav-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard.customize.integrations') }}">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-code" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <polyline points="7 8 3 12 7 16"></polyline>
+                    <polyline points="17 8 21 12 17 16"></polyline>
+                    <line x1="14" y1="4" x2="10" y2="20"></line>
+                  </svg>
+                </span>
+                <span class="nav-link-title">Integrations</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.payouts') ? 'active' : '' }}">
