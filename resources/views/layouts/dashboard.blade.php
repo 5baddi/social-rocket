@@ -39,7 +39,7 @@
             @yield('content')
           </div>
         </div>
-        {{-- <footer class="footer footer-transparent d-print-none">
+        <footer class="footer footer-transparent d-print-none">
           <div class="container">
             <div class="row text-center align-items-center flex-row-reverse">
               <div class="col-lg-auto ms-lg-auto">&nbsp;</div>
@@ -55,7 +55,7 @@
               </div>
             </div>
           </div>
-        </footer> --}}
+        </footer>
       </div>
       @if (request()->routeIs('dashboard'))
       @include('partials.dashboard.sidebar')

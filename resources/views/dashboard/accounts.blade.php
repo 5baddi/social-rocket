@@ -48,7 +48,7 @@
                             @endif
                         </div>
                         <div class="col-4">
-                            <label class="form-label">First name</label>
+                            <label class="form-label">Last name</label>
                             <input type="text" name="last_name" class="form-control @if ($errors->has('last_name')) is-invalid @endif" value="{{ old('last_name') ?? ucfirst($user->last_name) }}" placeholder="Your last name"/>
                             @if ($errors->has('last_name'))
                             <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
