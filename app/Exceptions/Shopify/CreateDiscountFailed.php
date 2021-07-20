@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Exceptions\Shopify;
+namespace BADDIServices\ClnkGO\Exceptions\Shopify;
 
 use Exception;
 use Throwable;

@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\ClnkGO\Http\Controllers;
 
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Routing\Controller as BaseController;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class ViewStoreController extends BaseController
 {

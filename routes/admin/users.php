@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Admin\Users as Users;
+use BADDIServices\ClnkGO\Http\Controllers\Admin\Users as Users;
 
 
 Route::prefix('accounts')

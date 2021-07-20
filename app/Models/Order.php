@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\ClnkGO\Models;
 
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\ClnkGO\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 

@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Rules;
+namespace BADDIServices\ClnkGO\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 

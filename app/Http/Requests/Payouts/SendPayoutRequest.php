@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Payouts;
 
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 

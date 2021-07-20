@@ -9,20 +9,19 @@
 namespace App\Console\Commands;
 
 use Throwable;
-use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\EarningService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Models\Earning;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\EarningService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
 
 class SyncAllSubscriptions extends Command
 {

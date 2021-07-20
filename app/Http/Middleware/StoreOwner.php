@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use App\Models\User;

@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\Mails;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Customize\Mails;
 
 use Illuminate\Notifications\Messages\MailMessage;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
-use BADDIServices\SocialRocket\Http\Requests\Customize\PurchaseMailPreviewRequest;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Http\Requests\Customize\PurchaseMailPreviewRequest;
 
 class PurchaseMailController extends DashboardController
 {

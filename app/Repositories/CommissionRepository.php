@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\ClnkGO\Models\Commission;
 
 class CommissionRepository
 {

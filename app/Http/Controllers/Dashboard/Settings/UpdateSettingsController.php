@@ -6,16 +6,16 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Settings;
 
 use Throwable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Http\Requests\UpdateSettingsRequest;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Requests\UpdateSettingsRequest;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\ClnkGO\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UpdateSettingsController extends Controller

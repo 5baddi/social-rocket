@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Affiliate;
+namespace BADDIServices\ClnkGO\Events\Affiliate;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Commission;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;

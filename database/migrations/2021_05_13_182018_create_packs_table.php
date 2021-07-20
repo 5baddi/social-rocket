@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
-use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Database\Migrations\Migration;
 
 class CreatePacksTable extends Migration

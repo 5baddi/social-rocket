@@ -6,24 +6,24 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Models\OrderProduct;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\EarningService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Models\Order;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Product;
+use BADDIServices\ClnkGO\Models\Commission;
+use BADDIServices\ClnkGO\Models\Earning;
+use BADDIServices\ClnkGO\Models\OrderProduct;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\OrderService;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\EarningService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\CommissionService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
 
 class StatsService extends Service
 {

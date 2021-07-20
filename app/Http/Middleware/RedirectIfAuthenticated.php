@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\ClnkGO\Services\UserService;
 
 class RedirectIfAuthenticated
 {

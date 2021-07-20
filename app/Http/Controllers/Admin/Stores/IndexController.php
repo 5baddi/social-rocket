@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Stores;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Stores;
 
 use App\Http\Requests\AnalyticsRequest;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController as ControllersAdminController;
 
 class IndexController extends ControllersAdminController
 {    

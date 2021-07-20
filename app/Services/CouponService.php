@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Illuminate\Support\Str;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
 
 class CouponService extends Service
 {

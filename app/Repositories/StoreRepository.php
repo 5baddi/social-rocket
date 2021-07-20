@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\OAuth;
+use BADDIServices\ClnkGO\Models\Store;
 
 class StoreRepository
 {

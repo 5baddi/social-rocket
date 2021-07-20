@@ -10,11 +10,11 @@ namespace App\Console\Commands\Store;
 
 use Throwable;
 use Illuminate\Console\Command;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Services\StoreService;
 
 class PurchaseReminderCommand extends Command
 {

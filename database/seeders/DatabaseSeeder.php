@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use BADDIServices\SocialRocket\Database\Seeders\PacksSeeder;
-use BADDIServices\SocialRocket\Database\Seeders\SettingsSeeder;
-use BADDIServices\SocialRocket\Database\Seeders\UsersSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\PacksSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\SettingsSeeder;
+use BADDIServices\ClnkGO\Database\Seeders\UsersSeeder;
 
 class DatabaseSeeder extends Seeder
 {

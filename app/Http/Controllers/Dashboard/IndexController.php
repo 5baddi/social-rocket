@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard;
 
 use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Requests\AnalyticsRequest;
-use BADDIServices\SocialRocket\Services\StatsService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Services\StatsService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class IndexController extends DashboardController
 {

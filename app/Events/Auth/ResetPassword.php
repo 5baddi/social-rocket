@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Auth;
+namespace BADDIServices\ClnkGO\Events\Auth;
 
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;

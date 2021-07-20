@@ -6,18 +6,18 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use BADDIServices\SocialRocket\Http\Requests\UpdateAccountRequest;
+use BADDIServices\ClnkGO\Http\Requests\UpdateAccountRequest;
 use Illuminate\Validation\ValidationException;
 
 class UpdateAccountController extends Controller

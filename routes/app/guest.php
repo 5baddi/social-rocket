@@ -6,15 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
-use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\ConnectController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\CreateUserController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
-use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
-use BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword as ResetPassword;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignInController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignUpController;
+use BADDIServices\ClnkGO\Http\Controllers\OAuth\OAuthController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\ConnectController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\SignOutController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\CreateUserController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\AuthenticateController;
+use BADDIServices\ClnkGO\Http\Controllers\OAuth\OAuthCallbackController;
+use BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword as ResetPassword;
 
 Route::middleware('guest')
     ->group(function() {

@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket;
+namespace BADDIServices\ClnkGO;
 
 use Throwable;
 use Illuminate\Support\Facades\Log;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 
 class AppLogger
 {

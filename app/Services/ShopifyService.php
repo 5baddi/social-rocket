@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Exception;
 use Carbon\Carbon;
@@ -14,27 +14,27 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\OAuth;
+use BADDIServices\ClnkGO\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreateDiscountFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\FetchResourcesFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidStoreURLException;
-use BADDIServices\SocialRocket\Exceptions\Shopify\LoadConfigurationsFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidAccessTokenException;
-use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePaymentConfirmationFailed;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\ClnkGO\Exceptions\Shopify\OrderNotFound;
+use BADDIServices\ClnkGO\Exceptions\Shopify\ProductNotFound;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CustomerNotFound;
+use BADDIServices\ClnkGO\Exceptions\Shopify\AcceptPaymentFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CreateDiscountFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\FetchResourcesFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePriceRuleFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CancelSubscriptionFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidStoreURLException;
+use BADDIServices\ClnkGO\Exceptions\Shopify\LoadConfigurationsFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidAccessTokenException;
+use BADDIServices\ClnkGO\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePaymentConfirmationFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidRequestSignatureException;
 
 class ShopifyService extends Service
 {

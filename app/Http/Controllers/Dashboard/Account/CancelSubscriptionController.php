@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Account;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CancelSubscriptionFailed;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CancelSubscriptionFailed;
 
 class CancelSubscriptionController extends DashboardController
 {

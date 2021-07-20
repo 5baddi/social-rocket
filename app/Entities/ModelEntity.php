@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Entities;
+namespace BADDIServices\ClnkGO\Entities;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
-use BADDIServices\SocialRocket\Traits\HasUUID;
+use BADDIServices\ClnkGO\Traits\HasUUID;
 
 class ModelEntity extends EloquentModel
 {

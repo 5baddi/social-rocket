@@ -6,15 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Repositories\EarningRepository;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Earning;
+use BADDIServices\ClnkGO\Repositories\EarningRepository;
 
 class EarningService extends Service
 {

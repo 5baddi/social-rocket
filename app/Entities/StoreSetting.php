@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Entities;
+namespace BADDIServices\ClnkGO\Entities;
 
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 
 class StoreSetting
 {

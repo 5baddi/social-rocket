@@ -676,7 +676,7 @@ style="overflow: visible; height: auto;">
                 var color = localStorage.getItem('checkout-color');
                 var el = document.getElementById('offer_header');
                 if (el && el !== 'undefined') {
-                    el.style.color = color || '{{ \BADDIServices\SocialRocket\Models\Setting::DEFAULT_COLOR }}';
+                    el.style.color = color || '{{ \BADDIServices\ClnkGO\Models\Setting::DEFAULT_COLOR }}';
                 }
 
                 window.modalInfo = function () {

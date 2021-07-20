@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Exceptions\Auth;
+namespace BADDIServices\ClnkGO\Exceptions\Auth;
 
 use Exception;
 use Throwable;

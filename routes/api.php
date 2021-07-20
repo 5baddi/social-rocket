@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\NewOrderController;
+use BADDIServices\ClnkGO\Http\Controllers\Affiliate\NewOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*

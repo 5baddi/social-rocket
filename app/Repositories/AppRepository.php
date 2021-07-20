@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
-use BADDIServices\SocialRocket\Models\AppSetting;
+use BADDIServices\ClnkGO\Models\AppSetting;
 
 class AppRepository
 {

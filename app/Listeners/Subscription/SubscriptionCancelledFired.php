@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Subscription;
+namespace BADDIServices\ClnkGO\Listeners\Subscription;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Events\Subscription\SubscriptionCancelled;
 
 class SubscriptionCancelledFired implements ShouldQueue
 {

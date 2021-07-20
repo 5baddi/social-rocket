@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\ClnkGO\Models;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\ClnkGO\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends ModelEntity

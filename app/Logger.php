@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket;
+namespace BADDIServices\ClnkGO;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 use Bugsnag\Client;
 use Illuminate\Support\Facades\Auth;
 

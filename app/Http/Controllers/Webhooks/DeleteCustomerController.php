@@ -7,12 +7,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Webhooks;
+namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Webhooks\CustomerRequest;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\ClnkGO\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
 
 class DeleteCustomerController extends BaseController

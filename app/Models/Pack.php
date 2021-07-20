@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\ClnkGO\Models;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\ClnkGO\Entities\ModelEntity;
 
 class Pack extends ModelEntity
 {

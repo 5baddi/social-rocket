@@ -6,15 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Users;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Users;
 
 use Throwable;
 use App\Models\User;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Http\Requests\Admin\Users\UpdatePasswordRequest;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\ClnkGO\Http\Requests\Admin\Users\UpdatePasswordRequest;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController as ControllersAdminController;
 
 class ResetPasswordController extends ControllersAdminController
 {

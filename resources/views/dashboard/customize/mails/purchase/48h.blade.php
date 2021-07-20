@@ -45,14 +45,14 @@
             </tr>
         </tbody></table>
         <p style="font-size: 14px;">
-            This code is valid for <strong style="font-weight: bold; font-size: 12pt;">{{ $setting->discount_type === \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE ? '$' . $setting->discount_amount : $setting->discount_amount . '%' }}</strong> off any order!
+            This code is valid for <strong style="font-weight: bold; font-size: 12pt;">{{ $setting->discount_type === \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE ? '$' . $setting->discount_amount : $setting->discount_amount . '%' }}</strong> off any order!
         </p>
     </td>
 </tr>
 <tr>
     <td>
         <p style="font-size: 14px;">
-            Every time someone makes a purchase using your code, we will send you <strong style="font-weight: bold; font-size: 12pt;">{{ $setting->commission_type === \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE ? '$' . $setting->commission_amount : $setting->commission_amount . '%' }}</strong> to a payout method of your choice! It’s that easy.
+            Every time someone makes a purchase using your code, we will send you <strong style="font-weight: bold; font-size: 12pt;">{{ $setting->commission_type === \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE ? '$' . $setting->commission_amount : $setting->commission_amount . '%' }}</strong> to a payout method of your choice! It’s that easy.
         </p>
 
         <p style="font-size: 14px;">Just a reminder: never hesitate to reach out if you have any questions, or just want to chat.</p>

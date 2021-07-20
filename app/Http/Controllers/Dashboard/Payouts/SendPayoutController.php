@@ -6,16 +6,16 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Payouts;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Payouts\SendPayoutRequest;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Models\Commission;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Services\CommissionService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class SendPayoutController extends DashboardController
 {

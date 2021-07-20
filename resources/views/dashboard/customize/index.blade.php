@@ -19,7 +19,7 @@
                         <div class="col-4">
                             <label class="form-label">Type</label>
                             <select name="commission_type" class="form-select @if ($errors->has('commission_type')) is-invalid @endif" placeholder="Select a type" id="select-commission-type">
-                                @foreach (\BADDIServices\SocialRocket\Models\Setting::COMMISSION_TYPES as $type)
+                                @foreach (\BADDIServices\ClnkGO\Models\Setting::COMMISSION_TYPES as $type)
                                 <option @if (old('commission_type') == $type || (is_null(old('commission_type')) && $setting->commission_type == $type)) selected @endif  value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
@@ -52,7 +52,7 @@
                         <div class="col-4">
                             <label class="form-label">Type</label>
                             <select name="discount_type" class="form-select @if ($errors->has('discount_type')) is-invalid @endif" placeholder="Select a type" id="select-discount-type">
-                                @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_TYPES as $type)
+                                @foreach (\BADDIServices\ClnkGO\Models\Setting::DISCOUNT_TYPES as $type)
                                 <option @if (old('discount_type') == $type || (is_null(old('discount_type')) && $setting->discount_type == $type)) selected @endif value="{{ strtolower($type) }}">{{ ucwords($type) }}</option>
                                 @endforeach
                             </select>
@@ -73,7 +73,7 @@
                         <div class="col-4">
                             <label class="form-label">Format</label>
                             <select name="discount_format" class="form-select @if ($errors->has('discount_format')) is-invalid @endif" placeholder="Select a type" id="select-discount-format">
-                                @foreach (\BADDIServices\SocialRocket\Models\Setting::DISCOUNT_FORMATS as $key => $format)
+                                @foreach (\BADDIServices\ClnkGO\Models\Setting::DISCOUNT_FORMATS as $key => $format)
                                 <option @if (old('discount_format') == $key || (is_null(old('discount_format')) && $setting->discount_format == $key)) selected @endif value="{{ strtolower($key) }}">{{ ucwords($format) }}</option>
                                 @endforeach
                             </select>
@@ -189,7 +189,7 @@
         var dicountEl = $('#discount-amount');
         $(document).ready(function() {
             var selected = $('#select-commission-type').children("option:selected").val();
-            if (selected == '{{ \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE }}') {
+            if (selected == '{{ \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE }}') {
                 amountEl.text('$');
             } else {
                 amountEl.text('%');
@@ -197,7 +197,7 @@
 
             $('#select-commission-type').change(function () {
                 var selected = $(this).children("option:selected").val();
-                if (selected == '{{ \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE }}') {
+                if (selected == '{{ \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE }}') {
                     amountEl.text('$');
                 } else {
                     amountEl.text('%');
@@ -205,7 +205,7 @@
             });
             
             var selected = $('#select-discount-type').children("option:selected").val();
-            if (selected == '{{ \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE }}') {
+            if (selected == '{{ \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE }}') {
                 dicountEl.text('$');
             } else {
                 dicountEl.text('%');
@@ -213,7 +213,7 @@
 
             $('#select-discount-type').change(function () {
                 var selected = $(this).children("option:selected").val();
-                if (selected == '{{ \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE }}') {
+                if (selected == '{{ \BADDIServices\ClnkGO\Models\Setting::FIXED_TYPE }}') {
                     dicountEl.text('$');
                 } else {
                     dicountEl.text('%');

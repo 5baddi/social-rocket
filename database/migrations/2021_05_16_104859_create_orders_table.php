@@ -1,6 +1,6 @@
 <?php
 
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

@@ -6,21 +6,21 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
-use BADDIServices\SocialRocket\Models\OAuth;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\ClnkGO\Models\OAuth;
 
 class SignInWithShopifyApp
 {

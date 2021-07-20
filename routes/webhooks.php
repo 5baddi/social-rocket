@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Webhooks as Webhooks;
+use BADDIServices\ClnkGO\Http\Controllers\Webhooks as Webhooks;
 
 Route::name('webhooks')
     ->prefix('webhooks')

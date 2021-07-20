@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Preview;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Preview;
 
 use Faker\Factory;
 use App\Http\Controllers\Controller;

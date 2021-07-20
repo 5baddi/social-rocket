@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Payouts;
 
 use App\Http\Requests\AnalyticsRequest;
 use Carbon\Carbon;
-use BADDIServices\SocialRocket\Services\StatsService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Services\StatsService;
+use BADDIServices\ClnkGO\Services\CommissionService;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
 class PayoutsController extends DashboardController
 {

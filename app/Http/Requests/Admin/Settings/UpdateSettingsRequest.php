@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Requests\Admin\Settings;
+namespace BADDIServices\ClnkGO\Http\Requests\Admin\Settings;
 
 use Illuminate\Foundation\Http\FormRequest;
 

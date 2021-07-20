@@ -6,17 +6,17 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Affiliate;
+namespace BADDIServices\ClnkGO\Listeners\Affiliate;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\FirstPurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\ThirdPurchaseReminder;
-use BADDIServices\SocialRocket\Events\Affiliate\PurchaseReminder\SecondPurchaseReminder;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Events\Affiliate\PurchaseReminder;
+use BADDIServices\ClnkGO\Events\Affiliate\PurchaseReminder\FirstPurchaseReminder;
+use BADDIServices\ClnkGO\Events\Affiliate\PurchaseReminder\ThirdPurchaseReminder;
+use BADDIServices\ClnkGO\Events\Affiliate\PurchaseReminder\SecondPurchaseReminder;
 
 class PurchaseReminderFired implements ShouldQueue
 {

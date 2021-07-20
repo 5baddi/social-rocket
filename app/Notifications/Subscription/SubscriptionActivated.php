@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications\Subscription;
+namespace BADDIServices\ClnkGO\Notifications\Subscription;
 
-use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;

@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Entities;
+namespace BADDIServices\ClnkGO\Entities;
 
 class Alert
 {

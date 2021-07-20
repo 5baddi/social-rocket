@@ -6,16 +6,16 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\OrderProduct;
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\OrderRepository;
+use BADDIServices\ClnkGO\Models\Order;
+use BADDIServices\ClnkGO\Models\OrderProduct;
+use BADDIServices\ClnkGO\Models\Product;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Repositories\OrderRepository;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Collection as SupportCollection;
 

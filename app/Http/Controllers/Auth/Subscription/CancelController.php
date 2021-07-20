@@ -6,17 +6,17 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\StoreService;
 
 class CancelController extends Controller
 {

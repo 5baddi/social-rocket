@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Subscription;
+namespace BADDIServices\ClnkGO\Events\Subscription;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Subscription;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;

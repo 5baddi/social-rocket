@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
 use Carbon\Carbon;
@@ -15,12 +15,12 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
-use BADDIServices\SocialRocket\Http\Requests\Auth\ResetTokenRequest;
-use BADDIServices\SocialRocket\Exceptions\Auth\FailedToGenerateToken;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Events\Auth\ResetPassword;
+use BADDIServices\ClnkGO\Http\Requests\Auth\ResetTokenRequest;
+use BADDIServices\ClnkGO\Exceptions\Auth\FailedToGenerateToken;
 
 class SendResetTokenController extends Controller
 {

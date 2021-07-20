@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners\Affiliate;
+namespace BADDIServices\ClnkGO\Listeners\Affiliate;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
+use BADDIServices\ClnkGO\Events\Affiliate\NewOrderCommission;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Commission;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class NewOrderCommissionFired implements ShouldQueue

@@ -6,20 +6,20 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Repositories\UserRespository;
-use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use BADDIServices\ClnkGO\Services\CouponService;
+use BADDIServices\ClnkGO\Repositories\UserRespository;
+use BADDIServices\ClnkGO\Notifications\Affiliate\NewAffiliateAccount;
 
 class UserService extends Service
 {

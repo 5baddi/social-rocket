@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard;
+namespace BADDIServices\ClnkGO\Http\Controllers\Affiliate\Dashboard;
 
 use App\Http\Controllers\Controller;
 

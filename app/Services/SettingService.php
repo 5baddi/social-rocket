@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Repositories\SettingRepository;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Repositories\SettingRepository;
 
 class SettingService extends Service
 {

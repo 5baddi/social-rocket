@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Models;
+namespace BADDIServices\ClnkGO\Models;
 
-use BADDIServices\SocialRocket\Traits\HasUUID;
+use BADDIServices\ClnkGO\Traits\HasUUID;
 use Illuminate\Foundation\Auth\User as BaseUser;
 
 class Authenticatable extends BaseUser

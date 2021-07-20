@@ -32,7 +32,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app/",
-            "BADDIServices\\SocialRocket\\": "app/",
+            "BADDIServices\\ClnkGO\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }

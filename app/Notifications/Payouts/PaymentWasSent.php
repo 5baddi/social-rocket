@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications\Payouts;
+namespace BADDIServices\ClnkGO\Notifications\Payouts;
 
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\ClnkGO\Models\Commission;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;

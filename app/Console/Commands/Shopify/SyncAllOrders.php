@@ -8,19 +8,19 @@
 
 namespace App\Console\Commands\Shopify;
 
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Commission;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Commission;
 use Throwable;
 use Illuminate\Console\Command;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ProductService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\CommissionService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Product;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\OrderService;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ProductService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\CommissionService;
 
 class SyncAllOrders extends Command
 {

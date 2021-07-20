@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Requests;
+namespace BADDIServices\ClnkGO\Http\Requests;
 
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateIntegrationsSettingsRequest extends FormRequest

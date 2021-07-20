@@ -7,15 +7,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Webhooks;
+namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\ClnkGO\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Requests\Webhooks\StoreRequest;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class DeleteStoreController extends BaseController
 {

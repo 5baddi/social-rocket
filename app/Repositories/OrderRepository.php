@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\Models\Order;
+use BADDIServices\ClnkGO\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\OrderProduct;
+use BADDIServices\ClnkGO\Models\OrderProduct;
 
 class OrderRepository
 {

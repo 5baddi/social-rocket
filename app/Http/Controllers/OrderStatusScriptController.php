@@ -6,17 +6,17 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Entities\StoreSetting;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\CouponService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 

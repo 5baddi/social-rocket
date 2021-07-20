@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Services\PackService;
 
 class SubscriptionController extends Controller
 {

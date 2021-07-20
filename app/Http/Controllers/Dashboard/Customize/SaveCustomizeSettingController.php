@@ -6,15 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Customize;
 
 use Throwable;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Http\Controllers\DashboardController;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\SettingService;
+use BADDIServices\ClnkGO\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use BADDIServices\SocialRocket\Http\Requests\SaveCustomizeSettingRequest;
+use BADDIServices\ClnkGO\Http\Requests\SaveCustomizeSettingRequest;
 
 class SaveCustomizeSettingController extends DashboardController
 {

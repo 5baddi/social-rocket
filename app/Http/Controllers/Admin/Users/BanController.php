@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Users;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Users;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController as ControllersAdminController;
 
 class BanController extends ControllersAdminController
 {

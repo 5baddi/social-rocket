@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class IsShopifyWebhook
 {

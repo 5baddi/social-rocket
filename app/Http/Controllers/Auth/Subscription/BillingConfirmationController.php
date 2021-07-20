@@ -6,25 +6,25 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\PackService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
-use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
-use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Exceptions\Shopify\AcceptPaymentFailed;
+use BADDIServices\ClnkGO\Http\Requests\BillingConfirmationRequest;
+use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionActivated;
+use BADDIServices\ClnkGO\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 use Illuminate\Support\Facades\Event;
 
 class BillingConfirmationController extends Controller

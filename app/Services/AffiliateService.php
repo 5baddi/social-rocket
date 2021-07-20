@@ -6,14 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Repositories\AffiliateRepository;
-use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Services\CouponService;
+use BADDIServices\ClnkGO\Repositories\AffiliateRepository;
+use BADDIServices\ClnkGO\Notifications\Affiliate\NewAffiliateAccount;
 use Illuminate\Support\Arr;
 
 class AffiliateService extends Service

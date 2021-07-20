@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Notifications\Affiliate;
+namespace BADDIServices\ClnkGO\Notifications\Affiliate;
 
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class NewAffiliateAccount extends Notification implements ShouldQueue

@@ -6,23 +6,23 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
+namespace BADDIServices\ClnkGO\Http\Controllers\OAuth;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\OAuth;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
+use BADDIServices\ClnkGO\Events\WelcomeMail;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Http\Requests\OAuthCallbackRequest;
 
 class OAuthCallbackController extends Controller
 {

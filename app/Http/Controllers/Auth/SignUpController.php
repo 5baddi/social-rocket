@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\StoreService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Services\StoreService;
 
 class SignUpController extends Controller
 {

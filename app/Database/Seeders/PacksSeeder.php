@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\ClnkGO\Database\Seeders;
 
-use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Database\Seeder;
 
 class PacksSeeder extends Seeder

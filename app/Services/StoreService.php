@@ -6,23 +6,23 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Carbon\Carbon;
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
-use BADDIServices\SocialRocket\App;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
+use BADDIServices\ClnkGO\App;
+use BADDIServices\ClnkGO\Entities\StoreSetting;
 use Illuminate\Support\Facades\Validator;
-use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\OAuth;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\SettingService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Repositories\StoreRepository;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Services\SettingService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Repositories\StoreRepository;
 
 class StoreService extends Service
 {

@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Events\Payouts;
+namespace BADDIServices\ClnkGO\Events\Payouts;
 
 use App\Models\User;
 use Illuminate\Queue\SerializesModels;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Bus\Queueable;

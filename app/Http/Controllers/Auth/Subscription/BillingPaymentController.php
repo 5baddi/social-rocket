@@ -6,18 +6,18 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\PackService;
-use BADDIServices\SocialRocket\Services\SubscriptionService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePaymentConfirmationFailed;
+use BADDIServices\ClnkGO\Services\PackService;
+use BADDIServices\ClnkGO\Services\SubscriptionService;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePaymentConfirmationFailed;
 
 class BillingPaymentController extends Controller
 {

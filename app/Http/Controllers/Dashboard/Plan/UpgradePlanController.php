@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan;
+namespace BADDIServices\ClnkGO\Http\Controllers\Dashboard\Plan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\ClnkGO\Services\PackService;
 
 class UpgradePlanController extends Controller
 {

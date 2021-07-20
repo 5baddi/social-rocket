@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\ClnkGO\Services\PackService;
 
 class LandingPageController extends Controller
 {

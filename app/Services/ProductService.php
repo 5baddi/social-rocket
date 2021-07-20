@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SocialRocket\Models\Product;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Repositories\ProductRepository;
+use BADDIServices\ClnkGO\Models\Product;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Repositories\ProductRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 

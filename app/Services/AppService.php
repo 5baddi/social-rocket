@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
-use BADDIServices\SocialRocket\Models\AppSetting;
-use BADDIServices\SocialRocket\Repositories\AppRepository;
+use BADDIServices\ClnkGO\Models\AppSetting;
+use BADDIServices\ClnkGO\Repositories\AppRepository;
 
 class AppService extends Service
 {

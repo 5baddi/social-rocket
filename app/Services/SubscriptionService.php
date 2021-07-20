@@ -6,22 +6,22 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\Models\Pack;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Pack;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Repositories\SubscriptionRepository;
-use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionCancelled;
-use BADDIServices\SocialRocket\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Repositories\SubscriptionRepository;
+use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionCancelled;
+use BADDIServices\ClnkGO\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;
 
 class SubscriptionService extends Service
 {

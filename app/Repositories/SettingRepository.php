@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Database\Eloquent\Collection;
 
 class SettingRepository

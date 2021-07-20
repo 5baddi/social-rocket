@@ -6,10 +6,10 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
-use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
+use BADDIServices\ClnkGO\Http\Controllers\OrderStatusScriptController;
+use BADDIServices\ClnkGO\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
+use BADDIServices\ClnkGO\Http\Controllers\Affiliate\Inscription\CreateAccountController;
+use BADDIServices\ClnkGO\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
 
 Route::name('affiliate')
     ->prefix('affiliate')

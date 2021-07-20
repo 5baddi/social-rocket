@@ -6,20 +6,20 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Order;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\Models\Setting;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Repositories\CommissionRepository;
-use BADDIServices\SocialRocket\Events\Affiliate\NewOrderCommission;
+use BADDIServices\ClnkGO\Models\Commission;
+use BADDIServices\ClnkGO\Entities\StoreSetting;
+use BADDIServices\ClnkGO\Repositories\CommissionRepository;
+use BADDIServices\ClnkGO\Events\Affiliate\NewOrderCommission;
 use Illuminate\Support\Arr;
 
 class CommissionService extends Service

@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Services;
+namespace BADDIServices\ClnkGO\Services;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\ClnkGO\Models\Pack;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Subscription;
-use BADDIServices\SocialRocket\Repositories\PackRepository;
+use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Repositories\PackRepository;
 
 class PackService extends Service
 {

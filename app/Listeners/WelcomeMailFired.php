@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Listeners;
+namespace BADDIServices\ClnkGO\Listeners;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Events\WelcomeMail;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Events\WelcomeMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
 class WelcomeMailFired implements ShouldQueue

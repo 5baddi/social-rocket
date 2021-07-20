@@ -63,14 +63,14 @@ class Kernel extends HttpKernel
         'signed'                => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'has.store'             => \BADDIServices\SocialRocket\Http\Middleware\HasStore::class,
-        'has.subscription'      => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
-        'cors'                  => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
-        'is.affiliate'          => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
-        'store-owner'           => \BADDIServices\SocialRocket\Http\Middleware\StoreOwner::class,
-        'admin'                 => \BADDIServices\SocialRocket\Http\Middleware\SuperAdmin::class,
-        'signin.with.app'       => \BADDIServices\SocialRocket\Http\Middleware\SignInWithShopifyApp::class,
-        'is-shopify-webhook'    => \BADDIServices\SocialRocket\Http\Middleware\IsShopifyWebhook::class,
+        'has.store'             => \BADDIServices\ClnkGO\Http\Middleware\HasStore::class,
+        'has.subscription'      => \BADDIServices\ClnkGO\Http\Middleware\HasSubscription::class,
+        'cors'                  => \BADDIServices\ClnkGO\Http\Middleware\Cors::class,
+        'is.affiliate'          => \BADDIServices\ClnkGO\Http\Middleware\AffiliateAccount::class,
+        'store-owner'           => \BADDIServices\ClnkGO\Http\Middleware\StoreOwner::class,
+        'admin'                 => \BADDIServices\ClnkGO\Http\Middleware\SuperAdmin::class,
+        'signin.with.app'       => \BADDIServices\ClnkGO\Http\Middleware\SignInWithShopifyApp::class,
+        'is-shopify-webhook'    => \BADDIServices\ClnkGO\Http\Middleware\IsShopifyWebhook::class,
     ];
 
     protected function bootstrappers()

@@ -6,32 +6,32 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Affiliate;
+namespace BADDIServices\ClnkGO\Http\Controllers\Affiliate;
 
 use Throwable;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Models\Order;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Models\Order;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Models\Commission;
-use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use BADDIServices\SocialRocket\Services\OrderService;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Services\ProductService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
-use BADDIServices\SocialRocket\Services\CommissionService;
-use BADDIServices\SocialRocket\Exceptions\Shopify\OrderNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\ProductNotFound;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CustomerNotFound;
-use BADDIServices\SocialRocket\Http\Controllers\AffiliateController;
-use BADDIServices\SocialRocket\Http\Requests\Affiliate\NewOrderRequest;
-use BADDIServices\SocialRocket\Exceptions\Shopify\CreatePriceRuleFailed;
+use BADDIServices\ClnkGO\Models\Commission;
+use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Entities\StoreSetting;
+use BADDIServices\ClnkGO\Services\OrderService;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\CouponService;
+use BADDIServices\ClnkGO\Services\ProductService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\CommissionService;
+use BADDIServices\ClnkGO\Exceptions\Shopify\OrderNotFound;
+use BADDIServices\ClnkGO\Exceptions\Shopify\ProductNotFound;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CustomerNotFound;
+use BADDIServices\ClnkGO\Http\Controllers\AffiliateController;
+use BADDIServices\ClnkGO\Http\Requests\Affiliate\NewOrderRequest;
+use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePriceRuleFailed;
 
 class NewOrderController extends AffiliateController
 {

@@ -6,15 +6,15 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Settings;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Settings;
 
 use Throwable;
-use BADDIServices\SocialRocket\AppLogger;
-use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\AppService;
-use BADDIServices\SocialRocket\Http\Requests\Admin\Settings\UpdateSettingsRequest;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\ClnkGO\Services\AppService;
+use BADDIServices\ClnkGO\Http\Requests\Admin\Settings\UpdateSettingsRequest;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController as ControllersAdminController;
 
 class UpdateSettingsController extends ControllersAdminController
 {

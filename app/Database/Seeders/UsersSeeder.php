@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\ClnkGO\Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;

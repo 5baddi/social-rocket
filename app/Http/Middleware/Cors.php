@@ -6,13 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Middleware;
+namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use BADDIServices\SocialRocket\Models\Store;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Services\ShopifyService;
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Services\ShopifyService;
 use Symfony\Component\HttpFoundation\Response;
 
 class Cors

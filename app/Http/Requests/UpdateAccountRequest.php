@@ -6,11 +6,11 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Requests;
+namespace BADDIServices\ClnkGO\Http\Requests;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Setting;
-use BADDIServices\SocialRocket\Rules\AccountPasswordRule;
+use BADDIServices\ClnkGO\Models\Setting;
+use BADDIServices\ClnkGO\Rules\AccountPasswordRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateAccountRequest extends FormRequest

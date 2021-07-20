@@ -6,8 +6,8 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\ViewStoreController;
-use BADDIServices\SocialRocket\Http\Controllers\Admin\Stores as Stores;
+use BADDIServices\ClnkGO\Http\Controllers\ViewStoreController;
+use BADDIServices\ClnkGO\Http\Controllers\Admin\Stores as Stores;
 
 Route::prefix('stores')
     ->name('.stores')

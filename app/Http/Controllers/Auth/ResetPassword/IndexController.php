@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
+namespace BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword;
 
 use App\Http\Controllers\Controller;
 

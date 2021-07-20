@@ -6,14 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\ClnkGO\Repositories;
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
-use BADDIServices\SocialRocket\Models\Earning;
-use BADDIServices\SocialRocket\Models\Subscription;
+use BADDIServices\ClnkGO\Models\Earning;
+use BADDIServices\ClnkGO\Models\Subscription;
 
 class EarningRepository
 {

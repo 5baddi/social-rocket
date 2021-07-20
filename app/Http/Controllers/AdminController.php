@@ -6,14 +6,14 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers;
+namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\ClnkGO\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
-use BADDIServices\SocialRocket\Services\StatsService;
+use BADDIServices\ClnkGO\Services\StatsService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 

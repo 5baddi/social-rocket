@@ -6,12 +6,12 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Http\Controllers\Admin\Stores;
+namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Stores;
 
-use BADDIServices\SocialRocket\Entities\Alert;
-use BADDIServices\SocialRocket\Services\StoreService;
-use BADDIServices\SocialRocket\Http\Controllers\AdminController as ControllersAdminController;
-use BADDIServices\SocialRocket\Models\Store;
+use BADDIServices\ClnkGO\Entities\Alert;
+use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Http\Controllers\AdminController as ControllersAdminController;
+use BADDIServices\ClnkGO\Models\Store;
 
 class DisableStoreController extends ControllersAdminController
 {
