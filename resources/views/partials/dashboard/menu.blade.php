@@ -116,9 +116,9 @@
           </li>
           @endif
         </ul>
-        <div class="row mb-4">
+        {{-- <div class="row mb-4">
             <div class="col-12">
-                {{-- <img src="{{ asset('assets/img/logo.mini.png') }}"/> --}}
+                <img src="{{ asset('assets/img/logo.mini.png') }}"/>
                 <div class="col-auto align-self-center mt-3">
                     <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-white w-100">
                         Upgrade plan
@@ -135,7 +135,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> --}}
       </div>
     </div>
 </aside>
