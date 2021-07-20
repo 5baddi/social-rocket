@@ -116,4 +116,9 @@ class User extends Authenticatable
     {
         return $this->getAttribute(self::BANNED_COLUMN) === true;
     }
+
+    public function hasPassword(): bool
+    {
+        return $this->getAttributeValue(self::PASSWORD_COLUMN) !== null;
+    }
 }
