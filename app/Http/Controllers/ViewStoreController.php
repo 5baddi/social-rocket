@@ -8,17 +8,19 @@
 
 namespace BADDIServices\ClnkGO\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
-use Illuminate\Routing\Controller as BaseController;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
-class ViewStoreController extends BaseController
+class ViewStoreController extends Controller
 {
     /** @var ShopifyService */
     protected $shopifyService;
 
-    public function __construct(ShopifyService $shopifyService)
+    public function __construct( ShopifyService $shopifyService)
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
     }
 

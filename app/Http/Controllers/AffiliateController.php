@@ -9,15 +9,15 @@
 namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use Illuminate\Routing\Controller as BaseController;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AffiliateController extends BaseController
+class AffiliateController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
@@ -32,6 +32,8 @@ class AffiliateController extends BaseController
 
     public function __construct(StoreService $storeService, ShopifyService $shopifyService)
     {
+        parent::__construct();
+
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 

@@ -8,18 +8,18 @@
 
 namespace BADDIServices\ClnkGO\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use BADDIServices\ClnkGO\Models\Setting;
 use BADDIServices\ClnkGO\Models\Subscription;
-use Illuminate\Routing\Controller as BaseController;
 use BADDIServices\ClnkGO\Entities\StoreSetting;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class DashboardController extends BaseController
+class DashboardController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
@@ -37,6 +37,8 @@ class DashboardController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 

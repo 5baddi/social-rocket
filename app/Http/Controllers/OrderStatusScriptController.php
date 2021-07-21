@@ -8,17 +8,16 @@
 
 namespace BADDIServices\ClnkGO\Http\Controllers;
 
+use Throwable;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Models\Setting;
+use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Entities\StoreSetting;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\CouponService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
-use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 
 class OrderStatusScriptController extends Controller
 {
@@ -33,6 +32,8 @@ class OrderStatusScriptController extends Controller
 
     public function __construct(ShopifyService $shopifyService, StoreService $storeService, CouponService $couponService)
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
         $this->couponService = $couponService;
@@ -62,7 +63,7 @@ class OrderStatusScriptController extends Controller
                 'html'      =>  $this->couponService->getScriptTag($setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
             ]);
         } catch (Throwable $ex) {
-            AppLogger::setStore($store)->error($ex, 'affiliate:script-tag');
+            $this->logger->setStore($store)->error($ex, 'affiliate:script-tag');
 
             return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }

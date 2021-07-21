@@ -13,7 +13,6 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\OAuth;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
@@ -37,6 +36,8 @@ class OAuthCallbackController extends Controller
 
     public function __construct(ShopifyService $shopifyService, StoreService $storeService, UserService $userService)
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
         $this->userService = $userService;
@@ -102,7 +103,7 @@ class OAuthCallbackController extends Controller
             return redirect('/signin')
                 ->with('success', 'Your new store has been linked successfully! Please log to your account..');
         } catch (ValidationException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
 
             $errors = collect($ex->errors());
             
@@ -111,7 +112,7 @@ class OAuthCallbackController extends Controller
                 ->withInput()
                 ->with('error', $errors->first());
         } catch (Throwable $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
             
             return redirect()
                 ->route('connect')

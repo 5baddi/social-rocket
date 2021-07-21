@@ -9,15 +9,15 @@
 namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use BADDIServices\ClnkGO\Services\UserService;
-use Illuminate\Routing\Controller as BaseController;
 use BADDIServices\ClnkGO\Services\StatsService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-class AdminController extends BaseController
+class AdminController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
@@ -32,6 +32,8 @@ class AdminController extends BaseController
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->middleware(function ($request, $next) {
             $this->user = Auth::user();
 

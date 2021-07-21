@@ -18,6 +18,8 @@ class LandingPageController extends Controller
 
     public function __construct(PackService $packService)
     {
+        parent::__construct();
+
         $this->packService = $packService;
     }
 
