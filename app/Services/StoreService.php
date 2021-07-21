@@ -129,7 +129,15 @@ class StoreService extends Service
             Store::DOMAIN_COLUMN,
             Store::PHONE_COLUMN,
             Store::COUNTRY_COLUMN,
+            Store::MYSHOPIFY_DOMAIN_COLUMN,
+            Store::SHOP_OWNER_COLUMN,
+            Store::CURRENCY_COLUMN,
         ]);
+
+        $attributes[Store::SHOP_ID_COLUMN] = Arr::get($attributes, Store::ID_COLUMN);
+        $attributes[Store::LOCALE_COLUMN] = Arr::get($attributes, 'primary_locale');
+        $attributes[Store::TIMEZONE_COLUMN] = Arr::get($attributes, 'iana_timezone');
+        $attributes[Store::CURRENCY_SYMBOL_COLUMN] = Arr::get($attributes, 'money_format');
 
         Arr::set($attributes, Store::CONNECTED_AT_COLUMN, Carbon::now());
 

@@ -89,7 +89,7 @@ class UserService extends Service
         $validator = Validator::make($attributes, [
             User::CUSTOMER_ID_COLUMN   => 'nullable|integer',
             User::FIRST_NAME_COLUMN    => 'required|string|min:1',
-            User::LAST_NAME_COLUMN     => 'nullable|string|min:1',
+            User::LAST_NAME_COLUMN     => 'required|string|min:1',
             User::EMAIL_COLUMN         => 'required|email',
             User::PASSWORD_COLUMN      => 'nullable|string',
             User::PHONE_COLUMN         => 'nullable|string|max:50'

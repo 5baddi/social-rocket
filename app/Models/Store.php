@@ -28,11 +28,12 @@ class Store extends ModelEntity
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
     public const CONNECTED_AT_COLUMN = 'connected_at';
     public const ENABLED_COLUMN = 'enabled';
-    public const SHOP_ID_COLUMN = 'store_id';
+    public const SHOP_ID_COLUMN = 'shop_id';
     public const TIMEZONE_COLUMN = 'timezone';
     public const LOCALE_COLUMN = 'locale';
     public const CURRENCY_COLUMN = 'currency';
     public const CURRENCY_SYMBOL_COLUMN = 'currency_symbol';
+    public const SHOP_OWNER_COLUMN = 'shop_owner';
 
     /** @var array */
     protected $casts = [

@@ -21,7 +21,8 @@ class AddStoresConfigsColumns extends Migration
             $table->string('phone', 50)->nullable()->after('myshopify_domain');
             $table->string('country', 10)->nullable()->after('phone');
             $table->bigInteger('shop_id')->nullable()->after('country');
-            $table->string('timezone')->nullable()->after('shop_id');
+            $table->string('shop_owner')->nullable()->after('shop_id');
+            $table->string('timezone')->nullable()->after('shop_owner');
             $table->string('locale', 10)->nullable()->after('timezone');
             $table->string('currency', 10)->nullable()->after('locale');
             $table->string('currency_symbol', 10)->nullable()->after('currency');
@@ -47,6 +48,7 @@ class AddStoresConfigsColumns extends Migration
             $table->dropColumn('locale');
             $table->dropColumn('currency');
             $table->dropColumn('currency_symbol');
+            $table->dropColumn('shop_owner');
         });
     }
 }
