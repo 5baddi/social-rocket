@@ -13,7 +13,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Http\Requests\SignInRequest;
@@ -57,7 +56,7 @@ class AuthenticateController extends Controller
         } catch (ValidationException $e) {
             return redirect()->route('signin')->withInput()->withErrors($e->errors());
         }  catch (Throwable $e) {
-            AppLogger::error($e, 'auth:signin', ['playload' => $request->all()]);
+            $this->logger->error($e, 'auth:signin', ['playload' => $request->all()]);
 
             return redirect()->route('signin')->withInput()->with("error", "Internal server error");
         }

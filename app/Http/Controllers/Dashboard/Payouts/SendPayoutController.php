@@ -13,7 +13,6 @@ use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use App\Http\Requests\Payouts\SendPayoutRequest;
 use BADDIServices\ClnkGO\Models\Commission;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Services\CommissionService;
 use BADDIServices\ClnkGO\Http\Controllers\DashboardController;
 
@@ -48,7 +47,7 @@ class SendPayoutController extends DashboardController
                                 new Alert($errors->first())
                             );
         } catch (Throwable $ex) {
-            AppLogger::error($ex, 'store:send-payment', ['playload' => $request->all()]);
+            $this->logger->error($ex, 'store:send-payment', ['playload' => $request->all()]);
 
             return redirect()->back()
                             ->with(

@@ -10,9 +10,9 @@ namespace App\Console\Commands;
 
 use Throwable;
 use App\Models\User;
+use BADDIServices\ClnkGO\Logger;
 use Illuminate\Support\Arr;
 use Illuminate\Console\Command;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\Pack;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
@@ -39,6 +39,9 @@ class SyncAllSubscriptions extends Command
      */
     protected $description = 'Sync subscriptions from shopify all stores';
 
+    /** @var Logger */
+    private $logger;
+
     /** @var StoreService */
     private $storeService;
 
@@ -57,6 +60,7 @@ class SyncAllSubscriptions extends Command
      * @return void
      */
     public function __construct(
+        Logger $logger,
         StoreService $storeService,
         SubscriptionService $subscriptionService,
         EarningService $earningService,
@@ -65,6 +69,7 @@ class SyncAllSubscriptions extends Command
     {
         parent::__construct();
 
+        $this->logger = $logger;
         $this->storeService = $storeService;
         $this->subscriptionService = $subscriptionService;
         $this->earningService = $earningService;
@@ -124,13 +129,13 @@ class SyncAllSubscriptions extends Command
 
                             sleep(10);
                         } catch (Throwable $e) {
-                            AppLogger::setStore($store ?? null)->error($e, 'command:shopify:sync-subscriptions');
+                            $this->logger->setStore($store ?? null)->error($e, 'command:shopify:sync-subscriptions');
                         }
                     });
                 } 
             );
         } catch (Throwable $e) {
-            AppLogger::error($e, 'command:shopify:sync-subscriptions', ['execution_time' => (microtime(true) - $startTime)]);
+            $this->logger->error($e, 'command:shopify:sync-subscriptions', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sync stores subscriptions %s", $e->getMessage()));
 
             return;

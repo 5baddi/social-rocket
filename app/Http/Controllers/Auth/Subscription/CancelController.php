@@ -12,7 +12,6 @@ use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Services\UserService;
@@ -47,7 +46,7 @@ class CancelController extends Controller
 
             return redirect()->route('landing');
         } catch(Throwable $e) {
-            AppLogger::setStore($store ?? null)->error($e, 'store:delete-account');
+            $this->logger->setStore($store ?? null)->error($e, 'store:delete-account');
 
             return redirect()->route('subscription.select.pack')->with('error', 'Internal server error');
         }

@@ -14,7 +14,6 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
-use BADDIServices\ClnkGO\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
 use BADDIServices\ClnkGO\Models\Pack;
@@ -162,7 +161,7 @@ class ShopifyService extends Service
 
             return $data['shop'];
         } catch (Exception | ClientException | RequestException $e) {
-            AppLogger::setStore($store)->error($e, 'store:load-configurations');
+            $this->logger->setStore($store)->error($e, 'store:load-configurations');
 
             throw new LoadConfigurationsFailed();
         }
@@ -204,7 +203,7 @@ class ShopifyService extends Service
 
             return $this->getBilling($store, $chargeId, $data['usage_charge']['id']);
         } catch (Exception | ClientException | RequestException $e) {
-            AppLogger::setStore($store)->error($e, 'store:get-usage-billing');
+            $this->logger->setStore($store)->error($e, 'store:get-usage-billing');
 
             throw new AcceptPaymentFailed();
         }
@@ -242,7 +241,7 @@ class ShopifyService extends Service
 
             return $usageId !== null ? $data['usage_charge'] : $data['recurring_application_charge'];
         } catch (Exception | ClientException | RequestException $e) {
-            AppLogger::setStore($store)->error($e, 'store:get-charge-billing');
+            $this->logger->setStore($store)->error($e, 'store:get-charge-billing');
 
             throw new AcceptPaymentFailed();
         }

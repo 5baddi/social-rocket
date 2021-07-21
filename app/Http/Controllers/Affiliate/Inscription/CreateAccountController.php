@@ -12,7 +12,6 @@ use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
@@ -50,7 +49,7 @@ class CreateAccountController extends Controller
                         ->withInput()
                         ->withErrors($e->errors);
         } catch (Throwable $e) {
-            AppLogger::setStore($store)->error($e, 'affiliate:signup');
+            $this->logger->setStore($store)->error($e, 'affiliate:signup');
 
             return redirect()->back()->withInput()->with('error', 'Something going wrong during inscription');
         }

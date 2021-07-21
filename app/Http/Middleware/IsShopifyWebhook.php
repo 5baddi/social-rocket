@@ -10,7 +10,6 @@ namespace BADDIServices\ClnkGO\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use BADDIServices\ClnkGO\AppLogger;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
@@ -41,7 +40,7 @@ class IsShopifyWebhook
             }
         }
 
-        AppLogger::info('Unauthrozied webhook request', 'webhooks:shopify-unauthorized', ['playload' => $request->all()]);
+        $this->logger->info('Unauthrozied webhook request', 'webhooks:shopify-unauthorized', ['playload' => $request->all()]);
         abort(Response::HTTP_UNAUTHORIZED);
     }
 }

@@ -10,7 +10,6 @@ namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Users;
 
 use Throwable;
 use App\Models\User;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Http\Requests\Admin\Users\UpdatePasswordRequest;
@@ -43,7 +42,7 @@ class ResetPasswordController extends ControllersAdminController
                     new Alert($errors->first())
                 );
         } catch (Throwable $e) {
-            AppLogger::error($e, 'admin:reset-user-password', ['user' => $user, 'playload' => $request->all()]);
+            $this->logger->error($e, 'admin:reset-user-password', ['user' => $user, 'playload' => $request->all()]);
 
             return redirect()
                 ->back()

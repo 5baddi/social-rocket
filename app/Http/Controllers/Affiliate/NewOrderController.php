@@ -12,7 +12,6 @@ use Throwable;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\Order;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Models\Setting;
@@ -141,13 +140,13 @@ class NewOrderController extends AffiliateController
         } catch (CustomerNotFound | OrderNotFound | ProductNotFound | CreatePriceRuleFailed $ex) {
             DB::rollBack();
 
-            AppLogger::setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
+            $this->logger->setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
 
             return response()->json($ex->getMessage(), Response::HTTP_INTERNAL_SERVER_ERROR);
         } catch (Throwable $ex) {
             DB::rollBack();
 
-            AppLogger::setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
+            $this->logger->setStore($store)->error($ex, 'affiliate:new-order', ['playload' => $request->all()]);
             
             return response()->json('Internal server error', Response::HTTP_INTERNAL_SERVER_ERROR);
         }

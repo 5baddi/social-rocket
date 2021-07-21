@@ -13,7 +13,6 @@ use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Services\UserService;
@@ -86,7 +85,7 @@ class SignInWithShopifyApp
                     return redirect()
                         ->route('fast.connect', ['store' => $store->slug]);
                 } catch (InvalidRequestSignatureException $ex) {
-                    AppLogger::setStore($store)
+                    $this->logger->setStore($store)
                     ->error(
                         $ex, 'store:login-via-app', 
                         [

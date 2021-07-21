@@ -8,7 +8,7 @@
 
 namespace App\Console\Commands\Shopify;
 
-use BADDIServices\ClnkGO\AppLogger;
+use BADDIServices\ClnkGO\Logger;
 use BADDIServices\ClnkGO\Models\Commission;
 use Throwable;
 use Illuminate\Console\Command;
@@ -38,6 +38,9 @@ class SyncAllOrders extends Command
      */
     protected $description = 'Sync orders from shopify store';
 
+    /** @var Logger */
+    private $logger;
+    
     /** @var StoreService */
     private $storeService;
     
@@ -62,6 +65,7 @@ class SyncAllOrders extends Command
      * @return void
      */
     public function __construct(
+        Logger $logger,
         StoreService $storeService, 
         ShopifyService $shopifyService, 
         OrderService $orderService,
@@ -72,6 +76,7 @@ class SyncAllOrders extends Command
     {
         parent::__construct();
 
+        $this->logger = $logger;
         $this->storeService = $storeService;
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
@@ -139,7 +144,7 @@ class SyncAllOrders extends Command
                 sleep(10);
             });
         } catch (Throwable $e) {
-            AppLogger::error($e, 'command:shopify:sync-orders');
+            $this->logger->error($e, 'command:shopify:sync-orders');
 
             return;
         }

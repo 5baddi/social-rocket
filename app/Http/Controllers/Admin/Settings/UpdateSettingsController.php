@@ -9,7 +9,6 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\Admin\Settings;
 
 use Throwable;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Services\AppService;
@@ -43,7 +42,7 @@ class UpdateSettingsController extends ControllersAdminController
                 ->withInput()
                 ->withErrors($e->errors());
         } catch (Throwable $e) {
-            AppLogger::error($e, 'admin:update-settings');
+            $this->logger->error($e, 'admin:update-settings');
 
             return redirect()
                 ->back()

@@ -11,7 +11,6 @@ namespace BADDIServices\ClnkGO\Http\Controllers\Auth;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
@@ -51,11 +50,11 @@ class CreateUserController extends Controller
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
 
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
             
             return redirect()->route('signup', ['store' => $store->id])->withInput()->with("error", "Internal server error");
         }

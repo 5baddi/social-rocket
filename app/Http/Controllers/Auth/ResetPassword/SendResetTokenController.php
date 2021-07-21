@@ -15,7 +15,6 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
-use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Events\Auth\ResetPassword;
@@ -59,7 +58,7 @@ class SendResetTokenController extends Controller
                     ->withInput()
                     ->withErrors($e->errors());
         }  catch (Throwable $e) {
-            AppLogger::error($e, 'auth:send-reset-token', ['playload' => $request->all()]);
+            $this->logger->error($e, 'auth:send-reset-token', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()

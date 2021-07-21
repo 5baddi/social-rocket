@@ -10,18 +10,20 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
+use BADDIServices\ClnkGO\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Webhooks\CustomerRequest;
-use BADDIServices\ClnkGO\Services\UserService;
-use Illuminate\Routing\Controller as BaseController;
 
-class DeleteCustomerController extends BaseController
+class DeleteCustomerController extends Controller
 {
     /** @var UserService */
     private $userService;
 
     public function __construct(UserService $userService)
     {
+        parent::__construct();
+
         $this->userService = $userService;
     }
     

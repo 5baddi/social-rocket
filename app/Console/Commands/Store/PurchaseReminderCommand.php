@@ -8,9 +8,9 @@
 
 namespace App\Console\Commands\Store;
 
+use BADDIServices\ClnkGO\Logger;
 use Throwable;
 use Illuminate\Console\Command;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\ClnkGO\Models\Setting;
@@ -24,15 +24,20 @@ class PurchaseReminderCommand extends Command
     /** @var string */
     protected $description = 'Purchase Email reminder';
 
+    /** @var Logger */
+    private $logger;
+
     /** @var StoreService */
     private $storeService;
 
     public function __construct(
+        Logger $logger,
         StoreService $storeService
     )
     {
         parent::__construct();
 
+        $this->logger = $logger;
         $this->storeService = $storeService;
     }
 
@@ -53,13 +58,13 @@ class PurchaseReminderCommand extends Command
 
                             //purchase_mail_24h purchase_mail_48h purchase_mail_120h
                         } catch (Throwable $e) {
-                            AppLogger::setStore($store ?? null)->error($e, 'command:purchase:reminder');
+                            $this->logger->setStore($store ?? null)->error($e, 'command:purchase:reminder');
                         }
                     });
                 } 
             );
         } catch (Throwable $e) {
-            AppLogger::error($e, 'command:purchase:reminder', ['execution_time' => (microtime(true) - $startTime)]);
+            $this->logger->error($e, 'command:purchase:reminder', ['execution_time' => (microtime(true) - $startTime)]);
             $this->error(sprintf("Error while sending stores purchase reminder %s", $e->getMessage()));
 
             return;

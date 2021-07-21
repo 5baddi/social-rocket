@@ -11,7 +11,6 @@ namespace BADDIServices\ClnkGO\Http\Controllers\Auth\Subscription;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\ClnkGO\Models\Pack;
 use BADDIServices\ClnkGO\Models\Store;
@@ -80,7 +79,7 @@ class BillingConfirmationController extends Controller
                                 new Alert($e->getMessage())
                             ); 
         } catch (Throwable $e) {
-            AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
+            $this->logger->setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
 
             return redirect()->route('subscription.select.pack')
                             ->with(

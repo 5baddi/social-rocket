@@ -10,7 +10,6 @@ namespace BADDIServices\ClnkGO\Http\Controllers\OAuth;
 
 use Throwable;
 use App\Http\Controllers\Controller;
-use BADDIServices\ClnkGO\AppLogger;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
@@ -57,15 +56,15 @@ class OAuthController extends Controller
 
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
             
             return redirect()->back()->withInput()->withErrors($ex->errors());
         } catch (InvalidStoreURLException | StoreAlreadyLinkedException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
 
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
+            $this->logger->setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
 
             return redirect()->back()->withInput()->with("error", "Internal server error");
         }

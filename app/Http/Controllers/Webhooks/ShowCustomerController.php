@@ -10,15 +10,15 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
-use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Webhooks\StoreRequest;
 use BADDIServices\ClnkGO\Services\UserService;
-use Illuminate\Routing\Controller as BaseController;
+use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
-class ShowCustomerController extends BaseController
+class ShowCustomerController extends Controller
 {
     /** @var ShopifyService */
     private $shopifyService;
@@ -35,6 +35,8 @@ class ShowCustomerController extends BaseController
         UserService $userService
     )
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
         $this->userService = $userService;

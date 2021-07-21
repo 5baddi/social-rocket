@@ -12,7 +12,6 @@ use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\ClnkGO\AppLogger;
 use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Support\Facades\Hash;
@@ -52,7 +51,7 @@ class ResetPasswordController extends Controller
                     ->withInput()
                     ->withErrors($e->errors());
         }  catch (Throwable $e) {
-            AppLogger::error($e, 'auth:send-reset-password', ['playload' => $request->all()]);
+            $this->logger->error($e, 'auth:send-reset-password', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()
