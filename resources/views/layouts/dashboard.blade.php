@@ -18,14 +18,6 @@
     <link href="{{ asset('assets/css/tabler-vendors.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/daterangepicker.css') }}" rel="stylesheet"/>
     <link href="{{ asset('assets/css/baddi.services.css') }}" rel="stylesheet"/>
-
-    @if (request()->routeIs('dashboard'))
-    <style>
-      .wrapper .page-wrapper{
-        margin-right: 15rem;
-      }
-    </style>
-    @endif
   </head>
   <body class="antialiased">
     <div class="wrapper">
