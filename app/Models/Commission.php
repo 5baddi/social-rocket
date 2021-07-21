@@ -31,27 +31,13 @@ class Commission extends ModelEntity
     public const REJECTED_STATUS = 'rejected'; 
     public const CANCELLED_STATUS = 'cancelled'; 
 
-        /** @var array */
-        public const STATUSES = [
-            self::DEFAULT_STATUS,
-            self::IN_PROCESS_STATUS,
-            self::PAID_STATUS,
-            self::REJECTED_STATUS,
-            self::CANCELLED_STATUS
-        ];
-
     /** @var array */
-    protected $fillable = [
-        self::STATUS_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::ORDER_ID_COLUMN,
-        self::AFFILIATE_ID_COLUMN,
-        self::AMOUNT_COLUMN,
-        self::REASON_COLUMN,
-        self::PAID_AT_COLUMN,
-        self::PAYOUT_METHOD_COLUMN,
-        self::PAYOUT_REFERENCE_COLUMN,
-        self::ADDITIONAL_INFO_COLUMN,
+    public const STATUSES = [
+        self::DEFAULT_STATUS,
+        self::IN_PROCESS_STATUS,
+        self::PAID_STATUS,
+        self::REJECTED_STATUS,
+        self::CANCELLED_STATUS
     ];
 
     /** @var array */

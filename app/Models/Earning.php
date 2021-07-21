@@ -34,17 +34,6 @@ class Earning extends ModelEntity
     public const DEFAULT_STATUS = self::STATUSES[0];
 
     /** @var array */
-    protected $fillable = [
-        self::USER_ID_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::SUBSCRIPTION_ID_COLUMN,
-        self::AMOUNT_COLUMN,
-        self::STATUS_COLUMN,
-        self::ACTIVATED_ON_COLUMN,
-        self::CANCELLED_ON_COLUMN
-    ];
-
-    /** @var array */
     protected $casts = [
         self::ACTIVATED_ON_COLUMN   => 'datetime',
         self::CANCELLED_ON_COLUMN   => 'datetime',

@@ -21,25 +21,18 @@ class Store extends ModelEntity
     public const NAME_COLUMN = 'name';
     public const EMAIL_COLUMN = 'email';
     public const DOMAIN_COLUMN = 'domain';
+    public const MYSHOPIFY_DOMAIN_COLUMN = 'myshopify_domain';
     public const SLUG_COLUMN = 'slug';
     public const PHONE_COLUMN = 'phone';
     public const COUNTRY_COLUMN = 'country';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
     public const CONNECTED_AT_COLUMN = 'connected_at';
     public const ENABLED_COLUMN = 'enabled';
-
-    /** @var array */
-    protected $fillable = [
-        self::NAME_COLUMN,
-        self::EMAIL_COLUMN,
-        self::DOMAIN_COLUMN,
-        self::SLUG_COLUMN,
-        self::PHONE_COLUMN,
-        self::COUNTRY_COLUMN,
-        self::SCRIPT_TAG_ID_COLUMN,
-        self::CONNECTED_AT_COLUMN,
-        self::ENABLED_COLUMN,
-    ];
+    public const SHOP_ID_COLUMN = 'store_id';
+    public const TIMEZONE_COLUMN = 'timezone';
+    public const LOCALE_COLUMN = 'locale';
+    public const CURRENCY_COLUMN = 'currency';
+    public const CURRENCY_SYMBOL_COLUMN = 'currency_symbol';
 
     /** @var array */
     protected $casts = [

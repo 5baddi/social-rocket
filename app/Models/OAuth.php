@@ -19,15 +19,6 @@ class OAuth extends ModelEntity
     protected $table = self::TABLE_NAME;
 
     /** @var array */
-    protected $fillable = [
-        self::STORE_ID_COLUMN,
-        self::CODE_COLUMN,
-        self::ACCESS_TOKEN_COLUMN,
-        self::SCOPE_COLUMN,
-        self::TIMESTAMP_COLUMN,
-    ];
-
-    /** @var array */
     protected $casts = [
         self::TIMESTAMP_COLUMN => 'integer',
     ];

@@ -29,23 +29,6 @@ class Order extends ModelEntity
     public const TOTAL_DISCOUNTS_COLUMN = 'total_discounts';
     public const CONFIRMED_COLUMN = 'confirmed';
     public const CANCELLED_AT_COLUMN = 'cancelled_at';
-    
-    /** @var array */
-    protected $fillable = [
-        self::STORE_ID_COLUMN,
-        self::CUSTOMER_ID_COLUMN,
-        self::ORDER_ID_COLUMN,
-        self::CHECKOUT_ID_COLUMN,
-        self::NAME_COLUMN,
-        self::TOTAL_PRICE_COLUMN,
-        self::TOTAL_PRICE_USD_COLUMN,
-        self::CURRENCY_COLUMN,
-        self::PRODUCTS_IDS_COLUMN,
-        self::DISCOUNT_CODES_COLUMN,
-        self::TOTAL_DISCOUNTS_COLUMN,
-        self::CONFIRMED_COLUMN,
-        self::CANCELLED_AT_COLUMN,
-    ];
 
     /** @var array */
     protected $casts = [

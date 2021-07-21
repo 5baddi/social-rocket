@@ -46,21 +46,6 @@ class Subscription extends ModelEntity
     ];
 
     /** @var array */
-    protected $fillable = [
-        self::USER_ID_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::PACK_ID_COLUMN,
-        self::CHARGE_ID_COLUMN,
-        self::USAGE_ID_COLUMN,
-        self::STATUS_COLUMN,
-        self::BILLING_ON_COLUMN,
-        self::ACTIVATED_ON_COLUMN,
-        self::TRIAL_ENDS_ON_COLUMN,
-        self::CANCELLED_ON_COLUMN,
-        self::CREATED_AT_COLUMN
-    ];
-
-    /** @var array */
     protected $casts = [
         self::ACTIVATED_ON_COLUMN   => 'date',
     ];

@@ -20,15 +20,6 @@ class AppSetting extends ModelEntity
     public const FACEBOOK_USERNAME = 'facebook_username';
     public const LINKEDIN_USERNAME = 'linkedin_username';
 
-    /** @var array */
-    protected $fillable = [
-        self::INSTAGRAM_USERNAME,
-        self::TWITTER_USERNAME,
-        self::FACEBOOK_USERNAME,
-        self::LINKEDIN_USERNAME,
-        self::SUPPORT_EMAIL,
-    ];
-
     public function getLinkedInUsername(): string
     {
         return "https://linkedin.com/company/" . $this->getAttribute(self::LINKEDIN_USERNAME);

@@ -66,35 +66,31 @@ class OAuthCallbackController extends Controller
             $this->storeService->updateConfigurations($store);
             $this->storeService->enableStore($store);
 
-            $existsEmail = $this->userService->findByEmail($store->email);
-            if ($existsEmail) {
-                return redirect('/connect')
-                    ->withInput([
-                        'store' => $store->domain 
-                    ])
-                    ->with("error", "Email already registred with another store");
+            $user = $this->userService->findByEmail($store->email);
+            if (!$user instanceof User) {
+                $user = $this->userService->create(
+                    $store,
+                    [
+                        User::FIRST_NAME_COLUMN    => ucwords($store->name),
+                        User::EMAIL_COLUMN         => $store->email,
+                        User::PHONE_COLUMN         => $store->phone
+                    ]
+                );
             }
-
-            $user = $this->userService->create(
-                $store,
-                [
-                    User::FIRST_NAME_COLUMN    => ucwords($store->name),
-                    User::EMAIL_COLUMN         => $store->email,
-                    User::PHONE_COLUMN         => $store->phone
-                ]
-            );
 
             Event::dispatch(new WelcomeMail($store, $user));
 
-            $authenticateUser = Auth::loginUsingId($user->id);
-            if (!$authenticateUser) {
-                return redirect('/signin')->with('error', 'Something going wrong with the authentification');
+            if ($user->last_login === null) {
+                $authenticateUser = Auth::loginUsingId($user->id);
+                if (!$authenticateUser) {
+                    return redirect('/signin')->with('error', 'Something going wrong with the authentification');
+                }
+
+                return redirect('/dashboard')->with('success', 'Account created successfully');
             }
 
-            return redirect('/dashboard')->with('success', 'Account created successfully');
-
-            return redirect()
-                ->route('signup', ['store' => $store->id]);
+            return redirect('/signin')
+                ->with('success', 'Your new store has been linked successfully! Please log to your account..');
         } catch (ValidationException $ex) {
             AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
 

@@ -21,16 +21,6 @@ class Affiliate extends ModelEntity
     public const FIRST_NAME_COLUMN = 'first_name';
     public const COUPON_COLUMN = 'coupon';
 
-    /** @var array */
-    protected $fillable = [
-        self::CUSTOMER_ID_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::FIRST_NAME_COLUMN,
-        self::LAST_NAME_COLUMN,
-        self::EMAIL_COLUMN,
-        self::COUPON_COLUMN,
-    ];
-
     public function store(): HasOne
     {
         return $this->hasOne(Store::class);

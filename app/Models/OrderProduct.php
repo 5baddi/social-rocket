@@ -19,13 +19,4 @@ class OrderProduct extends ModelEntity
     public const PRODUCT_ID_COLUMN = 'product_id';
     public const PRICE_COLUMN = 'price';
     public const CURRENCY_COLUMN = 'currency';
-
-    /** @var array */
-    protected $fillable = [
-        self::STORE_ID_COLUMN,
-        self::ORDER_ID_COLUMN,
-        self::PRODUCT_ID_COLUMN,
-        self::PRICE_COLUMN,
-        self::CURRENCY_COLUMN,
-    ];
 }

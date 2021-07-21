@@ -22,15 +22,6 @@ class PurchaseReminder extends ModelEntity
     public const MAIL_120H_SENT_COLUMN = 'mail_120h_sent';
 
     /** @var array */
-    protected $fillable = [
-        self::STORE_ID_COLUMN,
-        self::USER_ID_COLUMN,
-        self::MAIL_24H_SENT_COLUMN,
-        self::MAIL_48H_SENT_COLUMN,
-        self::MAIL_120H_SENT_COLUMN,
-    ];
-
-    /** @var array */
     protected $casts = [
         self::MAIL_24H_SENT_COLUMN      => 'boolean',
         self::MAIL_48H_SENT_COLUMN      => 'boolean',

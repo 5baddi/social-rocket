@@ -71,29 +71,6 @@ class Setting extends ModelEntity
     ];
 
     /** @var array */
-    protected $fillable = [
-        self::STORE_ID_COLUMN,
-        self::BRAND_NAME_COLUMN,
-        self::COMMISSION_TYPE_COLUMN,
-        self::DISCOUNT_TYPE_COLUMN,
-        self::COMMISSION_AMOUNT_COLUMN,
-        self::DISCOUNT_AMOUNT_COLUMN,
-        self::DISCOUNT_FORMAT_COLUMN,
-        self::COLOR_COLUMN,
-        self::CURRENCY_COLUMN,
-        self::PAYOUT_METHODS_COLUMN,
-        self::NOTIFY_NEW_ACCOUNT_COLUMN,
-        self::NOTIFY_NEW_OREDR_COLUMN,
-        self::AFFILIATE_FORM_COLUMN,
-        self::THANKYOU_PAGE_COLUMN,
-        self::CUSTOM_SHARE_TEXT_COLUMN,
-        self::PURCHASE_MAIL_COLUMN,
-        self::PURCHASE_MAIL_24H_COLUMN,
-        self::PURCHASE_MAIL_48H_COLUMN,
-        self::PURCHASE_MAIL_120H_COLUMN,
-    ];
-
-    /** @var array */
     protected $casts = [
         self::COMMISSION_AMOUNT_COLUMN  => 'float',
         self::DISCOUNT_AMOUNT_COLUMN    => 'float',
