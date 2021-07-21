@@ -289,7 +289,7 @@ style="overflow: visible; height: auto;">
                                         <div id="offer-details"
                                             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
                                             <div
-                                                style="background-color: #ffffff; text-align: center; color: #00af91; font-size: 18px; padding: 15px 25px; width: 320px;">
+                                                style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
                                                 <img src="{{ asset('assets/img/logo.png') }}"
                                                     id="offer-details-logo"
                                                     style="display: none; vertical-align: middle; width: 60%;">
