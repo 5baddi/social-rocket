@@ -11,22 +11,11 @@ namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 
 use App\Models\User;
 use App\Http\Controllers\Controller;
-use BADDIServices\ClnkGO\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
 use App\Http\Requests\Webhooks\CustomerRequest;
 
 class DeleteCustomerController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        parent::__construct();
-
-        $this->userService = $userService;
-    }
-    
     public function __invoke(CustomerRequest $request)
     {
         $user = $this->userService->findByEmail($request->input('customer_email'));

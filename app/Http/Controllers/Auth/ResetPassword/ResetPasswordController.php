@@ -12,21 +12,12 @@ use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Http\Requests\Auth\ResetPasswordRequest;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class ResetPasswordController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(ResetPasswordRequest $request)
     {
         try {

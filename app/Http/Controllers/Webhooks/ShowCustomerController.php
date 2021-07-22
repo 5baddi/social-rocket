@@ -13,9 +13,7 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
 use App\Http\Requests\Webhooks\StoreRequest;
-use BADDIServices\ClnkGO\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class ShowCustomerController extends Controller
@@ -23,23 +21,11 @@ class ShowCustomerController extends Controller
     /** @var ShopifyService */
     private $shopifyService;
 
-    /** @var StoreService */
-    private $storeService;
-    
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(
-        ShopifyService $shopifyService,
-        StoreService $storeService,
-        UserService $userService
-    )
+    public function __construct(ShopifyService $shopifyService)
     {
         parent::__construct();
 
         $this->shopifyService = $shopifyService;
-        $this->storeService = $storeService;
-        $this->userService = $userService;
     }
     
     public function __invoke(StoreRequest $request)

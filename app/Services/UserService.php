@@ -50,6 +50,11 @@ class UserService extends Service
         return $this->userRepository->exists($customerId);
     }
     
+    public function findById(string $id): ?User
+    {
+        return $this->userRepository->findById($id);
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return $this->userRepository->findByEmail($email);

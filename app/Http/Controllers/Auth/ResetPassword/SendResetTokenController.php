@@ -9,28 +9,16 @@
 namespace BADDIServices\ClnkGO\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
-use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Events\Auth\ResetPassword;
 use BADDIServices\ClnkGO\Http\Requests\Auth\ResetTokenRequest;
 use BADDIServices\ClnkGO\Exceptions\Auth\FailedToGenerateToken;
 
 class SendResetTokenController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(ResetTokenRequest $request)
     {
         try {

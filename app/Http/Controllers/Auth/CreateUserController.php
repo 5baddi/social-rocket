@@ -15,21 +15,12 @@ use BADDIServices\ClnkGO\Events\WelcomeMail;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 
 class CreateUserController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(Store $store, SignUpRequest $request)
     {
         try {

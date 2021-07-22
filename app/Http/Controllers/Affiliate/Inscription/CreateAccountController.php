@@ -15,19 +15,10 @@ use Illuminate\Support\Facades\Event;
 use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Http\Requests\AffiliateSignInRequest;
 
 class CreateAccountController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(Store $store, AffiliateSignInRequest $request)
     {
         try {

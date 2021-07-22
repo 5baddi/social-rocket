@@ -18,8 +18,6 @@ use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
-use BADDIServices\ClnkGO\Services\UserService;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 use BADDIServices\ClnkGO\Http\Requests\OAuthCallbackRequest;
 
@@ -28,19 +26,11 @@ class OAuthCallbackController extends Controller
     /** @var ShopifyService */
     private $shopifyService;
 
-    /** @var StoreService */
-    private $storeService;
-    
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(ShopifyService $shopifyService, StoreService $storeService, UserService $userService)
+    public function __construct(ShopifyService $shopifyService)
     {
         parent::__construct();
 
         $this->shopifyService = $shopifyService;
-        $this->storeService = $storeService;
-        $this->userService = $userService;
     }
     
     public function __invoke(OAuthCallbackRequest $request)

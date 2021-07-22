@@ -17,13 +17,10 @@ use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Models\Commission;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Entities\StoreSetting;
 use BADDIServices\ClnkGO\Services\OrderService;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\CouponService;
 use BADDIServices\ClnkGO\Services\ProductService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
 use BADDIServices\ClnkGO\Services\CommissionService;
 use BADDIServices\ClnkGO\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\ClnkGO\Exceptions\Shopify\ProductNotFound;
@@ -34,9 +31,6 @@ use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePriceRuleFailed;
 
 class NewOrderController extends AffiliateController
 {
-    /** @var UserService */
-    private $userService;
-
     /** @var ProductService */
     private $productService;
     
@@ -49,11 +43,10 @@ class NewOrderController extends AffiliateController
     /** @var CommissionService */
     private $commissionService;
 
-    public function __construct(StoreService $storeService, ShopifyService $shopifyService, UserService $userService, OrderService $orderService, ProductService $productService, CouponService $couponService, CommissionService $commissionService)
+    public function __construct(OrderService $orderService, ProductService $productService, CouponService $couponService, CommissionService $commissionService)
     {
-        parent::__construct($storeService, $shopifyService);
+        parent::__construct();
 
-        $this->userService = $userService;
         $this->orderService = $orderService;
         $this->productService = $productService;
         $this->couponService = $couponService;

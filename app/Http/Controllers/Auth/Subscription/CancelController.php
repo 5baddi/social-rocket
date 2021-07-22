@@ -14,23 +14,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\ClnkGO\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\UserService;
-use BADDIServices\ClnkGO\Services\StoreService;
 
 class CancelController extends Controller
 {
-    /** @var StoreService */
-    private $storeService;
-    
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(StoreService $storeService, UserService $userService)
-    {
-        $this->storeService = $storeService;
-        $this->userService = $userService;
-    }
-
     public function __invoke()
     {
         try {

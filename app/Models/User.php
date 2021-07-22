@@ -28,7 +28,7 @@ class User extends Authenticatable
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
     public const BANNED_COLUMN = 'banned';
     public const COUPON_COLUMN = 'coupon';
-    public const STORE_ID_COLUMN = 'store_id';
+    public const MAIN_STORE_ID_COLUMN = 'main_store_id';
     public const DEFAULT_ROLE = 'affiliate';
     public const STORE_OWNER_ROLE = 'store-owner';
 
@@ -36,23 +36,6 @@ class User extends Authenticatable
     public const ROLES = [
         self::DEFAULT_ROLE,
         'store-owner'
-    ];
-
-    /** @var array */
-    protected $fillable = [
-        self::FIRST_NAME_COLUMN,
-        self::LAST_NAME_COLUMN,
-        self::EMAIL_COLUMN,
-        self::PHONE_COLUMN,
-        self::PASSWORD_COLUMN,
-        self::LAST_LOGIN_COLUMN,
-        self::VERIFIED_AT_COLUMN,
-        self::CUSTOMER_ID_COLUMN,
-        self::REMEMBER_TOLEN_COLUMN,
-        self::ROLE_COLUMN,
-        self::STORE_ID_COLUMN,
-        self::COUPON_COLUMN,
-        self::IS_SUPERADMIN_COLUMN,
     ];
 
     /** @var array */
@@ -73,7 +56,7 @@ class User extends Authenticatable
 
     public function store(): BelongsTo
     {
-        return $this->belongsTo(Store::class);
+        return $this->belongsTo(Store::class, self::MAIN_STORE_ID_COLUMN);
     }
     
     public function subscription(): HasOne
@@ -120,5 +103,10 @@ class User extends Authenticatable
     public function hasPassword(): bool
     {
         return $this->getAttributeValue(self::PASSWORD_COLUMN) !== null;
+    }
+
+    public function getMainStore(): ?Store
+    {
+        return $this->getRelation('store');
     }
 }

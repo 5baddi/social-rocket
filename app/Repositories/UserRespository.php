@@ -34,6 +34,13 @@ class UserRespository
                     ->first();
     }
     
+    public function findById(string $id): ?User
+    {
+        return User::query()
+                    ->with(['store', 'subscription'])
+                    ->find($id);
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return User::query()
@@ -58,7 +65,7 @@ class UserRespository
     {
         return User::query()
                     ->where([
-                        User::STORE_ID_COLUMN   => $storeId,
+                        User::MAIN_STORE_ID_COLUMN   => $storeId,
                         User::ROLE_COLUMN       =>  User::STORE_OWNER_ROLE
                     ])
                     ->first();
@@ -67,7 +74,7 @@ class UserRespository
     public function coupons(string $storeId): array
     {
         return User::query()
-                    ->where(User::STORE_ID_COLUMN, $storeId)
+                    ->where(User::MAIN_STORE_ID_COLUMN, $storeId)
                     ->get()
                     ->pluck(User::COUPON_COLUMN)
                     ->toArray();
@@ -75,7 +82,7 @@ class UserRespository
 
     public function create(string $storeId, array $attributes): User
     {
-        Arr::set($attributes, User::STORE_ID_COLUMN, $storeId);
+        Arr::set($attributes, User::MAIN_STORE_ID_COLUMN, $storeId);
         Arr::set($attributes, User::EMAIL_COLUMN, strtolower($attributes[User::EMAIL_COLUMN]));
         
         return User::query()

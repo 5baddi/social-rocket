@@ -14,7 +14,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Entities\Alert;
-use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use BADDIServices\ClnkGO\Http\Requests\UpdateAccountRequest;
@@ -22,15 +21,11 @@ use Illuminate\Validation\ValidationException;
 
 class UpdateAccountController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-    
     /** @var SettingService */
     private $settingService;
 
-    public function __construct(UserService $userService, SettingService $settingService)
+    public function __construct(SettingService $settingService)
     {
-        $this->userService = $userService;
         $this->settingService = $settingService;
     }
     

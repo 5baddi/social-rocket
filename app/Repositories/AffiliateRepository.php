@@ -42,7 +42,7 @@ class AffiliateRepository
     public function coupons(string $storeId): array
     {
         return User::query()
-                    ->where(User::STORE_ID_COLUMN, $storeId)
+                    ->where(User::MAIN_STORE_ID_COLUMN, $storeId)
                     ->get()
                     ->pluck(User::COUPON_COLUMN)
                     ->toArray();

@@ -8,13 +8,12 @@
 
 namespace App\Console\Commands\Store;
 
-use BADDIServices\ClnkGO\Logger;
 use Throwable;
-use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\Models\Store;
-use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\ClnkGO\Models\Setting;
+use Illuminate\Database\Eloquent\Collection;
 use BADDIServices\ClnkGO\Services\StoreService;
+use BADDIServices\ClnkGO\Console\Command;
 
 class PurchaseReminderCommand extends Command
 {
@@ -24,20 +23,13 @@ class PurchaseReminderCommand extends Command
     /** @var string */
     protected $description = 'Purchase Email reminder';
 
-    /** @var Logger */
-    private $logger;
-
     /** @var StoreService */
     private $storeService;
 
-    public function __construct(
-        Logger $logger,
-        StoreService $storeService
-    )
+    public function __construct(StoreService $storeService)
     {
         parent::__construct();
 
-        $this->logger = $logger;
         $this->storeService = $storeService;
     }
 

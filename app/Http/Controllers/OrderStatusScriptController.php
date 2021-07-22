@@ -15,27 +15,19 @@ use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Entities\StoreSetting;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\CouponService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class OrderStatusScriptController extends Controller
 {
-    /** @var ShopifyService */
-    private $shopifyService;
-    
-    /** @var StoreService */
-    private $storeService;
-
     /** @var CouponService */
     private $couponService;
 
-    public function __construct(ShopifyService $shopifyService, StoreService $storeService, CouponService $couponService)
+    public function __construct(ShopifyService $shopifyService, CouponService $couponService)
     {
         parent::__construct();
 
         $this->shopifyService = $shopifyService;
-        $this->storeService = $storeService;
         $this->couponService = $couponService;
     }
     

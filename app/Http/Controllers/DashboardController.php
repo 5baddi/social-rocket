@@ -22,12 +22,6 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class DashboardController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
-    /** @var User */
-    protected $user;
-
-    /** @var Store */
-    protected $store;
     
     /** @var Setting */
     protected $setting;
@@ -40,20 +34,19 @@ class DashboardController extends Controller
         parent::__construct();
 
         $this->middleware(function ($request, $next) {
-            $this->user = Auth::user();
+            if ($this->user instanceof User && $this->store instanceof Store) {
+                $this->subscription = $this->user->subscription;
 
-            $this->store = $this->user->store;
-            $this->subscription = $this->user->subscription;
+                $this->store->load('setting');
+                $this->setting = $this->store->setting;
 
-            $this->store->load('setting');
-            $this->setting = $this->store->setting;
+                if (!$this->setting instanceof Setting) {
+                    $this->setting = new StoreSetting();
+                }
 
-            if (!$this->setting instanceof Setting) {
-                $this->setting = new StoreSetting();
-            }
-
-            if ($request->has('notification')) {
-                $this->user->unreadNotifications->where('id', $request->query('notification'))->markAsRead();
+                if ($request->has('notification')) {
+                    $this->user->unreadNotifications->where('id', $request->query('notification'))->markAsRead();
+                }
             }
 
             return $next($request);

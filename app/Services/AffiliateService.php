@@ -58,7 +58,7 @@ class AffiliateService extends Service
         ]);
         $attributes = $attributes->toArray();
 
-        $attributes[User::STORE_ID_COLUMN] = $store->id;
+        $attributes[User::MAIN_STORE_ID_COLUMN] = $store->id;
 
         $coupon = $this->couponService->generateDiscountCode($store, $attributes[User::FIRST_NAME_COLUMN]);
 

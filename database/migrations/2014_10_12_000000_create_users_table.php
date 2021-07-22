@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->uuid('store_id')->nullable();
+            $table->uuid('main_store_id')->nullable();
             $table->bigInteger('customer_id')->nullable();
             $table->string('first_name', 100)->nullable();
             $table->string('last_name', 100)->nullable();

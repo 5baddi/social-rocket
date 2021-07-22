@@ -12,9 +12,7 @@ namespace BADDIServices\ClnkGO\Http\Controllers\Webhooks;
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
 use App\Http\Requests\Webhooks\StoreRequest;
-use BADDIServices\ClnkGO\Services\UserService;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 
 class DeleteStoreController extends Controller
@@ -22,23 +20,11 @@ class DeleteStoreController extends Controller
     /** @var ShopifyService */
     private $shopifyService;
 
-    /** @var UserService */
-    private $userService;
-
-    /** @var StoreService */
-    private $storeService;
-
-    public function __construct(
-        ShopifyService $shopifyService, 
-        UserService $userService, 
-        StoreService $storeService
-    )
+    public function __construct(ShopifyService $shopifyService)
     {
         parent::__construct();
 
         $this->shopifyService = $shopifyService;
-        $this->userService = $userService;
-        $this->storeService = $storeService;
     }
     
     public function __invoke(StoreRequest $request)

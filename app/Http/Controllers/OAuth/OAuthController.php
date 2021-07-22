@@ -11,7 +11,6 @@ namespace BADDIServices\ClnkGO\Http\Controllers\OAuth;
 use Throwable;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
 use BADDIServices\ClnkGO\Http\Requests\ConnectStoreRequest;
 use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidStoreURLException;
@@ -23,13 +22,9 @@ class OAuthController extends Controller
     /** @var ShopifyService */
     private $shopifyService;
 
-    /** @var StoreService */
-    private $storeService;
-
-    public function __construct(ShopifyService $shopifyService, StoreService $storeService)
+    public function __construct(ShopifyService $shopifyService)
     {
         $this->shopifyService = $shopifyService;
-        $this->storeService = $storeService;
     }
     
     public function __invoke(ConnectStoreRequest $request)

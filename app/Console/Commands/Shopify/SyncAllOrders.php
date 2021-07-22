@@ -8,18 +8,17 @@
 
 namespace App\Console\Commands\Shopify;
 
-use BADDIServices\ClnkGO\Logger;
-use BADDIServices\ClnkGO\Models\Commission;
 use Throwable;
-use Illuminate\Console\Command;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Models\Product;
+use BADDIServices\ClnkGO\Models\Commission;
 use BADDIServices\ClnkGO\Models\Subscription;
+use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\OrderService;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ProductService;
 use BADDIServices\ClnkGO\Services\ShopifyService;
-use BADDIServices\ClnkGO\Services\UserService;
+use BADDIServices\ClnkGO\Console\Command;
 use BADDIServices\ClnkGO\Services\CommissionService;
 
 class SyncAllOrders extends Command
@@ -37,9 +36,6 @@ class SyncAllOrders extends Command
      * @var string
      */
     protected $description = 'Sync orders from shopify store';
-
-    /** @var Logger */
-    private $logger;
     
     /** @var StoreService */
     private $storeService;
@@ -65,7 +61,6 @@ class SyncAllOrders extends Command
      * @return void
      */
     public function __construct(
-        Logger $logger,
         StoreService $storeService, 
         ShopifyService $shopifyService, 
         OrderService $orderService,
@@ -76,7 +71,6 @@ class SyncAllOrders extends Command
     {
         parent::__construct();
 
-        $this->logger = $logger;
         $this->storeService = $storeService;
         $this->shopifyService = $shopifyService;
         $this->orderService = $orderService;
