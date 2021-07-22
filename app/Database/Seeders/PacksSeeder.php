@@ -64,9 +64,10 @@ class PacksSeeder extends Seeder
         Pack::create([
             'name'              =>  'gravity',
             'price'             =>  9.99,
-            'type'              =>  Pack::TYPES[0],
+            'type'              =>  Pack::RECURRING_TYPE,
             'symbol'            =>  '$',
             'currency'          =>  'usd',
+            'is_popular'        =>  true,
             'features'          =>  [
                 [
                     'key'       =>  Pack::UNLIMITED_AFFILIATES,
@@ -105,8 +106,7 @@ class PacksSeeder extends Seeder
         Pack::create([
             'name'          =>  'Asteroid',
             'price'         =>  10,
-            'type'          =>  Pack::TYPES[1],
-            'is_popular'    =>  true,
+            'type'          =>  Pack::USAGE_TYPE,
             'features'      =>  [
                 [
                     'key'       =>  Pack::UNLIMITED_AFFILIATES,
