@@ -140,6 +140,11 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
+                    'key'       =>  Pack::REVENUE_NOT_SHARED,
+                    'name'      =>  '100% of revenue is your\'s',
+                    'enabled'   =>  false,
+                ],
+                [
                     'key'       =>  Pack::MULTIPLE_STORES,
                     'name'      =>  'multiple stores',
                     'enabled'   =>  true,
@@ -148,12 +153,7 @@ class PacksSeeder extends Seeder
                     'key'       =>  Pack::CUSTOMIZATION,
                     'name'      =>  'full customization',
                     'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
-                    'enabled'   =>  false,
-                ],
+                ]
             ]
         ]);
     }
