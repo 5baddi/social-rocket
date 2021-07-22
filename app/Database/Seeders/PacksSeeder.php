@@ -33,6 +33,16 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
+                    'key'       =>  Pack::REPORTING,
+                    'name'      =>  'dashboard And data reports',
+                    'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::SUPPORT,
+                    'name'      =>  'live chat support',
+                    'enabled'   =>  true,
+                ],
+                [
                     'key'       =>  Pack::MULTIPLE_STORES,
                     'name'      =>  'multiple stores',
                     'enabled'   =>  false,
@@ -44,19 +54,9 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::CUSTOMIZATION,
                     'name'      =>  'full customization',
                     'enabled'   =>  false,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
-                    'enabled'   =>  true,
                 ],
                 [
                     'key'       =>  Pack::REVENUE_NOT_SHARED,
@@ -80,6 +80,16 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
+                    'key'       =>  Pack::REPORTING,
+                    'name'      =>  'dashboard And data reports',
+                    'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::SUPPORT,
+                    'name'      =>  'live chat support',
+                    'enabled'   =>  true,
+                ],
+                [
                     'key'       =>  Pack::MULTIPLE_STORES,
                     'name'      =>  'multiple stores',
                     'enabled'   =>  true,
@@ -91,18 +101,8 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::CUSTOMIZATION,
                     'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
                     'enabled'   =>  true,
                 ],
                 [
@@ -124,6 +124,16 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
+                    'key'       =>  Pack::REPORTING,
+                    'name'      =>  'dashboard And data reports',
+                    'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::SUPPORT,
+                    'name'      =>  'live chat support',
+                    'enabled'   =>  true,
+                ],
+                [
                     'key'       =>  Pack::MULTIPLE_STORES,
                     'name'      =>  'multiple stores',
                     'enabled'   =>  true,
@@ -135,18 +145,8 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::CUSTOMIZATION,
                     'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
                     'enabled'   =>  true,
                 ],
                 [
