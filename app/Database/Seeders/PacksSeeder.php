@@ -43,26 +43,26 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::MULTIPLE_STORES,
-                    'name'      =>  'multiple stores',
-                    'enabled'   =>  false,
-                ],
-                [
                     'key'       =>  Pack::PAYOUT_METHODS,
                     'name'      =>  '2 payout methods',
                     'enabled'   =>  true,
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  false,
-                ],
-                [
                     'key'       =>  Pack::REVENUE_NOT_SHARED,
                     'name'      =>  '100% of revenue is your\'s',
                     'enabled'   =>  true,
                 ],
+                [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
+                    'enabled'   =>  false,
+                ],
+                [
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
+                    'enabled'   =>  false,
+                ]
             ]
         ]);
         
@@ -90,26 +90,26 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::MULTIPLE_STORES,
-                    'name'      =>  'multiple stores',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::PAYOUT_METHODS,
                     'name'      =>  '5 payout methods',
                     'enabled'   =>  true,
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::REVENUE_NOT_SHARED,
                     'name'      =>  '100% of revenue is your\'s',
                     'enabled'   =>  true,
                 ],
+                [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
+                    'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
+                    'enabled'   =>  true,
+                ]
             ]
         ]);
         
@@ -134,15 +134,15 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::MULTIPLE_STORES,
-                    'name'      =>  'multiple stores',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::PAYOUT_METHODS,
                     'name'      =>  '5 payout methods',
                     'enabled'   =>  true,
                     'limit'     =>  5,
+                ],
+                [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
+                    'enabled'   =>  true,
                 ],
                 [
                     'key'       =>  Pack::CUSTOMIZATION,
