@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
 use App\Http\Requests\Webhooks\StoreRequest;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 
 class DeleteStoreController extends Controller
 {

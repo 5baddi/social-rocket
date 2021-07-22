@@ -8,7 +8,16 @@
 
 namespace BADDIServices\ClnkGO\Services;
 
+use BADDIServices\ClnkGO\Logger;
+
 class Service
 {
-    
+    /** @var Logger */
+    protected $logger;
+
+    public function __construct()
+    {
+        /** @var Logger */
+        $this->logger = app(Logger::class);
+    }
 }

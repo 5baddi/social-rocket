@@ -12,7 +12,7 @@ use Closure;
 use Illuminate\Http\Request;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Services\StoreService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use Symfony\Component\HttpFoundation\Response;
 
 class Cors

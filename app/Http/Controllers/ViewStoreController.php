@@ -10,7 +10,7 @@ namespace BADDIServices\ClnkGO\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use BADDIServices\ClnkGO\Models\Store;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 
 class ViewStoreController extends Controller
 {

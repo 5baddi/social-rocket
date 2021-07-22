@@ -21,7 +21,7 @@ use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\OrderService;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\EarningService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Services\CommissionService;
 use BADDIServices\ClnkGO\Services\SubscriptionService;
 

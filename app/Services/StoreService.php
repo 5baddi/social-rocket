@@ -21,7 +21,7 @@ use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\SettingService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Repositories\StoreRepository;
 
 class StoreService extends Service

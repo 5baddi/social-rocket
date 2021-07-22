@@ -11,7 +11,7 @@ namespace BADDIServices\ClnkGO\Http\Controllers\OAuth;
 use Throwable;
 use App\Http\Controllers\Controller;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Http\Requests\ConnectStoreRequest;
 use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\ClnkGO\Exceptions\Store\StoreAlreadyLinkedException;

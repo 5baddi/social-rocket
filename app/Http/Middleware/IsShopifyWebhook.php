@@ -11,7 +11,7 @@ namespace BADDIServices\ClnkGO\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 
 class IsShopifyWebhook
 {

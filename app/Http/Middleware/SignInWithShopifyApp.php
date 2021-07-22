@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Validator;
 use BADDIServices\ClnkGO\Models\Store;
 use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\StoreService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidRequestSignatureException;
 use BADDIServices\ClnkGO\Models\OAuth;
 

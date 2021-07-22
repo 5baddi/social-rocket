@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\ClnkGO\Models\Subscription;
 use BADDIServices\ClnkGO\Services\StoreService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Repositories\SubscriptionRepository;
 use BADDIServices\ClnkGO\Notifications\Subscription\SubscriptionCancelled;
 use BADDIServices\ClnkGO\Events\Subscription\SubscriptionCancelled as SubscriptionCancelledEvent;

@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\ClnkGO\Services;
+namespace BADDIServices\ClnkGO\Services\Shopify;
 
 use Exception;
 use Carbon\Carbon;
@@ -14,11 +14,12 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
 use BADDIServices\ClnkGO\Models\Pack;
 use BADDIServices\ClnkGO\Models\OAuth;
 use BADDIServices\ClnkGO\Models\Store;
+use GuzzleHttp\Exception\ClientException;
+use BADDIServices\ClnkGO\Services\Service;
+use GuzzleHttp\Exception\RequestException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Exceptions\Shopify\OrderNotFound;
 use BADDIServices\ClnkGO\Exceptions\Shopify\ProductNotFound;
@@ -30,6 +31,7 @@ use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePriceRuleFailed;
 use BADDIServices\ClnkGO\Exceptions\Shopify\CancelSubscriptionFailed;
 use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidStoreURLException;
 use BADDIServices\ClnkGO\Exceptions\Shopify\LoadConfigurationsFailed;
+use BADDIServices\ClnkGO\Exceptions\Shopify\SubscribeToWebhookFailed;
 use BADDIServices\ClnkGO\Exceptions\Shopify\InvalidAccessTokenException;
 use BADDIServices\ClnkGO\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
 use BADDIServices\ClnkGO\Exceptions\Shopify\CreatePaymentConfirmationFailed;
@@ -57,7 +59,7 @@ class ShopifyService extends Service
     const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
     const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
     const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
-
+    const POST_WEBHOOK_ENDPOINT = "/admin/api/2021-04/webhooks.json";
     /** @var Client */
     private $client;
 
@@ -164,6 +166,48 @@ class ShopifyService extends Service
             $this->logger->setStore($store)->error($e, 'store:load-configurations');
 
             throw new LoadConfigurationsFailed();
+        }
+    }
+
+    /**
+     * @throws SubscribeToWebhookFailed
+     */
+    public function subscribeToWebhook(Store $store, string $topic, string $callbackEndpoint): array
+    {
+        try {
+            $accessToken = $this->hasAccessToken($store);
+
+            $webhookURL = $this->getStoreURL($store->slug);
+            $webhookURL .= self::POST_WEBHOOK_ENDPOINT;
+
+            $requestBody['access_token'] = $accessToken;
+
+            $requestBody['webhook'] = [
+                'topic'     => $topic,
+                'address'   => $callbackEndpoint,
+                'format'    => 'json'
+            ];
+
+            $response = $this->client->request('POST', $webhookURL, 
+                [
+                    'form_params'      => $requestBody,
+                    'headers'   => [
+                        'Accept'        => 'application/json',
+                        'Content-Type'  => 'application/x-www-form-urlencoded',
+                    ]
+                ]
+            );
+
+            $data = json_decode($response->getBody(), true);
+            if (!isset($data['webhook'], $data['webhook']['id'])) {
+                throw new Exception();
+            }
+
+            return $data['webhook'];
+        } catch (Exception | ClientException | RequestException $e) {
+            $this->logger->setStore($store)->error($e, 'store:subscribe-to-webhook');
+
+            throw new SubscribeToWebhookFailed($topic);
         }
     }
     

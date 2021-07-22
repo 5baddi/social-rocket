@@ -18,7 +18,7 @@ use BADDIServices\ClnkGO\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Http\Requests\OAuthCallbackRequest;
 
 class OAuthCallbackController extends Controller

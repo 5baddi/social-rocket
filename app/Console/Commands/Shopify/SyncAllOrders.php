@@ -17,7 +17,7 @@ use BADDIServices\ClnkGO\Services\UserService;
 use BADDIServices\ClnkGO\Services\OrderService;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\ProductService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Console\Command;
 use BADDIServices\ClnkGO\Services\CommissionService;
 

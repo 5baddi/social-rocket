@@ -19,7 +19,7 @@ use BADDIServices\ClnkGO\Models\Earning;
 use BADDIServices\ClnkGO\Models\Subscription;
 use BADDIServices\ClnkGO\Services\StoreService;
 use BADDIServices\ClnkGO\Services\EarningService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Services\SubscriptionService;
 
 class SyncAllSubscriptions extends Command

@@ -16,7 +16,7 @@ use BADDIServices\ClnkGO\Models\Setting;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Entities\StoreSetting;
 use BADDIServices\ClnkGO\Services\CouponService;
-use BADDIServices\ClnkGO\Services\ShopifyService;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 
 class OrderStatusScriptController extends Controller
 {
