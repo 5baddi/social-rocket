@@ -34,7 +34,7 @@
                     <line x1="19" y1="18" x2="20" y2="18"></line>
                   </svg>
                 </span>
-                <span class="nav-link-title">Customize</span>
+                <span class="nav-link-title">Customization</span>
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}">
