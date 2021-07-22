@@ -33,6 +33,11 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
+                    'enabled'   =>  false,
+                ],
+                [
                     'key'       =>  Pack::PAYOUT_METHODS,
                     'name'      =>  '2 payout methods',
                     'enabled'   =>  true,
@@ -75,6 +80,11 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
+                    'enabled'   =>  true,
+                ],
+                [
                     'key'       =>  Pack::PAYOUT_METHODS,
                     'name'      =>  '5 payout methods',
                     'enabled'   =>  true,
@@ -111,6 +121,11 @@ class PacksSeeder extends Seeder
                 [
                     'key'       =>  Pack::UNLIMITED_AFFILIATES,
                     'name'      =>  'unlimited affiliates',
+                    'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::MULTIPLE_STORES,
+                    'name'      =>  'multiple stores',
                     'enabled'   =>  true,
                 ],
                 [

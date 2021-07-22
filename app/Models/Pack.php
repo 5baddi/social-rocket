@@ -37,6 +37,7 @@ class Pack extends ModelEntity
     public const CUSTOMIZATION = 4;
     public const SUPPORT = 5;
     public const REVENUE_NOT_SHARED = 5;
+    public const MULTIPLE_STORES = 6;
 
     /** @var array */
     public const INTERVAL = [
