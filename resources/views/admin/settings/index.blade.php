@@ -24,7 +24,7 @@
                         </div>
                         <div class="col-6">
                             <label class="form-label">Support e-mail</label>
-                            <input type="email" name="support_email" class="form-control" value="{{ config('rocket.support_email') }}"/>
+                            <input type="email" name="support_email" class="form-control" value="{{ config('clnkgo.support_email') }}"/>
                             @if ($errors->has('support_email'))
                             <div class="invalid-feedback">{{ $errors->first('support_email') }}</div>
                             @endif
@@ -33,14 +33,14 @@
                     <div class="row mt-3">
                         <div class="col-6">
                             <label class="form-label">Help URL</label>
-                            <input type="url" name="help_url" class="form-control" value="{{ config('rocket.help_url') }}"/>
+                            <input type="url" name="help_url" class="form-control" value="{{ config('clnkgo.help_url') }}"/>
                             @if ($errors->has('help_url'))
                             <div class="invalid-feedback">{{ $errors->first('help_url') }}</div>
                             @endif
                         </div>
                         <div class="col-6">
                             <label class="form-label">Setup guide</label>
-                            <input type="url" name="setup_guide" class="form-control" value="{{ config('rocket.setup_guide') }}"/>
+                            <input type="url" name="setup_guide" class="form-control" value="{{ config('clnkgo.setup_guide') }}"/>
                             @if ($errors->has('setup_guide'))
                             <div class="invalid-feedback">{{ $errors->first('setup_guide') }}</div>
                             @endif

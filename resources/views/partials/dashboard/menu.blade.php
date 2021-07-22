@@ -87,21 +87,22 @@
                 <span class="nav-link-title">Settings</span>
             </a>
           </li>
-          @if (config('rocket.help_url'))
-          <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
+          <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('dashboard') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <line x1="12" y1="17" x2="12" y2="17.01"></line>
-                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"></path>
-                    </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lifebuoy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="12" r="4"></circle>
+                    <circle cx="12" cy="12" r="9"></circle>
+                    <line x1="15" y1="15" x2="18.35" y2="18.35"></line>
+                    <line x1="9" y1="15" x2="5.65" y2="18.35"></line>
+                    <line x1="5.65" y1="5.65" x2="9" y2="9"></line>
+                    <line x1="18.35" y1="5.65" x2="15" y2="9"></line>
+                  </svg>
                 </span>
-                <span class="nav-link-title">Help</span>
+                <span class="nav-link-title">Support</span>
             </a>
           </li>
-          @endif
         </ul>
         {{-- <div class="row mb-4">
             <div class="col-12">

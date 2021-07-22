@@ -14,10 +14,10 @@ class HelpController extends Controller
 {
     public function __invoke()
     {
-        if (!config('rocket.help_url')) {
+        if (!config('clnkgo.help_url')) {
             return redirect()->route('landing');
         }
         
-        return redirect(config('rocket.help_url'));
+        return redirect(config('clnkgo.help_url'));
     }
 }

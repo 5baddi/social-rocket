@@ -17,7 +17,7 @@
             <br>
         </p>
         <p style="font-size: 14px;">
-            What’s my point? Keep trying! Don’t let small failures discourage you. You got this! For more tips and tricks on how to get affiliate sales: <a href="{{ config('rocket.help_url') }}" target="_blank">{{ config('rocket.help_url') }}</a>
+            What’s my point? Keep trying! Don’t let small failures discourage you. You got this! For more tips and tricks on how to get affiliate sales: <a href="{{ config('clnkgo.help_url') }}" target="_blank">{{ config('clnkgo.help_url') }}</a>
         </p>
         <p style="font-size: 14px;">In case you lost our previous email, here is your discount code:</p>
     </td>
