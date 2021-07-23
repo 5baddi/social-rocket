@@ -60,11 +60,14 @@ class ShopifyService extends Service
     const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
     const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
     const POST_WEBHOOK_ENDPOINT = "/admin/api/2021-04/webhooks.json";
+
     /** @var Client */
-    private $client;
+    protected $client;
 
     public function __construct()
     {
+        parent::__construct();
+
         $this->client = new Client([
             'debug'         => false,
             'http_errors'   => false,
@@ -199,6 +202,7 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
+            dd($data);
             if (!isset($data['webhook'], $data['webhook']['id'])) {
                 throw new Exception();
             }

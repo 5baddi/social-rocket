@@ -22,4 +22,7 @@ class Authenticatable extends BaseUser
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public const ID_COLUMN = 'id';
+
+    /** @var array */
+    protected $guarded = [];
 }

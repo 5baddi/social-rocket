@@ -8,6 +8,9 @@
 
 namespace BADDIServices\ClnkGO\Services\Shopify;
 
+use BADDIServices\ClnkGO\Models\Store;
+use BADDIServices\ClnkGO\Exceptions\Shopify\SubscribeToWebhookFailed;
+
 class ShopifyWebhookService extends ShopifyService
 {
     public const BILLING_SUCCESS_WEBHOOK = "subscription_billing_attempts/success";
@@ -22,4 +25,27 @@ class ShopifyWebhookService extends ShopifyService
     public const ORDER_UPDATED_WEBHOOK = "orders/updated";
     public const SHOP_UPDATED_WEBHOOK = "shop/update";
     public const PRODUCT_UPDATED_WEBHOOK = "products/update";
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    /**
+     * @throws SubscribeToWebhookFailed
+     */
+    public function subscribeToOrderUpdatedWebhook(Store $store): array
+    {
+        return $this->subscribeToWebhook(
+            $store,
+            self::ORDER_UPDATED_WEBHOOK,
+            route('webhooks.order.updated')
+        );
+    }
+
+    public function subscribeToWebhooks(Store $store): void
+    {
+        // TODO: save webhooks ids
+        dd($this->subscribeToOrderUpdatedWebhook($store));
+    }
 }

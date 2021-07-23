@@ -20,17 +20,25 @@ use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\ClnkGO\Events\WelcomeMail;
 use BADDIServices\ClnkGO\Services\Shopify\ShopifyService;
 use BADDIServices\ClnkGO\Http\Requests\OAuthCallbackRequest;
+use BADDIServices\ClnkGO\Services\Shopify\ShopifyWebhookService;
 
 class OAuthCallbackController extends Controller
 {
     /** @var ShopifyService */
     private $shopifyService;
 
-    public function __construct(ShopifyService $shopifyService)
+    /** @var ShopifyWebhookService  */
+    private $shopifyWebhookService;
+
+    public function __construct(
+        ShopifyService $shopifyService, 
+        ShopifyWebhookService $shopifyWebhookService
+    )
     {
         parent::__construct();
 
         $this->shopifyService = $shopifyService;
+        $this->shopifyWebhookService = $shopifyWebhookService;
     }
     
     public function __invoke(OAuthCallbackRequest $request)
@@ -56,6 +64,7 @@ class OAuthCallbackController extends Controller
 
             $store = $this->storeService->updateConfigurations($store);
             $this->storeService->enableStore($store);
+            $this->shopifyWebhookService->subscribeToWebhooks($store);
 
             $user = $this->userService->findByEmail($store->email);
             if (!$user instanceof User) {
@@ -92,17 +101,18 @@ class OAuthCallbackController extends Controller
 
             return redirect('/signin')
                 ->with('success', 'Your new store has been linked successfully! Please log to your account..');
-        } catch (ValidationException $ex) {
-            $this->logger->setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
+        } catch (ValidationException $e) {
+            $this->logger->setStore($store ?? null)->error($e, 'store:oauth-callback', $request->all());
 
-            $errors = collect($ex->errors());
-            
+            $errors = collect($e->errors());
+
             return redirect()
                 ->route('connect')
                 ->withInput()
                 ->with('error', $errors->first());
-        } catch (Throwable $ex) {
-            $this->logger->setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
+        } catch (Throwable $e) {
+            dd($e);
+            $this->logger->setStore($store ?? null)->error($e, 'store:oauth-callback', $request->all());
             
             return redirect()
                 ->route('connect')

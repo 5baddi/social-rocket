@@ -24,6 +24,8 @@ class OAuthController extends Controller
 
     public function __construct(ShopifyService $shopifyService)
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
     }
     

@@ -57,7 +57,7 @@ class Logger
     {
         Log::error($exception->getMessage(), [
             'context'   =>  $context,
-            'store'     =>  optional(self::$store)->id,
+            'store'     =>  optional($this->store)->id,
             'code'      =>  $exception->getCode(),
             'line'      =>  $exception->getLine(),
             'file'      =>  $exception->getFile(),

@@ -33,9 +33,11 @@ class IsShopifyWebhook
     public function handle(Request $request, Closure $next)
     {
         $hmacHeader = $request->header('HTTP_X_SHOPIFY_HMAC_SHA256');
+        $shopDomain = $request->header('HTTP_X-SHOPIFY-SHOP-DOMAIN');
 
         if (!is_null($hmacHeader)) {
             if ($this->shopifyService->verifySignature($request->query())) {
+                // TODO: verify shop exists and not disabled
                 return $next($request);
             }
         }
