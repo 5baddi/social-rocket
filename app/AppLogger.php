@@ -8,9 +8,12 @@
 
 namespace BADDIServices\SocialRocket;
 
-use BADDIServices\SocialRocket\Models\Store;
 use Throwable;
+use Bugsnag\Client;
+use Bugsnag\Configuration;
+use Bugsnag\Breadcrumbs\Breadcrumb;
 use Illuminate\Support\Facades\Log;
+use BADDIServices\SocialRocket\Models\Store;
 
 class AppLogger
 {
@@ -20,12 +23,21 @@ class AppLogger
     /** @var AppLogger */
     private static $instance = null;
 
+    /** @var Client */
+    private static $client = null;
+
     private function __construct() { }
 
     public static function getInstance(): self
     {
         if (self::$instance === null) {
             self::$instance = new self;
+
+            self::$client = new Client(
+                new Configuration(env('BUGSNAG_API_KEY'))
+            );
+
+            self::$client->setAppVersion(config('rocket.version'));
         }
 
         return self::$instance;
@@ -50,14 +62,24 @@ class AppLogger
             'trace'     =>  $exception->getTraceAsString(),
             'extra'     =>  json_encode($extra)
         ]);
+
+        self::$client->notifyException($exception);
     }
     
     public static function info(string $message, string $context, array $extra = [])
     {
-        Log::info($message, [
+        $infoContext = [
             'context'   =>  $context,
             'store'     =>  optional(self::$store)->id,
             'extra'     =>  json_encode($extra)
-        ]);
+        ];
+
+        Log::info($message, $infoContext);
+
+        self::$client->leaveBreadcrumb(
+            $message,
+            Breadcrumb::LOG_TYPE,
+            $infoContext
+        );
     }
 }

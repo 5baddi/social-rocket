@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'name' => ucwords(Str::replace('_', ' ', env('APP_NAME', 'Social Rocket'))),
+    'name' => ucwords(str_replace('_', ' ', env('APP_NAME', 'Social Rocket'))),
 
     /*
     |--------------------------------------------------------------------------
