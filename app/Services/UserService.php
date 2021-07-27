@@ -107,22 +107,22 @@ class UserService extends Service
 
     public function update(User $user, array $attributes): User
     {
-        $attributes = collect([
-            User::FIRST_NAME_COLUMN     => Arr::get($attributes, User::FIRST_NAME_COLUMN),
-            User::LAST_NAME_COLUMN      => Arr::get($attributes, User::LAST_NAME_COLUMN),
-            User::EMAIL_COLUMN          => Arr::get($attributes, User::EMAIL_COLUMN),
-            User::PHONE_COLUMN          => Arr::get($attributes, User::PHONE_COLUMN),
-            User::PASSWORD_COLUMN       => Arr::get($attributes, User::PASSWORD_COLUMN),
-            User::LAST_LOGIN_COLUMN     => Arr::get($attributes, User::LAST_LOGIN_COLUMN),
-            User::VERIFIED_AT_COLUMN    => Arr::get($attributes, User::VERIFIED_AT_COLUMN)
-        ]);
+        $attributes = collect($attributes);
 
-        $filterAttributes = $attributes->filter(function($value, $key) {
+        $filterAttributes = $attributes->only([
+            User::FIRST_NAME_COLUMN,
+            User::LAST_NAME_COLUMN,
+            User::EMAIL_COLUMN,
+            User::PHONE_COLUMN,
+            User::PASSWORD_COLUMN,
+            User::LAST_LOGIN_COLUMN,
+            User::VERIFIED_AT_COLUMN
+        ])->filter(function($value, $key) {
             return $value !== null;
         });
 
         if ($attributes->has(User::PASSWORD_COLUMN)) {
-            $attributes->put(User::PASSWORD_COLUMN, Hash::make($attributes->get(User::PASSWORD_COLUMN)));
+            $filterAttributes->put(User::PASSWORD_COLUMN, Hash::make($attributes->get(User::PASSWORD_COLUMN)));
         }
 
         return $this->userRepository->update($user, $filterAttributes->toArray());
