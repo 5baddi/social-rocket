@@ -119,4 +119,9 @@ class User extends Authenticatable
     {
         return $this->getAttribute(self::PASSWORD_COLUMN) !== null;
     }
+    
+    public function getPassword(): ?string
+    {
+        return $this->getAttribute(self::PASSWORD_COLUMN);
+    }
 }

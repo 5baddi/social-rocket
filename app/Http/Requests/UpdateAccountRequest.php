@@ -9,8 +9,9 @@
 namespace BADDIServices\SocialRocket\Http\Requests;
 
 use App\Models\User;
-use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Foundation\Http\FormRequest;
+use BADDIServices\SocialRocket\Models\Setting;
+use BADDIServices\SocialRocket\Rules\ValidateCurrentPassword;
 
 class UpdateAccountRequest extends FormRequest
 {
@@ -38,8 +39,8 @@ class UpdateAccountRequest extends FormRequest
             User::PHONE_COLUMN         => 'nullable|string|max:25',
             Setting::BRAND_NAME_COLUMN => 'nullable|string|min:1',
             Setting::CURRENCY_COLUMN   => 'nullable|string|max:10',
+            'current_password'         => ['nullable', 'string', 'min:8', new ValidateCurrentPassword()],
             User::PASSWORD_COLUMN      => 'nullable|string|min:8|required_with:current_password|same:confirm_password',
-            'current_password'         => 'nullable|string|min:8',
             'confirm_password'         => 'nullable|string|min:8'
         ];
     }
