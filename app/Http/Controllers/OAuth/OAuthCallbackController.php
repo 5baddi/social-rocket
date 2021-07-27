@@ -96,7 +96,7 @@ class OAuthCallbackController extends Controller
 
             Event::dispatch(new WelcomeMail($store, $user));
 
-            $authenticateUser = Auth::loginUsingId();
+            $authenticateUser = Auth::loginUsingId($user->id);
             if (!$authenticateUser) {
                 return redirect()
                     ->route('signin')
