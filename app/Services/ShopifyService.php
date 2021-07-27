@@ -41,22 +41,22 @@ class ShopifyService extends Service
     /** @var string */
     const SCOPES = "read_orders,read_customers,read_products,read_checkouts,read_price_rules,write_price_rules,read_discounts,write_discounts,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
-    const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-04/shop.json";
+    const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-07/shop.json";
     const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
-    const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
-    const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
-    const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
-    const GET_USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{charge_id}/usage_charges/{usage_id}.json";
-    const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
-    const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
-    const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
-    const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-04/price_rules/{id}/discount_codes.json";
-    const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
-    const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
-    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
-    const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
+    const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges.json";
+    const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}/usage_charges.json";
+    const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}.json";
+    const GET_USAGE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{charge_id}/usage_charges/{usage_id}.json";
+    const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}.json";
+    const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-07/script_tags.json";
+    const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-07/price_rules.json";
+    const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-07/price_rules/{id}/discount_codes.json";
+    const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-07/customers/{id}.json";
+    const GET_PRODUCT_ENDPOINT = "/admin/api/2021-07/products/{id}.json";
+    const GET_ORDER_ENDPOINT = "/admin/api/2021-07/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
+    const GET_ORDERS_ENDPOINT = "/admin/api/2021-07/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
 
     /** @var Client */
     private $client;
