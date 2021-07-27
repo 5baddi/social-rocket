@@ -25,6 +25,7 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
+use Illuminate\Support\Facades\DB;
 
 class OAuthCallbackController extends Controller
 {
@@ -65,6 +66,8 @@ class OAuthCallbackController extends Controller
                 OAuth::SCOPE_COLUMN,
                 OAuth::TIMESTAMP_COLUMN,
             ]);
+
+            DB::beginTransaction();
 
             $oauth = $this->storeService->updateStoreOAuth($store, $attributes);
             abort_unless($oauth instanceof OAuth, Response::HTTP_BAD_REQUEST, 'Something going wrong during authentification');
@@ -107,6 +110,8 @@ class OAuthCallbackController extends Controller
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
 
+            DB::commit();
+
             return redirect()
                 ->route('dashboard')
                 ->with(
@@ -121,6 +126,8 @@ class OAuthCallbackController extends Controller
                 ->withInput()
                 ->withErrors($ex->errors());
         } catch (Throwable $ex) {
+            DB::rollBack();
+
             AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
             
             return redirect()
