@@ -37,6 +37,16 @@
             drift.load('e9skwmkr8hwu');
         </script>
         <!-- End of Async Drift Code -->
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VG34Z8P7VP"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-VG34Z8P7VP');
+        </script>
     </head>
 
     <body>
