@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Http\Requests;
 
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
 
 class SignInRequest extends FormRequest
 {
@@ -32,7 +33,8 @@ class SignInRequest extends FormRequest
     {
         return [
             User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string'
+            User::PASSWORD_COLUMN      => 'required|string',
+            'h-captcha-response'       =>  ['required', new ValidateHCaptcha()],
         ];
     }
 }
