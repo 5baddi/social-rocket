@@ -29,16 +29,16 @@ class AppSetting extends ModelEntity
 
     public function getFacebookUsername(): string
     {
-        return "https://facebook.com/" . $this->getAttribute(self::FACEBOOK_USERNAME);
+        return sprintf("https://facebook.com/%s?utm_source=%s", $this->getAttribute(self::FACEBOOK_USERNAME), config('app.name'));
     }
     
     public function getTwitterUsername(): string
     {
-        return "https://twitter.com/" . $this->getAttribute(self::TWITTER_USERNAME);
+        return sprintf("https://twitter.com/%s?utm_source=%s", $this->getAttribute(self::TWITTER_USERNAME), config('app.name'));
     }
     
     public function getInstagramUsername(): string
     {
-        return "https://instagram.com/" . $this->getAttribute(self::INSTAGRAM_USERNAME);
+        return sprintf("https://instagram.com/%s?utm_source=%s", $this->getAttribute(self::INSTAGRAM_USERNAME), config('app.name'));
     }
 }
