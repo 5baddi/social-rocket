@@ -35,6 +35,13 @@
                         </div>
                     </div>
                     <hr class="divider divider-fade divider-dark my-4">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <a href="{{ $settings->getAppLinkOnShopifyAppStore() }}" target="_blank" class="avatar mb-3" style="width: 10rem;">
+                                <img src="{{ asset('assets/img/Shopify-App-Store-Badge.svg') }}" alt="Find it on the Shopify App Store"/>
+                            </a>
+                        </div>
+                    </div>
                     <div class="row align-items-center justify-content-md-between pb-4">
                         <div class="col-md-6">
                             <div class="copyright text-sm font-weight-bold text-center text-md-left">

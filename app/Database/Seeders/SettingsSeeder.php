@@ -21,10 +21,10 @@ class SettingsSeeder extends Seeder
     public function run()
     {
         AppSetting::create([
-            AppSetting::SUPPORT_EMAIL         =>  'info@trysocialrocket.com',
-            AppSetting::INSTAGRAM_USERNAME    =>  'trysocialrocket',
-            AppSetting::TWITTER_USERNAME      =>  'TrySocialRocket',
-            AppSetting::FACEBOOK_USERNAME     =>  'Trysocialrocketapp-103039265306555',
+            AppSetting::SUPPORT_EMAIL_COLUMN         =>  'support@trysocialrocket.com',
+            AppSetting::INSTAGRAM_USERNAME_COLUMN    =>  'trysocialrocket',
+            AppSetting::TWITTER_USERNAME_COLUMN      =>  'TrySocialRocket',
+            AppSetting::FACEBOOK_USERNAME_COLUMN     =>  'Trysocialrocketapp-103039265306555',
         ]);
     }
 }

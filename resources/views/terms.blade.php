@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row row-grid align-items-center">
 			<div class="col-lg-6">
-				<h1 class="h1 text-white text-center text-lg-left my-4">Privacy policy</h1>
+				<h1 class="h1 text-white text-center text-lg-left my-4">Terms Of Use</h1>
 			</div>
 		</div>
 	</div>
@@ -18,7 +18,7 @@
 		<div class="row row-grid justify-content-between align-items-center">
 			<div class="col">
                 <p>
-                    Protecting your private information is our priority. This Statement of Privacy applies to {{ url('/') }} and {{ config('app.name') }} and governs data collection and usage. For the purposes of this Privacy Policy, unless otherwise noted, all references to {{ config('app.name') }} include {{ url('/') }}, {{ config('app.name') }} and socialsnbowball.io. The {{ config('app.name') }} website is a SAAS site. By using the {{ config('app.name') }} website, you consent to the data practices described in this statement.
+                    These Terms of Service constitute an agreement (this “Agreement”) for the provision of services by Social Snowball IO, LLC, a Delaware limited liability company (“Social Snowball IO”) and any person or entity which opens an online account with Social Snowball IO (“Customer”) as set out in the Customer’s online registration with Social Snowball IO. This Agreement is effective upon the Customer clicking “Accepted and Agreed To” or a similar button in opening an online account with Social Snowball IO (the “Effective Date”). Customer’s use of, and Social Snowball IO’ providing of, the Services and the Social Snowball IO Platform (each as defined below) are governed by this Agreement.
                 </p>
                 <h5>Collection of your Personal Information</h5>
                 <p>

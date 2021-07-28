@@ -30,10 +30,10 @@ class AppService extends Service
     {
         $filteredAttributes = collect($attributes);
         $filteredAttributes = $filteredAttributes->only([
-            AppSetting::INSTAGRAM_USERNAME,
-            AppSetting::TWITTER_USERNAME,
-            AppSetting::FACEBOOK_USERNAME,
-            AppSetting::SUPPORT_EMAIL,
+            AppSetting::INSTAGRAM_USERNAME_COLUMN,
+            AppSetting::TWITTER_USERNAME_COLUMN,
+            AppSetting::FACEBOOK_USERNAME_COLUMN,
+            AppSetting::SUPPORT_EMAIL_COLUMN,
         ]);
 
         return $this->appRepository->update($filteredAttributes->toArray());

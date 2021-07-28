@@ -18,6 +18,7 @@ class CreateAppSettingsTable extends Migration
             $table->string('instagram_username')->nullable();
             $table->string('twitter_username')->nullable();
             $table->string('facebook_username')->nullable();
+            $table->string('shopify_app_slug')->nullable();
             $table->timestamps();
         });
     }
