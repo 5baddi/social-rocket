@@ -68,9 +68,9 @@
             Once you get your first sale, we will email you with instructions to finish setting up your account and collect your money!
         </p>
 
-        @if (config('rocket.help_url'))
+        @if (config('baddi.help_url'))
         <p style="font-size: 14px;">
-            Want to get your first sale but don’t know where to start? Check out this epic blog post we wrote on how to make BANK as a brand affiliate: <a href="{{ config('rocket.help_url') }}" target="_blank">{{ config('rocket.help_url') }}</a>
+            Want to get your first sale but don’t know where to start? Check out this epic blog post we wrote on how to make BANK as a brand affiliate: <a href="{{ config('baddi.help_url') }}" target="_blank">{{ config('baddi.help_url') }}</a>
         </p>
         @endif
 

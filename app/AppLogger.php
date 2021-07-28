@@ -37,7 +37,7 @@ class AppLogger
                 new Configuration(env('BUGSNAG_API_KEY'))
             );
 
-            self::$client->setAppVersion(config('rocket.version'));
+            self::$client->setAppVersion(config('baddi.version'));
         }
 
         return self::$instance;

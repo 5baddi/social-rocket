@@ -70,6 +70,12 @@
                     @endif
                 </div>
             </div>
+            <div class="h-captcha mt-3 mb-2 text-center" data-sitekey="{{ config('baddi.hcaptcha_site_key') }}"></div>
+            @if($errors->has('h-captcha-response'))
+            <div class="invalid-feedback d-block mb-2">
+                {{ $errors->first('h-captcha-response') }}
+            </div>
+            @endif
             <div class="mt-4">
                 <button type="submit" class="btn btn-block btn-primary">Sign in</button>
             </div>

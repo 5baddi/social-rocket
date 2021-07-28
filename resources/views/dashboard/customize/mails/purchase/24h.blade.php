@@ -51,10 +51,10 @@
             Every time someone makes a purchase using your code, we will send you <strong style="font-weight: bold; font-size: 12pt;">{{ $setting->commission_type === \BADDIServices\SocialRocket\Models\Setting::FIXED_TYPE ? '$' . $setting->commission_amount : $setting->commission_amount . '%' }}</strong> to a payout method of your choice! It’s that easy.
         </p>
 
-        @if (config('rocket.help_url'))
+        @if (config('baddi.help_url'))
         <p style="font-size: 14px;">
             Make sure you check out the super quick and easy to read blog post we wrote on how to make BANK as a brand affiliate: 
-            <a href="{{ config('rocket.help_url') }}" target="_blank">{{ config('rocket.help_url') }}</a>
+            <a href="{{ config('baddi.help_url') }}" target="_blank">{{ config('baddi.help_url') }}</a>
         </p>
         @endif
 
