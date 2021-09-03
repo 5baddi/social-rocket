@@ -3,8 +3,6 @@
 namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
-use App\Console\Commands\SyncAllSubscriptions;
-use App\Console\Commands\Shopify\SyncAllOrders;
 use App\Console\Commands\Store\PurchaseReminderCommand;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -16,8 +14,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        SyncAllOrders::class,
-        SyncAllSubscriptions::class,
         PurchaseReminderCommand::class,
     ];
 
@@ -30,8 +26,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('queue:work --tries=3 --timeout=2000 --once')->everyMinute()->withoutOverlapping()->runInBackground();
-        $schedule->command('purchase:reminder')->dailyAt('00:00');
-        $schedule->command('shopify:sync-orders')->dailyAt('00:00');
         $schedule->command('shopify:sync-subscriptions')->dailyAt('03:00');
     }
 
