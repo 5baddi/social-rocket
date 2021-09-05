@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Managers\UserManager;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
@@ -23,14 +24,22 @@ use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
 
 class UserService extends Service
 {
+    /** @var UserManager */
+    private $userManager;
+
     /** @var UserRespository */
     private $userRepository;
     
     /** @var CouponService */
     private $couponService;
 
-    public function __construct(UserRespository $userRepository, CouponService $couponService)
+    public function __construct(
+        UserManager $userManager,
+        UserRespository $userRepository, 
+        CouponService $couponService
+    )
     {
+        $this->userManager = $userManager;
         $this->userRepository = $userRepository;
         $this->couponService = $couponService;
     }
@@ -48,6 +57,11 @@ class UserService extends Service
     public function exists(int $customerId): ?User
     {
         return $this->userRepository->exists($customerId);
+    }
+    
+    public function findById(string $id): ?User
+    {
+        return $this->userManager->findById($id);
     }
     
     public function findByEmail(string $email): ?User

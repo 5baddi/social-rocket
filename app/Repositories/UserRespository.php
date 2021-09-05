@@ -34,6 +34,16 @@ class UserRespository
                     ->first();
     }
     
+    public function findById(string $id): ?User
+    {
+        return User::query()
+                    ->with(['store', 'subscription'])
+                    ->where([
+                        User::ID_COLUMN => $id
+                    ])
+                    ->first();
+    }
+    
     public function findByEmail(string $email): ?User
     {
         return User::query()

@@ -21,7 +21,6 @@ use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
@@ -35,18 +34,13 @@ class OAuthCallbackController extends Controller
     /** @var StoreService */
     private $storeService;
 
-    /** @var UserService */
-    private $userService;
-
     public function __construct(
         ShopifyService $shopifyService, 
-        StoreService $storeService,
-        UserService $userService
+        StoreService $storeService
     )
     {
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
-        $this->userService = $userService;
     }
     
     public function __invoke(OAuthCallbackRequest $request)

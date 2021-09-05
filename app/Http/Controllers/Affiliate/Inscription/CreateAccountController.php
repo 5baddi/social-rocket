@@ -16,19 +16,10 @@ use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
-use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\AffiliateSignInRequest;
 
 class CreateAccountController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(Store $store, AffiliateSignInRequest $request)
     {
         try {

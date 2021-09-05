@@ -26,4 +26,6 @@ Route::group([], function() {
         require 'app/storeOwner.php';
         require 'admin.php';
         require 'webhooks.php';
+
+        require __DIR__ . '/../Blog/Routes.php';
     });

@@ -29,6 +29,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultMorphKeyType('uuid');
+
+        Schema::defaultStringLength(191);
         
         URL::forceScheme('https');
 

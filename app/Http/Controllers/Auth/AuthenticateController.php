@@ -15,19 +15,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Http\Requests\SignInRequest;
 
 class AuthenticateController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(SignInRequest $request)
     {
         try {

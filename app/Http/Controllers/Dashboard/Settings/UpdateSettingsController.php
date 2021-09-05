@@ -15,19 +15,10 @@ use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
 use BADDIServices\SocialRocket\Http\Requests\UpdateSettingsRequest;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\SettingService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UpdateSettingsController extends Controller
 {
-    /** @var SettingService */
-    private $settingService;
-
-    public function __construct(SettingService $settingService)
-    {
-        $this->settingService = $settingService;
-    }
-
     public function __invoke(UpdateSettingsRequest $request)
     {
         try {

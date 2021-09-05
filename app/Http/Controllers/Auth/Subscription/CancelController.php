@@ -15,21 +15,18 @@ use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
-use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 
 class CancelController extends Controller
 {
     /** @var StoreService */
     private $storeService;
-    
-    /** @var UserService */
-    private $userService;
 
-    public function __construct(StoreService $storeService, UserService $userService)
+    public function __construct(StoreService $storeService)
     {
+        parent::__construct();
+
         $this->storeService = $storeService;
-        $this->userService = $userService;
     }
 
     public function __invoke()

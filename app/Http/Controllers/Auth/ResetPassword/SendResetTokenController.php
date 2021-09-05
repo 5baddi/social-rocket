@@ -9,29 +9,17 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
 
 use Throwable;
-use Carbon\Carbon;
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Event;
 use BADDIServices\SocialRocket\AppLogger;
 use Illuminate\Validation\ValidationException;
-use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
 use BADDIServices\SocialRocket\Http\Requests\Auth\ResetTokenRequest;
 use BADDIServices\SocialRocket\Exceptions\Auth\FailedToGenerateToken;
 
 class SendResetTokenController extends Controller
 {
-    /** @var UserService */
-    private $userService;
-
-    public function __construct(UserService $userService)
-    {
-        $this->userService = $userService;
-    }
-
     public function __invoke(ResetTokenRequest $request)
     {
         try {
