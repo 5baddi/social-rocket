@@ -10,9 +10,8 @@
 namespace BADDIServices\SocialRocket\Blog\Controllers;
 
 use Wink\WinkPost;
-use App\Http\Controllers\Controller;
 
-class IndexController extends Controller
+class IndexController extends BlogController
 {
     public function __invoke()
     {
@@ -20,6 +19,11 @@ class IndexController extends Controller
             ->orderBy('publish_date', 'DESC')
             ->paginate(10);
 
-        dd($posts);
+        return $this->renderView(
+            'index',
+            [
+                'posts' => $posts
+            ]
+        );
     }
 }

@@ -28,6 +28,9 @@ class Controller extends BaseController
     /** @var User|null */
     protected $user;
 
+    /** @var string */
+    protected $baseView = 'Admin';
+
     public function __construct()
     {
         /** @var UserService */
@@ -47,5 +50,20 @@ class Controller extends BaseController
             return $next($request);
         });
 
+    }
+
+    protected function renderView(string $view, array $data = [])
+    {
+        return $this->view(
+            sprintf('%s::%s', $this->baseView, $view),
+            array_merge($this->baseData(), $data)
+        );
+    }
+
+    protected function baseData(): array
+    {
+        return [
+            'user'  =>  $this->user
+        ];
     }
 }
