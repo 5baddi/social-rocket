@@ -32,7 +32,9 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         
-        URL::forceScheme('https');
+        if (config('app.env') !== 'local') {
+            URL::forceScheme('https');
+        }
 
         $settings = new AppSetting(); 
         if (Schema::hasTable(AppSetting::TABLE)) {
