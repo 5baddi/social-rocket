@@ -49,8 +49,8 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
                     'enabled'   =>  true,
                 ],
                 [
@@ -59,8 +59,8 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  false,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
+                    'key'       =>  Pack::REVENUE_NOT_SHARED,
+                    'name'      =>  '100% of revenue is your\'s',
                     'enabled'   =>  false,
                 ]
             ]
@@ -68,7 +68,7 @@ class PacksSeeder extends Seeder
 
         Pack::create([
             'name'          =>  'Asteroid',
-            'price'         =>  10,
+            'price'         =>  12,
             'type'          =>  Pack::USAGE_TYPE,
             'features'      =>  [
                 [
@@ -93,9 +93,9 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
-                    'enabled'   =>  false,
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
+                    'enabled'   =>  true,
                 ],
                 [
                     'key'       =>  Pack::MULTIPLE_STORES,
@@ -103,16 +103,16 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  true,
+                    'key'       =>  Pack::REVENUE_NOT_SHARED,
+                    'name'      =>  '100% of revenue is your\'s',
+                    'enabled'   =>  false,
                 ]
             ]
         ]);
         
         Pack::create([
             'name'              =>  'gravity',
-            'price'             =>  9.99,
+            'price'             =>  19.99,
             'type'              =>  Pack::RECURRING_TYPE,
             'symbol'            =>  '$',
             'currency'          =>  'usd',
@@ -140,8 +140,8 @@ class PacksSeeder extends Seeder
                     'limit'     =>  5,
                 ],
                 [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
                     'enabled'   =>  true,
                 ],
                 [
@@ -150,8 +150,8 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
+                    'key'       =>  Pack::REVENUE_NOT_SHARED,
+                    'name'      =>  '100% of revenue is your\'s',
                     'enabled'   =>  true,
                 ]
             ]

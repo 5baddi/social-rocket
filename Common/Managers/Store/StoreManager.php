@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\ClnkGO\Common\Store\Managers;
+namespace BADDIServices\ClnkGO\Common\Managers\Store;
 
 use BADDIServices\ClnkGO\Common\Managers\CacheManager;
 
