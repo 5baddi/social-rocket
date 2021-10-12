@@ -1,0 +1,16 @@
+{
+    "name": "baddiservices/blog",
+    "description": "Blog package for BADDI Services projects",
+    "type": "package",
+    "keywords": ["blog"],
+    "authors": [
+        {
+            "name": "BADDI Services",
+            "email": "services@baddi.info",
+            "homepage": "https://baddi.info"
+        }
+    ],
+    "require": {
+        "themsaid/wink": "^1.2"
+    }
+}
