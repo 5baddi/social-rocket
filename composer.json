@@ -35,6 +35,7 @@
             "App\\": "app/",
             "BADDIServices\\SocialRocket\\": "app/",
             "BADDIServices\\SocialRocket\\Blog\\": "Blog/",
+            "BADDIServices\\SocialRocket\\Documentation\\": "Documentation/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
         }
