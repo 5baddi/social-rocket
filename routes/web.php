@@ -27,5 +27,5 @@ Route::group([], function() {
         require 'admin.php';
         require 'webhooks.php';
 
-        require __DIR__ . '/../Blog/Routes.php';
+//        require __DIR__ . '/../blog/Routes.php';
     });

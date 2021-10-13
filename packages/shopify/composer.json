@@ -1,0 +1,39 @@
+{
+    "name": "baddiservices/shopify-wrapper",
+    "description": "Shopify wrapper package",
+    "type": "library",
+    "license": "MIT",
+    "keywords": ["shopify", "integration", "wrapper"],
+    "minimum-stability": "alpha",
+    "authors": [
+        {
+            "name": "BADDI Services",
+            "email": "services@baddi.info",
+            "homepage": "https://baddi.info"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.3"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "BADDIServices\\Packages\\Shopify\\": "src/",
+            "BADDIServices\\Packages\\Shopify\\Database\\Factories\\": "src/database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "BADDIServices\\Packages\\Shopify\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BADDIServices\\Packages\\Shopify\\ShopifyPackageServiceProvider"
+            ]
+        }
+    }
+}

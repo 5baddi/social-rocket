@@ -31,7 +31,7 @@ class BillingConfirmationController extends Controller
 {
     /** @var PackService */
     private $packService;
-    
+
     /** @var SubscriptionService */
     private $subscriptionService;
 
@@ -49,8 +49,9 @@ class BillingConfirmationController extends Controller
             $user->load('store');
 
             $store = $user->store;
+
             abort_unless($store instanceof Store, Response::HTTP_NOT_FOUND, 'Store not found');
-            
+
             $pack = $this->packService->findById($packId);
             abort_unless($pack instanceof Pack, Response::HTTP_NOT_FOUND, 'No pack selected');
 
@@ -78,15 +79,16 @@ class BillingConfirmationController extends Controller
                             ->with(
                                 'alert',
                                 new Alert($e->getMessage())
-                            ); 
+                            );
         } catch (Throwable $e) {
+            dd($e);
             AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
 
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',
                                 new Alert('Internal server error')
-                            ); 
+                            );
         }
     }
 }

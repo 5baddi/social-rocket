@@ -27,7 +27,7 @@ class SubscriptionService extends Service
 {
     /** @var SubscriptionRepository */
     private $subscriptionRepository;
-    
+
     /** @var ShopifyService */
     private $shopifyService;
 
@@ -44,15 +44,15 @@ class SubscriptionService extends Service
     public function loadRelations(Subscription &$subscription): Subscription
     {
         $subscription->load(['user', 'pack']);
-        
+
         return $subscription;
     }
-    
+
     public function getUsageBills(): Collection
     {
         return $this->subscriptionRepository->getUsageBills();
     }
-    
+
     public function createBillingConfirmationURL(Store $store, Pack $pack): string
     {
         $charge = [
@@ -105,7 +105,7 @@ class SubscriptionService extends Service
 
         return $subscription;
     }
-    
+
     public function save(User $user, Store $store, Pack $pack, array $billing): Subscription
     {
         $billing = collect($billing);

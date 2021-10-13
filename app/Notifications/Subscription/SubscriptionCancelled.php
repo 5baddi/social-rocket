@@ -53,7 +53,7 @@ class SubscriptionCancelled extends Notification
     {
         return [
             'subject'           => sprintf(self::SUBJECT, ucwords($this->subscription->pack->name)),
-            'subscription_id'   => $this->subscription->id, 
+            'subscription_id'   => $this->subscription->id,
             'name'              => $this->subscription->pack->name,
             'cancelled_at'      => $this->subscription->delete_at,
             'link'              =>  [

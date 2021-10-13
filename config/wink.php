@@ -3,7 +3,7 @@
 return [
     /*
     |--------------------------------------------------------------------------
-    | Wink Database Connection
+    | Wink database Connection
     |--------------------------------------------------------------------------
     |
     | This is the database connection you want Wink to use while storing &

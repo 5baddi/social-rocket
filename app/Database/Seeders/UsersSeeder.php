@@ -23,7 +23,7 @@ class UsersSeeder extends Seeder
         User::create([
             User::FIRST_NAME_COLUMN     =>  "Admin Account",
             User::EMAIL_COLUMN          =>  "webmaster@trysocialrocket.com",
-            User::PASSWORD_COLUMN       =>  "tryrocketapp@2021",  
+            User::PASSWORD_COLUMN       =>  "tryrocketapp@2021",
             User::IS_SUPERADMIN_COLUMN  =>  true,
             User::LAST_LOGIN_COLUMN     =>  null
         ]);

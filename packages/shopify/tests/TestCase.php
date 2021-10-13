@@ -12,9 +12,12 @@ namespace BADDIServices\Packages\Shopify\Tests;
 
 use BADDIServices\Packages\Shopify\ShopifyPackageServiceProvider;
 use PHPUnit\Framework\TestCase as BaseTestCase;
+use Tests\CreatesApplication;
 
-class TestCase extends BaseTestCase
+abstract class TestCase extends BaseTestCase
 {
+    use CreatesApplication;
+
     public function setUp(): void
     {
         parent::setUp();
@@ -29,6 +32,14 @@ class TestCase extends BaseTestCase
 
     public function getEnvironmentSetUp($app)
     {
-        // TODO: perform environment setup
+        $app['config']->set('database.default', 'test_shopify_package');
+        $app['config']->set(
+            'database.connections.test_shopify_package',
+            [
+                'driver'   => 'sqlite',
+                'database' => ':memory:',
+                'prefix'   => '',
+            ]
+        );
     }
 }

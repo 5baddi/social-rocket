@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9f90fee4aedbd58fb68c6f499de7e1a3",
+    "content-hash": "54b31e590dfa896ae908b2c69b0cfae6",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,59 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "baddiservices/shopify-wrapper",
+            "version": "dev-main",
+            "dist": {
+                "type": "path",
+                "url": "packages/shopify",
+                "reference": "1adc56f8b5927110a609ff951778713cbe909de6"
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "BADDIServices\\Packages\\Shopify\\ShopifyPackageServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "BADDIServices\\Packages\\Shopify\\": "src/",
+                    "BADDIServices\\Packages\\Shopify\\Database\\Factories\\": "src/database/factories"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "BADDIServices\\Packages\\Shopify\\Tests\\": "tests/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "BADDI Services",
+                    "email": "services@baddi.info",
+                    "homepage": "https://baddi.info"
+                }
+            ],
+            "description": "Shopify wrapper package",
+            "keywords": [
+                "integration",
+                "shopify",
+                "wrapper"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "brick/math",
@@ -7726,12 +7779,14 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "baddiservices/shopify-wrapper": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "1.1.0"
 }

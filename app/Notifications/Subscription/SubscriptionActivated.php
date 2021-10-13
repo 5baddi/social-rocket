@@ -54,8 +54,8 @@ class SubscriptionActivated extends Notification
     {
         return [
             'subject'           => sprintf(self::SUBJECT, ucwords($this->subscription->pack->name)),
-            'subscription_id'   => $this->subscription->id, 
-            'pack_id'           => $this->subscription->pack_id, 
+            'subscription_id'   => $this->subscription->id,
+            'pack_id'           => $this->subscription->pack_id,
             'type'              => $this->subscription->pack->price_type,
             'price'             => $this->subscription->pack->price,
             'name'              => $this->subscription->pack->name,

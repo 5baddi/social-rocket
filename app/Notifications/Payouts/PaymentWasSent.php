@@ -68,12 +68,12 @@ class PaymentWasSent extends Notification implements ShouldQueue
     {
         return [
             'subject'           => self::SUBJECT,
-            'affiliate'         => $this->affiliate->getFullName(), 
-            'commission_id'     => $this->commission->id, 
-            'payout_method'     => $this->commission->payout_method, 
-            'payout_reference'  => $this->commission->payout_reference, 
-            'amount'            => $this->commission->amount, 
-            'additional_info'   => $this->commission->additional_info, 
+            'affiliate'         => $this->affiliate->getFullName(),
+            'commission_id'     => $this->commission->id,
+            'payout_method'     => $this->commission->payout_method,
+            'payout_reference'  => $this->commission->payout_reference,
+            'amount'            => $this->commission->amount,
+            'additional_info'   => $this->commission->additional_info,
             'paid_at'           => $this->commission->paid_at,
             'link'              =>  [
                 'url'           =>  route('dashboard.payouts'),

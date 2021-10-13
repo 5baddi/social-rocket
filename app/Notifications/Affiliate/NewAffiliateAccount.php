@@ -21,10 +21,10 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
 
     /** @var User */
     private $user;
-    
+
     /** @var User */
     private $affiliate;
-    
+
     /** @var Setting */
     private $setting;
 
@@ -65,7 +65,7 @@ class NewAffiliateAccount extends Notification implements ShouldQueue
      * @return \Illuminate\Notifications\Messages\MailMessage
      */
     public function toMail($notifiable)
-    {    
+    {
         return (new MailMessage)
                     ->subject(self::SUBJECT)
                     ->view('emails.affiliate.new', ['subject' => self::SUBJECT, 'user' => $this->user, 'affiliate' => $this->affiliate]);
