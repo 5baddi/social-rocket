@@ -75,10 +75,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Store::class);
     }
-    
+
     public function subscription(): HasOne
     {
         return $this->hasOne(Subscription::class, 'user_id');
+    }
+
+    public function getEmail(): string
+    {
+        return $this->getAttribute(self::EMAIL_COLUMN);
     }
 
     public function setEmailAttribute($value): self
@@ -87,7 +92,7 @@ class User extends Authenticatable
 
         return $this;
     }
-    
+
     public function setPasswordAttribute($value): self
     {
         $this->attributes[self::PASSWORD_COLUMN] = Hash::make($value);
@@ -109,7 +114,7 @@ class User extends Authenticatable
     {
         return $this->getAttribute(self::IS_SUPERADMIN_COLUMN) === true && is_null($this->getAttribute(self::ROLE_COLUMN));
     }
-    
+
     public function isBanned(): bool
     {
         return $this->getAttribute(self::BANNED_COLUMN) === true;
@@ -119,7 +124,7 @@ class User extends Authenticatable
     {
         return $this->getAttribute(self::PASSWORD_COLUMN) !== null;
     }
-    
+
     public function getPassword(): ?string
     {
         return $this->getAttribute(self::PASSWORD_COLUMN);
