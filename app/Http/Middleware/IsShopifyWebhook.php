@@ -23,7 +23,7 @@ class IsShopifyWebhook
     {
         $this->shopifyService = $shopifyService;
     }
-    
+
     /**
      * Handle an incoming request.
      *

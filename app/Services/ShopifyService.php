@@ -81,7 +81,7 @@ class ShopifyService extends Service
 
         return $productURL;
     }
-    
+
     public function getProductWithDiscountURL($store, string $slug, string $coupon): string
     {
         $productURL = $this->getStoreURL($store->slug);
@@ -90,7 +90,7 @@ class ShopifyService extends Service
 
         return $productURL;
     }
-    
+
     public function getOAuthURL(Store $store): string
     {
         $oauthURL = $this->getStoreURL($store->slug);
@@ -140,7 +140,7 @@ class ShopifyService extends Service
             $configURL .= self::STORE_CONFIGS_ENDPOINT;
             $configURL .= "?access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $configURL, 
+            $response = $this->client->request('GET', $configURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json',
@@ -161,7 +161,7 @@ class ShopifyService extends Service
             throw new LoadConfigurationsFailed();
         }
     }
-    
+
     /**
      * @throws AcceptPaymentFailed
      */
@@ -181,7 +181,7 @@ class ShopifyService extends Service
                 'price'         => 1.0
             ];
 
-            $response = $this->client->request('POST', $chargeURL, 
+            $response = $this->client->request('POST', $chargeURL,
                 [
                     'form_params'      => $requestBody,
                     'headers'   => [
@@ -221,7 +221,7 @@ class ShopifyService extends Service
 
             $chargeURL .= "?access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $chargeURL, 
+            $response = $this->client->request('GET', $chargeURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -241,7 +241,7 @@ class ShopifyService extends Service
             throw new AcceptPaymentFailed();
         }
     }
-    
+
     /**
      * @throws CustomerNotFound
      */
@@ -254,7 +254,7 @@ class ShopifyService extends Service
             $customerURL .= Str::replace("{id}", $customerId, self::GET_CUSTOMER_ENDPOINT);
             $customerURL .= "?access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $customerURL, 
+            $response = $this->client->request('GET', $customerURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -281,7 +281,7 @@ class ShopifyService extends Service
             throw new CustomerNotFound();
         }
     }
-    
+
     /**
      * @throws OrderNotFound
      */
@@ -294,7 +294,7 @@ class ShopifyService extends Service
             $orderURL .= Str::replace("{id}", $orderId, self::GET_ORDER_ENDPOINT);
             $orderURL .= "&access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $orderURL, 
+            $response = $this->client->request('GET', $orderURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -322,7 +322,7 @@ class ShopifyService extends Service
             throw new OrderNotFound();
         }
     }
-    
+
     /**
      * @throws FetchResourcesFailed
      */
@@ -335,7 +335,7 @@ class ShopifyService extends Service
             $orderURL .= self::GET_ORDERS_ENDPOINT;
             $orderURL .= "&access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $orderURL, 
+            $response = $this->client->request('GET', $orderURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -362,7 +362,7 @@ class ShopifyService extends Service
             throw new FetchResourcesFailed();
         }
     }
-    
+
     /**
      * @throws ProductNotFound
      */
@@ -375,7 +375,7 @@ class ShopifyService extends Service
             $productURL .= Str::replace("{id}", $productId, self::GET_PRODUCT_ENDPOINT);
             $productURL .= "?access_token={$accessToken}";
 
-            $response = $this->client->request('GET', $productURL, 
+            $response = $this->client->request('GET', $productURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -403,7 +403,7 @@ class ShopifyService extends Service
             throw new ProductNotFound();
         }
     }
-    
+
     /**
      * @throws CancelSubscriptionFailed
      */
@@ -416,7 +416,7 @@ class ShopifyService extends Service
             $chargeURL .= Str::replace("{id}", $chargeId, self::DELETE_CHARGE_ENDPOINT);
             $chargeURL .= "?access_token={$accessToken}";
 
-            $response = $this->client->request('DELETE', $chargeURL, 
+            $response = $this->client->request('DELETE', $chargeURL,
                 [
                     'headers'   => [
                         'Accept'        => 'application/json'
@@ -437,7 +437,7 @@ class ShopifyService extends Service
             throw new CancelSubscriptionFailed();
         }
     }
-    
+
     public function createScriptTag(Store $store): array
     {
         try {
@@ -454,7 +454,7 @@ class ShopifyService extends Service
 
             $requestBody['access_token'] = $accessToken;
 
-            $response = $this->client->request('POST', $scriptTagURL, 
+            $response = $this->client->request('POST', $scriptTagURL,
                 [
                     'form_params'      => $requestBody,
                     'headers'   => [
@@ -497,7 +497,7 @@ class ShopifyService extends Service
             $requestBody['access_token'] = $accessToken;
 
             $priceRule = array_merge(
-                $priceRule, 
+                $priceRule,
                 [
                     'target_selection'      =>  'all',
                     'customer_selection'    =>  'all',
@@ -508,7 +508,7 @@ class ShopifyService extends Service
             );
             $requestBody['price_rule'] = $priceRule;
 
-            $response = $this->client->request('POST', $priceRuleURL, 
+            $response = $this->client->request('POST', $priceRuleURL,
                 [
                     'form_params'      => $requestBody,
                     'headers'   => [
@@ -539,7 +539,7 @@ class ShopifyService extends Service
             throw new CreatePriceRuleFailed();
         }
     }
-    
+
     /**
      * @throws CreateDiscountFailed
      */
@@ -551,12 +551,12 @@ class ShopifyService extends Service
             $discountURL = $this->getStoreURL($store->slug);
             $discountURL .= Str::replace("{id}", $priceRule['id'], self::POST_DISCOUNT_ENDPOINT);
             $discountURL .= "?access_token={$accessToken}";
-            
+
             $requestBody['discount_code'] = [
                 'code' => $priceRule['title']
             ];
 
-            $response = $this->client->request('POST', $discountURL, 
+            $response = $this->client->request('POST', $discountURL,
                 [
                     'body'      => json_encode($requestBody),
                     'headers'   => [
@@ -603,7 +603,7 @@ class ShopifyService extends Service
 
                 return $storeName[0];
             }
-            
+
             $storeURL = Str::replace("{store}", $storeURL, self::STORE_ENDPOINT);
             $storeHeaders = @get_headers((string) $storeURL);
 
@@ -634,7 +634,7 @@ class ShopifyService extends Service
                 'code'                      =>  $params['code']
             ];
 
-            $response = $this->client->request('POST', $oauthURL, 
+            $response = $this->client->request('POST', $oauthURL,
                 [
                     'form_params'      => $requestBody,
                     'headers'   => [
@@ -686,7 +686,7 @@ class ShopifyService extends Service
 
         return $store->oauth->access_token;
     }
-    
+
     private function createBillingChargeApplication(Store $store, array $charge): array
     {
         $accessToken = $this->hasAccessToken($store);
@@ -698,7 +698,7 @@ class ShopifyService extends Service
 
         $requestBody['recurring_application_charge'] = $charge;
 
-        $response = $this->client->request('POST', $chargeURL, 
+        $response = $this->client->request('POST', $chargeURL,
             [
                 'form_params'      => $requestBody,
                 'headers'   => [
@@ -708,6 +708,6 @@ class ShopifyService extends Service
             ]
         );
 
-        return json_decode($response->getBody(), true);  
+        return json_decode($response->getBody(), true);
     }
 }

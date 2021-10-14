@@ -1,0 +1,3 @@
+[submodule "packages/shopify"]
+	path = packages/shopify
+	url = git@github.com:baddiservices/shopify-wrapper.git

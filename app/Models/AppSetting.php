@@ -33,17 +33,17 @@ class AppSetting extends ModelEntity
     {
         return sprintf("https://facebook.com/%s?utm_source=%s", $this->getAttribute(self::FACEBOOK_USERNAME_COLUMN), config('app.name'));
     }
-    
+
     public function getTwitterUsername(): string
     {
         return sprintf("https://twitter.com/%s?utm_source=%s", $this->getAttribute(self::TWITTER_USERNAME_COLUMN), config('app.name'));
     }
-    
+
     public function getInstagramUsername(): string
     {
         return sprintf("https://instagram.com/%s?utm_source=%s", $this->getAttribute(self::INSTAGRAM_USERNAME_COLUMN), config('app.name'));
     }
-    
+
     public function getAppLinkOnShopifyAppStore(): string
     {
         return sprintf("https://apps.shopify.com/%s?utm_source=%s", $this->getAttribute(self::SHOPIFY_APP_SLUG_COLUMN), config('app.name'));
