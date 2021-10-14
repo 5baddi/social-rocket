@@ -12,12 +12,12 @@
         <!-- Start of Async Drift Code -->
         <script>
             "use strict";
-            
+
             !function() {
             var t = window.driftt = window.drift = window.driftt || [];
             if (!t.init) {
                 if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
-                t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ], 
+                t.invoked = !0, t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
                 t.factory = function(e) {
                 return function() {
                     var n = Array.prototype.slice.call(arguments);
@@ -39,13 +39,13 @@
         <!-- End of Async Drift Code -->
 
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VG34Z8P7VP"></script>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-DGDWP8P20K"></script>
         <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-        gtag('config', 'G-VG34Z8P7VP');
+            gtag('config', 'G-DGDWP8P20K');
         </script>
     </head>
 
