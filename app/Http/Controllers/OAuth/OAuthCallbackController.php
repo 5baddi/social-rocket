@@ -35,14 +35,16 @@ class OAuthCallbackController extends Controller
     private $storeService;
 
     public function __construct(
-        ShopifyService $shopifyService, 
+        ShopifyService $shopifyService,
         StoreService $storeService
     )
     {
+        parent::__construct();
+
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
     }
-    
+
     public function __invoke(OAuthCallbackRequest $request)
     {
         try {
@@ -114,7 +116,7 @@ class OAuthCallbackController extends Controller
                 );
         } catch (ValidationException $ex) {
             AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
-            
+
             return redirect()
                 ->route('connect')
                 ->withInput()
@@ -123,7 +125,7 @@ class OAuthCallbackController extends Controller
             DB::rollBack();
 
             AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
-            
+
             return redirect()
                 ->route('connect')
                 ->with('error', 'Internal server error');
