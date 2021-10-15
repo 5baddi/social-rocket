@@ -19,7 +19,8 @@ class CreatePacksTable extends Migration
             $table->string('name', 100)->unique();
             $table->json('features')->nullable(true);
             $table->float('price')->default(0.0);
-            $table->enum('type', Pack::TYPES);
+            $table->float('revenue_share')->default(0.0);
+            $table->tinyInteger('type')->nullable();
             $table->enum('interval', Pack::INTERVAL)->default(Pack::PER_MONTH);
             $table->integer('trial_days')->default(Pack::DEFAULT_TRIAL_DAYS);
             $table->boolean('is_popular')->default(false);

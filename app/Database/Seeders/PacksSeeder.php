@@ -21,9 +21,10 @@ class PacksSeeder extends Seeder
     public function run()
     {
         Pack::create([
-            'name'          =>  'Asteroid',
-            'price'         =>  10,
-            'type'          =>  Pack::TYPES[1],
+            'name'          =>  'Starter',
+            'price'         =>  0,
+            'type'          =>  Pack::FREE_TYPE,
+            'revenue_share' => 0.12,
             'is_popular'    =>  false,
             'features'      =>  [
                 [
@@ -33,9 +34,9 @@ class PacksSeeder extends Seeder
                 ],
                 [
                     'key'       =>  Pack::PAYOUT_METHODS,
-                    'name'      =>  '5 payout methods',
+                    'name'      =>  '2 payout methods',
                     'enabled'   =>  true,
-                    'limit'     =>  5,
+                    'limit'     =>  2,
                 ],
                 [
                     'key'       =>  Pack::REPORTING,
@@ -43,14 +44,19 @@ class PacksSeeder extends Seeder
                     'enabled'   =>  true,
                 ],
                 [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
                     'key'       =>  Pack::SUPPORT,
                     'name'      =>  'live chat support',
                     'enabled'   =>  true,
+                ],
+                [
+                    'key'       =>  Pack::CUSTOMIZATION,
+                    'name'      =>  'full customization',
+                    'enabled'   =>  false,
+                ],
+                [
+                    'key'       =>  Pack::STAFF,
+                    'name'      =>  'staff management',
+                    'enabled'   =>  false,
                 ],
                 [
                     'key'       =>  Pack::REVENUE_NOT_SHARED,
@@ -60,46 +66,46 @@ class PacksSeeder extends Seeder
             ]
         ]);
 
-        Pack::create([
-            'name'              =>  'gravity',
-            'price'             =>  9.99,
-            'type'              =>  Pack::TYPES[0],
-            'symbol'            =>  '$',
-            'currency'          =>  'usd',
-            'is_popular'        =>  true,
-            'features'          =>  [
-                [
-                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
-                    'name'      =>  'unlimited affiliates',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::PAYOUT_METHODS,
-                    'name'      =>  '5 payout methods',
-                    'enabled'   =>  true,
-                    'limit'     =>  5,
-                ],
-                [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
-                    'enabled'   =>  true,
-                ],
-            ]
-        ]);
+//        Pack::create([
+//            'name'              =>  'gravity',
+//            'price'             =>  9.99,
+//            'type'              =>  Pack::TYPES[0],
+//            'symbol'            =>  '$',
+//            'currency'          =>  'usd',
+//            'is_popular'        =>  true,
+//            'features'          =>  [
+//                [
+//                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
+//                    'name'      =>  'unlimited affiliates',
+//                    'enabled'   =>  true,
+//                ],
+//                [
+//                    'key'       =>  Pack::PAYOUT_METHODS,
+//                    'name'      =>  '5 payout methods',
+//                    'enabled'   =>  true,
+//                    'limit'     =>  5,
+//                ],
+//                [
+//                    'key'       =>  Pack::REPORTING,
+//                    'name'      =>  'dashboard And data reports',
+//                    'enabled'   =>  true,
+//                ],
+//                [
+//                    'key'       =>  Pack::CUSTOMIZATION,
+//                    'name'      =>  'full customization',
+//                    'enabled'   =>  true,
+//                ],
+//                [
+//                    'key'       =>  Pack::SUPPORT,
+//                    'name'      =>  'live chat support',
+//                    'enabled'   =>  true,
+//                ],
+//                [
+//                    'key'       =>  Pack::REVENUE_NOT_SHARED,
+//                    'name'      =>  '100% of revenue is your\'s',
+//                    'enabled'   =>  true,
+//                ],
+//            ]
+//        ]);
     }
 }
