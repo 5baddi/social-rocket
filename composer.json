@@ -12,7 +12,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "bugsnag/bugsnag-laravel": "^2.0",
         "fakerphp/faker": "^1.14",
         "fideloper/proxy": "^4.4",
@@ -24,6 +24,7 @@
         "themsaid/wink": "^1.2"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.6",
         "facade/ignition": "^2.5",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.2",
@@ -70,7 +71,8 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "platform-check": false
     },
     "minimum-stability": "dev",
     "prefer-stable": true

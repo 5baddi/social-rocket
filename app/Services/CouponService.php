@@ -21,13 +21,13 @@ class CouponService extends Service
             <div class="text-container">
                 <h2 id="offer_header" style="font-weight: 600; font-size: 23px; color: {color};"> You can make money promoting our products!</h2>
                 <p class="os-step__description">
-                    Simply share the discount code we created just for you 
+                    Simply share the discount code we created just for you
                     <svg class="sloading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: none; vertical-align: middle;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                         <circle cx="50" cy="50" fill="none" stroke="#2c407d" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(336.538 50 50)">
                         <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"> </animateTransform>
                         </circle>
                     </svg>
-                    <span class="scode" id="app-coupon" style="font-weight: bold;">{coupon}</span> and receive 
+                    <span class="scode" id="app-coupon" style="font-weight: bold;">{coupon}</span> and receive
                     <b style="font-weight: bold;">
                         <svg class="sloading_merchant_commission" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: rgb(255, 255, 255); display: none; vertical-align: middle;" width="20px" height="20px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                         <circle cx="50" cy="50" fill="none" stroke="#2c407d" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138" transform="rotate(336.538 50 50)">
@@ -61,7 +61,7 @@ class CouponService extends Service
                     </svg>Share</a> </div>
                     </li>
                     <li class="payment-method-list__item" style="text-align: center; ">
-                        <div style="width: 100%;"><a style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #000000; border-radius: 30px; cursor: pointer; width: 88%;" onclick="window.shareTwitter()"><svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <div style="width: 100%;"><a style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #04AF90; border-radius: 30px; cursor: pointer; width: 88%;" onclick="window.shareTwitter()"><svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
                     </svg>Share</a> </div>
@@ -79,15 +79,15 @@ class CouponService extends Service
                         </div>
                     </li>
                 </ul>
-                <input class="smerchant_name" type="hidden" value="Harper"> <input class="smerchant_discount" type="hidden" value="10%"> <input class="samount_code" type="hidden" value="10%"> <input class="smerchant_store" type="hidden" value="Social Rocket Store"> 
+                <input class="smerchant_name" type="hidden" value="Harper"> <input class="smerchant_discount" type="hidden" value="10%"> <input class="samount_code" type="hidden" value="10%"> <input class="smerchant_store" type="hidden" value="Social Rocket Store">
             </div>
             </div>
         </div>
         <div id="offer-details"
             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
             <div
-                style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
-                <img src="' . asset('assets/img/logo.png') . '"
+                style="background-color: #ffffff; text-align: center; color: #04AF90; font-size: 18px; padding: 15px 25px; width: 320px;">
+                <img src="' . asset('assets/img/logo.svg') . '"
                     id="offer-details-logo"
                     style="vertical-align: middle; width: 60%; margin-bottom: 1.5rem;">
                 <p style="font-weight: 600">Affiliate Program</p>
@@ -107,7 +107,7 @@ class CouponService extends Service
         </div>';
 
         $amount = $this->getDiscount($discount, $type, $currency);
-        
+
         $html = Str::replace('{color}', $color, $html);
         $html = Str::replace('{amount}', $amount, $html);
 

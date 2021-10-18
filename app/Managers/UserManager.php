@@ -9,12 +9,12 @@
 namespace BADDIServices\SocialRocket\Managers;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Common\Repositories\UserRepository;
 use BADDIServices\SocialRocket\Managers\Cache\CacheManager;
-use BADDIServices\SocialRocket\Repositories\UserRespository;
 
 class UserManager extends CacheManager
 {
-    public function __construct(UserRespository $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         parent::__construct();
 

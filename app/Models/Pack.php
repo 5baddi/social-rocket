@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Models;
 
+use BADDIServices\SocialRocket\Models\Subscription\PackFeature;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
@@ -17,31 +18,30 @@ class Pack extends ModelEntity
     use SoftDeletes;
 
     /** @var string */
-    public const PER_MONTH = 'month';
-    public const PER_YEAR = 'year';
-    public const FEATURES_COLUMN = 'features';
+    public const NAME_KEY_COLUMN = 'name_key';
     public const PRICE_COLUMN = 'price';
     public const TYPE_COLUMN = 'type';
     public const INTERVAL_COLUMN = 'interval';
+    public const REVENUE_SHARE_COLUMN = 'revenue_share';
+    public const IS_POPULAR_COLUMN = 'is_popular';
+    public const TRIAL_DAYS_COLUMN = 'trial_days';
+    public const CURRENCY_COLUMN = 'currency';
+    public const CURRENCY_SYMBOL_COLUMN = 'currency_symbol';
+
+    public const PER_MONTH = 'month';
+    public const PER_YEAR = 'year';
+
+    /** @var int */
+    public const DEFAULT_CHARGE_PRICE = 25;
+    public const DEFAULT_MAX_USAGE_PRICE = 1000;
+    public const DEFAULT_TRIAL_DAYS = 14;
+
     public const FREE_TYPE = 1;
     public const RECURRING_TYPE = 2;
     public const USAGE_TYPE = 3;
-    public const IS_POPULAR_TYPE = 'is_popular';
-
-    /** @var int */
-    public const DEFAULT_CHARGE_PRICE = 10;
-    public const DEFAULT_MAX_USAGE_PRICE = 1000;
-    public const DEFAULT_TRIAL_DAYS = 14;
-    public const UNLIMITED_AFFILIATES = 1;
-    public const PAYOUT_METHODS = 2;
-    public const REPORTING = 3;
-    public const CUSTOMIZATION = 4;
-    public const SUPPORT = 5;
-    public const REVENUE_NOT_SHARED = 6;
-    public const STAFF = 7;
 
     /** @var array */
-    public const INTERVAL = [
+    public const INTERVALS = [
         self::PER_MONTH,
         self::PER_YEAR
     ];
@@ -53,30 +53,58 @@ class Pack extends ModelEntity
         self::USAGE_TYPE
     ];
 
+    /** @var array|PackFeature[] */
+    private $features = [];
+
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class);
     }
 
-    public function getFeaturesAttribute(): array
+    public function getType(): ?int
     {
-        return json_decode($this->attributes[self::FEATURES_COLUMN], true);
+        return $this->getAttribute(self::TYPE_COLUMN);
     }
 
-    public function setFeaturesAttribute($value): self
+    public function getFeatures(): array
     {
-        $this->attributes[self::FEATURES_COLUMN] = json_encode($value);
+        return $this->features;
+    }
+
+    /**
+     * @param array|PackFeature[] $features
+     */
+    public function setFeatures(array $features): self
+    {
+        $this->features = $features;
 
         return $this;
     }
 
     public function isFixedPrice(): bool
     {
-        return $this->attributes[self::TYPE_COLUMN] === self::TYPES[0];
+        return $this->getType() === Pack::RECURRING_TYPE;
     }
 
     public function isUsageType(): bool
     {
         return $this->getAttribute(self::TYPE_COLUMN) === self::USAGE_TYPE;
+    }
+
+    public function getRevenueShare(): ?float
+    {
+        return $this->getAttribute(self::REVENUE_SHARE_COLUMN);
+    }
+
+    public function isFree(): bool
+    {
+        return $this->getType() === self::FREE_TYPE;
+    }
+
+    public function getName(): string
+    {
+        return trans(
+            sprintf('packs.%s', $this->getAttribute(self::NAME_KEY_COLUMN))
+        );
     }
 }

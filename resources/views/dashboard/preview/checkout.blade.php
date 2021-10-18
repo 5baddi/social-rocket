@@ -149,7 +149,7 @@ style="overflow: visible; height: auto;">
                                 <div class="section">
                                     <div class="section__content">
 
-                                        
+
                                         <div class="content-box">
                                             <div class="content-box__row">
                                                 <div class="section__content srow">
@@ -243,7 +243,7 @@ style="overflow: visible; height: auto;">
                                                                     style="text-align: center; ">
                                                                     <div style="width: 100%;">
                                                                         <a
-                                                                            style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #000000; border-radius: 30px; cursor: pointer; width: 88%;"
+                                                                            style="color: #40ABEE; font-weight: 600; display: inline-block; padding: 8px 15px 8px 12px; background-color: #04AF90; border-radius: 30px; cursor: pointer; width: 88%;"
                                                                             onclick="window.shareTwitter()">
                                                                             <svg xmlns="http://www.w3.org/2000/svg" style="width: 20px; margin-top: -5px; margin-right: 4px; display: inline-block; vertical-align: middle; " class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -283,14 +283,14 @@ style="overflow: visible; height: auto;">
                                                 </div>
                                             </div>
                                         </div>
-                                        
 
-                                        
+
+
                                         <div id="offer-details"
                                             style="background-color: rgba(0,0,0,0.4); position: fixed; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; display: none; align-items:center; justify-content: center; z-index: 9999;">
                                             <div
-                                                style="background-color: #ffffff; text-align: center; color: #000000; font-size: 18px; padding: 15px 25px; width: 320px;">
-                                                <img src="{{ asset('assets/img/logo.png') }}"
+                                                style="background-color: #ffffff; text-align: center; color: #04AF90; font-size: 18px; padding: 15px 25px; width: 320px;">
+                                                <img src="{{ asset('assets/img/logo.svg') }}"
                                                     id="offer-details-logo"
                                                     style="display: none; vertical-align: middle; width: 60%;">
                                                 <p style="font-weight: 600">Affiliate Program</p>
@@ -308,7 +308,7 @@ style="overflow: visible; height: auto;">
                                                         onclick="window.modalClose()">Accept</a></div>
                                             </div>
                                         </div>
-                                        
+
 
                                         <div class="content-box">
                                             <div class="content-box__row text-container">

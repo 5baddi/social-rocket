@@ -174,7 +174,7 @@
       locale: {
         format: 'YYYY/MM/DD'
       }
-    }); 
+    });
 
     $('#period').on('apply.daterangepicker', function(ev, picker) {
       $('#startDate').val(picker.startDate.format('YYYY-MM-DD'));
@@ -221,7 +221,7 @@
             opacity: 0.5
         },
       },
-      colors: ["#000000"],
+      colors: ["#04AF90"],
       xaxis: {
         type: 'datetime',
         min: new Date("{{ $startDate }}").getTime(),

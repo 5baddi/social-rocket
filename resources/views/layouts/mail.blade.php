@@ -49,7 +49,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                         <tr>
                             <td style="padding: 25px 0; text-align: center;">
                                     <a href="{{ url('/') }}" style="display: inline-block;">
-                                        <img src="{{ asset('assets/img/logo.png') }}" class="logo" width="160">
+                                        <img src="{{ asset('assets/img/logo.svg') }}" class="logo" width="160">
                                     </a>
                             </td>
                         </tr>

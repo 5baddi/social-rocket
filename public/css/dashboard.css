@@ -63,7 +63,7 @@ body{
     display: inline-block;
     padding: 10px 20px;
     background: #DFE6E9;
-    color: #000000;
+    color: #04AF90;
     border-radius: 27px;
     font-weight: 600;
     -webkit-transition: all .3s ease;
@@ -110,7 +110,7 @@ body{
 
 .title1 {
     font-weight: 700;
-    color: #000000;
+    color: #04AF90;
     font-size: 40px;
     margin-bottom: 20px;
 }
@@ -166,7 +166,7 @@ header {
 
 .title2 {
     font-size: 28px;
-    color: #000000;
+    color: #04AF90;
     font-weight: 700;
     margin-bottom: 35px;
 }
@@ -178,7 +178,7 @@ header {
 .title3 {
     font-size: 20px;
     font-weight: 700;
-    color: #000000;
+    color: #04AF90;
 }
 
 .items-how-it-works .item-how-it-works {
@@ -205,7 +205,7 @@ header {
     width: calc(100% - 80px);
 }
 
-.items-how-it-works .item-how-it-works:before {content: "";height: 100%;width: 2px;background: #000000;position: absolute;left: -50px;}
+.items-how-it-works .item-how-it-works:before {content: "";height: 100%;width: 2px;background: #04AF90;position: absolute;left: -50px;}
 
 .col-content-how-it-works {
     overflow: hidden;
@@ -287,7 +287,7 @@ header {
 .title-item-plan {
     font-size: 20px;
     font-weight: 700;
-    color: #000000;
+    color: #04AF90;
     text-align: center;
     margin-bottom: 20px;
 }
@@ -322,7 +322,7 @@ header {
 .title-price-item-plan {
     margin: 0;
     font-size: 28px;
-    color: #000000;
+    color: #04AF90;
     font-weight: 600;
 }
 
@@ -429,7 +429,7 @@ header {
     top: -15px;
     width: 100px;
     right: -115px;
-    color: #000000;
+    color: #04AF90;
     font-weight: 500;
 }
 
@@ -505,7 +505,7 @@ header {
 .btn-item-faq {
     font-size: 20px;
     font-weight: 600;
-    color: #000000;
+    color: #04AF90;
     width: 100%;
     text-align: left;
     background: transparent;
@@ -617,8 +617,8 @@ footer {
 }
 
 .btn-design1:hover {
-    background: #000000;
-    border-color: #000000;
+    background: #04AF90;
+    border-color: #04AF90;
     text-decoration: none !important;
     color: #DFE6E9;
 }
@@ -636,7 +636,7 @@ footer {
 }
 
 div.active > .text-time-pricing {
-    color: #000000;
+    color: #04AF90;
 }
 
 .separate-line {
@@ -716,7 +716,7 @@ header.menu-fixed .content-header {
 }
 
 .content-single-page b, .content-single-page strong, .content-single-page u {
-    color: #000000;
+    color: #04AF90;
 }
 
 .content-single-page ol li {
@@ -724,7 +724,7 @@ header.menu-fixed .content-header {
 }
 
 .link-header:hover {
-    color: #000000;
+    color: #04AF90;
     text-decoration: none;
 }
 

@@ -169,7 +169,7 @@ body {
     background: transparent;
     border: 0;
     font-size: 14px;
-    color: #000000;
+    color: #04AF90;
     font-weight: 500;
     outline: none !important;
 }
@@ -179,7 +179,7 @@ body {
 }
 
 .custom-select-design2 {
-    color: #000000;
+    color: #04AF90;
     font-weight: 500;
     -webkit-appearance: none;
     border: 0;
@@ -492,7 +492,7 @@ body {
 
 .link-customize-rd {
     margin-left: auto;
-    color: #000000 !important;
+    color: #04AF90 !important;
     font-size: 18px;
     font-weight: 500;
     display: block;
@@ -508,7 +508,7 @@ body {
 }
 
 .btn-submit-customize {
-    background: #000000;
+    background: #04AF90;
     border: 0;
     color: #fff;
     font-size: 18px;
@@ -606,11 +606,11 @@ textarea.custom-textarea {
 }
 
 .btn-payouts.active {
-    color: #000000;
+    color: #04AF90;
 }
 
 .btn-payouts.active span {
-    background: #000000;
+    background: #04AF90;
 }
 
 .box-body-payouts-body table {
@@ -717,12 +717,12 @@ textarea.custom-textarea {
 .name-profile {
     font-size: 18px;
     text-align: center;
-    color: #000000;
+    color: #04AF90;
     opacity: .5;
 }
 
 .name-company-profile {
-    color: #000000;
+    color: #04AF90;
     opacity: .5;
     font-size: 16px;
     font-weight: 400;
@@ -777,11 +777,11 @@ textarea.custom-textarea {
 }
 
 .box-profile-settings-tabs a.active {
-    color: #000000;
+    color: #04AF90;
 }
 
 .box-profile-settings-tabs a.active:after {
-    background: #000000;
+    background: #04AF90;
 }
 
 .box-profile-settings-tabs a:after {
@@ -872,7 +872,7 @@ textarea.custom-textarea {
 }
 
 .item-notification-check input:checked + .box-slide-notification {
-    background: #000000;
+    background: #04AF90;
 }
 
 .item-notification-check input:disabled:checked + .box-slide-notification {
@@ -1078,7 +1078,7 @@ textarea.custom-textarea {
 }
 
 .col-payout input:checked+label span {
-    background: #000000;
+    background: #04AF90;
 }
 
 .item-payout>.row {
@@ -1183,7 +1183,7 @@ body.body-login {
 }
 
 .body-login .title2 {
-    color: #000000;
+    color: #04AF90;
     font-weight: 700;
     font-size: 24px;
 }
@@ -1229,7 +1229,7 @@ body.body-login {
 .body-login .title1 {
     font-size: 28px;
     font-weight: 700;
-    color: #000000;
+    color: #04AF90;
 }
 
 .label-custom1 {
@@ -1247,7 +1247,7 @@ body.body-login {
     border: 1px solid #E6E6E6;
     font-size: 13px;
     font-weight: 600;
-    color: #000000;
+    color: #04AF90;
     background: #fff;
     padding: 7px 15px;
     outline: none !important;
@@ -1280,7 +1280,7 @@ body.body-login {
 }
 
 .input-custom1:focus {
-    border: 2px solid #000000;
+    border: 2px solid #04AF90;
 }
 
 .form-group-custom1 {
@@ -1292,7 +1292,7 @@ body.body-login {
     width: 100%;
     border-radius: 20px;
     border: 0;
-    background: #000000;
+    background: #04AF90;
     font-weight: 700;
     color: #fff;
     padding: 7px 5px;
@@ -1309,7 +1309,7 @@ body.body-login {
 
 .link-design1 {
     font-weight: 600;
-    color: #000000 !important;
+    color: #04AF90 !important;
     font-size: 15px;
     text-decoration: none !important;
 }
@@ -1389,12 +1389,12 @@ body.body-login {
 }
 
 .form-group-custom1-exist input {
-    border-color: #000000;
+    border-color: #04AF90;
     border-width: 2px;
 }
 
 .exist-input {
-    background: #000000;
+    background: #04AF90;
 }
 
 .error-input {
@@ -1426,7 +1426,7 @@ body.body-login {
     font-weight: 600;
     border: 0;
     background: transparent;
-    color: #000000;
+    color: #04AF90;
     position: relative;
     width: 100%;
     padding: 5px;
@@ -1917,7 +1917,7 @@ a.link-menu-lat.active {
 .btn-notification {
     width: 100%;
     border: 0;
-    background: #000000;
+    background: #04AF90;
     font-weight: 600;
     color: #fff;
     font-size: 16px;
@@ -2116,7 +2116,7 @@ a.link-menu-lat.active {
 .btn-design-td,
 .btn-design-td-invoice {
     height: 40px;
-    background: #000000;
+    background: #04AF90;
     border: 0;
     color: #fff !important;
     border-radius: 6px;
@@ -2208,7 +2208,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .td-check input:checked + label {
-    border-color: #000000
+    border-color: #04AF90
 }
 
 .box-design1-single-payouts {
@@ -2320,11 +2320,11 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .item-pay:hover .title-pay {
-    color: #000000;
+    color: #04AF90;
 }
 
 .item-pay:hover {
-    border-color: #000000;
+    border-color: #04AF90;
 }
 
 .btn-advanced-settings .title-box-body img {
@@ -2346,7 +2346,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .td-check label:after {
-    background: #000000;
+    background: #04AF90;
     position: absolute;
     left: 1px;
     right: 1px;
@@ -2738,7 +2738,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .btn-change-payment {
     font-size: 15px;
     font-weight: 600;
-    color: #000000 !important;
+    color: #04AF90 !important;
     border: 0;
     background: transparent;
     -webkit-appearance: none;
@@ -2898,7 +2898,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .text-plan-logo {
-    background: #000000;
+    background: #04AF90;
     color: #fff;
     font-weight: 500;
     padding: 4px 12px;
@@ -2918,7 +2918,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .item-plan:hover {
-    border-color: #000000;
+    border-color: #04AF90;
 }
 
 .col-num-account img {
@@ -3107,7 +3107,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .title-wellcome,
 .title-code {
     font-size: 17px;
-    color: #000000;
+    color: #04AF90;
 }
 
 .title-code {
@@ -3182,7 +3182,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .title-steps {
     font-size: 13px;
-    color: #000000;
+    color: #04AF90;
     margin-bottom: 5px;
 }
 
@@ -3267,7 +3267,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     width: 100%;
     text-align: center;
     display: block;
-    background: #000000;
+    background: #04AF90;
     color: #fff !important;
     font-weight: 600;
     line-height: 16px;
@@ -3304,7 +3304,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     margin-right: 5px;
 }
 .text-notified {
-    color: #000000 !important;
+    color: #04AF90 !important;
     font-weight: 600 !important;
 }
 
@@ -3326,7 +3326,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .box-show-more a {
     display: inline-block;
-    color: #000000;
+    color: #04AF90;
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 20px;
@@ -3490,7 +3490,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .box-item-bank-with-input {
     background: #fff;
-    border: 1px solid #000000;
+    border: 1px solid #04AF90;
     padding: 7px 15px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -3598,7 +3598,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
   .box-item-bank1 {
       background: #fff;
-      border: 1px solid #000000;
+      border: 1px solid #04AF90;
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -3954,7 +3954,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .preview-popup-footer .btn-white-customize {
     background: #fff;
-    color: #000000;
+    color: #04AF90;
 }
 
 #preview-popup {
@@ -4107,7 +4107,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     height: 50px;
     line-height: 49px;
     font-size: 12px;
-    background: #000000;
+    background: #04AF90;
     border: 0;
     color: #fff !important;
     border-radius: 6px;
@@ -4265,7 +4265,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .subtitle-plans h1 {
     font-size: 33px;
     font-weight: 700;
-    color: #000000;
+    color: #04AF90;
 }
 
 .select-pay {
@@ -4396,7 +4396,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .btn-design-delete {
-    background: #000000;
+    background: #04AF90;
     /* color: #fff !important; */
 }
 
@@ -4563,7 +4563,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .btn-copy-iframe {
-    background: #000000;
+    background: #04AF90;
     border: 0;
     color: #fff;
     font-size: 14px;
@@ -4582,7 +4582,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     /* display: block; */
     width: 100%;
     font-size: 80%;
-    color: #000000;
+    color: #04AF90;
     margin-top: -33px;
     margin-left: 30px;
     position: absolute;
@@ -4632,7 +4632,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
     /*width: 100%;*/
     /*border-radius: 20px;*/
     border: 0;
-    background: #000000;
+    background: #04AF90;
     font-weight: 700;
     color: #fff;
     padding: 7px 5px;
@@ -4723,7 +4723,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .input-bank-account {
-    border: 1px solid #000000;
+    border: 1px solid #04AF90;
     font-weight: 500;
 }
 
@@ -4916,7 +4916,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 }
 
 .confirm-message {
-    color: #000000 !important;
+    color: #04AF90 !important;
     font-size: 12px !important;
     font-weight: 700 !important;
     margin-top: 0px !important;
@@ -4929,7 +4929,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 
 .link-design2 {
     font-weight: 600;
-    color: #000000 !important;
+    color: #04AF90 !important;
     font-size: 12px;
     text-decoration: none !important;
     margin-left: 0px;
@@ -4997,7 +4997,7 @@ table.table-payouts-pendings tr th:last-child, table.table-payouts-pendings tr t
 .save-success {
     width: 100%;
     font-size: 80%;
-    color: #000000;
+    color: #04AF90;
     margin-top: -23px;
     margin-left: -7px;
     position: absolute;

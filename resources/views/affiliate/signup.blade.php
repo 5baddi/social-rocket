@@ -48,7 +48,7 @@
                             <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
                             @endif
                         </div>
-                        
+
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="email">Email:</label>
                             <input type="email" class="form-control input-register-form @if ($errors->has('email')) is-invalid @endif" id="email" name="email" value="{{ old('email') }}" required/>
@@ -56,7 +56,7 @@
                             <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                             @endif
                         </div>
-                        
+
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="password">Password:</label>
                             <input type="password" class="form-control input-register-form @if ($errors->has('password')) is-invalid @endif" id="password" name="password" required/>
@@ -64,12 +64,12 @@
                             <div class="invalid-feedback">{{ $errors->first('password') }}</div>
                             @endif
                         </div>
-                        
+
                         <button type="submit" style="display: block; width: 100%;" class="btn-thanks mt-4">Create Account</button>
                     </form>
                     <div class="container" style="text-align: center;">
                         <p class="have-account">
-                            <a style="font-size: 12px; font-weight: 600; color: #000000 !important;" target="_blank" href="{{ route('signin') }}">
+                            <a style="font-size: 12px; font-weight: 600; color: #04AF90 !important;" target="_blank" href="{{ route('signin') }}">
                                 Already have an account? Sign in here.
                             </a>
                         </p>

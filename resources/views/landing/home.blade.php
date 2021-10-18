@@ -1,4 +1,6 @@
-@include('partials.landing.header')
+@extends('layouts.landing')
+
+@section('content')
         <!-- Main content -->
         <section class="slice py-7">
             <div class="container">
@@ -16,9 +18,9 @@
                         </h1>
                         <!-- Text -->
                         <p class="lead text-center text-md-left text-muted">
-                            Our app offers you easy tools to shape your affiliate program and win more and 
-more affiliates. With {{ config('app.name') }}, you can step back and see your newest 
-customers bring in more shoppers. And this cycle continues. 
+                            Our app offers you easy tools to shape your affiliate program and win more and
+more affiliates. With {{ config('app.name') }}, you can step back and see your newest
+customers bring in more shoppers. And this cycle continues.
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
@@ -126,92 +128,92 @@ customers bring in more shoppers. And this cycle continues.
         <section class="slice slice-lg">
             <div class="container">
                 <div class="row mb-2 justify-content-center text-center">
-                    <div class="col" id="how-it-work">
+                    <div class="col" id="features">
                         <h2>How {{ config('app.name') }} Becomes a Gamechanger? </h2>
                     </div>
                 </div>
                 <div class="row mt-5">
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="card-body pb-5">
                                 <div class="pt-4 pb-5">
                                     <img src="{{ asset('assets/img/people.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="h4 lh-130 mb-3">Design the Best Affiliate Program Effortlessly</h5>
-                                <p class="text-muted mb-0">Convert your customers and visitors into affiliates with our most innovative tools. 
-                                    Simply copy our given code and paste it on your website to display an affiliate 
-                                    form. This will attract more visitors to become affiliates and earn you some extra 
-                                    cash. You can also set up an email flow for your shoppers after they purchase 
-                                    something. These automated mails will allow you to stay connected with your 
-                                    customers. We recommend inviting your shoppers to become your affiliate using 
-                                    the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win 
-                                    more affiliates.</p>
+{{--                                <h5 class="h4 lh-130 mb-3">Design the Best Affiliate Program Effortlessly</h5>--}}
+{{--                                <p class="text-muted mb-0">Convert your customers and visitors into affiliates with our most innovative tools.--}}
+{{--                                    Simply copy our given code and paste it on your website to display an affiliate--}}
+{{--                                    form. This will attract more visitors to become affiliates and earn you some extra--}}
+{{--                                    cash. You can also set up an email flow for your shoppers after they purchase--}}
+{{--                                    something. These automated mails will allow you to stay connected with your--}}
+{{--                                    customers. We recommend inviting your shoppers to become your affiliate using--}}
+{{--                                    the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win--}}
+{{--                                    more affiliates.</p>--}}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="card-body pb-5">
                                 <div class="pt-4 pb-5">
                                     <img src="{{ asset('assets/img/dashboard.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="h4 lh-130 mb-3">Offer Something Interesting for Your Affiliates</h5>
-                                <p class="text-muted mb-0">{{ config('app.name') }} is not just offering some discount codes. Your visitors and customers 
-                                    can make real money from you. They can use dashboards to track their sales. On 
-                                    top of that, you can offer up to 6 payout methods that make their money-making 
-                                    process much more manageable. That means, by doing the bare minimum, you 
-                                    can run an extensive network of affiliates.</p>
+{{--                                <h5 class="h4 lh-130 mb-3">Offer Something Interesting for Your Affiliates</h5>--}}
+{{--                                <p class="text-muted mb-0">{{ config('app.name') }} is not just offering some discount codes. Your visitors and customers--}}
+{{--                                    can make real money from you. They can use dashboards to track their sales. On--}}
+{{--                                    top of that, you can offer up to 6 payout methods that make their money-making--}}
+{{--                                    process much more manageable. That means, by doing the bare minimum, you--}}
+{{--                                    can run an extensive network of affiliates.</p>--}}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="card-body pb-5">
                                 <div class="pt-4 pb-5">
                                     <img src="{{ asset('assets/img/manage.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="h4 lh-130 mb-3">Manage Unlimited Affiliates Without a Hitch</h5>
-                                <p class="text-muted mb-0">{{ config('app.name') }} lets you create automatic affiliate codes and links that your affiliates 
-                                    can share and earn with every successful purchase. {{ config('app.name') }} enables you to 
-                                    create a bunch of affiliate soldiers and maintain this program effortlessly. You can 
-                                    use our dashboard to see the best-selling products, your top affiliates and track 
-                                    revenue and commissions.
-                                    </p>
+{{--                                <h5 class="h4 lh-130 mb-3">Manage Unlimited Affiliates Without a Hitch</h5>--}}
+{{--                                <p class="text-muted mb-0">{{ config('app.name') }} lets you create automatic affiliate codes and links that your affiliates--}}
+{{--                                    can share and earn with every successful purchase. {{ config('app.name') }} enables you to--}}
+{{--                                    create a bunch of affiliate soldiers and maintain this program effortlessly. You can--}}
+{{--                                    use our dashboard to see the best-selling products, your top affiliates and track--}}
+{{--                                    revenue and commissions.--}}
+{{--                                    </p>--}}
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3">
                         <div class="card">
                             <div class="card-body pb-5">
                                 <div class="pt-4 pb-5">
                                     <img src="{{ asset('assets/img/settings.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="h4 lh-130 mb-3">Set Your Rates & Tailor Settings</h5>
-                                <p class="text-muted mb-0">With our super accessible settings, you can customize your commissions and apply 
-                                    them automatically. Turn on the Notifications, if you wish to stay updated 
-                                    whenever a new affiliate joins your program, or each time you manage a sale. 
-                                    {{ config('app.name') }} helps you build your affiliate network, set commissions, manage 
-                                    payouts and monitor revenues. With us, you can get more sales by turning your 
-                                    visitors and customers into affiliates. And this does not require a whole lot of effort 
-                                    or time from you. 
-                                    </p>
+{{--                                <h5 class="h4 lh-130 mb-3">Set Your Rates & Tailor Settings</h5>--}}
+{{--                                <p class="text-muted mb-0">With our super accessible settings, you can customize your commissions and apply--}}
+{{--                                    them automatically. Turn on the Notifications, if you wish to stay updated--}}
+{{--                                    whenever a new affiliate joins your program, or each time you manage a sale.--}}
+{{--                                    {{ config('app.name') }} helps you build your affiliate network, set commissions, manage--}}
+{{--                                    payouts and monitor revenues. With us, you can get more sales by turning your--}}
+{{--                                    visitors and customers into affiliates. And this does not require a whole lot of effort--}}
+{{--                                    or time from you.--}}
+{{--                                    </p>--}}
                             </div>
                         </div>
                     </div>
                 </div>
-                {{-- <div class="py-4">
+                 <div class="py-4">
                     <div class="row row-grid justify-content-between align-items-center">
                         <div class="col-lg-5 order-lg-2">
                             <h5 class="h3">Design the Best Affiliate Program Effortlessly</h5>
                             <p class="lead my-4">
-                                Convert your customers and visitors into affiliates with our most innovative tools. 
-Simply copy our given code and paste it on your website to display an affiliate 
-form. This will attract more visitors to become affiliates and earn you some extra 
-cash. You can also set up an email flow for your shoppers after they purchase 
-something. These automated mails will allow you to stay connected with your 
-customers. We recommend inviting your shoppers to become your affiliate using 
-the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win 
-more affiliates. 
+                                Convert your customers and visitors into affiliates with our most innovative tools.
+Simply copy our given code and paste it on your website to display an affiliate
+form. This will attract more visitors to become affiliates and earn you some extra
+cash. You can also set up an email flow for your shoppers after they purchase
+something. These automated mails will allow you to stay connected with your
+customers. We recommend inviting your shoppers to become your affiliate using
+the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win
+more affiliates.
                             </p>
                         </div>
                         <div class="col-lg-6 order-lg-1">
@@ -222,7 +224,7 @@ more affiliates.
                             </div>
                         </div>
                     </div>
-                </div> --}}
+                </div>
             </div>
         </section>
         <section class="slice slice-lg bg-section-secondary">
@@ -241,29 +243,9 @@ more affiliates.
                 </div>
                 <!-- Pricing -->
                 <div class="row justify-content-center">
-                    @foreach ($packs as $pack)
-                    <div class="col-lg-4 col-md">
-                        <div class="card card-pricing @if($pack->is_popular)bg-dark @endif text-center px-3 hover-scale-110">
-                            <div class="card-header border-0 delimiter-bottom">
-                                <h5 class="@if($pack->is_popular)text-white @else text-muted @endif">{{ ucwords($pack->name) }}</h5>
-                                <div class="h1 text-center mb-0 @if($pack->is_popular)text-white @endif">
-                                    {{ $pack->isFixedPrice() ? $pack->symbol : '' }}<span class="price font-weight-bolder">{{ $pack->price }}</span>{{ !$pack->isFixedPrice() ? '%' : '' }} 
-                                    <p class="text-sm">{{ $pack->isFixedPrice() ? 'per month' : 'of revenue share' }}</p>
-                                </div>
-                                <hr/>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-unstyled text-sm mb-4 @if($pack->is_popular)text-white @endif">
-                                    @foreach ($pack->features as $feature)
-                                    <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>
-                                    @endforeach
-                                </ul>
-                                <a href="{{ route('connect') }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">Start Free Trial</a>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
+                    @include('partials.landing.prices')
                 </div>
             </div>
         </section>
-@include('partials.landing.footer')
+@endsection
+

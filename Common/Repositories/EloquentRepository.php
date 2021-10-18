@@ -6,10 +6,10 @@
  * @copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Repositories;
+namespace BADDIServices\SocialRocket\Common\Repositories;
 
+use BADDIServices\SocialRocket\Common\Entities\Entity;
 use Illuminate\Database\Eloquent\Builder;
-use BADDIServices\SocialRocket\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Collection;
 
 class EloquentRepository
@@ -17,7 +17,7 @@ class EloquentRepository
     /** @var string */
     private $connection;
 
-    /** @var BaseModel */
+    /** @var string */
     protected $model;
 
     public function setConnection(string $name): self
@@ -41,17 +41,17 @@ class EloquentRepository
     public function all(): Collection
     {
         return $this->newQuery()
-            ->select(ModelEntity::ID_COLUMN)
+            ->select(Entity::ID_COLUMN)
             ->get();
     }
-    
-    public function findById(string $id): ?ModelEntity
+
+    public function findById(string $id): ?Entity
     {
         return $this->newQuery()
             ->find($id);
     }
 
-    public function first(array $conditions, array $columns = ['*']): ?ModelEntity
+    public function first(array $conditions, array $columns = ['*']): ?Entity
     {
         return $this->newQuery()
             ->select($columns)
@@ -66,23 +66,29 @@ class EloquentRepository
             ->where($conditions)
             ->get();
     }
-    
-    public function create(array $attributes): ModelEntity
+
+    public function create(array $attributes): Entity
     {
         return $this->newQuery()
             ->create($attributes);
     }
-    
+
     public function update(array $conditions, array $attributes): bool
     {
         return $this->newQuery()
             ->where($conditions)
-            ->update($attributes);
+            ->update($attributes) > 0;
     }
-    
-    public function updateOrCreate(array $conditions, array $attributes): ModelEntity
+
+    public function updateOrCreate(array $conditions, array $attributes): Entity
     {
         return $this->newQuery()
             ->updateOrCreate($conditions, $attributes);
+    }
+
+    public function updateAny(array $attributes): bool
+    {
+        return $this->newQuery()
+            ->update($attributes) > 0;
     }
 }

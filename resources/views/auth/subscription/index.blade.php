@@ -16,7 +16,7 @@
     <body>
         <header>
             <div class="content-header">
-                <a href="{{ route('dashboard') }}" class="logo-header"><img src="{{ asset('assets/img/logo.png') }}" alt=""></a>
+                <a href="{{ route('dashboard') }}" class="logo-header"><img src="{{ asset('assets/img/logo.svg') }}" alt=""></a>
             </div>
         </header>
 

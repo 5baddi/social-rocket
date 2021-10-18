@@ -10,5 +10,8 @@ namespace BADDIServices\SocialRocket\Common\Services;
 
 class Service
 {
+    public function __construct()
+    {
 
+    }
 }

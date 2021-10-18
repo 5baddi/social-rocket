@@ -16,16 +16,15 @@ class CreatePacksTable extends Migration
     {
         Schema::create('packs', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
-            $table->string('name', 100)->unique();
-            $table->json('features')->nullable(true);
+            $table->string('name_key', 100)->unique();
             $table->float('price')->default(0.0);
             $table->float('revenue_share')->default(0.0);
             $table->tinyInteger('type')->nullable();
-            $table->enum('interval', Pack::INTERVAL)->default(Pack::PER_MONTH);
-            $table->integer('trial_days')->default(Pack::DEFAULT_TRIAL_DAYS);
+            $table->string('interval', 25);
+            $table->integer('trial_days');
             $table->boolean('is_popular')->default(false);
-            $table->string('currency', 10)->default('usd');
-            $table->string('symbol', 10)->nullable();
+            $table->string('currency', 10);
+            $table->string('currency_symbol', 10)->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

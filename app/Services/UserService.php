@@ -9,6 +9,7 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Common\Repositories\UserRepository;
 use BADDIServices\SocialRocket\Managers\UserManager;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
@@ -18,8 +19,6 @@ use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Pagination\LengthAwarePaginator;
-use BADDIServices\SocialRocket\Services\CouponService;
-use BADDIServices\SocialRocket\Repositories\UserRespository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
 
 class UserService extends Service
@@ -27,15 +26,15 @@ class UserService extends Service
     /** @var UserManager */
     private $userManager;
 
-    /** @var UserRespository */
+    /** @var UserRepository */
     private $userRepository;
-    
+
     /** @var CouponService */
     private $couponService;
 
     public function __construct(
         UserManager $userManager,
-        UserRespository $userRepository, 
+        UserRepository $userRepository,
         CouponService $couponService
     )
     {
@@ -58,22 +57,22 @@ class UserService extends Service
     {
         return $this->userRepository->exists($customerId);
     }
-    
+
     public function findById(string $id): ?User
     {
         return $this->userManager->findById($id);
     }
-    
+
     public function findByEmail(string $email): ?User
     {
         return $this->userRepository->findByEmail($email);
     }
-    
+
     public function findByCustomerId(int $customerId): ?User
     {
         return $this->userRepository->findByCustomerId($customerId);
     }
-    
+
     public function getStoreOwner(Store $store): ?User
     {
         return $this->userRepository->getStoreOwner($store->id);
@@ -141,21 +140,21 @@ class UserService extends Service
 
         return $this->userRepository->update($user, $filterAttributes->toArray());
     }
-    
+
     public function delete(User $user): bool
     {
         return $this->userRepository->delete($user->id);
     }
-    
+
     public function ban(User $user): User
     {
         return $this->userRepository->update($user, [
             User::BANNED_COLUMN => !$user->isBanned()
         ]);
     }
-    
+
     public function notifyStoreOwner(Store $store, User $affiliate): void
-    {   
+    {
         /** @var User */
         $user = $this->getStoreOwner($store);
 
@@ -177,7 +176,7 @@ class UserService extends Service
             ]
         );
     }
-    
+
     public function getAllNewVerifiedAffiliatesCount(CarbonPeriod $period): int
     {
         return $this->userRepository->countByPeriod(
@@ -194,12 +193,12 @@ class UserService extends Service
     {
         return $this->userRepository->generateResetPasswordToken($user->email);
     }
-    
+
     public function verifyResetPasswordToken(string $token): ?User
     {
         return $this->userRepository->verifyResetPasswordToken($token);
     }
-    
+
     public function removeResetPasswordToken(string $token): bool
     {
         return $this->userRepository->removeResetPasswordToken($token);

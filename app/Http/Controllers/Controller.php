@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Common\Services\AppService;
+use BADDIServices\SocialRocket\Models\AppSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-use BADDIServices\SocialRocket\Services\AppService;
 use BADDIServices\SocialRocket\Services\UserService;
 use Illuminate\Routing\Controller as BaseController;
 use BADDIServices\SocialRocket\Services\SettingService;
@@ -21,15 +22,18 @@ class Controller extends BaseController
 
     /** @var AppService */
     protected $appService;
-    
+
     /** @var SettingService */
     protected $settingService;
 
     /** @var User|null */
     protected $user;
 
+    /** @var AppSetting|null */
+    protected $appSettings;
+
     /** @var string */
-    protected $baseView = 'Admin';
+    protected $baseView = '';
 
     public function __construct()
     {
@@ -42,6 +46,8 @@ class Controller extends BaseController
         /** @var SettingService */
         $this->settingService = app(SettingService::class);
 
+        $this->loadAppSettings();
+
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
                 $this->user = $this->userService->findById(Auth::id());
@@ -49,13 +55,12 @@ class Controller extends BaseController
 
             return $next($request);
         });
-
     }
 
     protected function renderView(string $view, array $data = [])
     {
-        return $this->view(
-            sprintf('%s::%s', $this->baseView, $view),
+        return view(
+            sprintf('%s%s', $this->baseView, $view),
             array_merge($this->baseData(), $data)
         );
     }
@@ -63,7 +68,13 @@ class Controller extends BaseController
     protected function baseData(): array
     {
         return [
-            'user'  =>  $this->user
+            'user'      => $this->user,
+            'settings'  => $this->appSettings
         ];
+    }
+
+    private function loadAppSettings(): void
+    {
+        $this->appSettings = $this->appService->settings();
     }
 }

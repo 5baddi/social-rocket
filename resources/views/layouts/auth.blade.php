@@ -17,7 +17,7 @@
                     <div class="col-md-8 col-lg-6 col-xl-6 py-6 py-md-0">
                         <div class="col-md-12 text-center mb-4">
                             <a href="{{ url('/') }}" class="text-center top-logo">
-                                <img src="{{ asset('assets/img/logo.png') }}" alt="{{ config('app.name') }}"/>
+                                <img src="{{ asset('assets/img/logo.svg') }}" alt="{{ config('app.name') }}"/>
                             </a>
                         </div>
                         <div class="card shadow zindex-100 mb-0">

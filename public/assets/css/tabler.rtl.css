@@ -3500,13 +3500,13 @@ textarea.form-control-lg {
   width: 0.75rem;
   height: 0.75rem;
   padding: 0.25em 0.25em;
-  color: #000000;
+  color: #04AF90;
   background: transparent url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'%3e%3cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3e%3c/svg%3e") center/0.75rem auto no-repeat;
   border: 0;
   border-radius: 4px;
   opacity: 0.3; }
   .btn-close:hover {
-    color: #000000;
+    color: #04AF90;
     text-decoration: none;
     opacity: 0.75; }
   .btn-close:focus {
@@ -3842,7 +3842,7 @@ textarea.form-control-lg {
     .bs-tooltip-top .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^="top"] .tooltip-arrow::before {
       top: -1px;
       border-width: 0.4rem 0.4rem 0;
-      border-top-color: #000000; }
+      border-top-color: #04AF90; }
 
 .bs-tooltip-end, .bs-tooltip-auto[data-popper-placement^="right"] {
   padding: 0 0.4rem; }
@@ -3853,7 +3853,7 @@ textarea.form-control-lg {
     .bs-tooltip-end .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^="right"] .tooltip-arrow::before {
       left: -1px;
       border-width: 0.4rem 0 0.4rem 0.4rem;
-      border-left-color: #000000; }
+      border-left-color: #04AF90; }
 
 .bs-tooltip-bottom, .bs-tooltip-auto[data-popper-placement^="bottom"] {
   padding: 0.4rem 0; }
@@ -3862,7 +3862,7 @@ textarea.form-control-lg {
     .bs-tooltip-bottom .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^="bottom"] .tooltip-arrow::before {
       bottom: -1px;
       border-width: 0 0.4rem 0.4rem;
-      border-bottom-color: #000000; }
+      border-bottom-color: #04AF90; }
 
 .bs-tooltip-start, .bs-tooltip-auto[data-popper-placement^="left"] {
   padding: 0 0.4rem; }
@@ -3873,14 +3873,14 @@ textarea.form-control-lg {
     .bs-tooltip-start .tooltip-arrow::before, .bs-tooltip-auto[data-popper-placement^="left"] .tooltip-arrow::before {
       right: -1px;
       border-width: 0.4rem 0.4rem 0.4rem 0;
-      border-right-color: #000000; }
+      border-right-color: #04AF90; }
 
 .tooltip-inner {
   max-width: 200px;
   padding: 0.25rem 0.5rem;
   color: #ffffff;
   text-align: center;
-  background-color: #000000;
+  background-color: #04AF90;
   border-radius: 4px; }
 
 .popover {
@@ -4155,10 +4155,10 @@ textarea.form-control-lg {
   filter: invert(1) grayscale(100); }
 
 .carousel-dark .carousel-indicators [data-bs-target] {
-  background-color: #000000; }
+  background-color: #04AF90; }
 
 .carousel-dark .carousel-caption {
-  color: #000000; }
+  color: #04AF90; }
 
 @-webkit-keyframes spinner-border {
   to {

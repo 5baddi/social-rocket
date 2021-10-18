@@ -9,10 +9,19 @@
 namespace BADDIServices\SocialRocket\Database\Seeders;
 
 use BADDIServices\SocialRocket\Models\Pack;
+use BADDIServices\SocialRocket\Services\PackService;
 use Illuminate\Database\Seeder;
 
 class PacksSeeder extends Seeder
 {
+    /** @var PackService */
+    private $packService;
+
+    public function __construct(PackService $packService)
+    {
+        $this->packService = $packService;
+    }
+
     /**
      * Run the database seeds.
      *
@@ -20,92 +29,13 @@ class PacksSeeder extends Seeder
      */
     public function run()
     {
-        Pack::create([
-            'name'          =>  'Starter',
-            'price'         =>  0,
-            'type'          =>  Pack::FREE_TYPE,
-            'revenue_share' => 0.12,
-            'is_popular'    =>  false,
-            'features'      =>  [
-                [
-                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
-                    'name'      =>  'unlimited affiliates',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::PAYOUT_METHODS,
-                    'name'      =>  '2 payout methods',
-                    'enabled'   =>  true,
-                    'limit'     =>  2,
-                ],
-                [
-                    'key'       =>  Pack::REPORTING,
-                    'name'      =>  'dashboard And data reports',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::SUPPORT,
-                    'name'      =>  'live chat support',
-                    'enabled'   =>  true,
-                ],
-                [
-                    'key'       =>  Pack::CUSTOMIZATION,
-                    'name'      =>  'full customization',
-                    'enabled'   =>  false,
-                ],
-                [
-                    'key'       =>  Pack::STAFF,
-                    'name'      =>  'staff management',
-                    'enabled'   =>  false,
-                ],
-                [
-                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-                    'name'      =>  '100% of revenue is your\'s',
-                    'enabled'   =>  false,
-                ],
+        $this->packService->bulkCreate([
+            [
+                Pack::NAME_KEY_COLUMN               => 'entrepreneur',
+                Pack::PRICE_COLUMN                  => 0,
+                Pack::TYPE_COLUMN                   => Pack::FREE_TYPE,
+                Pack::REVENUE_SHARE_COLUMN          => 0.12,
             ]
         ]);
-
-//        Pack::create([
-//            'name'              =>  'gravity',
-//            'price'             =>  9.99,
-//            'type'              =>  Pack::TYPES[0],
-//            'symbol'            =>  '$',
-//            'currency'          =>  'usd',
-//            'is_popular'        =>  true,
-//            'features'          =>  [
-//                [
-//                    'key'       =>  Pack::UNLIMITED_AFFILIATES,
-//                    'name'      =>  'unlimited affiliates',
-//                    'enabled'   =>  true,
-//                ],
-//                [
-//                    'key'       =>  Pack::PAYOUT_METHODS,
-//                    'name'      =>  '5 payout methods',
-//                    'enabled'   =>  true,
-//                    'limit'     =>  5,
-//                ],
-//                [
-//                    'key'       =>  Pack::REPORTING,
-//                    'name'      =>  'dashboard And data reports',
-//                    'enabled'   =>  true,
-//                ],
-//                [
-//                    'key'       =>  Pack::CUSTOMIZATION,
-//                    'name'      =>  'full customization',
-//                    'enabled'   =>  true,
-//                ],
-//                [
-//                    'key'       =>  Pack::SUPPORT,
-//                    'name'      =>  'live chat support',
-//                    'enabled'   =>  true,
-//                ],
-//                [
-//                    'key'       =>  Pack::REVENUE_NOT_SHARED,
-//                    'name'      =>  '100% of revenue is your\'s',
-//                    'enabled'   =>  true,
-//                ],
-//            ]
-//        ]);
     }
 }

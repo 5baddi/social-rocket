@@ -9,7 +9,7 @@
 namespace BADDIServices\SocialRocket\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use BADDIServices\SocialRocket\Services\PackService;
+use BADDIServices\SocialRocket\Common\Services\Subscription\PackService;
 
 class LandingPageController extends Controller
 {
@@ -18,14 +18,19 @@ class LandingPageController extends Controller
 
     public function __construct(PackService $packService)
     {
+        parent::__construct();
+
         $this->packService = $packService;
     }
 
     public function __invoke()
     {
-        return view('landing', [
-            'packs'         =>  $this->packService->all()
-        ]);
+        return $this->renderView(
+            'landing.home',
+            [
+                'packs' =>  $this->packService->all()
+            ]
+        );
     }
 
     public function privacy()

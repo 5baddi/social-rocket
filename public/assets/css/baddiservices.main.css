@@ -45,7 +45,7 @@ body.loaded>div.preloader {
 .card-pricing ul{
     text-align: start !important;
 }
-.card-pricing ul li { 
+.card-pricing ul li {
     position: relative;
     padding: .5rem 0;
 }
@@ -79,4 +79,16 @@ hr {
 }
 .top-logo img {
     width: 75%;
+}
+
+.footer-dark .copyright a {
+    color: #ffbe3d !important;
+}
+
+.footer-dark .copyright a:hover {
+    color: rgba(255, 190, 61, 0.8) !important;
+}
+
+.footer-dark .nav .nav-item .nav-link:hover {
+    color: rgba(255, 190, 61, 0.8) !important;
 }

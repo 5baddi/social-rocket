@@ -12,7 +12,7 @@
                         <div class="col-lg-4 mb-5 mb-lg-0">
                             <!-- Theme's logo -->
                             <a href="index.html">
-                                <img class="footer-logo"  src="{{ asset('assets/img/logo-white.png') }}" id="footer-logo"/>
+                                <img class="footer-logo"  src="{{ asset('assets/img/white-logo.svg') }}" id="footer-logo"/>
                             </a>
                             <!-- Social -->
                             <ul class="nav mt-4">

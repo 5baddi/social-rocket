@@ -1,4 +1,6 @@
-@include('partials.landing.header')
+@extends('layouts.landing')
+
+@section('content')
 <section class="slice py-6 pt-lg-7 pb-lg-8 bg-dark">
 	<div class="container">
 		<div class="row row-grid align-items-center">
@@ -134,4 +136,4 @@ We strive to take appropriate security measures to protect against unauthorized 
 		</div>
 	</div>
 </section>
-@include('partials.landing.footer')
+@endsection

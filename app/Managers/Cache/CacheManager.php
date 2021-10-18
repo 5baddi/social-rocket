@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Managers\Cache;
 
+use BADDIServices\SocialRocket\Common\Repositories\EloquentRepository;
 use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Logger;
 use Illuminate\Database\Eloquent\Model;
@@ -15,7 +16,6 @@ use Illuminate\Contracts\Cache\Repository;
 use BADDIServices\SocialRocket\FeatureList;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
 use BADDIServices\SocialRocket\Repositories\UserRespository;
-use BADDIServices\SocialRocket\Repositories\EloquentRepository;
 
 class CacheManager
 {
@@ -38,17 +38,6 @@ class CacheManager
 
         /** @var Logger */
         $this->logger = app(Logger::class);
-    }
-
-    private function getCacheKey(string $suffix = null): string
-    {
-        $cacheKey = sprintf("%s", config('app.env'));
-
-        if ($suffix !== null) {
-            $cacheKey = sprintf("%s:%s", $cacheKey, sprintf(self::CACHE_KEY, $suffix));
-        }
-
-        return $cacheKey;
     }
 
     /**
@@ -86,7 +75,7 @@ class CacheManager
 
         return $this->cacheRepository->set($cacheKey, $value, $ttl);
     }
-    
+
     public function forever($key, $value): bool
     {
         $cacheKey = $this->getCacheKey($key);
@@ -134,6 +123,10 @@ class CacheManager
 
     public function findById(string $id): ?Model
     {
+        if ($this->isCacheDisabled()) {
+            return $this->eloquentRepository->findById($id);
+        }
+
         $model = $this->get($id);
         if ($model instanceof Model) {
             return $model;
@@ -149,16 +142,16 @@ class CacheManager
 
     public function create(array $attributes): Model
     {
-        $model = $this->eloquentRepository->create($attributes);
-
-        $this->set($model->getId(), $model);
-
-        return $model;
+        return $this->eloquentRepository->create($attributes);
     }
 
     public function update(Model $model, array $conditions, array $attributes): Model
     {
         $modelUpdated = $this->eloquentRepository->update($conditions, $attributes);
+        if ($this->isCacheDisabled()) {
+            return $this->findById($model->getId());
+        }
+
         if ($modelUpdated) {
             $this->invalidate($model->getId());
 
@@ -168,10 +161,14 @@ class CacheManager
 
         return $model;
     }
-    
+
     public function updateOrCreate(array $conditions, array $attributes): Model
     {
         $model = $this->eloquentRepository->updateOrCreate($conditions, $attributes);
+        if ($model instanceof Model && $this->isCacheDisabled()) {
+            return $this->findById($model->getId());
+        }
+
         if ($model instanceof Model) {
             $this->invalidate($model->getId());
 
@@ -201,5 +198,26 @@ class CacheManager
         $ids = $this->eloquentRepository->where($conditions, [ModelEntity::ID_COLUMN]);
 
         return $this->hydrate($ids);
+    }
+
+    private function isCacheDisabled(): bool
+    {
+        return config('baddi.cache.enabled') !== true;
+    }
+
+    private function isCacheEnabled(): bool
+    {
+        return ! $this->isCacheDisabled();
+    }
+
+    private function getCacheKey(string $suffix = null): string
+    {
+        $cacheKey = sprintf("%s", config('app.env'));
+
+        if ($suffix !== null) {
+            $cacheKey = sprintf("%s:%s", $cacheKey, sprintf(self::CACHE_KEY, $suffix));
+        }
+
+        return $cacheKey;
     }
 }

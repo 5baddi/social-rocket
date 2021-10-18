@@ -8,20 +8,14 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use BADDIServices\SocialRocket\Common\Repositories\EloquentRepository;
 use BADDIServices\SocialRocket\Models\Pack;
 use Illuminate\Database\Eloquent\Collection;
 
-class PackRepository
+class PackRepository extends EloquentRepository
 {
-    public function all(): Collection
+    public function __construct()
     {
-        return Pack::query()
-                    ->get();
-    }
-    
-    public function findById(string $id): ?Pack
-    {
-        return Pack::query()
-                    ->find($id);
+        $this->model = Pack::class;
     }
 }

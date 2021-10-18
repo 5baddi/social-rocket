@@ -61,7 +61,7 @@
             <div class="container">
                 <!-- Brand -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img  src="{{ asset('assets/img/logo.png') }}" id="navbar-logo">
+                    <img  src="{{ asset('assets/img/logo.svg') }}" id="navbar-logo">
                 </a>
                 <!-- Toggler -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,7 +72,7 @@
                     <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
                         @if (request()->routeIs('landing'))
                         <li class="nav-item ">
-                            <a class="nav-link" href="#how-it-work">How it works</a>
+                            <a class="nav-link" href="#features">@lang('landing.features')</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="#pricing">Pricing</a>

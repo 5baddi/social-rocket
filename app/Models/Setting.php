@@ -18,7 +18,7 @@ class Setting extends ModelEntity
     public const PERCENTAGE_TYPE = 'percentage';
     public const UNIQUE_DISCOUNT_FORMAT = 'unique';
     public const RANDOM_DISCOUNT_FORMAT = 'random';
-    public const DEFAULT_COLOR = '#000000';
+    public const DEFAULT_COLOR = '#04AF90';
     public const DEFAULT_CURRENCY = 'USD';
     public const DEFAULT_PAYMENT_METHOD = 'paypal';
 
@@ -51,7 +51,7 @@ class Setting extends ModelEntity
         self::FIXED_TYPE,
         self::PERCENTAGE_TYPE,
     ];
-    
+
     public const DISCOUNT_TYPES = [
         self::FIXED_TYPE,
         self::PERCENTAGE_TYPE,
@@ -117,14 +117,14 @@ class Setting extends ModelEntity
 
         return json_decode($this->attributes[self::PAYOUT_METHODS_COLUMN]);
     }
-    
+
     public function setCurrencyAttribute($value): self
     {
         $this->attributes[self::CURRENCY_COLUMN] = strtoupper($value);
 
         return $this;
     }
-    
+
     public function setPayoutMethodsAttribute($value): self
     {
         $this->attributes[self::PAYOUT_METHODS_COLUMN] = json_encode($value);

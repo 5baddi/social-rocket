@@ -36,7 +36,7 @@ class HtmlFormatter extends NormalizerFormatter
         Logger::ERROR     => '#FD7E14',
         Logger::CRITICAL  => '#DC3545',
         Logger::ALERT     => '#821722',
-        Logger::EMERGENCY => '#000000',
+        Logger::EMERGENCY => '#04AF90',
     ];
 
     /**
