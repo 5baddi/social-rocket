@@ -175,7 +175,7 @@ class CacheManager
 
     public function where(array $conditions): Collection
     {
-        $ids = $this->eloquentRepository->where($conditions, [ModelEntity::ID_COLUMN]);
+        $ids = $this->eloquentRepository->where($conditions, [Entity::ID_COLUMN]);
 
         return $this->hydrate($ids);
     }

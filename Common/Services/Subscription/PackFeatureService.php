@@ -8,14 +8,14 @@
 
 namespace BADDIServices\SocialRocket\Common\Services\Subscription;
 
-use BADDIServices\SocialRocket\Common\Managers\Subscription\PackFeatureManager;
 use BADDIServices\SocialRocket\Common\Services\Service;
 
 class PackFeatureService extends Service
 {
     public function __construct(
-        private PackFeatureManager $packFeatureManager
-    ) {
+        private PackFeatureService $packFeatureService
+    )
+    {
         parent::__construct();
     }
 }

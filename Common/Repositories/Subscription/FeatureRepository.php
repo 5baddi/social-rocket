@@ -8,11 +8,11 @@
 
 namespace BADDIServices\SocialRocket\Common\Repositories\Subscription;
 
-use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
+use BADDIServices\SocialRocket\Common\Entities\Subscription\Feature;
 use BADDIServices\SocialRocket\Common\Repositories\EloquentRepository;
 
-class PackRepository extends EloquentRepository
+class FeatureRepository extends EloquentRepository
 {
     /** @var string */
-    protected $model = Pack::class;
+    protected $model = Feature::class;
 }

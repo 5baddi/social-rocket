@@ -8,8 +8,8 @@
 
 namespace BADDIServices\SocialRocket\Common\Repositories\Subscription;
 
+use BADDIServices\SocialRocket\Common\Entities\Subscription\PackFeature;
 use BADDIServices\SocialRocket\Common\Repositories\EloquentRepository;
-use BADDIServices\SocialRocket\Models\Subscription\PackFeature;
 
 class PackFeatureRepository extends EloquentRepository
 {

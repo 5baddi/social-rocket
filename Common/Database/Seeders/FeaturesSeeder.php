@@ -6,21 +6,16 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\SocialRocket\Common\Database\Seeders;
 
 use BADDIServices\SocialRocket\Common\Entities\Subscription\Feature;
+use BADDIServices\SocialRocket\Common\Services\Subscription\FeatureService;
 use BADDIServices\SocialRocket\Common\Services\Subscription\PackFeatureService;
 use Illuminate\Database\Seeder;
 
 class FeaturesSeeder extends Seeder
 {
-    /** @var PackFeatureService */
-    private $packFeatureService;
-
-    public function __construct(PackFeatureService $packFeatureService)
-    {
-        $this->packFeatureService = $packFeatureService;
-    }
+    public function __construct(private FeatureService $featureService) {}
 
     /**
      * Run the database seeds.
@@ -29,7 +24,7 @@ class FeaturesSeeder extends Seeder
      */
     public function run()
     {
-        $this->packFeatureService->bulkCreate([
+        $this->featureService->bulkCreate([
             [
                 Feature::KEY_COLUMN       =>  Feature::UNLIMITED_AFFILIATES,
                 Feature::NAME_KEY_COLUMN  =>  'unlimited_affiliates',

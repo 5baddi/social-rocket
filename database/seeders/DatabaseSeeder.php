@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use BADDIServices\SocialRocket\Database\Seeders\FeaturesSeeder;
+use BADDIServices\SocialRocket\Common\Database\Seeders\FeaturesSeeder;
 use Illuminate\Database\Seeder;
-use BADDIServices\SocialRocket\Database\Seeders\PacksSeeder;
-use BADDIServices\SocialRocket\Database\Seeders\SettingsSeeder;
-use BADDIServices\SocialRocket\Database\Seeders\UsersSeeder;
+use BADDIServices\SocialRocket\Common\Database\Seeders\PacksSeeder;
+use BADDIServices\SocialRocket\Common\Database\Seeders\SettingsSeeder;
+use BADDIServices\SocialRocket\Common\Database\Seeders\UsersSeeder;
 
 class DatabaseSeeder extends Seeder
 {

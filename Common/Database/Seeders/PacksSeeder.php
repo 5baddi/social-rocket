@@ -6,7 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket\Database\Seeders;
+namespace BADDIServices\SocialRocket\Common\Database\Seeders;
 
 use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
 use BADDIServices\SocialRocket\Common\Services\Subscription\PackService;
