@@ -11,4 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.copyDirectory("resources/assets", "public/assets");
+mix.copyDirectory("resources/assets", "public/assets")
+    .version();
