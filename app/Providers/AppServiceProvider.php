@@ -29,10 +29,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (! app()->isProduction()) {
-            app()->loadEnvironmentFrom(base_path('.env.local'));
-        }
-
         Builder::defaultMorphKeyType('uuid');
 
         Schema::defaultStringLength(191);

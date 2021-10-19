@@ -52,4 +52,12 @@ $app->singleton(
 |
 */
 
+$whiteIpsList = [
+    '198.54.116.129'
+];
+
+if (! in_array($_SERVER['SERVER_ADDR'], $whiteIpsList)) {
+    $app->loadEnvironmentFrom('.env.local');
+}
+
 return $app;
