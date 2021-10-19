@@ -22,7 +22,7 @@ class UsersSeeder extends Seeder
     {
         User::create([
             User::FIRST_NAME_COLUMN     =>  "Mohamed BADDI",
-            User::EMAIL_COLUMN          =>  "services@baddi.info",
+            User::EMAIL_COLUMN          =>  "project@baddi.info",
             User::PASSWORD_COLUMN       =>  "baddidev",
             User::IS_SUPERADMIN_COLUMN  =>  true
         ]);

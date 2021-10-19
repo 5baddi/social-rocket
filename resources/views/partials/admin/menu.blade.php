@@ -5,7 +5,7 @@
       </button>
       <h1 class="navbar-brand navbar-brand-autodark">
         <a href="{{ route('dashboard') }}">
-          <img src="{{ asset('assets/img/logo-white.png') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
+          <img src="{{ asset('assets/img/white-logo.svg') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
         </a>
       </h1>
       <div class="collapse navbar-collapse" id="navbar-menu">
@@ -72,7 +72,7 @@
         </ul>
         <div class="row mb-4">
             <div class="col-12">
-                <img src="{{ asset('assets/img/logo.mini.png') }}"/>
+{{--                <img src="{{ asset('assets/img/logo.mini.png') }}"/>--}}
                 <div class="col-auto align-self-center mt-1">
                     <a href="{{ route('signout') }}" class="btn btn-white w-100">
                         Logout

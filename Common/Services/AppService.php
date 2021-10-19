@@ -14,13 +14,10 @@ use Illuminate\Support\Arr;
 
 class AppService extends Service
 {
-    private AppManager $appManager;
-
-    public function __construct(AppManager $appManager)
-    {
+    public function __construct(
+        private AppManager $appManager
+    ) {
         parent::__construct();
-
-        $this->appManager = $appManager;
     }
 
     public function settings(): ?AppSetting

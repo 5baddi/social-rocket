@@ -14,6 +14,6 @@ class SignInController extends Controller
 {
     public function __invoke()
     {
-        return view('auth.signin');
+        return $this->renderView('auth.signin');
     }
 }

@@ -13,7 +13,7 @@ final class StoreBuilder
      *
      * @var string[]
      */
-    private const DEFAULT_NAME = '.env.local';
+    private const DEFAULT_NAME = '.env.local.local';
 
     /**
      * The paths to search within.

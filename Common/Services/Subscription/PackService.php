@@ -18,8 +18,7 @@ class PackService extends Service
 {
     public function __construct(
         private PackManager $packManager
-    )
-    {
+    ) {
         parent::__construct();
     }
 

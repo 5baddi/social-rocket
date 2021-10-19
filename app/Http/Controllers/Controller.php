@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use BADDIServices\SocialRocket\Common\Services\AppService;
+use BADDIServices\SocialRocket\Common\Services\FeatureService;
 use BADDIServices\SocialRocket\Models\AppSetting;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -26,6 +27,9 @@ class Controller extends BaseController
     /** @var SettingService */
     protected $settingService;
 
+    /** @var FeatureService */
+    protected $featureService;
+
     /** @var User|null */
     protected $user;
 
@@ -45,6 +49,9 @@ class Controller extends BaseController
 
         /** @var SettingService */
         $this->settingService = app(SettingService::class);
+
+        /** @var FeatureService */
+        $this->featureService = app(FeatureService::class);
 
         $this->loadAppSettings();
 
@@ -68,8 +75,9 @@ class Controller extends BaseController
     protected function baseData(): array
     {
         return [
-            'user'      => $this->user,
-            'settings'  => $this->appSettings
+            'user'              => $this->user,
+            'settings'          => $this->appSettings,
+            'featureService'    => $this->featureService
         ];
     }
 
