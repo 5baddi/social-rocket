@@ -134,8 +134,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'hcaptcha'      => [
+            'invalid'   => 'incorrect CAPTCHA',
         ],
     ],
 
@@ -150,6 +150,8 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'        => [
+        'hcaptcha'      => 'CAPTCHA'
+    ],
 
 ];

@@ -31,7 +31,9 @@
         <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
         <script src="{{ asset('assets/js/popper.js') }}"></script>
         <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-        <script src="{{ config('baddi.hcaptcha_js_endpoint') }}" async defer></script>
+        @if ($featureService->isFeatureEnabled(\BADDIServices\SocialRocket\Common\FeatureList::HCAPTCHA))
+        <script src="{{ config('baddi.hcaptcha.js_endpoint') }}" async defer></script>
+        @endif
         <script src="{{ asset('assets/js/baddiservices.main.js') }}"></script>
     </body>
 </html>

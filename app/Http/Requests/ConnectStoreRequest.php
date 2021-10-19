@@ -8,6 +8,8 @@
 
 namespace BADDIServices\SocialRocket\Http\Requests;
 
+use BADDIServices\SocialRocket\Common\FeatureList;
+use BADDIServices\SocialRocket\Rules\RequiredIfFeatureEnabled;
 use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -33,7 +35,7 @@ class ConnectStoreRequest extends FormRequest
     {
         return [
             'store'                  =>  ['required', 'string'],
-            'h-captcha-response'     =>  [Rule::requiredIf(env('HCAPTCHA_ENABLED')), new ValidateHCaptcha()],
+            'h-captcha-response'     =>  [new RequiredIfFeatureEnabled(FeatureList::HCAPTCHA), new ValidateHCaptcha()],
         ];
     }
 }

@@ -14,6 +14,6 @@ class ConnectController extends Controller
 {
     public function __invoke()
     {
-        return view('auth.connect');
+        return $this->renderView('auth.connect');
     }
 }

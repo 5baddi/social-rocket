@@ -40,10 +40,10 @@ class ValidateHCaptcha implements Rule
     public function passes($attribute, $value)
     {
         try {
-            $response = $this->client->request('POST', config('baddi.hcaptcha_verify_endpoint'), 
+            $response = $this->client->request('POST', config('baddi.hcaptcha.verify_endpoint'),
                 [
                     'form_params'       => [
-                        'secret'        => config('baddi.hcaptcha_secret'),
+                        'secret'        => config('baddi.hcaptcha.secret'),
                         'response'      => $value
                     ],
                     'headers'   => [
@@ -68,6 +68,6 @@ class ValidateHCaptcha implements Rule
      */
     public function message()
     {
-        return __('message.invalid_captcha');
+        return __('validation.custom.hcaptcha.invalid');
     }
 }

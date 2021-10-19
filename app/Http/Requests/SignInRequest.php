@@ -9,6 +9,8 @@
 namespace BADDIServices\SocialRocket\Http\Requests;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Common\FeatureList;
+use BADDIServices\SocialRocket\Rules\RequiredIfFeatureEnabled;
 use Illuminate\Foundation\Http\FormRequest;
 use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
 use Illuminate\Validation\Rule;
@@ -35,7 +37,7 @@ class SignInRequest extends FormRequest
         return [
             User::EMAIL_COLUMN         => 'required|email',
             User::PASSWORD_COLUMN      => 'required|string',
-            'h-captcha-response'       =>  [Rule::requiredIf(env('HCAPTCHA_ENABLED')), new ValidateHCaptcha()],
+            'h-captcha-response'       =>  [new RequiredIfFeatureEnabled(FeatureList::HCAPTCHA), new ValidateHCaptcha()],
         ];
     }
 }
