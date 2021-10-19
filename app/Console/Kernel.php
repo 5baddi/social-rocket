@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        PurchaseReminderCommand::class,
+//        PurchaseReminderCommand::class,
     ];
 
     /**
@@ -25,8 +25,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('queue:work --tries=3 --timeout=2000 --once')->everyMinute()->withoutOverlapping()->runInBackground();
-        $schedule->command('shopify:sync-subscriptions')->dailyAt('03:00');
+        $schedule->command('queue:work --tries=3 --timeout=2000 --once')->withoutOverlapping()->runInBackground();
+//        $schedule->command('shopify:sync-subscriptions')->dailyAt('03:00');
     }
 
     /**
