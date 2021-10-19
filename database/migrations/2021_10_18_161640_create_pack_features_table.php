@@ -14,6 +14,7 @@ class CreatePackFeaturesTable extends Migration
     public function up()
     {
         Schema::create('pack_features', function (Blueprint $table) {
+            $table->uuid('id')->primary();
             $table->uuid('pack_id');
             $table->uuid('feature_id');
             $table->json('value')->nullable();

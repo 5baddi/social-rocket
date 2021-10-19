@@ -26,4 +26,11 @@ class Feature extends Entity
     public const SUPPORT = 4;
     public const CUSTOMIZATION = 5;
     public const REVENUE_NOT_SHARED = 6;
+
+    public function getName(): string
+    {
+        return trans(
+            sprintf('packs.%s', $this->getAttribute(self::NAME_KEY_COLUMN))
+        );
+    }
 }

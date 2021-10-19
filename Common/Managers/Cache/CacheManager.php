@@ -180,24 +180,18 @@ class CacheManager
         return $this->hydrate($ids);
     }
 
-    private function isCacheDisabled(): bool
+    public function getCacheKey(string ...$keys): string
+    {
+        return sprintf("%s:%s", config('app.env'), vsprintf(self::CACHE_KEY, $keys));
+    }
+
+    public function isCacheDisabled(): bool
     {
         return config('baddi.cache.enabled') !== true;
     }
 
-    private function isCacheEnabled(): bool
+    public function isCacheEnabled(): bool
     {
         return ! $this->isCacheDisabled();
-    }
-
-    private function getCacheKey(string $suffix = null): string
-    {
-        $cacheKey = sprintf("%s", config('app.env'));
-
-        if ($suffix !== null) {
-            $cacheKey = sprintf("%s:%s", $cacheKey, sprintf(self::CACHE_KEY, $suffix));
-        }
-
-        return $cacheKey;
     }
 }

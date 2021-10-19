@@ -165,9 +165,9 @@ customers bring in more shoppers. And this cycle continues.
                                 <div class="pt-4 pb-5">
                                     <img src="{{ asset('assets/img/manage.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="lh-130 mb-3">Manage Unlimited Affiliates Without a Hitch</h5>
+                                <h5 class="lh-130 mb-3">Integration</h5>
                                 <p class="text-muted mb-0">
-
+                                    Automated integration
                                 </p>
                             </div>
                         </div>
@@ -180,36 +180,36 @@ customers bring in more shoppers. And this cycle continues.
                                 </div>
                                 <h5 class="lh-130 mb-3">Customization</h5>
                                 <p class="text-muted mb-0">
-
+                                    Full pages customization
                                 </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                 <div class="py-4">
-                    <div class="row row-grid justify-content-between align-items-center">
-                        <div class="col-lg-5 order-lg-2">
-                            <h5 class="h3">Design the Best Affiliate Program Effortlessly</h5>
-                            <p class="lead my-4">
-                                Convert your customers and visitors into affiliates with our most innovative tools.
-Simply copy our given code and paste it on your website to display an affiliate
-form. This will attract more visitors to become affiliates and earn you some extra
-cash. You can also set up an email flow for your shoppers after they purchase
-something. These automated mails will allow you to stay connected with your
-customers. We recommend inviting your shoppers to become your affiliate using
-the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win
-more affiliates.
-                            </p>
-                        </div>
-                        <div class="col-lg-6 order-lg-1">
-                            <div class="card mb-0 mr-lg-5">
-                                <div class="card-body p-2">
-                                    <img  src="{{ asset('assets/img/dashboard.png') }}" class="img-fluid shadow rounded"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+{{--                 <div class="py-4">--}}
+{{--                    <div class="row row-grid justify-content-between align-items-center">--}}
+{{--                        <div class="col-lg-5 order-lg-2">--}}
+{{--                            <h5 class="h3">Design the Best Affiliate Program Effortlessly</h5>--}}
+{{--                            <p class="lead my-4">--}}
+{{--                                Convert your customers and visitors into affiliates with our most innovative tools.--}}
+{{--Simply copy our given code and paste it on your website to display an affiliate--}}
+{{--form. This will attract more visitors to become affiliates and earn you some extra--}}
+{{--cash. You can also set up an email flow for your shoppers after they purchase--}}
+{{--something. These automated mails will allow you to stay connected with your--}}
+{{--customers. We recommend inviting your shoppers to become your affiliate using--}}
+{{--the 'Thank You' page. You can easily tailor the text on the 'Thank You' page and win--}}
+{{--more affiliates.--}}
+{{--                            </p>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-lg-6 order-lg-1">--}}
+{{--                            <div class="card mb-0 mr-lg-5">--}}
+{{--                                <div class="card-body p-2">--}}
+{{--                                    <img  src="{{ asset('assets/img/dashboard.png') }}" class="img-fluid shadow rounded"/>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
         </section>
         <section class="slice slice-lg bg-section-secondary">

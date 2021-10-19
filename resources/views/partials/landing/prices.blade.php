@@ -18,7 +18,8 @@
             <div class="card-body">
                 <ul class="list-unstyled text-sm mb-4 @if($pack->is_popular)text-white @endif">
                     @foreach ($pack->getFeatures() as $feature)
-                        <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>
+{{--                        <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>--}}
+                        <li>{{ ucwords($feature->getName()) }}</li>
                     @endforeach
                 </ul>
                 <a href="{{ route('connect') }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">

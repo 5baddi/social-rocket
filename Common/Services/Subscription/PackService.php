@@ -9,6 +9,9 @@
 namespace BADDIServices\SocialRocket\Common\Services\Subscription;
 
 use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
+use BADDIServices\SocialRocket\Common\Entities\Subscription\PackFeature;
+use BADDIServices\SocialRocket\Common\Managers\Subscription\FeatureManager;
+use BADDIServices\SocialRocket\Common\Managers\Subscription\PackFeatureManager;
 use BADDIServices\SocialRocket\Common\Managers\Subscription\PackManager;
 use BADDIServices\SocialRocket\Common\Services\Service;
 use Illuminate\Support\Arr;
@@ -17,14 +20,18 @@ use Illuminate\Support\Collection;
 class PackService extends Service
 {
     public function __construct(
-        private PackManager $packManager
+        private PackManager $packManager,
+        private FeatureManager $featureManager,
+        private PackFeatureManager $packFeatureManager
     ) {
         parent::__construct();
     }
 
     public function all(): Collection
     {
-        return $this->packManager->all();
+        $packs = $this->packManager->all();
+
+        return $this->hydratePackFeatures($packs);
     }
 
     public function bulkCreate(array $packs): array
@@ -56,5 +63,23 @@ class PackService extends Service
         );
 
         return $this->packManager->create($attributes);
+    }
+
+    private function hydratePackFeatures(Collection $packs): Collection
+    {
+        $packsFeatures = $this->packFeatureManager->all();
+
+        return $packs->map(function (Pack $pack) use ($packsFeatures) {
+            $packFeatures = $packsFeatures
+                ->where(PackFeature::PACK_ID_COLUMN, $pack->getId())
+                ->map(function (PackFeature $packFeature) {
+                    return $this->featureManager->findById($packFeature->getFeatureId());
+                })
+                ->all();
+
+            $pack->setFeatures($packFeatures);
+
+            return $pack;
+        });
     }
 }
