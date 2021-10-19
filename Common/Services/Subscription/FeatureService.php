@@ -12,6 +12,7 @@ use BADDIServices\SocialRocket\Common\Entities\Subscription\Feature;
 use BADDIServices\SocialRocket\Common\Managers\Subscription\FeatureManager;
 use BADDIServices\SocialRocket\Common\Services\Service;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Collection;
 
 class FeatureService extends Service
 {
@@ -19,6 +20,11 @@ class FeatureService extends Service
         private FeatureManager $featureManager
     ) {
         parent::__construct();
+    }
+
+    public function all(): Collection
+    {
+        return $this->featureManager->all();
     }
 
     public function bulkCreate(array $features): array

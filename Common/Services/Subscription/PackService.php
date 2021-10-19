@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Common\Services\Subscription;
 
+use BADDIServices\SocialRocket\Common\Entities\Subscription\Feature;
 use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
 use BADDIServices\SocialRocket\Common\Entities\Subscription\PackFeature;
 use BADDIServices\SocialRocket\Common\Managers\Subscription\FeatureManager;
@@ -75,6 +76,7 @@ class PackService extends Service
                 ->map(function (PackFeature $packFeature) {
                     return $this->featureManager->findById($packFeature->getFeatureId());
                 })
+                ->sortBy(Feature::SORT_ORDER_COLUMN)
                 ->all();
 
             $pack->setFeatures($packFeatures);

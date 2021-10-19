@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use BADDIServices\SocialRocket\Common\Database\Seeders\FeaturesSeeder;
+use BADDIServices\SocialRocket\Common\Database\Seeders\PacksFeaturesSeeder;
 use Illuminate\Database\Seeder;
 use BADDIServices\SocialRocket\Common\Database\Seeders\PacksSeeder;
 use BADDIServices\SocialRocket\Common\Database\Seeders\SettingsSeeder;
@@ -19,9 +20,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UsersSeeder::class,
-            FeaturesSeeder::class,
-            PacksSeeder::class,
             SettingsSeeder::class,
+            PacksSeeder::class,
+            FeaturesSeeder::class,
+            PacksFeaturesSeeder::class,
         ]);
     }
 }

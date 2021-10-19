@@ -19,6 +19,7 @@ class Feature extends Entity
     public const NAME_KEY_COLUMN = 'name_key';
     public const ICON_COLUMN = 'icon';
     public const DESCRIPTION_COLUMN = 'description';
+    public const SORT_ORDER_COLUMN = 'sort_order';
 
     public const UNLIMITED_AFFILIATES = 1;
     public const REPORTING = 2;
