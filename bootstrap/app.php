@@ -52,11 +52,11 @@ $app->singleton(
 |
 */
 
-$whiteDomainList = [
-    'clnkgo.com'
+$whiteIpsList = [
+    '172.19.0.10'
 ];
-
-if (! isset($_SERVER['HTTP_HOST']) || ! in_array($_SERVER['HTTP_HOST'], $whiteDomainList)) {
+dd($_SERVER['SERVER_ADDR']);
+if (isset($_SERVER['SERVER_ADDR']) && in_array($_SERVER['SERVER_ADDR'], $whiteIpsList)) {
     $app->loadEnvironmentFrom('.local');
 }
 
