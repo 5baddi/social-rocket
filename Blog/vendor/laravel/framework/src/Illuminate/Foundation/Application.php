@@ -138,7 +138,7 @@ class Application extends Container implements ApplicationContract, CachesConfig
      *
      * @var string
      */
-    protected $environmentFile = '.env.local.local';
+    protected $environmentFile = '.local.local';
 
     /**
      * Indicates if the application is running in the console.
@@ -544,7 +544,7 @@ class Application extends Container implements ApplicationContract, CachesConfig
      */
     public function environmentFile()
     {
-        return $this->environmentFile ?: '.env.local.local';
+        return $this->environmentFile ?: '.local.local';
     }
 
     /**
