@@ -18,6 +18,7 @@ class CreatePackFeaturesTable extends Migration
             $table->uuid('pack_id');
             $table->uuid('feature_id');
             $table->json('value')->nullable();
+            $table->tinyInteger('enabled')->default(0);
             $table->tinyInteger('sort_order')->nullable();
             $table->timestamps();
         });

@@ -16,19 +16,22 @@ class User extends Authenticatable
 
     /** @var string */
     public const EMAIL_COLUMN = 'email';
-    public const LAST_NAME_COLUMN = 'last_name';
-    public const FIRST_NAME_COLUMN = 'first_name';
-    public const PHONE_COLUMN = 'phone';
     public const PASSWORD_COLUMN = 'password';
-    public const CUSTOMER_ID_COLUMN = 'customer_id';
     public const LAST_LOGIN_COLUMN = 'last_login';
     public const VERIFIED_AT_COLUMN = 'verified_at';
     public const REMEMBER_TOLEN_COLUMN = 'remember_token';
     public const ROLE_COLUMN = 'role';
     public const IS_SUPERADMIN_COLUMN = 'is_superadmin';
     public const BANNED_COLUMN = 'banned';
+
+    // TODO:: remove
     public const COUPON_COLUMN = 'coupon';
     public const STORE_ID_COLUMN = 'store_id';
+    public const LAST_NAME_COLUMN = 'last_name';
+    public const FIRST_NAME_COLUMN = 'first_name';
+    public const PHONE_COLUMN = 'phone';
+    public const CUSTOMER_ID_COLUMN = 'customer_id';
+
     public const DEFAULT_ROLE = 'affiliate';
     public const STORE_OWNER_ROLE = 'store-owner';
 

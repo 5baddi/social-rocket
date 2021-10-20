@@ -16,6 +16,7 @@ class Pack extends Entity
     use SoftDeletes;
 
     /** @var string */
+    public const KEY_COLUMN = 'key';
     public const NAME_KEY_COLUMN = 'name_key';
     public const PRICE_COLUMN = 'price';
     public const TYPE_COLUMN = 'type';
@@ -37,6 +38,10 @@ class Pack extends Entity
     public const FREE_TYPE = 1;
     public const RECURRING_TYPE = 2;
     public const USAGE_TYPE = 3;
+
+    public const ENTREPRENEUR = 1;
+    public const SMALL_BUSINESS = 2;
+    public const AGENCY = 3;
 
     /** @var array */
     public const INTERVALS = [
@@ -99,5 +104,35 @@ class Pack extends Entity
         return trans(
             sprintf('packs.%s', $this->getAttribute(self::NAME_KEY_COLUMN))
         );
+    }
+
+    public function getNameKey(): string
+    {
+        return $this->getAttribute(self::NAME_KEY_COLUMN);
+    }
+
+    public function getKey(): int
+    {
+        return $this->getAttribute(self::KEY_COLUMN);
+    }
+
+    public function getCurrency(): ?string
+    {
+        return $this->getAttribute(self::CURRENCY_COLUMN);
+    }
+
+    public function getCurrencySymbol(): ?string
+    {
+        return $this->getAttribute(self::CURRENCY_SYMBOL_COLUMN);
+    }
+
+    public function getPrice(): float
+    {
+        return $this->getAttribute(self::PRICE_COLUMN) ?? 0.0;
+    }
+
+    public function isPopular(): bool
+    {
+        return $this->getAttribute(self::IS_POPULAR_COLUMN);
     }
 }

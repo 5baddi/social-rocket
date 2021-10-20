@@ -11,4 +11,7 @@ namespace BADDIServices\SocialRocket;
 class App
 {
     public const CHUNK_SIZE = 1000;
+
+    public const DEFAULT_CURRENCY = 'USD';
+    public const DEFAULT_CURRENCY_SYMBOL = '$';
 }

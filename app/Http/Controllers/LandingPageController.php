@@ -35,6 +35,6 @@ class LandingPageController extends Controller
 
     public function privacy()
     {
-        return view('privacy');
+        return $this->renderView('landing.privacy');
     }
 }

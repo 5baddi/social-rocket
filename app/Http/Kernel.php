@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
         'admin'                 => \BADDIServices\SocialRocket\Http\Middleware\SuperAdmin::class,
         'signin.with.app'       => \BADDIServices\SocialRocket\Http\Middleware\SignInWithShopifyApp::class,
         'is-shopify-webhook'    => \BADDIServices\SocialRocket\Http\Middleware\IsShopifyWebhook::class,
+        'plan.remember'         => \BADDIServices\SocialRocket\Http\Middleware\RememberSelectedPlan::class,
     ];
 
     protected function bootstrappers()

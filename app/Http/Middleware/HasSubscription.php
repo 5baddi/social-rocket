@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Http\Middleware;
 
+use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
 use Closure;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,8 +26,9 @@ class HasSubscription
         $user = Auth::user();
 
         if (
-            strpos($request->path(), "dashboard") === 0 
+            strpos($request->path(), "dashboard") === 0
             && strpos($request->path(), "logout") === false
+            && $request->session()->get('plan', Pack::ENTREPRENEUR) !== Pack::ENTREPRENEUR
         ) {
             $user->load('subscription');
 
@@ -34,7 +36,7 @@ class HasSubscription
             $subscription = $user->subscription;
 
             if(!$subscription instanceof Subscription || $subscription->trashed()) {
-                return redirect()->route('subscription.select.pack');
+                //return redirect()->route('subscription.select.pack');
             }
         }
 

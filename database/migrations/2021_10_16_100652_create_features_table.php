@@ -15,7 +15,7 @@ class CreateFeaturesTable extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('key', 100);
+            $table->tinyInteger('key');
             $table->string('name_key', 100);
             $table->string('icon')->nullable();
             $table->text('description')->nullable();

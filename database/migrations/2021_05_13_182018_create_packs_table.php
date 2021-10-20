@@ -16,6 +16,7 @@ class CreatePacksTable extends Migration
     {
         Schema::create('packs', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
+            $table->tinyInteger('key');
             $table->string('name_key', 100)->unique();
             $table->float('price')->default(0.0);
             $table->float('revenue_share')->default(0.0);

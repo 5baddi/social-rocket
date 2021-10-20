@@ -51,6 +51,7 @@ class PackService extends Service
         $attributes = Arr::only(
             $attributes,
             [
+                Pack::KEY_COLUMN,
                 Pack::NAME_KEY_COLUMN,
                 Pack::PRICE_COLUMN,
                 Pack::TYPE_COLUMN,
@@ -66,6 +67,13 @@ class PackService extends Service
         return $this->packManager->create($attributes);
     }
 
+    public function getFreePack(): Pack
+    {
+        return $this->packManager->first([
+            [Pack::PRICE_COLUMN, '=', 0]
+        ]);
+    }
+
     private function hydratePackFeatures(Collection $packs): Collection
     {
         $packsFeatures = $this->packFeatureManager->all();
@@ -74,7 +82,12 @@ class PackService extends Service
             $packFeatures = $packsFeatures
                 ->where(PackFeature::PACK_ID_COLUMN, $pack->getId())
                 ->map(function (PackFeature $packFeature) {
-                    return $this->featureManager->findById($packFeature->getFeatureId());
+                    /** @var Feature */
+                    $feature = $this->featureManager->findById($packFeature->getFeatureId());
+
+                    $feature->setIsEnabled($packFeature->isEnabled());
+
+                    return $feature;
                 })
                 ->sortBy(Feature::SORT_ORDER_COLUMN)
                 ->all();

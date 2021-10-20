@@ -16,6 +16,7 @@ class PackFeature extends Entity
     public const FEATURE_ID_COLUMN = 'feature_id';
     public const VALUE_COLUMN = 'value';
     public const SORT_ORDER_COLUMN = 'sort_order';
+    public const ENABLED_COLUMN = 'enabled';
 
     public function getPackId(): string
     {
@@ -25,5 +26,10 @@ class PackFeature extends Entity
     public function getFeatureId(): string
     {
         return $this->getAttribute(self::FEATURE_ID_COLUMN);
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getAttribute(self::ENABLED_COLUMN);
     }
 }

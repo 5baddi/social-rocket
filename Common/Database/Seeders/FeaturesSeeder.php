@@ -46,6 +46,10 @@ class FeaturesSeeder extends Seeder
                 Feature::NAME_KEY_COLUMN  =>  'customization',
             ],
             [
+                Feature::KEY_COLUMN       =>  Feature::AUTOMATED_INTEGRATION,
+                Feature::NAME_KEY_COLUMN  =>  'automated_integration',
+            ],
+            [
                 Feature::KEY_COLUMN       =>  Feature::REVENUE_NOT_SHARED,
                 Feature::NAME_KEY_COLUMN  =>  'revenue_not_shared',
             ],

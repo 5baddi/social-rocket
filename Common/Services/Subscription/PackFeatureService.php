@@ -31,6 +31,7 @@ class PackFeatureService extends Service
                 PackFeature::FEATURE_ID_COLUMN,
                 PackFeature::VALUE_COLUMN,
                 PackFeature::SORT_ORDER_COLUMN,
+                PackFeature::ENABLED_COLUMN,
             ]
         );
 

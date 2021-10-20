@@ -26,12 +26,33 @@ class Feature extends Entity
     public const PAYOUT_METHODS = 3;
     public const SUPPORT = 4;
     public const CUSTOMIZATION = 5;
-    public const REVENUE_NOT_SHARED = 6;
+    public const AUTOMATED_INTEGRATION = 6;
+    public const REVENUE_NOT_SHARED = 7;
+
+    /** @var bool */
+    private $enabled = false;
+
+    public function getKey(): int
+    {
+        return $this->getAttribute(self::KEY_COLUMN);
+    }
 
     public function getName(): string
     {
         return trans(
             sprintf('packs.%s', $this->getAttribute(self::NAME_KEY_COLUMN))
         );
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->enabled;
+    }
+
+    public function setIsEnabled(bool $value): self
+    {
+        $this->enabled = $value;
+
+        return $this;
     }
 }

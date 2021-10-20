@@ -7,10 +7,12 @@
                     @if ($pack->isFree())
                         <span class="price font-weight-bolder">Free</span>
                     @else
-                    {{ $pack->isFixedPrice() ? $pack->symbol : '' }}<span class="price font-weight-bolder">{{ $pack->price }}</span>{{ !$pack->isFixedPrice() ? '%' : '' }}
+                    <sup>{{ $pack->getCurrencySymbol() }}</sup><span class="price font-weight-bolder">{{ $pack->getPrice() }}</span>
                     @endif
                     @if ($pack->getRevenueShare() > 0)
-                        <p class="text-sm">+{{ number_format($pack->getRevenueShare() * 100, 0) }}% @lang('packs.revenue_share')</p>
+                        <p class="text-sm">+{{ sprintf('%02d', number_format($pack->getRevenueShare() * 100, 0)) }}% @lang('packs.revenue_share')</p>
+                    @else
+                        <p class="text-sm">@lang('packs.no_hidden_fees')</p>
                     @endif
                 </div>
                 <hr/>
@@ -18,11 +20,10 @@
             <div class="card-body">
                 <ul class="list-unstyled text-sm mb-4 @if($pack->is_popular)text-white @endif">
                     @foreach ($pack->getFeatures() as $feature)
-{{--                        <li @if(!$feature['enabled'])class="uncheck"@endif>{{ ucwords($feature['name']) }}</li>--}}
-                        <li>{{ ucwords($feature->getName()) }}</li>
+                        <li @if(!$feature->isEnabled())class="uncheck"@endif>{{ ucwords($feature->getName()) }}</li>
                     @endforeach
                 </ul>
-                <a href="{{ route('connect') }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">
+                <a href="{{ route('connect', ['plan' => $pack->getKey()]) }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">
                     @if ($pack->isFree())
                         @lang('packs.try_free')
                     @else

@@ -38,10 +38,10 @@ class EloquentRepository
         return (new $modelClassName)->setConnection($this->connection)->newQuery();
     }
 
-    public function all(): Collection
+    public function all(array $columns = [Entity::ID_COLUMN]): Collection
     {
         return $this->newQuery()
-            ->select(Entity::ID_COLUMN)
+            ->select($columns)
             ->get();
     }
 

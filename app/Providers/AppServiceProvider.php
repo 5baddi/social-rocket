@@ -6,6 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Builder;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use BADDIServices\SocialRocket\Models\AppSetting;
 use BADDIServices\SocialRocket\Services\AppService;
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
         Builder::defaultMorphKeyType('uuid');
 
         Schema::defaultStringLength(191);
+
+        View::addNamespace('App', base_path('/resources/views/'));
 
         if (config('app.env') !== 'local') {
             URL::forceScheme('https');

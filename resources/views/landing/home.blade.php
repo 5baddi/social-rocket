@@ -8,7 +8,7 @@
                     <div class="col-12 col-md-5 col-lg-6 order-md-2 text-center">
                         <!-- Image -->
                         <figure class="w-100">
-                            <img alt="Dashboard" src="{{ asset('assets/img/dashboard.png') }}" class="img-fluid rounded mw-md-120"/>
+                            <img alt="Dashboard" src="{{ asset('assets/img/dashboard-report.png') }}" class="img-fluid rounded mw-md-120"/>
                         </figure>
                     </div>
                     <div class="col-12 col-md-7 col-lg-6 order-md-1 pr-md-5">
@@ -163,11 +163,11 @@ customers bring in more shoppers. And this cycle continues.
                         <div class="card">
                             <div class="card-body pb-5 text-center">
                                 <div class="pt-4 pb-5">
-                                    <img src="{{ asset('assets/img/manage.svg') }}" class="img-fluid img-center" style="height:150px"/>
+                                    <img src="{{ asset('assets/img/settings.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="lh-130 mb-3">Integration</h5>
+                                <h5 class="lh-130 mb-3">Customization</h5>
                                 <p class="text-muted mb-0">
-                                    Automated integration
+                                    Full pages customization
                                 </p>
                             </div>
                         </div>
@@ -176,11 +176,11 @@ customers bring in more shoppers. And this cycle continues.
                         <div class="card">
                             <div class="card-body pb-5 text-center">
                                 <div class="pt-4 pb-5">
-                                    <img src="{{ asset('assets/img/settings.svg') }}" class="img-fluid img-center" style="height:150px"/>
+                                    <img src="{{ asset('assets/img/manage.svg') }}" class="img-fluid img-center" style="height:150px"/>
                                 </div>
-                                <h5 class="lh-130 mb-3">Customization</h5>
+                                <h5 class="lh-130 mb-3">Integration</h5>
                                 <p class="text-muted mb-0">
-                                    Full pages customization
+                                    Automated integration
                                 </p>
                             </div>
                         </div>
@@ -222,7 +222,7 @@ customers bring in more shoppers. And this cycle continues.
                         </h2>
                         <!-- Text -->
                         <p class="text-muted">
-                            Pricing
+                            @lang('packs.monthly_billing')
                         </p>
                     </div>
                 </div>

@@ -8,8 +8,10 @@
 
 namespace BADDIServices\SocialRocket\Common\Repositories\Subscription;
 
+use BADDIServices\SocialRocket\Common\Entities\Entity;
 use BADDIServices\SocialRocket\Common\Entities\Subscription\Feature;
 use BADDIServices\SocialRocket\Common\Repositories\EloquentRepository;
+use Illuminate\Database\Eloquent\Collection;
 
 class FeatureRepository extends EloquentRepository
 {

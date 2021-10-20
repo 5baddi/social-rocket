@@ -16,7 +16,7 @@ use BADDIServices\SocialRocket\Http\Controllers\Auth\AuthenticateController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthCallbackController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword as ResetPassword;
 
-Route::middleware('guest')
+Route::middleware('guest', 'plan.remember')
     ->group(function() {
         Route::get('/connect', ConnectController::class)->name('connect');
         Route::get('/fast/connect', OAuthController::class)->name('fast.connect');

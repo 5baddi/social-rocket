@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\OAuth;
 
+use BADDIServices\SocialRocket\Common\Services\Subscription\PackService;
 use Throwable;
 use Carbon\Carbon;
 use App\Models\User;
@@ -36,7 +37,8 @@ class OAuthCallbackController extends Controller
 
     public function __construct(
         ShopifyService $shopifyService,
-        StoreService $storeService
+        StoreService $storeService,
+        private PackService $packService
     )
     {
         parent::__construct();
@@ -105,6 +107,8 @@ class OAuthCallbackController extends Controller
             $this->userService->update($user, [
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
+
+            dd($this->packService->getFreePack());
 
             DB::commit();
 

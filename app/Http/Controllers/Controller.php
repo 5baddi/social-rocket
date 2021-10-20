@@ -37,7 +37,7 @@ class Controller extends BaseController
     protected $appSettings;
 
     /** @var string */
-    protected $baseView = '';
+    protected $baseView = 'App';
 
     public function __construct()
     {
@@ -67,7 +67,7 @@ class Controller extends BaseController
     protected function renderView(string $view, array $data = [])
     {
         return view(
-            sprintf('%s%s', $this->baseView, $view),
+            sprintf('%s::%s', $this->baseView, $view),
             array_merge($this->baseData(), $data)
         );
     }

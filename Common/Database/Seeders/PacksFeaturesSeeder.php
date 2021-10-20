@@ -31,21 +31,39 @@ class PacksFeaturesSeeder extends Seeder
      */
     public function run()
     {
-        $packs = $this->packRepository->all();
+        $packs = $this->packRepository->all(['*']);
         $features = $this->featureRepository
-            ->all()
+            ->all(['*'])
             ->sortBy(Feature::KEY_COLUMN);
 
         $packs->each(function (Pack $pack) use ($features) {
             $sort = 0;
-
             $features->each(function (Feature $feature) use ($pack, &$sort) {
+                $enabled = ! in_array($feature->getKey(), $this->disabledFeaturesForPack($pack->getKey()));
+
                 $this->packFeatureRepository->create([
                     PackFeature::PACK_ID_COLUMN     => $pack->getId(),
                     PackFeature::FEATURE_ID_COLUMN  => $feature->getId(),
                     PackFeature::SORT_ORDER_COLUMN  => ++$sort,
+                    PackFeature::ENABLED_COLUMN     => $enabled,
                 ]);
             });
         });
+    }
+
+    private function disabledFeaturesForPack(int $key): array
+    {
+        $keys = [];
+
+        switch ($key) {
+            case Pack::ENTREPRENEUR:
+                $keys = [Feature::CUSTOMIZATION, Feature::AUTOMATED_INTEGRATION, Feature::REVENUE_NOT_SHARED];
+                break;
+            case Pack::SMALL_BUSINESS:
+                $keys = [Feature::AUTOMATED_INTEGRATION, Feature::REVENUE_NOT_SHARED];
+                break;
+        };
+
+        return $keys;
     }
 }
