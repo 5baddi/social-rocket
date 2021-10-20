@@ -52,14 +52,13 @@ $app->singleton(
 |
 */
 
-$app->loadEnvironmentFrom('.local');
-
 $whiteDomainList = [
     'clnkgo.com'
 ];
 
-if (isset($_SERVER['HTTP_HOST']) && in_array($_SERVER['HTTP_HOST'], $whiteDomainList)) {
-    $app->loadEnvironmentFrom('.env');
+if (! isset($_SERVER['HTTP_HOST']) || ! in_array($_SERVER['HTTP_HOST'], $whiteDomainList)) {
+    $app->loadEnvironmentFrom('.local');
 }
+
 
 return $app;
