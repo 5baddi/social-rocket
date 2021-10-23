@@ -1,0 +1,24 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: public
+
+# Ensure we skip ".env.prod", which is only for local development
+skip_files:
+  - .env.prod
+
+env_variables:
+  # Put production environment variables here.
+  APP_LOG: errorlog
+  APP_KEY: base64:KQKAWhZet45TuqIMltlEgSGo0n8Iwsnk/OMqnJ3IFuQ=
+
+  # Database
+  DB_HOST: localhost
+  DB_DATABASE: YOUR_DB_DATABASE
+  DB_USERNAME: YOUR_DB_USERNAME
+  DB_PASSWORD: YOUR_DB_PASSWORD
+  DB_SOCKET: "/cloudsql/clnkgoins01mysql80"
+
+beta_settings:
+  cloud_sql_instances: "clnkgoins01mysql80"

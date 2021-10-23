@@ -45,8 +45,8 @@ class ServeCommand extends Command
         $this->line("<info>Starting Laravel development server:</info> http://{$this->host()}:{$this->port()}");
 
         $environmentFile = $this->option('env')
-                            ? base_path('.local.local').'.'.$this->option('env')
-                            : base_path('.local.local');
+                            ? base_path('.env.local').'.'.$this->option('env')
+                            : base_path('.env.local');
 
         $hasEnvironment = file_exists($environmentFile);
 
@@ -198,7 +198,7 @@ class ServeCommand extends Command
             ['host', null, InputOption::VALUE_OPTIONAL, 'The host address to serve the application on', '127.0.0.1'],
             ['port', null, InputOption::VALUE_OPTIONAL, 'The port to serve the application on', Env::get('SERVER_PORT')],
             ['tries', null, InputOption::VALUE_OPTIONAL, 'The max number of ports to attempt to serve from', 10],
-            ['no-reload', null, InputOption::VALUE_NONE, 'Do not reload the development server on .local.local file changes'],
+            ['no-reload', null, InputOption::VALUE_NONE, 'Do not reload the development server on .env.local file changes'],
         ];
     }
 }
