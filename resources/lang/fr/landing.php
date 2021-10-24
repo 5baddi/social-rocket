@@ -10,7 +10,7 @@ return [
     'features'              => 'Features',
     'pricing'               => 'Pricing',
     'connect_shop'          => [
-        'title'             => 'Connect your shop',
-        'label'             => 'Please enter your shop URL and we’ll redirect you to finish connecting your shop with :name App',
+        'title'             => 'Connectez votre boutique',
+        'label'             => 'S’il vous plaît entrer votre boutique URL et nous allons vous rediriger pour terminer la connexion de votre boutique avec :name App',
     ],
 ];

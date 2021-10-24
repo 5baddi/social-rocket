@@ -1,15 +1,17 @@
 @extends('layouts.auth')
 
-@section('title') Connect your store @endsection
+@section('title') Connect your shop @endsection
 
 @section('form')
+{{--    <div class="card-header px-md-5">--}}
+{{--        <div class="text-center">--}}
+{{--            <img src="{{ asset('assets/img/shopify.svg') }}" style="max-width: 200px;"/>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div class="card-body px-md-5 py-5">
-        <div class="mb-2 text-center">
-            <img src="{{ asset('assets/img/shopify.svg') }}" style="max-width: 200px;"/>
-        </div>
-        <div class="mb-5 mt-4">
-            <h6 class="h3">Connect your store</h6>
-            <p class="text-muted mb-0">Please enter your Shopify store URL and we’ll redirect you to Shopify to finish connecting your store to {{ config('app.name') }} App</p>
+        <div class="mb-4">
+            <h6 class="h3 text-center">@lang('landing.connect_shop.title')</h6>
+            <p class="mt-4 text-muted mb-0">@lang('landing.connect_shop.label', ['name' => config('app.name')])</p>
             @if(Session::has('error'))
                 <div class="invalid-feedback">
                     {{ Session::get('error') }}
@@ -20,12 +22,12 @@
         <form action="{{ route('oauth.connect') }}" method="POST">
             @csrf
             <div class="form-group">
-                <label class="form-control-label">Shopify store name or URL</label>
+{{--                <label class="form-control-label">Shopify shop name or URL</label>--}}
                 <div class="input-group">
-                    <input name="store" value="{{ old('store') }}" type="text" class="form-control @if($errors->has('store')) is-invalid @endif" placeholder="example.myshopify.com" autofocus required/>
-                    @if($errors->has('store'))
+                    <input name="shop" value="{{ old('shop') }}" type="text" class="form-control @if($errors->has('shop')) is-invalid @endif" placeholder="example.myshopify.com" autofocus required/>
+                    @if($errors->has('shop'))
                     <div class="invalid-feedback">
-                        {{ $errors::first('store') }}
+                        {{ $errors::first('shop') }}
                     </div>
                     @endif
                 </div>
