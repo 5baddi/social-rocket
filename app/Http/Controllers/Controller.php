@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use BADDIServices\SocialRocket\Common\Logger;
 use BADDIServices\SocialRocket\Common\Services\AppService;
 use BADDIServices\SocialRocket\Common\Services\FeatureService;
 use BADDIServices\SocialRocket\Models\AppSetting;
@@ -17,6 +18,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /** @var Logger */
+    protected $logger;
 
     /** @var UserService */
     protected $userService;
@@ -41,19 +45,7 @@ class Controller extends BaseController
 
     public function __construct()
     {
-        /** @var UserService */
-        $this->userService = app(UserService::class);
-
-        /** @var AppService */
-        $this->appService = app(AppService::class);
-
-        /** @var SettingService */
-        $this->settingService = app(SettingService::class);
-
-        /** @var FeatureService */
-        $this->featureService = app(FeatureService::class);
-
-        $this->loadAppSettings();
+        $this->init();
 
         $this->middleware(function ($request, $next) {
             if (Auth::check()) {
@@ -79,6 +71,26 @@ class Controller extends BaseController
             'settings'          => $this->appSettings,
             'featureService'    => $this->featureService
         ];
+    }
+
+    private function init(): void
+    {
+        /** @var Logger */
+        $this->logger = app(Logger::class);
+
+        /** @var UserService */
+        $this->userService = app(UserService::class);
+
+        /** @var AppService */
+        $this->appService = app(AppService::class);
+
+        /** @var SettingService */
+        $this->settingService = app(SettingService::class);
+
+        /** @var FeatureService */
+        $this->featureService = app(FeatureService::class);
+
+        $this->loadAppSettings();
     }
 
     private function loadAppSettings(): void

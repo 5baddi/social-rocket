@@ -6,8 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-namespace BADDIServices\SocialRocket;
+namespace BADDIServices\SocialRocket\Common;
 
+use BADDIServices\SocialRocket\Common\Entities\Shop\Shop;
 use Bugsnag\Configuration;
 use Throwable;
 use Bugsnag\Client;
@@ -15,7 +16,6 @@ use App\Models\User;
 use Psr\Log\LoggerInterface;
 use Bugsnag\Breadcrumbs\Breadcrumb;
 use Illuminate\Support\Facades\Log;
-use BADDIServices\SocialRocket\Models\Store;
 
 class Logger implements LoggerInterface
 {
@@ -23,10 +23,10 @@ class Logger implements LoggerInterface
     private $client = null;
 
     /** @var User|null */
-    public $user = null;
+    private $user = null;
 
-    /** @var Store|null */
-    public $store = null;
+    /** @var Shop|null */
+    private $shop = null;
 
     public function __construct()
     {
@@ -44,9 +44,9 @@ class Logger implements LoggerInterface
         return $this;
     }
 
-    public function setStore(?Store $store = null): self
+    public function setShop(?Shop $shop = null): self
     {
-        $this->store = $store;
+        $this->shop = $shop;
 
         return $this;
     }
@@ -60,7 +60,7 @@ class Logger implements LoggerInterface
     {
         Log::error($message, [
             'user'      => optional($this->user)->getId(),
-            'store'     => optional($this->store)->getId(),
+            'shop'      => optional($this->shop)->getId(),
             'extra'     => json_encode($extra),
             'trace'     => !is_null($exception) && $exception->getTraceAsString()
         ]);
@@ -95,7 +95,7 @@ class Logger implements LoggerInterface
 
     public function error($message, array $context = array())
     {
-        $this->trace($message, $context);
+        $this->trace($message, $context, null, Breadcrumb::ERROR_TYPE);
     }
 
     public function warning($message, array $context = array())

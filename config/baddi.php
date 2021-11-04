@@ -15,6 +15,9 @@ return [
     'cache'             => [
         'enabled'       => env('CACHE_FEATURE_ENABLED', false)
     ],
+    'bugsnag'           => [
+        'api_key'       => env('BUGSNAG_API_KEY')
+    ],
     'hcaptcha'          => [
         'verify_endpoint'           => env('HCAPTCHA_VERIFY_ENDPOINT'),
         'js_endpoint'               => env('HCAPTCHA_JS_ENDPOINT'),

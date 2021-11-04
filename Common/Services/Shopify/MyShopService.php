@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Common\Services\Shopify;
 
+use BADDIServices\SocialRocket\Common\Repositories\Shop\ShopRepository;
 use BADDIServices\SocialRocket\Common\Services\Service;
 use Illuminate\Support\Str;
 
@@ -15,12 +16,12 @@ class MyShopService extends Service
 {
     public const SHOP_ENDPOINT = 'https://{shop}.myshopify.com';
 
-    public function __construct()
+    public function __construct(private ShopRepository $shopRepository)
     {
         parent::__construct();
     }
 
-    public function getShopName(string $shopUrl): ?string
+    public function getShopSlug(string $shopUrl): ?string
     {
         $checkUrl = preg_match(
             '/((http|https)\:\/\/)?[a-zA-Z0-9\.\/\?\:@\-_=#]+\.([a-zA-Z0-9\&\.\/\?\:@\-_=#])*/',
@@ -48,5 +49,15 @@ class MyShopService extends Service
         }
 
         return $shopUrl;
+    }
+
+    public function shopIsAlreadyLinked(string $shopSlug): bool
+    {
+        return $this->shopRepository->isLinked($shopSlug);
+    }
+
+    public function getShopUrl(string $shopSlug): string
+    {
+        return (string)Str::replace('{shop}', $shopSlug, self::SHOP_ENDPOINT);
     }
 }

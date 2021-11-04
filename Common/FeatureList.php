@@ -13,6 +13,7 @@ class FeatureList
     public const CACHE = 'cache';
     public const HCAPTCHA = 'hcaptcha';
     public const OAUTH = 'oauth';
+    public const SHOPIFY = 'shopify';
 
     public static function all(): array
     {

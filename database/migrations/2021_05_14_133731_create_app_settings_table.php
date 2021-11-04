@@ -15,6 +15,8 @@ class CreateAppSettingsTable extends Migration
     {
         Schema::create('app_settings', function (Blueprint $table) {
             $table->uuid('id')->unqiue()->primary();
+            $table->string('key')->unique();
+            $table->longText('value')->nullable();
             $table->string('instagram_username')->nullable();
             $table->string('twitter_username')->nullable();
             $table->string('facebook_username')->nullable();

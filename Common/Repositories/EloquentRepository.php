@@ -67,6 +67,13 @@ class EloquentRepository
             ->get();
     }
 
+    public function exists(array $conditions): bool
+    {
+        return $this->newQuery()
+            ->where($conditions)
+            ->exists();
+    }
+
     public function create(array $attributes): Entity
     {
         return $this->newQuery()

@@ -11,6 +11,8 @@ namespace BADDIServices\SocialRocket\Common\Entities;
 class AppSetting extends Entity
 {
     /** @var string */
+    public const KEY_COLUMN = 'key';
+    public const VALUE_COLUMN = 'value';
     public const SUPPORT_EMAIL_COLUMN = 'support_email';
     public const INSTAGRAM_USERNAME_COLUMN = 'instagram_username';
     public const TWITTER_USERNAME_COLUMN = 'twitter_username';

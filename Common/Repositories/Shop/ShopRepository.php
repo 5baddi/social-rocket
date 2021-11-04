@@ -15,4 +15,11 @@ class ShopRepository extends EloquentRepository
 {
     /** @var string */
     protected $model = Shop::class;
+
+    public function isLinked($shopName): bool
+    {
+        return $this->exists([
+            Shop::SLUG_COLUMN => $shopName
+        ]);
+    }
 }

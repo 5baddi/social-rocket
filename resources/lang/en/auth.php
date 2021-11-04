@@ -17,4 +17,9 @@ return [
     'password' => 'The provided password is incorrect.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'shop'              =>  [
+        'is_linked'     => 'Shop is already connect! please try to sign in.',
+        'url_invalid'   => 'Shop URL is invalid',
+        'connect_error' => sprintf('An error occurred while connecting the shop with %s app', config('app.name'))
+    ]
 ];
