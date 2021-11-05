@@ -12,6 +12,7 @@ class FeatureList
 {
     public const CACHE = 'cache';
     public const HCAPTCHA = 'hcaptcha';
+    public const MULTI_LANGUAGE = 'multi-language';
 
     public static function all(): array
     {

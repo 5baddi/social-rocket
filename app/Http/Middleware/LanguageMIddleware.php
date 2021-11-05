@@ -9,6 +9,11 @@
 namespace BADDIServices\SocialRocket\Http\Middleware;
 
 use BADDIServices\SocialRocket\App;
+use BADDIServices\SocialRocket\Common\Logger;
+use BADDIServices\SocialRocket\Common\LogParametersList;
+use BADDIServices\SocialRocket\Common\Services\CountryService;
+use BADDIServices\SocialRocket\Common\Services\IpLocatorService;
+use BADDIServices\SocialRocket\FeatureList;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -18,7 +23,12 @@ use Illuminate\Support\Str;
 
 class LanguageMIddleware
 {
-    public function __construct(private SessionManager $sessionManager) {}
+    public function __construct(
+        private Logger $logger,
+        private SessionManager $sessionManager,
+        private IpLocatorService $ipLocatorService,
+        private CountryService $countryService
+    ) {}
 
     /**
      * Handle an incoming request.
@@ -43,6 +53,20 @@ class LanguageMIddleware
 
             return $this->redirectWithLocale($request);
         } catch (\Throwable $e) {
+            $this->logger->trace(
+                'an occurred error during fetching user locale',
+                [
+                    LogParametersList::FEATURE      => FeatureList::MULTI_LANGUAGE,
+                    LogParametersList::PAYLOAD      => [
+                        'uri'                       => optional($request)->getUri,
+                        'locale'                    => optional($locale),
+                        'ip'                        => optional($request)->getClientIp(),
+                        'session.locale'            => optional($this->sessionManager)->get('locale')
+                    ]
+                ],
+                $e
+            );
+
             abort(Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
@@ -54,7 +78,10 @@ class LanguageMIddleware
             $locale = $request->query('lang', Str::substr($request->header('x-preferred-locale'), 0, 2));
         }
 
-        // TODO: Get locale from IP location
+        $countryFromIp = $this->ipLocatorService->getCountryFromIp($request);
+        if ($locale === null && $countryFromIp !== null) {
+            $locale = $this->countryService->getLocaleByCountry($countryFromIp);
+        }
 
         return in_array($locale, App::SUPPORTED_LOCALES) ? $locale : App::DEFAULT_LOCALE;
     }

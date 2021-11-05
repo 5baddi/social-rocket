@@ -62,6 +62,8 @@ class Logger implements LoggerInterface
             'user'      => optional($this->user)->getId(),
             'shop'      => optional($this->shop)->getId(),
             'extra'     => json_encode($extra),
+            'code'      => !is_null($exception) && $exception->getCode(),
+            'message'   => !is_null($exception) && $exception->getMessage(),
             'trace'     => !is_null($exception) && $exception->getTraceAsString()
         ]);
 

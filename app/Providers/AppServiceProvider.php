@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use BADDIServices\SocialRocket\Models\AppSetting;
 use BADDIServices\SocialRocket\Services\AppService;
+use Torann\GeoIP\GeoIP;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->alias('geoip', GeoIP::class);
     }
 
     /**
