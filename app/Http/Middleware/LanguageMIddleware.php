@@ -101,6 +101,6 @@ class LanguageMIddleware
         $routeParams = array_merge($request->route()->parameters(), $queryParams);
         $targetUrl = localeRoute($request->route()->getName(), $routeParams);
 
-        return redirect($targetUrl, Response::HTTP_MOVED_PERMANENTLY);
+        return redirect($targetUrl);
     }
 }

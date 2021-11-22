@@ -106,23 +106,23 @@
                         </li>
                     </ul>
                     @guest
-                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('signin') }}">
+                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ localeRoute('signin') }}">
                         Sign in
                     </a>
                     @endguest
                     @auth
-                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ route('dashboard') }}">
+                    <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="{{ localeRoute('dashboard') }}">
                         Dashboard
                     </a>
                     @endauth
                     <div class="d-lg-none text-center">
                         @guest
-                        <a href="{{ route('signin') }}" class="btn btn-block btn-sm btn-warning">
+                        <a href="{{ localeRoute('signin') }}" class="btn btn-block btn-sm btn-warning">
                             Sign in
                         </a>
                         @endguest
                         @auth
-                        <a href="{{ route('dashboard') }}" class="btn btn-block btn-sm btn-warning">
+                        <a href="{{ localeRoute('dashboard') }}" class="btn btn-block btn-sm btn-warning">
                             Dashboard
                         </a>
                         @endauth

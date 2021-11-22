@@ -12,9 +12,9 @@ class App
 {
     public const CHUNK_SIZE = 1000;
 
-    public const DEFAULT_LOCALE = 'EN';
-    public const ARABIC_LOCALE = 'AR';
-    public const FRENCH_LOCALE = 'FR';
+    public const DEFAULT_LOCALE = 'en';
+    public const ARABIC_LOCALE = 'ar';
+    public const FRENCH_LOCALE = 'fr';
     public const DEFAULT_CURRENCY = 'USD';
     public const DEFAULT_CURRENCY_SYMBOL = '$';
 
