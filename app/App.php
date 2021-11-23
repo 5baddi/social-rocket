@@ -20,7 +20,7 @@ class App
 
     public const SUPPORTED_LOCALES = [
         self::DEFAULT_LOCALE,
-        self::FRENCH_LOCALE,
-        self::ARABIC_LOCALE,
+        // self::FRENCH_LOCALE,
+        // self::ARABIC_LOCALE,
     ];
 }

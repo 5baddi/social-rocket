@@ -68,7 +68,7 @@
             "php artisan clear-compiled",
             "php artisan cache:clear",
             "chmod -R 777 public/",
-            "chmod -R 755 bootstrap\\/cache\""
+            "chmod -R 755 bootstrap/cache/"
         ]
     },
     "extra": {

@@ -12,3 +12,5 @@ npm-debug.log
 yarn-error.log
 .idea/
 /blog/vendor
+public/assets/.DS_Store
+packages/shopify

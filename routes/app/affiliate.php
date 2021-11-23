@@ -11,17 +11,17 @@ use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsCon
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
 
-Route::name('affiliate')
+Route::name('affiliate.')
     ->prefix('affiliate')
     ->group(function() {
-        Route::redirect('/', '/', 301);
+        Route::redirect('/', '/', 301)->name('home');
 
-        Route::get('/{store}', AffiliateSignUpController::class);
-        Route::post('/{store}/signup', CreateAccountController::class)->name('.signup');
+        Route::get('/{store}', AffiliateSignUpController::class)->name('signup');
+        Route::post('/{store}/signup', CreateAccountController::class)->name('form.signup');
 
         Route::middleware(['auth', 'is.affiliate'])
             ->group(function() {
-                Route::get('/analytics', AnalyticsController::class)->name('.analytics');
+                Route::get('/analytics', AnalyticsController::class)->name('analytics');
             });
     });
 
