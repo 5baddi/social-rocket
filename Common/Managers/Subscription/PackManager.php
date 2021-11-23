@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Common\Managers\Subscription;
 
+use BADDIServices\SocialRocket\Common\Entities\Subscription\Pack;
 use BADDIServices\SocialRocket\Common\Managers\Cache\CacheManager;
 use BADDIServices\SocialRocket\Common\Repositories\Subscription\PackRepository;
 
@@ -20,5 +21,10 @@ class PackManager extends CacheManager
         parent::__construct();
 
         $this->eloquentRepository = $packRepository;
+    }
+
+    public function findByKey(int $key): ?Pack
+    {
+        return $this->first([Pack::KEY_COLUMN => $key]);
     }
 }

@@ -12,8 +12,6 @@ use BADDIServices\SocialRocket\Common\FeatureList;
 use BADDIServices\SocialRocket\Rules\RequiredIfFeatureEnabled;
 use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-
 class ConnectStoreRequest extends FormRequest
 {
     /**

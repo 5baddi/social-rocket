@@ -97,4 +97,9 @@ class PackService extends Service
             return $pack;
         });
     }
+
+    public function findByKey(int $key): ?Pack
+    {
+        return $this->packManager->findByKey($key);
+    }
 }
