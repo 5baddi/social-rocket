@@ -6,7 +6,7 @@
     <img src="{{ asset('img/connect-app.png') }}" class="img-box-right-login"/>
     <h1 class="title1">Connect your store</h1>
     <p>Please enter your Shopify store URL and we’ll redirect you to Shopify to finish connecting your store to {{ config('app.name') }} App.</p>
-    <form method="POST" action="{{ route('oauth.connect') }}">
+    <form method="POST" action="{{ localeRoute('oauth.connect') }}">
         @csrf
         <div class="box-form-design1">
             <div class="form-group-custom1">

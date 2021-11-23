@@ -19,7 +19,7 @@
             @endif
         </div>
         <span class="clearfix"></span>
-        <form action="{{ route('oauth.connect') }}" method="POST">
+        <form action="{{ localeRoute('oauth.connect') }}" method="POST">
             @csrf
             <div class="form-group">
 {{--                <label class="form-control-label">Shopify shop name or URL</label>--}}
@@ -40,6 +40,6 @@
     </div>
     <div class="card-footer px-md-5">
         <small>Already have an account?</small>
-        <a href="{{ route('signin') }}" class="small font-weight-bold">Login</a>
+        <a href="{{ localeRoute('signin') }}" class="small font-weight-bold">Login</a>
     </div>
 @endsection

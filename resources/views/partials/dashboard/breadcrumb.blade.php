@@ -13,7 +13,7 @@
           @if (!request()->routeIs('dashboard'))
           <div class="mt-2">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ localeRoute('dashboard') }}">Dashboard</a></li>
                 @foreach (request()->segments() as $key => $segment)
                     @if ($segment === 'dashboard')
                     @continue

@@ -7,7 +7,7 @@
 @section('content')
     <div class="row align-items-center pt-2 pb-4">
         <div class="col-auto ms-auto d-print-none">
-          <form id="periodForm" action="{{ route('dashboard') }}" method="POST">
+          <form id="periodForm" action="{{ localeRoute('dashboard') }}" method="POST">
             @csrf
             <input type="hidden" id="startDate" name="start-date"/>
             <input type="hidden" id="endDate" name="end-date"/>
@@ -24,9 +24,9 @@
                     <div class="dropdown">
                         <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last {{ $period ? $period : '7 days' }}</a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item {{ ($period === '7 days' || !$period) ? 'active' : '' }}" href="{{ route('dashboard', ['period' => '7_days']) }}">Last 7 days</a>
-                            <a class="dropdown-item {{ $period === '30 days' ? 'active' : '' }}" href="{{ route('dashboard', ['period' => '30_days']) }}">Last 30 days</a>
-                            <a class="dropdown-item {{ $period === 'current year' ? 'active' : '' }}" href="{{ route('dashboard', ['period' => 'current_year']) }}">Current year</a>
+                            <a class="dropdown-item {{ ($period === '7 days' || !$period) ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => '7_days']) }}">Last 7 days</a>
+                            <a class="dropdown-item {{ $period === '30 days' ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => '30_days']) }}">Last 30 days</a>
+                            <a class="dropdown-item {{ $period === 'current year' ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => 'current_year']) }}">Current year</a>
                         </div>
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="h1 mb-3">${{ $paidOrdersCommissions }}</div>
                 <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts') }}#paid">
+                    <a href="{{ localeRoute('dashboard.payouts') }}#paid">
                       View Payouts
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -74,7 +74,7 @@
                 </div>
                 <div class="h1 mb-3 text-red">${{ $unpaidOrdersCommissions }}</div>
                 <div class="d-flex">
-                    <a href="{{ route('dashboard.payouts') }}">
+                    <a href="{{ localeRoute('dashboard.payouts') }}">
                       Send Payouts
                       <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

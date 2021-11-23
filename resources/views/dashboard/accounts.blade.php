@@ -14,16 +14,16 @@
         <div class="card">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'settings']) }}" class="nav-link {{ $tab === 'settings' ? 'active' : '' }}">Account Info</a>
+                <a href="{{ localeRoute('dashboard.account', ['tab' => 'settings']) }}" class="nav-link {{ $tab === 'settings' ? 'active' : '' }}">Account Info</a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard.account', ['tab' => 'plan']) }}" class="nav-link {{ $tab === 'plan' ? 'active' : '' }}">Your plan</a>
+                <a href="{{ localeRoute('dashboard.account', ['tab' => 'plan']) }}" class="nav-link {{ $tab === 'plan' ? 'active' : '' }}">Your plan</a>
               </li>
             </ul>
         </div>
     </div>
 
-    <form action="{{ route('dashboard.account.save', ['tab' => $tab]) }}" method="POST">
+    <form action="{{ localeRoute('dashboard.account.save', ['tab' => $tab]) }}" method="POST">
         @csrf
         <div class="col">
             <div class="card">
@@ -141,8 +141,8 @@
                 <div class="col-12 text-end">
                     <div class="d-flex justify-content-end">
                         @if ($tab === 'plan')
-                        <a href="{{ route('dashboard.plan.cancel') }}" class="btn btn-ghost-danger">Cancel subscription</a>
-                        <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-ghost-dark" style="margin-left: .5rem;">
+                        <a href="{{ localeRoute('dashboard.plan.cancel') }}" class="btn btn-ghost-danger">Cancel subscription</a>
+                        <a href="{{ localeRoute('dashboard.plan.upgrade') }}" class="btn btn-ghost-dark" style="margin-left: .5rem;">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-rotate-2" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                 <path d="M15 4.55a8 8 0 0 0 -6 14.9m0 -4.45v5h-5"></path>

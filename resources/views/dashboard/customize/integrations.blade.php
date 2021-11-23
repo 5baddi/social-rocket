@@ -6,7 +6,7 @@
 
 @section('content')
 <div class="row row-cards">
-    <form action="{{ route('dashboard.customize.integrations.save') }}" method="POST">
+    <form action="{{ localeRoute('dashboard.customize.integrations.save') }}" method="POST">
         @csrf
 
         <div class="col-12">
@@ -24,11 +24,11 @@
                 </div>
                 <div class="card-body" id="affiliate-form" style="display: none;">
                     <div class="row">
-                        <a href="{{ route('guide.affiliate.setup') }}" target="_blank">How to add your sign up form to Shopify</a>
+                        <a href="{{ localeRoute('guide.affiliate.setup') }}" target="_blank">How to add your sign up form to Shopify</a>
                         <div class="col mt-2">
                             <label class="form-label">Copy this code and paste on a page</label>
                             <div class="input-group input-group-flat">
-                                <textarea id="iframe" rows="1" class="form-control text-start" style="resize: none;" readonly><iframe src="{{ route('affiliate', ['store' => $store]) }}" frameborder="0" width="100%" height="550px" scrolling="no"></iframe></textarea>
+                                <textarea id="iframe" rows="1" class="form-control text-start" style="resize: none;" readonly><iframe src="{{ localeRoute('affiliate', ['store' => $store]) }}" frameborder="0" width="100%" height="550px" scrolling="no"></iframe></textarea>
                                 <span class="input-group-text">
                                     <a id="copy-iframe" href="#" class="input-group-link" style="padding-left:.5rem;" title="copy">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -80,7 +80,7 @@
                                 <span class="form-label">
                                     Post Purchase Email (instant)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                <a href="{{ localeRoute('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -95,7 +95,7 @@
                                 <span class="form-label">
                                     Email 1 (24 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '24h']) }}" target="_blank">
+                                <a href="{{ localeRoute('dashboard.customize.integrations.mails.purchase', ['template' => '24h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -110,7 +110,7 @@
                                 <span class="form-label">
                                     Email 2 (48 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '48h']) }}" target="_blank">
+                                <a href="{{ localeRoute('dashboard.customize.integrations.mails.purchase', ['template' => '48h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -125,7 +125,7 @@
                                 <span class="form-label">
                                     Email 3 (120 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '120h']) }}" target="_blank">
+                                <a href="{{ localeRoute('dashboard.customize.integrations.mails.purchase', ['template' => '120h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -142,7 +142,7 @@
         <div class="row mt-4">
             <div class="col-12 text-end">
                 <div class="d-flex">
-                {{-- Need Help?&nbsp;<a href="{{ route('dashboard.help') }}">check our guide</a> --}}
+                {{-- Need Help?&nbsp;<a href="{{ localeRoute('dashboard.help') }}">check our guide</a> --}}
                 <button type="submit" class="btn btn-ghost-dark ms-auto">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-floppy" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

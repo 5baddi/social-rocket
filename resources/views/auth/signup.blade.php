@@ -14,7 +14,7 @@
             @endif
         </div>
         <span class="clearfix"></span>
-        <form action="{{ route('auth.signup', ['store' => $store->id]) }}" method="POST">
+        <form action="{{ localeRoute('auth.signup', ['store' => $store->id]) }}" method="POST">
             @csrf
             <div class="form-group">
                 <label class="form-control-label">First name</label>
@@ -78,6 +78,6 @@
     </div>
     <div class="card-footer px-md-5">
         <small>Already have an account?</small>
-        <a href="{{ route('signin') }}" class="small font-weight-bold">Login</a>
+        <a href="{{ localeRoute('signin') }}" class="small font-weight-bold">Login</a>
     </div>
 @endsection

@@ -7,7 +7,7 @@
 @section('content')
     <div class="row align-items-center pt-2 pb-4">
         <div class="col-auto ms-auto d-print-none">
-        <form id="periodForm" action="{{ route('dashboard') }}" method="POST">
+        <form id="periodForm" action="{{ localeRoute('dashboard') }}" method="POST">
             @csrf
             <input type="hidden" id="startDate" name="start-date"/>
             <input type="hidden" id="endDate" name="end-date"/>
@@ -24,9 +24,9 @@
                     <div class="dropdown">
                         <a class="dropdown-toggle text-muted" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Last {{ $period ? $period : '7 days' }}</a>
                         <div class="dropdown-menu dropdown-menu-end">
-                            <a class="dropdown-item {{ ($period === '7 days' || !$period) ? 'active' : '' }}" href="{{ route('dashboard', ['period' => '7_days']) }}">Last 7 days</a>
-                            <a class="dropdown-item {{ $period === '30 days' ? 'active' : '' }}" href="{{ route('dashboard', ['period' => '30_days']) }}">Last 30 days</a>
-                            <a class="dropdown-item {{ $period === 'current year' ? 'active' : '' }}" href="{{ route('dashboard', ['period' => 'current_year']) }}">Current year</a>
+                            <a class="dropdown-item {{ ($period === '7 days' || !$period) ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => '7_days']) }}">Last 7 days</a>
+                            <a class="dropdown-item {{ $period === '30 days' ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => '30_days']) }}">Last 30 days</a>
+                            <a class="dropdown-item {{ $period === 'current year' ? 'active' : '' }}" href="{{ localeRoute('dashboard', ['period' => 'current_year']) }}">Current year</a>
                         </div>
                     </div>
                 </div>

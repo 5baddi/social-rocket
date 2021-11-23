@@ -35,7 +35,7 @@
                     @endforeach
                 </ul>
                 <div class="text-center mt-4">
-                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? '#' : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn {{ ($currentPack && $currentPack->id === $pack->id) ? 'btn-dark' : '' }} w-100">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : 'Choose ' . ucwords($pack->name) }}</a>
+                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? '#' : localeRoute('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn {{ ($currentPack && $currentPack->id === $pack->id) ? 'btn-dark' : '' }} w-100">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : 'Choose ' . ucwords($pack->name) }}</a>
                 </div>
             </div>
         </div>

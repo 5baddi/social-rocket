@@ -48,7 +48,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{route('wink.password.email')}}">
+        <form method="POST" action="{{localeRoute('wink.password.email')}}">
             @csrf
 
             <div class="input-group mb-10">

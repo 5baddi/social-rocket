@@ -4,7 +4,7 @@
 
 @section('form')
     <h1 class="title1">Welcome back</h1>
-    <form method="POST" action="{{ route('auth.signin') }}">
+    <form method="POST" action="{{ localeRoute('auth.signin') }}">
         @csrf
         <div class="box-form-design1">
             <div class="form-group-custom1">
@@ -34,8 +34,8 @@
                 <button class="btn-design1" type="submit">Login</button>
             </div>
             <p class="have-account">
-                <a href="{{ route('reset') }}" class="link-design1">Can’t access your account?</a>
-                <a href="{{ route('connect') }}" class="link-design1">or Register</a>
+                <a href="{{ localeRoute('reset') }}" class="link-design1">Can’t access your account?</a>
+                <a href="{{ localeRoute('connect') }}" class="link-design1">or Register</a>
             </p>
         </div>
     </form> 

@@ -6,7 +6,7 @@ if (typeof Shopify.shop !== 'undefined' && typeof Shopify.checkout !== 'undefine
     };
 
     (async () => {
-        const rawResponse = await fetch('{{  route('rest.affiliate.order') }}?shop=' + Shopify.shop, {
+        const rawResponse = await fetch('{{  localeRoute('rest.affiliate.order') }}?shop=' + Shopify.shop, {
           method: 'POST',
           headers: {
             'Accept': 'application/json',

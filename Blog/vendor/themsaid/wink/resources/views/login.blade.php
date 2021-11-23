@@ -43,7 +43,7 @@
             </div>
         @endif
 
-        <form method="POST" action="{{route('wink.auth.attempt')}}">
+        <form method="POST" action="{{localeRoute('wink.auth.attempt')}}">
             @csrf
 
             <div class="input-group">
@@ -66,7 +66,7 @@
                     <label for="remember">Remember Me</label>
                 </div>
 
-                <a href="{{route('wink.password.forgot')}}" class="no-underline text-primary">Forgot your password?</a>
+                <a href="{{localeRoute('wink.password.forgot')}}" class="no-underline text-primary">Forgot your password?</a>
             </div>
 
             <button type="submit" class="btn-primary">Login</button>

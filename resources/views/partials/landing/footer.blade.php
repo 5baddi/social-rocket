@@ -51,12 +51,12 @@
                         <div class="col-md-6">
                             <ul class="nav justify-content-center justify-content-md-end mt-3 mt-md-0">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('privacy') }}">
+                                    <a class="nav-link" href="{{ localeRoute('privacy') }}">
                                         Privacy
                                     </a>
                                 </li>
                                 {{-- <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('privacy') }}">
+                                    <a class="nav-link" href="{{ localeRoute('privacy') }}">
                                         Terms
                                     </a>
                                 </li> --}}

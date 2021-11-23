@@ -24,7 +24,7 @@ customers bring in more shoppers. And this cycle continues.
                         </p>
                         <!-- Buttons -->
                         <div class="text-center text-md-left mt-5">
-                            <a href="{{ route('connect') }}" class="btn btn-primary btn-icon">
+                            <a href="{{ localeRoute('connect') }}" class="btn btn-primary btn-icon">
                                 <span class="btn-inner--text">Get {{ config('app.name') }} Now!</span>
                             </a>
                         </div>

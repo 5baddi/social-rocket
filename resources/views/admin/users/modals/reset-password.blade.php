@@ -5,7 +5,7 @@
           <h5 class="modal-title">Reset password</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
         </div>
-        <form action="{{ route('admin.users.password.reset', ['user' => $user->id]) }}" method="POST">
+        <form action="{{ localeRoute('admin.users.password.reset', ['user' => $user->id]) }}" method="POST">
           @csrf
           <div class="modal-body">
               <div>

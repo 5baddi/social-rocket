@@ -38,7 +38,7 @@
                         <td>{{ $subscription->activated_on->format('d/m/Y') }}</td>
                         <td>{{ $subscription->store->connected_at->format('d/m/Y') }}</td>
                         <td align="center">
-                            <a href="{{ route('admin.stores.view', ['store' => $subscription->store->id]) }}" class="btn btn-dark" title="Visit the store" target="_blank">
+                            <a href="{{ localeRoute('admin.stores.view', ['store' => $subscription->store->id]) }}" class="btn btn-dark" title="Visit the store" target="_blank">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                                     <circle cx="12" cy="12" r="2"></circle>
@@ -46,7 +46,7 @@
                                 </svg>
                             </a>
                             @if ($subscription->store->isEnabled())
-                            <form action="{{ route('admin.stores.disable', ['store' => $subscription->store->id]) }}" method="POST" style="display: inline;">
+                            <form action="{{ localeRoute('admin.stores.disable', ['store' => $subscription->store->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             <button class="btn btn-danger" title="Disable store">
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -58,7 +58,7 @@
                             </button>
                             </form>
                             @else
-                            <form action="{{ route('admin.stores.enable', ['store' => $subscription->store->id]) }}" method="POST" style="display: inline;">
+                            <form action="{{ localeRoute('admin.stores.enable', ['store' => $subscription->store->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             <button type="submit" class="btn btn-dark" title="Enable store">
                               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-lock-open" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

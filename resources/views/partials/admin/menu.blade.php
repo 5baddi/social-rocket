@@ -4,14 +4,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <h1 class="navbar-brand navbar-brand-autodark">
-        <a href="{{ route('dashboard') }}">
+        <a href="{{ localeRoute('dashboard') }}">
           <img src="{{ asset('assets/img/white-logo.svg') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
         </a>
       </h1>
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="navbar-nav pt-lg-3">
           <li class="nav-item {{ request()->routeIs('admin') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin') }}">
+            <a class="nav-link" href="{{ localeRoute('admin') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-device-desktop-analytics" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -29,7 +29,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('admin.stores') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.stores') }}">
+            <a class="nav-link" href="{{ localeRoute('admin.stores') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-building-store" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                       <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -44,7 +44,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('admin.users') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.users') }}">
+            <a class="nav-link" href="{{ localeRoute('admin.users') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('admin.settings') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('admin.settings') }}">
+            <a class="nav-link" href="{{ localeRoute('admin.settings') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -74,7 +74,7 @@
             <div class="col-12">
 {{--                <img src="{{ asset('assets/img/logo.mini.png') }}"/>--}}
                 <div class="col-auto align-self-center mt-1">
-                    <a href="{{ route('signout') }}" class="btn btn-white w-100">
+                    <a href="{{ localeRoute('signout') }}" class="btn btn-white w-100">
                         Logout
                     </a>
                 </div>

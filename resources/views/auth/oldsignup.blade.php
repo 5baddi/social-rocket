@@ -5,7 +5,7 @@
 @section('form')
     <h1 class="title1 uppercase">Welcome to</br>{{ config('app.name') }}</h1>
     <p>Lets get started by creating your account</p>
-    <form method="POST" action="{{ route('auth.signup', ['store' => $store->id]) }}">
+    <form method="POST" action="{{ localeRoute('auth.signup', ['store' => $store->id]) }}">
         @csrf
         <div class="box-form-design1">
             <div class="form-group-custom1">

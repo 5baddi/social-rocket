@@ -14,16 +14,16 @@
         <div class="card">
             <ul class="nav nav-tabs">
               <li class="nav-item">
-                <a href="{{ route('dashboard.settings', ['tab' => 'methods']) }}" class="nav-link {{ $tab === 'methods' ? 'active' : '' }}">Payout Methods</a>
+                <a href="{{ localeRoute('dashboard.settings', ['tab' => 'methods']) }}" class="nav-link {{ $tab === 'methods' ? 'active' : '' }}">Payout Methods</a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('dashboard.settings', ['tab' => 'notifications']) }}" class="nav-link {{ $tab === 'notifications' ? 'active' : '' }}">Notifications</a>
+                <a href="{{ localeRoute('dashboard.settings', ['tab' => 'notifications']) }}" class="nav-link {{ $tab === 'notifications' ? 'active' : '' }}">Notifications</a>
               </li>
             </ul>
         </div>
     </div>
 
-    <form action="{{ route('dashboard.settings.save', ['tab' => $tab]) }}" method="POST">
+    <form action="{{ localeRoute('dashboard.settings.save', ['tab' => $tab]) }}" method="POST">
         @csrf
         <div class="col">
             <div class="card">

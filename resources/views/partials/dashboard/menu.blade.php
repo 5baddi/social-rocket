@@ -4,14 +4,14 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <h1 class="navbar-brand navbar-brand-autodark">
-        <a href="{{ route('dashboard') }}">
+        <a href="{{ localeRoute('dashboard') }}">
           <img src="{{ asset('assets/img/white-logo.svg') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
         </a>
       </h1>
       <div class="collapse navbar-collapse" id="navbar-menu">
         <ul class="navbar-nav pt-lg-3">
           <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard') }}">
+            <a class="nav-link" href="{{ localeRoute('dashboard') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><polyline points="5 12 3 12 12 3 21 12 19 12" /><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
                 </span>
@@ -19,7 +19,7 @@
             </a>
           </li>
           <li class="nav-item dropdown {{ request()->routeIs('dashboard.customize') ? 'active' : '' }}">
-            <a class="nav-link dropdown-toggle" href="{{ route('dashboard.customize') }}" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="{{ localeRoute('dashboard.customize') }}" aria-expanded="false">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -39,13 +39,13 @@
             <div class="dropdown-menu {{ (request()->routeIs('dashboard.customize') || request()->routeIs('dashboard.customize.*')) ? 'show' : '' }}">
               <div class="dropdown-menu-columns">
                 <div class="dropdown-menu-column">
-                  <a class="dropdown-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}" href="{{ route('dashboard.customize.integrations') }}">Integrations</a>
+                  <a class="dropdown-item {{ request()->routeIs('dashboard.customize.integrations') ? 'active' : '' }}" href="{{ localeRoute('dashboard.customize.integrations') }}">Integrations</a>
                 </div>
               </div>
             </div>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.payouts') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.payouts') }}">
+            <a class="nav-link" href="{{ localeRoute('dashboard.payouts') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-coin" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -58,7 +58,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.account') }}">
+            <a class="nav-link" href="{{ localeRoute('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                   <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -70,7 +70,7 @@
             </a>
           </li>
           <li class="nav-item {{ request()->routeIs('dashboard.settings') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.settings') }}">
+            <a class="nav-link" href="{{ localeRoute('dashboard.settings') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-settings" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -83,7 +83,7 @@
           </li>
           @if (config('baddi.help_url'))
           <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
+            <a class="nav-link" href="{{ localeRoute('dashboard.help') }}" target="_blank">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -101,7 +101,7 @@
             <div class="col-12">
 {{--                <img src="{{ asset('assets/img/logo.mini.png') }}"/>--}}
                 <div class="col-auto align-self-center mt-3">
-                    <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-white w-100">
+                    <a href="{{ localeRoute('dashboard.plan.upgrade') }}" class="btn btn-white w-100">
                         Upgrade plan
                     </a>
                 </div>
@@ -111,7 +111,7 @@
                     </a>
                 </div>
                 <div class="col-auto align-self-center mt-1">
-                    <a href="{{ route('signout') }}" class="btn btn-white w-100">
+                    <a href="{{ localeRoute('signout') }}" class="btn btn-white w-100">
                         Logout
                     </a>
                 </div>

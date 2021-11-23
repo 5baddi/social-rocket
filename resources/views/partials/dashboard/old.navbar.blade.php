@@ -13,7 +13,7 @@
           @if (!request()->routeIs('dashboard'))
           <div class="mt-2">
             <ol class="breadcrumb breadcrumb-arrows" aria-label="breadcrumbs">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ localeRoute('dashboard') }}">Dashboard</a></li>
                 @foreach (request()->segments() as $key => $segment)
                     @if ($segment === 'dashboard')
                     @continue
@@ -43,7 +43,7 @@
                     {{ auth()->user()->unreadNotifications->first()->data['subject'] }}
                   </div>
                   <div class="card-footer">
-                    <a href="{{ route('dashboard.activity') }}" class="btn btn-ghost-dark w-100">
+                    <a href="{{ localeRoute('dashboard.activity') }}" class="btn btn-ghost-dark w-100">
                       Read all
                     </a>
                   </div>
@@ -66,11 +66,11 @@
                 </div>
               </a>
               <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                <a href="{{ route('dashboard.plan') }}" class="dropdown-item">Your plan</a>
+                <a href="{{ localeRoute('dashboard.plan') }}" class="dropdown-item">Your plan</a>
                 <div class="dropdown-divider"></div>
-                <a href="{{ route('dashboard.account') }}" class="dropdown-item">Account</a>
-                <a href="{{ route('dashboard.activity') }}" class="dropdown-item">Activity</a>
-                <a href="{{ route('signout') }}" class="dropdown-item">Logout</a>
+                <a href="{{ localeRoute('dashboard.account') }}" class="dropdown-item">Account</a>
+                <a href="{{ localeRoute('dashboard.activity') }}" class="dropdown-item">Activity</a>
+                <a href="{{ localeRoute('signout') }}" class="dropdown-item">Logout</a>
               </div>
             </div>
             {{-- <a href="#" class="btn btn-primary d-none d-sm-inline-block" data-bs-toggle="modal" data-bs-target="#modal-report">

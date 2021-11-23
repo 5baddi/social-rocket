@@ -19,7 +19,7 @@
             @endif
         </div>
         <span class="clearfix"></span>
-        <form action="{{ route('auth.signin') }}" method="POST">
+        <form action="{{ localeRoute('auth.signin') }}" method="POST">
             @csrf
             <div class="form-group">
                 <label class="form-control-label">E-mail address</label>
@@ -47,7 +47,7 @@
                         <label class="form-control-label">Password</label>
                     </div>
                     <div class="mb-2">
-                        <a href="{{ route('reset') }}" class="small text-muted text-underline--dashed border-primary">Reset password</a>
+                        <a href="{{ localeRoute('reset') }}" class="small text-muted text-underline--dashed border-primary">Reset password</a>
                     </div>
                 </div>
                 <div class="input-group">
@@ -78,6 +78,6 @@
     </div>
     <div class="card-footer px-md-5">
         <small>Not registered yet?</small>
-        <a href="{{ route('connect') }}" class="small font-weight-bold">Create account</a>
+        <a href="{{ localeRoute('connect') }}" class="small font-weight-bold">Create account</a>
     </div>
 @endsection

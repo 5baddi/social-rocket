@@ -52,7 +52,7 @@
                                 <line x1="15" y1="8" x2="17" y2="10"></line>
                               </svg>
                             </a>
-                            <form action="{{ route('admin.users.ban', ['user' => $user->id]) }}" method="POST" style="display: inline;">
+                            <form action="{{ localeRoute('admin.users.ban', ['user' => $user->id]) }}" method="POST" style="display: inline;">
                             @csrf
                             @if(!$user->isBanned())
                             <button class="btn btn-danger" title="Ban">

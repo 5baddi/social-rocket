@@ -19,7 +19,7 @@
         @endif
     </div>
     <span class="clearfix"></span>
-    <form method="POST" action="{{ route('auth.reset.password') }}">
+    <form method="POST" action="{{ localeRoute('auth.reset.password') }}">
         @csrf
         <input name="token" type="hidden" value="{{ $token }}"/>
         <div class="form-group">
@@ -47,7 +47,7 @@
 </div>
 <div class="card-footer px-md-5">
     <small>Back to</small>
-    <a href="{{ route('signin') }}" class="small font-weight-bold">Sign in</a>
+    <a href="{{ localeRoute('signin') }}" class="small font-weight-bold">Sign in</a>
     <small>page</small>
 </div>
 @endsection

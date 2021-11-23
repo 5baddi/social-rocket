@@ -14,7 +14,7 @@
                           <div class="text-muted">{{ $notification->created_at->diffForHumans() }}</div>
                       </div>
                       <div class="col-auto align-self-center">
-                          <a href="{{ route('dashboard.activity.read', ['notification' => $notification->id]) }}" class="btn btn-ghost-dark w-100">
+                          <a href="{{ localeRoute('dashboard.activity.read', ['notification' => $notification->id]) }}" class="btn btn-ghost-dark w-100">
                             Mark as read 
                           </a>
                       </div>
@@ -66,7 +66,7 @@
     <div class="col-8 mt-4">
       <div class="text-end">
           <div class="d-flex justify-content-end">
-              <a href="{{ route('dashboard.activity.read.all') }}" class="btn btn-ghost-dark">
+              <a href="{{ localeRoute('dashboard.activity.read.all') }}" class="btn btn-ghost-dark">
                 Mark all as read
               </a>
           </div>

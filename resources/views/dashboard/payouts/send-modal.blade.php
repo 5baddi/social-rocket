@@ -5,7 +5,7 @@
           <h5 class="modal-title">Send payment</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cancel"></button>
         </div>
-        <form action="{{ route('dashboard.payouts.send', ['commission' => $commission->id]) }}" method="POST">
+        <form action="{{ localeRoute('dashboard.payouts.send', ['commission' => $commission->id]) }}" method="POST">
           @csrf
           <div class="modal-body">
               <div>

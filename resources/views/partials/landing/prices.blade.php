@@ -23,7 +23,7 @@
                         <li @if(!$feature->isEnabled())class="uncheck"@endif>{{ ucwords($feature->getName()) }}</li>
                     @endforeach
                 </ul>
-                <a href="{{ route('connect', ['plan' => $pack->getKey()]) }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">
+                <a href="{{ localeRoute('connect', ['plan' => $pack->getKey()]) }}" class="btn btn-sm btn-warning hover-translate-y-n3 hover-shadow-lg mb-3">
                     @if ($pack->isFree())
                         @lang('packs.try_free')
                     @else

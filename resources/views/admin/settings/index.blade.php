@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<form action="{{ route('admin.settings.update') }}" method="POST">
+<form action="{{ localeRoute('admin.settings.update') }}" method="POST">
     @csrf
     <div class="row row-cards">
         <div class="col-12">

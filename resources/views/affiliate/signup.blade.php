@@ -31,7 +31,7 @@
                     </div>
                     @endif
 
-                    <form method="POST" action="{{ route('affiliate.signup', ['store' => $store->id]) }}">
+                    <form method="POST" action="{{ localeRoute('affiliate.signup', ['store' => $store->id]) }}">
                         @csrf
 
                         <div class="form-group group-register-form">
@@ -69,7 +69,7 @@
                     </form>
                     <div class="container" style="text-align: center;">
                         <p class="have-account">
-                            <a style="font-size: 12px; font-weight: 600; color: #04AF90 !important;" target="_blank" href="{{ route('signin') }}">
+                            <a style="font-size: 12px; font-weight: 600; color: #04AF90 !important;" target="_blank" href="{{ localeRoute('signin') }}">
                                 Already have an account? Sign in here.
                             </a>
                         </p>

@@ -16,7 +16,7 @@
     <body>
         <header>
             <div class="content-header">
-                <a href="{{ route('dashboard') }}" class="logo-header"><img src="{{ asset('assets/img/logo.svg') }}" alt=""></a>
+                <a href="{{ localeRoute('dashboard') }}" class="logo-header"><img src="{{ asset('assets/img/logo.svg') }}" alt=""></a>
             </div>
         </header>
 
@@ -53,14 +53,14 @@
                                     @endforeach
                                 </ul>
                                 <div class="box-btn-item-plan @if($currentPack && $currentPack->id === $pack->id) current-plan @endif">
-                                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? route('dashboard') : route('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : (!$currentPack ? 'Start Free Trial' : 'Choose ' . ucwords($pack->name)) }}</a>
+                                    <a href="{{ ($currentPack && $currentPack->id === $pack->id) ? localeRoute('dashboard') : localeRoute('subscription.pack.billing', ['pack' => $pack->id]) }}" class="btn-item-plan btn-design1">{{ $currentPack && $currentPack->id === $pack->id ? 'Current Plan' : (!$currentPack ? 'Start Free Trial' : 'Choose ' . ucwords($pack->name)) }}</a>
                                 </div>
                             </div>
                             @endforeach
                         </div>
                         @if (!$currentPack)
                         <div class="text-center">
-                            <a href="{{ route('subscription.cancel') }}" onclick="return confirm('Are you sure you want to delete your account?')">Delete your account!</a>
+                            <a href="{{ localeRoute('subscription.cancel') }}" onclick="return confirm('Are you sure you want to delete your account?')">Delete your account!</a>
                         </div>
                         @endif
                     </div>
