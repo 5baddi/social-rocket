@@ -33,7 +33,7 @@ class User extends Authenticatable
     public const CUSTOMER_ID_COLUMN = 'customer_id';
 
     public const DEFAULT_ROLE = 'affiliate';
-    public const STORE_OWNER_ROLE = 'store-owner';
+    public const STORE_OWNER_ROLE = 'shop-owner';
 
     /** @var array */
     public const ROLES = [

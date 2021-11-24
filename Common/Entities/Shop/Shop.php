@@ -9,9 +9,12 @@
 namespace BADDIServices\SocialRocket\Common\Entities\Shop;
 
 use BADDIServices\SocialRocket\Common\Entities\Entity;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Shop extends Entity
 {
+    use SoftDeletes;
+
     public const NAME_COLUMN = 'name';
     public const EMAIL_COLUMN = 'email';
     public const DOMAIN_COLUMN = 'domain';

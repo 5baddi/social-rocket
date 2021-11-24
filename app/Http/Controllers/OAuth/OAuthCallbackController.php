@@ -16,8 +16,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
 use BADDIServices\SocialRocket\AppLogger;
+use BADDIServices\SocialRocket\Common\Entities\Shop\Shop;
+use BADDIServices\SocialRocket\Common\Services\Shop\ShopService;
+use BADDIServices\SocialRocket\Common\Services\Shopify\MyShopService;
 use BADDIServices\SocialRocket\Models\OAuth;
-use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,6 +28,7 @@ use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Http\Requests\OAuthCallbackRequest;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class OAuthCallbackController extends Controller
 {
@@ -38,7 +41,9 @@ class OAuthCallbackController extends Controller
     public function __construct(
         ShopifyService $shopifyService,
         StoreService $storeService,
-        private PackService $packService
+        private PackService $packService,
+        private MyShopService $myShopService,
+        private ShopService $shopService
     )
     {
         parent::__construct();
@@ -50,9 +55,10 @@ class OAuthCallbackController extends Controller
     public function __invoke(OAuthCallbackRequest $request)
     {
         try {
-            $storeName = $this->shopifyService->getStoreName($request->query('shop'));
-            $store = $this->storeService->findBySlug($storeName);
-            if (!$store instanceof Store) {
+            $shopSlug = $this->myShopService->getShopSlug($request->query('shop'));
+            $shop = $this->shopService->findBySlug($shopSlug);
+            dd($shop);
+            if (!$shop instanceof Shop) {
                 abort(Response::HTTP_NOT_FOUND, 'Store not found');
             }
 
@@ -67,40 +73,39 @@ class OAuthCallbackController extends Controller
 
             DB::beginTransaction();
 
-            $oauth = $this->storeService->updateStoreOAuth($store, $attributes);
+            $oauth = $this->storeService->updateStoreOAuth($shop, $attributes);
             abort_unless($oauth instanceof OAuth, Response::HTTP_BAD_REQUEST, 'Something going wrong during authentification');
 
-            $store = $this->storeService->updateConfigurations($store);
-            $this->storeService->enableStore($store);
+            $shop = $this->storeService->updateConfigurations($shop);
+            $this->storeService->enableStore($shop);
 
-            $user = $this->userService->findByEmail($store->email);
+            $user = $this->userService->findByEmail($shop->email);
             if (!$user instanceof User) {
-                $firstName = ucwords($store->name);
+                $firstName = ucwords($shop->name);
                 $lastName = 'Admin';
 
-                $shopOwner = explode(' ', $store->shop_owner);
+                $shopOwner = explode(' ', $shop->shop_owner);
                 if (sizeof($shopOwner) === 2) {
                     $firstName = ucfirst($shopOwner[0]);
                     $lastName = ucfirst($shopOwner[1]);
                 }
 
                 $user = $this->userService->create(
-                    $store,
+                    $shop,
                     [
                         User::FIRST_NAME_COLUMN    => $firstName,
                         User::LAST_NAME_COLUMN     => $lastName,
-                        User::EMAIL_COLUMN         => $store->email,
-                        User::PHONE_COLUMN         => $store->phone
+                        User::EMAIL_COLUMN         => $shop->email,
+                        User::PHONE_COLUMN         => $shop->phone
                     ]
                 );
             }
 
-            Event::dispatch(new WelcomeMail($store, $user));
+            Event::dispatch(new WelcomeMail($shop, $user));
 
             $authenticateUser = Auth::loginUsingId($user->id);
             if (!$authenticateUser) {
-                return redirect()
-                    ->route('signin')
+                return $this->redirect('signin')
                     ->with('error', 'Something going wrong with the authentification');
             }
 
@@ -108,30 +113,25 @@ class OAuthCallbackController extends Controller
                 User::LAST_LOGIN_COLUMN    =>  Carbon::now()
             ]);
 
-            dd($this->packService->getFreePack());
-
             DB::commit();
 
-            return redirect()
-                ->route('dashboard')
+            return $this->redirect('dashboard')
                 ->with(
                     'alert',
                     new Alert('Your store has been linked successfully', 'success')
                 );
-        } catch (ValidationException $ex) {
-            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
-
-            return redirect()
-                ->route('connect')
+        } catch (ValidationException $e) {
+            return $this->redirect('connect')
                 ->withInput()
-                ->withErrors($ex->errors());
-        } catch (Throwable $ex) {
+                ->withErrors($e->errors());
+        } catch (HttpException $e) {
+            throw $e;
+        } catch (Throwable $e) {
             DB::rollBack();
 
-            AppLogger::setStore($store ?? null)->error($ex, 'store:oauth-callback', $request->all());
+            AppLogger::setStore($shop ?? null)->error($e, 'store:oauth-callback', $request->all());
 
-            return redirect()
-                ->route('connect')
+            return $this->redirect('connect')
                 ->with('error', 'Internal server error');
         }
     }

@@ -43,6 +43,9 @@ class Controller extends BaseController
     /** @var string */
     protected $baseView = 'App';
 
+    /** @var array */
+    protected $params = [];
+
     public function __construct()
     {
         $this->init();
@@ -73,6 +76,15 @@ class Controller extends BaseController
         ];
     }
 
+    /**
+     * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+     */
+    protected function redirect(string $route, array $params = [])
+    {
+        return redirect()
+            ->route($route, array_merge($this->params, $params));
+    }
+
     private function init(): void
     {
         /** @var Logger */
@@ -91,10 +103,18 @@ class Controller extends BaseController
         $this->featureService = app(FeatureService::class);
 
         $this->loadAppSettings();
+        $this->loadRequestParams();
     }
 
     private function loadAppSettings(): void
     {
         $this->appSettings = $this->appService->settings();
+    }
+    
+    private function loadRequestParams(): void
+    {
+        $this->params = [
+            'locale'  => app()->getLocale()
+        ];
     }
 }

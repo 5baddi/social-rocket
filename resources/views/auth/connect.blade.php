@@ -3,11 +3,6 @@
 @section('title') Connect your shop @endsection
 
 @section('form')
-{{--    <div class="card-header px-md-5">--}}
-{{--        <div class="text-center">--}}
-{{--            <img src="{{ asset('assets/img/shopify.svg') }}" style="max-width: 200px;"/>--}}
-{{--        </div>--}}
-{{--    </div>--}}
     <div class="card-body px-md-5 py-5">
         <div class="mb-4">
             <h6 class="h3 text-center">@lang('landing.connect_shop.title')</h6>
@@ -22,7 +17,6 @@
         <form action="{{ localeRoute('oauth.connect') }}" method="POST">
             @csrf
             <div class="form-group">
-{{--                <label class="form-control-label">Shopify shop name or URL</label>--}}
                 <div class="input-group">
                     <input name="shop" value="{{ old('shop') }}" type="text" class="form-control @if($errors->has('shop')) is-invalid @endif" placeholder="example.myshopify.com" autofocus required/>
                     @if($errors->has('shop'))

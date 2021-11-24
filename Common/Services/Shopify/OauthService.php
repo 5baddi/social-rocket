@@ -24,10 +24,10 @@ class OauthService extends Service
     public function getRedirectUrl(string $shopUrl, string $redirectUri, string $scopes = self::DEFAULT_SCOPES): string
     {
         return sprintf(
-            '%s/%s?client_id=%s&scope=%s&redirect_uri=%s',
+            '%s%s?client_id=%s&scope=%s&redirect_uri=%s',
             $shopUrl,
             self::OAUTH_AUTHORIZE_ENDPOINT,
-            '',
+            config('shopify.api_key'),
             $scopes,
             urlencode($redirectUri)
         );

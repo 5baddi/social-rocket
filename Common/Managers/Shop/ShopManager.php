@@ -9,7 +9,7 @@
 namespace BADDIServices\SocialRocket\Common\Managers\Shop;
 
 use BADDIServices\SocialRocket\Common\Managers\Cache\CacheManager;
-use BADDIServices\SocialRocket\Common\Repositories\ShopRepository;
+use BADDIServices\SocialRocket\Common\Repositories\Shop\ShopRepository;
 
 class ShopManager extends CacheManager
 {

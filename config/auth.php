@@ -1,5 +1,7 @@
 <?php
 
+use BADDIServices\SocialRocket\Common\Entities\Shop\ShopOwner;
+
 return [
 
     /*
@@ -67,8 +69,8 @@ return [
 
     'providers' => [
         'users' => [
-            'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'driver'    => 'shop-owner',
+            'model'     => ShopOwner::class,
         ],
 
         // 'users' => [

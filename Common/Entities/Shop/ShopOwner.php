@@ -8,11 +8,10 @@
 
 namespace BADDIServices\SocialRocket\Common\Entities\Shop;
 
-use BADDIServices\SocialRocket\Common\Entities\Entity;
+use App\Models\User;
 
-class ShopOwner extends Entity
+class ShopOwner extends User
 {
-    public const USER_ID_COLUMN = 'user_id';
     public const SHOP_ID_COLUMN = 'shop_id';
     public const FULL_NAME_COLUMN = 'full_name';
     public const PHONE_COLUMN = 'phone';

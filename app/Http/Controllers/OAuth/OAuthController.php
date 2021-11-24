@@ -50,7 +50,7 @@ class OAuthController extends Controller
 
             $oauthURL = $this->oauthService->getRedirectUrl(
                 $this->myShopService->getShopUrl($shopSlug),
-                route('oauth.callback')
+                localeRoute('oauth.callback')
             );
 
             return redirect($oauthURL);
