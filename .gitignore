@@ -14,3 +14,4 @@ yarn-error.log
 /blog/vendor
 public/assets/.DS_Store
 packages/shopify
+.DS_Store
