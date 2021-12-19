@@ -32,9 +32,9 @@ class SignInRequest extends FormRequest
     public function rules()
     {
         return [
-            User::EMAIL_COLUMN         => 'required|email',
-            User::PASSWORD_COLUMN      => 'required|string',
-            'h-captcha-response'       =>  ['required', new ValidateHCaptcha()],
+            User::EMAIL_COLUMN         => ['required', 'email'],
+            User::PASSWORD_COLUMN      => ['required', 'string'],
+            'h-captcha-response'       => [new ValidateHCaptcha()],
         ];
     }
 }

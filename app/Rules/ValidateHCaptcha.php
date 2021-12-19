@@ -40,6 +40,13 @@ class ValidateHCaptcha implements Rule
     public function passes($attribute, $value)
     {
         try {
+            if (
+                ! config('baddi.hcaptcha_enabled') ||
+                in_array(null, config('baddi.hcaptcha_verify_endpoint'), config('baddi.hcaptcha_secret'))
+            ) {
+                return true;
+            }
+
             $response = $this->client->request('POST', config('baddi.hcaptcha_verify_endpoint'), 
                 [
                     'form_params'       => [
