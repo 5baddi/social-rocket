@@ -27,4 +27,6 @@ class ModelEntity extends EloquentModel
     /** @var string */
     protected $primaryKey = 'id';
     protected $keyType = 'string';
+
+    protected $guarded = [];
 }

@@ -14,8 +14,6 @@ use Carbon\CarbonPeriod;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\App;
-use BADDIServices\SocialRocket\Entities\StoreSetting;
-use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
@@ -23,6 +21,7 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\SettingService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
+use Illuminate\Support\Facades\Validator;
 
 class StoreService extends Service
 {
@@ -92,16 +91,41 @@ class StoreService extends Service
             throw new ValidationException($validator);
         }
 
-        $store = $this->storeRepository->create($attributes);
+        $attributes = Arr::only(
+            $validator->validated(),
+            [
+                Store::NAME_COLUMN,
+                Store::EMAIL_COLUMN,
+                Store::DOMAIN_COLUMN,
+                Store::SLUG_COLUMN,
+                Store::PHONE_COLUMN,
+                Store::COUNTRY_COLUMN,
+                Store::SCRIPT_TAG_ID_COLUMN,
+                Store::CONNECTED_AT_COLUMN,
+                Store::ENABLED_COLUMN,
+            ]
+        );
 
-        $setting = collect(new StoreSetting());
-        $this->settingService->save($store, $setting);
-
-        return $store;
+        return $this->storeRepository->create($attributes);
     }
     
     public function update(Store $store, array $attributes): Store
     {
+        $attributes = Arr::only(
+            $attributes,
+            [
+                Store::NAME_COLUMN,
+                Store::EMAIL_COLUMN,
+                Store::DOMAIN_COLUMN,
+                Store::SLUG_COLUMN,
+                Store::PHONE_COLUMN,
+                Store::COUNTRY_COLUMN,
+                Store::SCRIPT_TAG_ID_COLUMN,
+                Store::CONNECTED_AT_COLUMN,
+                Store::ENABLED_COLUMN,
+            ]
+        );
+
         return $this->storeRepository->update($store, $attributes);
     }
     

@@ -18,7 +18,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Store extends ModelEntity
 {   
     /** @var string */
-    public const TABLE_NAME = 'stores';
     public const NAME_COLUMN = 'name';
     public const EMAIL_COLUMN = 'email';
     public const DOMAIN_COLUMN = 'domain';
@@ -30,25 +29,15 @@ class Store extends ModelEntity
     public const ENABLED_COLUMN = 'enabled';
 
     /** @var array */
-    protected $fillable = [
-        self::NAME_COLUMN,
-        self::EMAIL_COLUMN,
-        self::DOMAIN_COLUMN,
-        self::SLUG_COLUMN,
-        self::PHONE_COLUMN,
-        self::COUNTRY_COLUMN,
-        self::SCRIPT_TAG_ID_COLUMN,
-        self::CONNECTED_AT_COLUMN,
-        self::ENABLED_COLUMN,
-    ];
-
-    /** @var array */
     protected $casts = [
         self::ENABLED_COLUMN        => 'boolean',
         self::CONNECTED_AT_COLUMN   => 'datetime',
     ];
 
     private Setting|StoreSetting|null $setting;
+    private OAuth|null $oauth;
+    private User|null $owner;
+    private Subscription|null $subscription;
 
     public function setSetting(Setting|StoreSetting $setting): self
     {
@@ -60,6 +49,42 @@ class Store extends ModelEntity
     public function getSetting(): Setting|StoreSetting|null
     {
         return $this->setting;
+    }
+    
+    public function setOAuth(OAuth $oauth): self
+    {
+        $this->oauth = $oauth;
+
+        return $this;
+    }
+
+    public function getOAuth(): ?OAuth
+    {
+        return $this->oauth;
+    }
+    
+    public function setOwner(User $user): self
+    {
+        $this->owner = $user;
+
+        return $this;
+    }
+
+    public function getOwner(): ?User
+    {
+        return $this->owner;
+    }
+    
+    public function setSubscription(Subscription $subscription): self
+    {
+        $this->subscription = $subscription;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
     }
 
     public function user(): BelongsTo
