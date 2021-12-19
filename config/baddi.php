@@ -16,4 +16,5 @@ return [
     'hcaptcha_js_endpoint'               => env('HCAPTCHA_JS_ENDPOINT'),
     'hcaptcha_secret'                    => env('HCAPTCHA_SECRET'),
     'hcaptcha_site_key'                  => env('HCAPTCHA_SITE_KEY'),
+    'hcaptcha_enabled'                   => env('HCAPTCHA_ENABLED', false),
 ];
