@@ -32,7 +32,7 @@ class ConnectStoreRequest extends FormRequest
     {
         return [
             'store'                  =>  ['required', 'string'],
-            'h-captcha-response'     =>  ['required', new ValidateHCaptcha()],
+            'h-captcha-response'     =>  [new ValidateHCaptcha()],
         ];
     }
 }
