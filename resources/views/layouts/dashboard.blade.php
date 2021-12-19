@@ -39,7 +39,7 @@
             @yield('content')
           </div>
         </div>
-        {{-- <footer class="footer footer-transparent d-print-none">
+        <footer class="footer footer-transparent d-print-none">
           <div class="container">
             <div class="row text-center align-items-center flex-row-reverse">
               <div class="col-lg-auto ms-lg-auto">&nbsp;</div>
@@ -48,14 +48,14 @@
                   <li class="list-inline-item">
                     Copyright &copy; {{ date('Y') }} All rights reserved
                   </li>
-                  <li class="list-inline-item">
+                  {{-- <li class="list-inline-item">
                     <a href="https://baddi.info" class="link-secondary" rel="noopener">v1.0.0</a>
-                  </li>
+                  </li> --}}
                 </ul>
               </div>
             </div>
           </div>
-        </footer> --}}
+        </footer>
       </div>
       @if (request()->routeIs('dashboard'))
       @include('partials.dashboard.sidebar')

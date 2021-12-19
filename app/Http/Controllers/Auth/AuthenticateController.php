@@ -32,17 +32,26 @@ class AuthenticateController extends Controller
     {
         try {
             $user = $this->userService->findByEmail($request->input(User::EMAIL_COLUMN));
-            if (!$user) {
-                return redirect()->route('signin')->withInput()->with("error", "No account registred with those credentials");
+            if (! $user) {
+                return redirect()
+                    ->route('signin')
+                    ->withInput($request->only([User::EMAIL_COLUMN]))
+                    ->with("error", "No account registred with those credentials");
             }
 
-            if (!$this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
-                return redirect()->route('signin')->with('error', 'Incorrect credentials, try again...');
+            if (! $this->userService->verifyPassword($user, $request->input(User::PASSWORD_COLUMN))) {
+                return redirect()
+                    ->route('signin')
+                    ->withInput($request->only([User::EMAIL_COLUMN]))
+                    ->with('error', 'Incorrect credentials, try again...');
             }
 
             $authenticateUser = Auth::attempt(['email' => $user->email, 'password' => $request->input(User::PASSWORD_COLUMN)]);
-            if (!$authenticateUser) {
-                return redirect()->route('signin')->with('error', 'Something going wrong with the authentification');
+            if (! $authenticateUser) {
+                return redirect()
+                    ->route('signin')
+                    ->withInput($request->only([User::EMAIL_COLUMN]))
+                    ->with('error', 'Something going wrong with the authentification');
             }
 
             $this->userService->update($user, [
@@ -50,16 +59,26 @@ class AuthenticateController extends Controller
             ]);
 
             if ($user->isSuperAdmin()) {
-                return redirect()->route('admin')->with('success', 'Welcome back ' . strtoupper($user->first_name));
+                return redirect()
+                    ->route('admin')
+                    ->with('success', 'Welcome back ' . strtoupper($user->first_name));
             }
             
-            return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($user->first_name));
+            return redirect()
+                ->route('dashboard')
+                ->with('success', 'Welcome back ' . strtoupper($user->first_name));
         } catch (ValidationException $e) {
-            return redirect()->route('signin')->withInput()->withErrors($e->errors());
+            return redirect()
+                ->route('signin')
+                ->withInput($request->only([User::EMAIL_COLUMN]))
+                ->withErrors($e->errors());
         }  catch (Throwable $e) {
             AppLogger::error($e, 'auth:signin', ['playload' => $request->all()]);
 
-            return redirect()->route('signin')->withInput()->with("error", "Internal server error");
+            return redirect()
+                ->route('signin')
+                ->withInput($request->only([User::EMAIL_COLUMN]))
+                ->with("error", "Internal server error");
         }
     }
 }
