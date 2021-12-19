@@ -95,6 +95,8 @@ class UserService extends Service
             User::PHONE_COLUMN         => 'nullable|string|max:50'
         ]);
 
+        $attributes[User::PASSWORD_COLUMN] = Hash::make($attributes[User::PASSWORD_COLUMN]);
+
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }
