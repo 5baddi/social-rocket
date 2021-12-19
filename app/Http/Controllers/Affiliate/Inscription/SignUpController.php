@@ -26,14 +26,13 @@ class SignUpController extends Controller
     public function __invoke(string $storeName)
     {
         $store = $this->storeService->findBySlug($storeName);
-        if (!$store instanceof Store) {
+        if (! $store instanceof Store) {
             return redirect('/');
         }
 
         $store->load('setting');
         $setting = $store->setting;
-        
-        if (!$setting instanceof Setting || !$setting->affiliate_form) {
+        if (! $setting instanceof Setting || ! $setting->affiliate_form) {
             return redirect('/');
         }
 

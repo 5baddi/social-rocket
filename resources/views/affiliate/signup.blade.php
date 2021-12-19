@@ -25,12 +25,12 @@
                         {{ Session::get('error') }}
                     </div>
                     @endif
+
                     @if(Session::has('success'))
-                    <div class="valid-feedback" style="display: block;">
+                    <div class="valid-feedback text-center mb-2" style="display: block;">
                         {{ Session::get('success') }}
                     </div>
-                    @endif
-
+                    @else
                     <form method="POST" action="{{ route('affiliate.signup', ['store' => $store->id]) }}">
                         @csrf
 
@@ -56,17 +56,10 @@
                             <div class="invalid-feedback">{{ $errors->first('email') }}</div>
                             @endif
                         </div>
-                        
-                        <div class="form-group group-register-form">
-                            <label class="label-register-form" for="password">Password:</label>
-                            <input type="password" class="form-control input-register-form @if ($errors->has('password')) is-invalid @endif" id="password" name="password" required/>
-                            @if ($errors->has('password'))
-                            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
-                            @endif
-                        </div>
-                        
+
                         <button type="submit" style="display: block; width: 100%;" class="btn-thanks mt-4">Create Account</button>
                     </form>
+                    @endif
                     <div class="container" style="text-align: center;">
                         <p class="have-account">
                             <a style="font-size: 12px; font-weight: 600; color: #000000 !important;" target="_blank" href="{{ route('signin') }}">
