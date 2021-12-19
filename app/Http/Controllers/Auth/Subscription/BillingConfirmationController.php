@@ -55,12 +55,13 @@ class BillingConfirmationController extends Controller
             abort_unless($pack instanceof Pack, Response::HTTP_NOT_FOUND, 'No pack selected');
 
             $subscription = $this->subscriptionService->confirmBilling($user, $store, $pack, $request->query('charge_id'));
-            if (!$subscription instanceof Subscription || $subscription->status !== Subscription::CHARGE_ACCEPTED) {
-                return redirect()->route('subscription.select.pack')
-                                ->with(
-                                    'alert',
-                                    new Alert('Plan not activated please try to accept the billiing')
-                                );
+            if (! $subscription instanceof Subscription || $subscription->status !== Subscription::CHARGE_ACCEPTED) {
+                return redirect()
+                    ->route('subscription.select.pack')
+                    ->with(
+                        'alert',
+                        new Alert('Plan not activated please try to accept the billiing')
+                    );
             }
 
             $subscription = $this->subscriptionService->loadRelations($subscription);
@@ -68,25 +69,28 @@ class BillingConfirmationController extends Controller
 
             Event::dispatch(new SubscriptionSubscriptionActivated($user, $subscription));
 
-            return redirect()->route('dashboard')
-                            ->with(
-                                'alert',
-                                new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
-                            );
+            return redirect()
+                ->route('dashboard')
+                ->with(
+                    'alert',
+                    new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
+                );
         } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $e) {
-            return redirect()->route('subscription.select.pack')
-                            ->with(
-                                'alert',
-                                new Alert($e->getMessage())
-                            ); 
+            return redirect()
+                ->route('subscription.select.pack')
+                ->with(
+                    'alert',
+                    new Alert($e->getMessage())
+                ); 
         } catch (Throwable $e) {
             AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
 
-            return redirect()->route('subscription.select.pack')
-                            ->with(
-                                'alert',
-                                new Alert('Internal server error')
-                            ); 
+            return redirect()
+                ->route('subscription.select.pack')
+                ->with(
+                    'alert',
+                    new Alert('Internal server error')
+                ); 
         }
     }
 }
