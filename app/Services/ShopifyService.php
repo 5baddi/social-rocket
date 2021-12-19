@@ -385,8 +385,8 @@ class ShopifyService extends Service
 
             $data = json_decode($response->getBody(), true);
 
-            if (!isset($data['product']) || $response->getStatusCode() !== Response::HTTP_OK) {
-                throw new CustomerNotFound();
+            if (! isset($data['product']) || $response->getStatusCode() !== Response::HTTP_OK) {
+                throw new ProductNotFound();
             }
 
             return $data['product'];
