@@ -1,0 +1,8 @@
+[24-Jul-2021 11:54:16 UTC] PHP Fatal error:  Uncaught ReflectionException: Class config does not exist in /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php:836
+Stack trace:
+#0 /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(836): ReflectionClass->__construct('config')
+#1 /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(717): Illuminate\Container\Container->build('config')
+#2 /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(841): Illuminate\Container\Container->resolve('config', Array, true)
+#3 /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php(655): Illuminate\Foundation\Application->resolve('config', Array)
+#4 /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Foundation/Application.php(826): Illuminate\Container\Container->make('config', Array)
+#5 /home/socialrocketdev/public_html/vendor in /home/socialrocketdev/public_html/vendor/laravel/framework/src/Illuminate/Container/Container.php on line 838
