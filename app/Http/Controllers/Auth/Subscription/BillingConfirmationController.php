@@ -11,10 +11,12 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\AppLogger;
 use Illuminate\Support\Facades\Auth;
 use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Entities\Alert;
+use BADDIServices\SocialRocket\Events\Subscription\SubscriptionActivated as SubscriptionSubscriptionActivated;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Models\Subscription;
 use BADDIServices\SocialRocket\Services\PackService;
@@ -23,6 +25,7 @@ use BADDIServices\SocialRocket\Exceptions\Shopify\AcceptPaymentFailed;
 use BADDIServices\SocialRocket\Http\Requests\BillingConfirmationRequest;
 use BADDIServices\SocialRocket\Notifications\Subscription\SubscriptionActivated;
 use BADDIServices\SocialRocket\Exceptions\Shopify\IntegateAppLayoutToThemeFailed;
+use Illuminate\Support\Facades\Event;
 
 class BillingConfirmationController extends Controller
 {
@@ -53,28 +56,32 @@ class BillingConfirmationController extends Controller
 
             $subscription = $this->subscriptionService->confirmBilling($user, $store, $pack, $request->query('charge_id'));
             if (!$subscription instanceof Subscription || $subscription->status !== Subscription::CHARGE_ACCEPTED) {
-                return redirect()->route('subscription.select.pack')->with('error', 'Plan not activated please try to accept the billiing');
+                return redirect()->route('subscription.select.pack')
+                                ->with(
+                                    'alert',
+                                    new Alert('Plan not activated please try to accept the billiing')
+                                );
             }
-
-            // if ($subscription->pack->type === Pack::USAGE_TYPE) {
-            //     $subscription = $this->subscriptionService->confirmUsageBilling($user, $store, $pack, $request->query('charge_id'));
-            // }
 
             $subscription = $this->subscriptionService->loadRelations($subscription);
             $user->notify(new SubscriptionActivated($subscription));
+
+            Event::dispatch(new SubscriptionSubscriptionActivated($user, $subscription));
 
             return redirect()->route('dashboard')
                             ->with(
                                 'alert',
                                 new  Alert(ucwords($pack->name) . ' plan activated successfully', 'success')
                             );
-        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $ex) {
+        } catch (AcceptPaymentFailed | IntegateAppLayoutToThemeFailed $e) {
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',
-                                new Alert($ex->getMessage())
+                                new Alert($e->getMessage())
                             ); 
-        } catch (Throwable $ex) {
+        } catch (Throwable $e) {
+            AppLogger::setStore($store ?? null)->error($e, 'store:confirm-billing', ['playload' => $request->all()]);
+
             return redirect()->route('subscription.select.pack')
                             ->with(
                                 'alert',

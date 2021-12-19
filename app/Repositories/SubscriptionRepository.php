@@ -8,11 +8,21 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
-use BADDIServices\SocialRocket\Models\Subscription;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use BADDIServices\SocialRocket\Models\Subscription;
 
 class SubscriptionRepository
 {
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return Subscription::query()
+                    ->with(['user', 'pack', 'store'])
+                    ->where(Subscription::USER_ID_COLUMN, '!=', Auth::id())
+                    ->paginate(10, ['*'], 'ap', $page);
+    }
+
     public function getUsageBills(): Collection
     {
         return Subscription::query()

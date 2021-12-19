@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <title>{{ config('app.name') }} &mdash; Sign up</title>
         <meta name="viewport" content="width=device-width">
-        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}"/>
         <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}"/>
@@ -36,16 +36,33 @@
 
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="first_name">First Name:</label>
-                            <input type="text" class="form-control input-register-form" id="first_name" name="first_name" value="{{ old('first_name') }}" required>
+                            <input type="text" class="form-control input-register-form @if ($errors->has('first_name')) is-invalid @endif" id="first_name" name="first_name" value="{{ old('first_name') }}" required/>
+                            @if ($errors->has('first_name'))
+                            <div class="invalid-feedback">{{ $errors->first('first_name') }}</div>
+                            @endif
                         </div>
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="last_name">Last Name:</label>
-                            <input type="text" class="form-control input-register-form" id="last_name" name="last_name" value="{{ old('last_name') }}" required>
+                            <input type="text" class="form-control input-register-form @if ($errors->has('last_name')) is-invalid @endif" id="last_name" name="last_name" value="{{ old('last_name') }}" required/>
+                            @if ($errors->has('last_name'))
+                            <div class="invalid-feedback">{{ $errors->first('last_name') }}</div>
+                            @endif
                         </div>
                         
                         <div class="form-group group-register-form">
                             <label class="label-register-form" for="email">Email:</label>
-                            <input type="email" class="form-control input-register-form" id="email" name="email" value="{{ old('email') }}" required>
+                            <input type="email" class="form-control input-register-form @if ($errors->has('email')) is-invalid @endif" id="email" name="email" value="{{ old('email') }}" required/>
+                            @if ($errors->has('email'))
+                            <div class="invalid-feedback">{{ $errors->first('email') }}</div>
+                            @endif
+                        </div>
+                        
+                        <div class="form-group group-register-form">
+                            <label class="label-register-form" for="password">Password:</label>
+                            <input type="password" class="form-control input-register-form @if ($errors->has('password')) is-invalid @endif" id="password" name="password" required/>
+                            @if ($errors->has('password'))
+                            <div class="invalid-feedback">{{ $errors->first('password') }}</div>
+                            @endif
                         </div>
                         
                         <button type="submit" style="display: block; width: 100%;" class="btn-thanks mt-4">Create Account</button>

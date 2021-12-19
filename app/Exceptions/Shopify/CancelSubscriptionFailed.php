@@ -14,7 +14,7 @@ use Throwable;
 class CancelSubscriptionFailed extends Exception
 {
     /** @var int */
-    public const CODE = 16;
+    public const CODE = 58;
 
     /** @var string */
     public const MESSAGE = "Failed to cancel subscription";

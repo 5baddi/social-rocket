@@ -14,7 +14,7 @@ use Throwable;
 class IntegateAppLayoutToThemeFailed extends Exception
 {
     /** @var int */
-    public const CODE = 17;
+    public const CODE = 64;
 
     /** @var string */
     public const MESSAGE = "Failed to integrate app layouts to theme";

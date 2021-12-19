@@ -8,11 +8,24 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class UserRespository
 {
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return User::query()
+                    ->with(['store'])
+                    ->where(User::ID_COLUMN, '!=', Auth::id())
+                    ->paginate(10, ['*'], 'ap', $page);
+    }
+
     public function exists(int $customerId): ?User
     {
         return User::query()
@@ -27,6 +40,16 @@ class UserRespository
                     ->with(['store', 'subscription'])
                     ->where([
                         User::EMAIL_COLUMN => strtolower($email)
+                    ])
+                    ->first();
+    }
+    
+    public function findByCustomerId(int $customerId): ?User
+    {
+        return User::query()
+                    ->with(['store'])
+                    ->where([
+                        User::CUSTOMER_ID_COLUMN => $customerId
                     ])
                     ->first();
     }
@@ -77,5 +100,70 @@ class UserRespository
         }
 
         return false;
+    }
+    
+    public function delete(string $id): bool
+    {
+        return User::query()
+                    ->find($id)
+                    ->delete();
+    }
+
+    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
+    {
+        return User::query()
+                    ->whereDate(
+                        User::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        User::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->where($conditions)
+                    ->count();
+    }
+
+    public function generateResetPasswordToken(string $email): ?string
+    {
+        DB::table('password_resets')
+            ->where('email', $email)
+            ->delete();
+
+        DB::table('password_resets')
+            ->insert([
+                'email'         => $email,
+                'token'         => Str::random(60),
+                'created_at'    => Carbon::now()
+            ]);
+
+        $tokenData = DB::table('password_resets')
+            ->where('email', $email)
+            ->select('token')
+            ->first();
+
+        return $tokenData->token ?? null;
+    }
+
+    public function verifyResetPasswordToken(string $token): ?User
+    {
+        $token = DB::table('password_resets')
+            ->where('token', $token)
+            ->first();
+
+        if ($token === null || $token->email === null) {
+            return null;
+        }
+
+        return $this->findByEmail($token->email);
+    }
+
+    public function removeResetPasswordToken(string $token): bool
+    {
+        return DB::table('password_resets')
+            ->where('token', $token)
+            ->delete() > 0;
     }
 }

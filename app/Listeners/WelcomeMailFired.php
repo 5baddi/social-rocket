@@ -12,8 +12,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
+use Illuminate\Contracts\Queue\ShouldQueue;
 
-class WelcomeMailFired
+class WelcomeMailFired implements ShouldQueue
 {
     /** @var string */
     public const SUBJECT = "Welcome to ";
@@ -26,7 +27,15 @@ class WelcomeMailFired
         /** @var User */
         $user = $event->user;
 
-        Mail::send('emails.welcome', ['store', $store, 'user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
+        /** @var bool */
+        $isAffiliate = $event->isAffiliate ?? false;
+
+        $template = 'emails.welcome';
+        if ($isAffiliate) {
+            $template = 'emails.affiliate.welcome';
+        }
+
+        Mail::send($template, ['store' => $store, 'user' => $user, 'subject' => self::SUBJECT . config('app.name')], function($message) use ($user) {
             $message->to($user->email);
             $message->subject(self::SUBJECT . config('app.name'));
         });

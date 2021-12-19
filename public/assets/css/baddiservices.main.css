@@ -73,3 +73,10 @@ hr {
     margin-bottom: 0 !important;
     opacity: .5;
 }
+
+.top-logo {
+    text-align: center;
+}
+.top-logo img {
+    width: 75%;
+}

@@ -31,7 +31,7 @@ class ResetPasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            User::EMAIL_COLUMN         => 'required|email',
+            'token'                    => 'required|string|min:60',
             User::PASSWORD_COLUMN      => 'required|string|min:8|same:confirm_password',
             'confirm_password'         => 'required|string|min:8'
         ];

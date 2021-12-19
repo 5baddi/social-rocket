@@ -54,20 +54,30 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \App\Http\Middleware\Authenticate::class,
-        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
-        'can' => \Illuminate\Auth\Middleware\Authorize::class,
-        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
-        'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
-        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
-        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'has.store' => \BADDIServices\SocialRocket\Http\Middleware\HasStore::class,
-        'has.subscription' => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
-        'cors' => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
-        'is.affiliate' => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
-        'store-owner' => \BADDIServices\SocialRocket\Http\Middleware\StoreOwner::class,
-        'signin.with.app' => \BADDIServices\SocialRocket\Http\Middleware\SignInWithShopifyApp::class,
+        'auth'                  => \App\Http\Middleware\Authenticate::class,
+        'auth.basic'            => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'cache.headers'         => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can'                   => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest'                 => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'password.confirm'      => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'signed'                => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle'              => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified'              => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'has.store'             => \BADDIServices\SocialRocket\Http\Middleware\HasStore::class,
+        'has.subscription'      => \BADDIServices\SocialRocket\Http\Middleware\HasSubscription::class,
+        'cors'                  => \BADDIServices\SocialRocket\Http\Middleware\Cors::class,
+        'is.affiliate'          => \BADDIServices\SocialRocket\Http\Middleware\AffiliateAccount::class,
+        'store-owner'           => \BADDIServices\SocialRocket\Http\Middleware\StoreOwner::class,
+        'admin'                 => \BADDIServices\SocialRocket\Http\Middleware\SuperAdmin::class,
+        'signin.with.app'       => \BADDIServices\SocialRocket\Http\Middleware\SignInWithShopifyApp::class,
+        'is-shopify-webhook'    => \BADDIServices\SocialRocket\Http\Middleware\IsShopifyWebhook::class,
     ];
+
+    protected function bootstrappers()
+    {
+        return array_merge(
+            [\Bugsnag\BugsnagLaravel\OomBootstrapper::class],
+            parent::bootstrappers(),
+        );
+    }
 }

@@ -15,6 +15,7 @@ class AddUsersIsSuperadminColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('is_superadmin')->default(false)->after('role');
+            $table->boolean('banned')->default(false)->after('is_superadmin');
         });
     }
 
@@ -27,6 +28,7 @@ class AddUsersIsSuperadminColumn extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('is_superadmin');
+            $table->dropColumn('banned');
         });
     }
 }

@@ -45,6 +45,18 @@ You can now access the server at http://127.0.0.1:8000
 
 To see all defined routes and corresponding controllers methods use `php artisan route:list` console command
 
+Queue listen
+
+``` bash
+php artisan queue:work --timeout=2000 --sleep=3 --tries=3 --daemon
+```
+
+Run scheduled commands
+
+``` bash
+php artisan schedule:run
+```
+
 ## Mail configuration
 `MAIL_MAILER`=smtp
 
@@ -83,6 +95,6 @@ You can follow next [steps](https://www.shopify.co.uk/partners/blog/how-to-build
 
     `Set your zendesk help/guide page url`
 
-- GUIDE_SETUP
+- SETUP_GUIDE
 
     `Set setup guide page url will be included in affiliate iframe settings`

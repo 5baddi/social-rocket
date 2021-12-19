@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Models;
 
 use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Order extends ModelEntity
@@ -54,6 +55,11 @@ class Order extends ModelEntity
         self::PRODUCTS_IDS_COLUMN   => 'json',
         self::DISCOUNT_CODES_COLUMN => 'json',
     ];
+
+    public function store(): BelongsTo
+    {
+        return $this->belongsTo(Store::class);
+    }
 
     public function products(): BelongsToMany
     {

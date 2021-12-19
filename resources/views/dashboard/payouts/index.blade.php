@@ -9,7 +9,7 @@
     <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Panding payouts</h3>
+            <h3 class="card-title">Pending payouts</h3>
           </div>
           <div class="table-responsive">
             <table class="table card-table table-vcenter text-nowrap datatable">
@@ -25,6 +25,11 @@
                 </tr>
               </thead>
               <tbody>
+                  @if ($unpaidCommissions->count() === 0)
+                  <tr>
+                    <td colspan="7" class="text-center text-xs text-muted">No data</td>
+                  </tr>
+                  @endif
                   @foreach ($unpaidCommissions as $commission)
                     <tr>
                         <td>{{ $commission->created_at->format('d/m/Y') }}</td>
@@ -77,6 +82,11 @@
                 </tr>
               </thead>
               <tbody>
+                  @if ($paidCommissions->count() === 0)
+                  <tr>
+                    <td colspan="7" class="text-center text-xs text-muted">No data</td>
+                  </tr>
+                  @endif
                   @foreach ($paidCommissions as $commission)
                     <tr>
                         <td>{{ $commission->created_at->format('d/m/Y') }}</td>

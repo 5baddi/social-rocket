@@ -14,7 +14,7 @@ use Throwable;
 class CreatePriceRuleFailed extends Exception
 {
     /** @var int */
-    public const CODE = 21;
+    public const CODE = 61;
 
     /** @var string */
     public const MESSAGE = "Failed to create price rule";

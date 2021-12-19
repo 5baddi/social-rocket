@@ -9,16 +9,13 @@
 namespace BADDIServices\SocialRocket\Models;
 
 use App\Models\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends ModelEntity
-{
-    use SoftDeletes;
-    
+{   
     /** @var string */
     public const TABLE_NAME = 'stores';
     public const NAME_COLUMN = 'name';
@@ -28,7 +25,8 @@ class Store extends ModelEntity
     public const PHONE_COLUMN = 'phone';
     public const COUNTRY_COLUMN = 'country';
     public const SCRIPT_TAG_ID_COLUMN = 'script_tag_id';
-    public const CONNECTED_AT = 'connected_at';
+    public const CONNECTED_AT_COLUMN = 'connected_at';
+    public const ENABLED_COLUMN = 'enabled';
 
     /** @var array */
     protected $fillable = [
@@ -39,7 +37,14 @@ class Store extends ModelEntity
         self::PHONE_COLUMN,
         self::COUNTRY_COLUMN,
         self::SCRIPT_TAG_ID_COLUMN,
-        self::CONNECTED_AT,
+        self::CONNECTED_AT_COLUMN,
+        self::ENABLED_COLUMN,
+    ];
+
+    /** @var array */
+    protected $casts = [
+        self::ENABLED_COLUMN        => 'boolean',
+        self::CONNECTED_AT_COLUMN   => 'datetime',
     ];
 
     public function user(): BelongsTo
@@ -65,5 +70,15 @@ class Store extends ModelEntity
     public function affiliates(): HasMany
     {
         return $this->hasMany(User::class);
+    }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function isEnabled(): bool
+    {
+        return $this->getAttribute(self::ENABLED_COLUMN) === true;
     }
 }

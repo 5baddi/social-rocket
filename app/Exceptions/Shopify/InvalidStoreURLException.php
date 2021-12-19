@@ -14,7 +14,7 @@ use Throwable;
 class InvalidStoreURLException extends Exception
 {
     /** @var int */
-    public const CODE = 11;
+    public const CODE = 67;
 
     /** @var string */
     public const MESSAGE = "Store URL is invalid";

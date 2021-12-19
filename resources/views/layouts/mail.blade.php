@@ -5,7 +5,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="icon" type="image/png" href="{{ asset('img/mini-logo.png') }}"/>
+        <link rel="icon" type="image/png" href="{{ asset('assets/img/logo.mini.png') }}"/>
         <style>
             @import  url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
         </style>
@@ -67,7 +67,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
 
                                                 @yield('content')
 
-                                                <tr>
+                                                {{-- <tr>
                                                     <td>
                                                         <p style="font-size: 14px;">Good luck! I know you’ll crush it.</p>
 
@@ -75,7 +75,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD
                                                         <p style="font-size: 14px;"><b>{{ ucwords($store->name) }}</b></p>
                                                         @endif
                                                     </td>
-                                                </tr>
+                                                </tr> --}}
                                                 <tr>
                                                     <td>
                                                         <table class="footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation" style="-premailer-cellpadding: 0; -premailer-cellspacing: 0; -premailer-width: 570px; margin: 0 auto; padding: 0; text-align: center; width: 570px;">

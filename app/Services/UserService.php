@@ -9,15 +9,17 @@
 namespace BADDIServices\SocialRocket\Services;
 
 use App\Models\User;
+use Carbon\CarbonPeriod;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\Store;
 use BADDIServices\SocialRocket\Models\Setting;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use BADDIServices\SocialRocket\Services\CouponService;
 use BADDIServices\SocialRocket\Repositories\UserRespository;
 use BADDIServices\SocialRocket\Notifications\Affiliate\NewAffiliateAccount;
-use Illuminate\Support\Arr;
 
 class UserService extends Service
 {
@@ -33,6 +35,11 @@ class UserService extends Service
         $this->couponService = $couponService;
     }
 
+    public function paginateWithRelations(?int $page = null): LengthAwarePaginator
+    {
+        return $this->userRepository->paginateWithRelations($page);
+    }
+
     public function verifyPassword(User $user, string $password): bool
     {
         return Hash::check($password, $user->password);
@@ -46,6 +53,11 @@ class UserService extends Service
     public function findByEmail(string $email): ?User
     {
         return $this->userRepository->findByEmail($email);
+    }
+    
+    public function findByCustomerId(int $customerId): ?User
+    {
+        return $this->userRepository->findByCustomerId($customerId);
     }
     
     public function getStoreOwner(Store $store): ?User
@@ -95,36 +107,87 @@ class UserService extends Service
 
     public function update(User $user, array $attributes): User
     {
-        $attributes = collect([
-            User::FIRST_NAME_COLUMN     => $attributes[User::FIRST_NAME_COLUMN],
-            User::LAST_NAME_COLUMN      => $attributes[User::LAST_NAME_COLUMN],
-            User::EMAIL_COLUMN          => $attributes[User::EMAIL_COLUMN],
-            User::PHONE_COLUMN          => $attributes[User::PHONE_COLUMN],
-            User::PASSWORD_COLUMN       => $attributes[User::PASSWORD_COLUMN],
-        ]);
+        $attributes = collect($attributes);
 
-        $filterAttributes = $attributes->filter(function($value, $key) {
+        $filterAttributes = $attributes->only([
+            User::FIRST_NAME_COLUMN,
+            User::LAST_NAME_COLUMN,
+            User::EMAIL_COLUMN,
+            User::PHONE_COLUMN,
+            User::PASSWORD_COLUMN,
+            User::LAST_LOGIN_COLUMN,
+            User::VERIFIED_AT_COLUMN
+        ])->filter(function($value, $key) {
             return $value !== null;
         });
 
+        if ($attributes->has(User::PASSWORD_COLUMN)) {
+            $filterAttributes->put(User::PASSWORD_COLUMN, Hash::make($attributes->get(User::PASSWORD_COLUMN)));
+        }
+
         return $this->userRepository->update($user, $filterAttributes->toArray());
     }
-
-    public function welcomeMail(User $user): void
+    
+    public function delete(User $user): bool
     {
-        
+        return $this->userRepository->delete($user->id);
+    }
+    
+    public function ban(User $user): User
+    {
+        return $this->userRepository->update($user, [
+            User::BANNED_COLUMN => !$user->isBanned()
+        ]);
     }
     
     public function notifyStoreOwner(Store $store, User $affiliate): void
-    {
-        $store->load(['user', 'setting']);
-        
+    {   
         /** @var User */
-        $user = $store->user;
+        $user = $this->getStoreOwner($store);
 
-        /** @var Setting */
-        $setting = $store->setting;
+        if ($user instanceof User) {
+            /** @var Setting */
+            $setting = $store->setting;
 
-        $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
+            $user->notify(new NewAffiliateAccount($user, $affiliate, $setting));
+        }
+    }
+
+    public function getAllNewAffiliatesCount(CarbonPeriod $period): int
+    {
+        return $this->userRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [User::ROLE_COLUMN, '=', User::DEFAULT_ROLE]
+            ]
+        );
+    }
+    
+    public function getAllNewVerifiedAffiliatesCount(CarbonPeriod $period): int
+    {
+        return $this->userRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [User::ROLE_COLUMN, '=', User::DEFAULT_ROLE],
+                [User::VERIFIED_AT_COLUMN, '!=', null],
+            ]
+        );
+    }
+
+    public function generateResetPasswordToken(User $user): ?string
+    {
+        return $this->userRepository->generateResetPasswordToken($user->email);
+    }
+    
+    public function verifyResetPasswordToken(string $token): ?User
+    {
+        return $this->userRepository->verifyResetPasswordToken($token);
+    }
+    
+    public function removeResetPasswordToken(string $token): bool
+    {
+        return $this->userRepository->removeResetPasswordToken($token);
     }
 }

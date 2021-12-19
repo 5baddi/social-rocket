@@ -1,4 +1,6 @@
+@if ($paginator->count() > 0)
 <p class="m-0 text-muted">Showing <span>{{ $paginator->firstItem() }}</span> to  <span>{{ $paginator->lastItem() }}</span> of <span>{{ $paginator->total() }}</span> entries</p>
+@endif
 @if ($paginator->hasPages())
 <ul class="pagination m-0 ms-auto">
     @if (!$paginator->onFirstPage())

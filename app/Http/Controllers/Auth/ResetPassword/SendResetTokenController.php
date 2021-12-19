@@ -14,12 +14,15 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Event;
 use BADDIServices\SocialRocket\AppLogger;
+use Illuminate\Validation\ValidationException;
 use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SocialRocket\Events\Auth\ResetPassword;
 use BADDIServices\SocialRocket\Http\Requests\Auth\ResetTokenRequest;
+use BADDIServices\SocialRocket\Exceptions\Auth\FailedToGenerateToken;
 
-class ResetTokenController extends Controller
+class SendResetTokenController extends Controller
 {
     /** @var UserService */
     private $userService;
@@ -40,25 +43,23 @@ class ResetTokenController extends Controller
                             ->with('error', 'No account registred with this email');
             }
 
-            DB::table('password_resets')->insert([
-                'email'         => $request->email,
-                'token'         => Str::random(60),
-                'created_at'    => Carbon::now()
-            ]);
+            $token = $this->userService->generateResetPasswordToken($user);
+            if ($token === null) {
+                throw new FailedToGenerateToken();
+            }
 
-            $tokenData = DB::table('password_resets')
-                            ->where('email', $request->input(User::EMAIL_COLUMN))->first();
+            Event::dispatch(new ResetPassword($user, $token));
 
             return redirect()
                     ->back()
                     ->with('success', 'A reset link has been sent to your email address.');
-        } catch (ValidationException $ex) {
+        } catch (ValidationException $e) {
             return redirect()
                     ->back()
                     ->withInput()
-                    ->withErrors($ex->errors());
-        }  catch (Throwable $ex) {
-            AppLogger::error($ex, null, 'auth:send-reset-token', ['playload' => $request->all()]);
+                    ->withErrors($e->errors());
+        }  catch (Throwable $e) {
+            AppLogger::error($e, 'auth:send-reset-token', ['playload' => $request->all()]);
 
             return redirect()
                     ->back()

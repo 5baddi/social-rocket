@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Repositories;
 
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use BADDIServices\SocialRocket\Models\OAuth;
@@ -31,17 +32,25 @@ class StoreRepository
     public function findBySlug(string $slug): ?Store
     {
         return Store::query()
+                    ->with(['user', 'oauth'])
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
                     ->first();
     }
     
-    public function where(array $conditions): ?Store
+    public function first(array $conditions): ?Store
     {
         return Store::query()
                     ->where($conditions)
                     ->first();
+    }
+    
+    public function where(array $conditions): Collection
+    {
+        return Store::query()
+                    ->where($conditions)
+                    ->get();
     }
     
     public function isLinked(string $slug): ?Store
@@ -50,7 +59,7 @@ class StoreRepository
                     ->where([
                         Store::SLUG_COLUMN => $slug
                     ])
-                    ->whereNotNull(Store::CONNECTED_AT)
+                    ->whereNotNull(Store::CONNECTED_AT_COLUMN)
                     ->first();
     }
     
@@ -96,5 +105,37 @@ class StoreRepository
                         ], 
                         $attributes
                     );
+    }
+
+    public function delete(string $id): bool
+    {
+        return Store::query()
+                    ->find($id)
+                    ->delete();
+    }
+
+    public function countByPeriod(Carbon $startDate, carbon $endDate, array $conditions = []): int
+    {
+        return Store::query()
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '>=',
+                        $startDate
+                    )
+                    ->whereDate(
+                        Store::CREATED_AT,
+                        '<=',
+                        $endDate
+                    )
+                    ->where($conditions)
+                    ->count();
+    }
+
+    public function iterateOnActiveStores(callable $callback, int $chunkSize): bool
+    {
+        return Store::query()
+            ->where(Store::ENABLED_COLUMN, true)
+            ->whereNotNull(Store::CONNECTED_AT_COLUMN)
+            ->chunk($chunkSize, $callback);
     }
 }

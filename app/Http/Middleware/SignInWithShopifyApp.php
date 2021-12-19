@@ -20,6 +20,7 @@ use BADDIServices\SocialRocket\Services\UserService;
 use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Exceptions\Shopify\InvalidRequestSignatureException;
+use BADDIServices\SocialRocket\Models\OAuth;
 
 class SignInWithShopifyApp
 {
@@ -32,7 +33,7 @@ class SignInWithShopifyApp
     /** @var UserService */
     private $userService;
 
-    public function __construct(ShopifyService $shopifyService, storeService $storeService, UserService $userService)
+    public function __construct(ShopifyService $shopifyService, StoreService $storeService, UserService $userService)
     {
         $this->shopifyService = $shopifyService;
         $this->storeService = $storeService;
@@ -58,31 +59,40 @@ class SignInWithShopifyApp
             $shop = $request->query('shop');
             $slug = $this->shopifyService->getStoreName($shop);
 
-            if (!is_null($slug)) {
+            if ($slug !== null) {
                 $store = $this->storeService->findBySlug($slug);
 
-                if ($store instanceof Store) {
-                    try {
-                        $this->shopifyService->verifySignature($request->query());
+                if (!$store instanceof Store) {
+                    $store = $this->storeService->create([
+                        'slug'  =>  $slug
+                    ]);
+                }
 
-                        $storeOwner = $this->userService->getStoreOwner($store);
-                        if (!$storeOwner instanceof User) {
-                            return redirect()->route('landing');
-                        }
+                try {
+                    $this->shopifyService->verifySignature($request->query());
 
+                    $storeOwner = $this->userService->getStoreOwner($store);
+                    if ($store->oauth instanceof OAuth && $storeOwner instanceof User) {
                         $authenticateUser = Auth::loginUsingId($storeOwner->id);
-                        if (!$authenticateUser) {
-                            return redirect()->route('landing');
+                        if ($authenticateUser) {
+                            $this->userService->update($storeOwner, [
+                                User::LAST_LOGIN_COLUMN    =>  Carbon::now()
+                            ]);
+    
+                            return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($storeOwner->getFullName()));    
                         }
-
-                        $this->userService->update($storeOwner, [
-                            User::LAST_LOGIN_COLUMN    =>  Carbon::now()
-                        ]);
-
-                        return redirect()->route('dashboard')->with('success', 'Welcome back ' . strtoupper($storeOwner->getFullName()));
-                    } catch (InvalidRequestSignatureException $ex) {
-                        AppLogger::error($ex, $store, 'store:login-via-app', ['playload' => $request->all()]);
                     }
+
+                    return redirect()
+                        ->route('fast.connect', ['store' => $store->slug]);
+                } catch (InvalidRequestSignatureException $ex) {
+                    AppLogger::setStore($store)
+                    ->error(
+                        $ex, 'store:login-via-app', 
+                        [
+                            'playload' => $request->query()
+                    ]
+                    );
                 }
             }
         }

@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
-require 'app/landing.php';
-require 'app/guest.php';
-require 'app/affiliate.php';
-require 'app/storeOwner.php';
-require 'admin/webhooks.php';
+Route::group([], function() {
+        require 'app/landing.php';
+        require 'app/guest.php';
+        require 'app/affiliate.php';
+        require 'app/storeOwner.php';
+        require 'admin.php';
+        require 'webhooks.php';
+    });

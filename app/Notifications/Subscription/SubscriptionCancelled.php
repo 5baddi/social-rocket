@@ -10,11 +10,9 @@ namespace BADDIServices\SocialRocket\Notifications\Subscription;
 
 use BADDIServices\SocialRocket\Models\Subscription;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SubscriptionCancelled extends Notification implements ShouldQueue
+class SubscriptionCancelled extends Notification
 {
     use Queueable;
 
@@ -22,7 +20,7 @@ class SubscriptionCancelled extends Notification implements ShouldQueue
     private $subscription;
 
     /** @var string */
-    public const SUBJECT = 'Your subscription has been cancelled!';
+    public const SUBJECT = 'Your subscription to %s plan has been cancelled!';
 
     /**
      * Create a new notification instance.
@@ -42,20 +40,7 @@ class SubscriptionCancelled extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['mail', 'database'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->subject(self::SUBJECT)
-                    ->view('emails.subscription.cancelled', ['subject' => self::SUBJECT, 'subscription' => $this->subscription]);
+        return ['database'];
     }
 
     /**
@@ -67,7 +52,7 @@ class SubscriptionCancelled extends Notification implements ShouldQueue
     public function toArray($notifiable)
     {
         return [
-            'subject'           => self::SUBJECT,
+            'subject'           => sprintf(self::SUBJECT, ucwords($this->subscription->pack->name)),
             'subscription_id'   => $this->subscription->id, 
             'name'              => $this->subscription->pack->name,
             'cancelled_at'      => $this->subscription->delete_at,

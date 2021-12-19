@@ -8,6 +8,7 @@
 
 namespace BADDIServices\SocialRocket\Http\Requests;
 
+use BADDIServices\SocialRocket\Rules\ValidateHCaptcha;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ConnectStoreRequest extends FormRequest
@@ -30,7 +31,8 @@ class ConnectStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'store'     =>  ['required', 'string']
+            'store'                  =>  ['required', 'string'],
+            'h-captcha-response'     =>  ['required', new ValidateHCaptcha()],
         ];
     }
 }

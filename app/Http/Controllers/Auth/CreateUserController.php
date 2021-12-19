@@ -11,12 +11,12 @@ namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 use Throwable;
 use App\Models\User;
 use App\Http\Controllers\Controller;
+use BADDIServices\SocialRocket\AppLogger;
 use BADDIServices\SocialRocket\Events\WelcomeMail;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use BADDIServices\SocialRocket\Services\UserService;
-use BADDIServices\SocialRocket\Services\StoreService;
 use BADDIServices\SocialRocket\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Event;
@@ -26,13 +26,9 @@ class CreateUserController extends Controller
     /** @var UserService */
     private $userService;
 
-    /** @var StoreService */
-    private $storeService;
-
-    public function __construct(UserService $userService, StoreService $storeService)
+    public function __construct(UserService $userService)
     {
         $this->userService = $userService;
-        $this->storeService = $storeService;
     }
 
     public function __invoke(Store $store, SignUpRequest $request)
@@ -55,11 +51,13 @@ class CreateUserController extends Controller
 
             return redirect('/dashboard')->with('success', 'Account created successfully');
         } catch (ValidationException $ex) {
+            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
 
             return redirect('/signup')->withInput()->withErrors($ex->errors());
         }  catch (Throwable $ex) {
+            AppLogger::setStore($store ?? null)->error($ex, 'store:create-account', $request->all());
             
-            return redirect('/signup')->withInput()->with("error", "Internal server error");
+            return redirect()->route('signup', ['store' => $store->id])->withInput()->with("error", "Internal server error");
         }
     }
 }

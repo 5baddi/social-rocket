@@ -9,7 +9,6 @@
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 
 class SignInController extends Controller
 {

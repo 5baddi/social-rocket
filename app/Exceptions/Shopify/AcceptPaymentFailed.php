@@ -14,7 +14,7 @@ use Throwable;
 class AcceptPaymentFailed extends Exception
 {
     /** @var int */
-    public const CODE = 15;
+    public const CODE = 57;
 
     /** @var string */
     public const MESSAGE = "Failed to redirect to payment acceptation link";

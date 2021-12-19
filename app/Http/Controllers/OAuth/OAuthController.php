@@ -36,7 +36,8 @@ class OAuthController extends Controller
     public function __invoke(ConnectStoreRequest $request)
     {
         try {
-            $storeName = $this->shopifyService->getStoreName($request->input('store'));
+            $storeName = $this->shopifyService->getStoreName($request->get('store'));
+
             if (is_null($storeName)) {
                 throw new InvalidStoreURLException();
             }
@@ -56,15 +57,15 @@ class OAuthController extends Controller
 
             return redirect($oauthURL);
         } catch (ValidationException $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:redirect-oauth', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
             
             return redirect()->back()->withInput()->withErrors($ex->errors());
         } catch (InvalidStoreURLException | StoreAlreadyLinkedException $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:redirect-oauth', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
 
             return redirect()->back()->withInput()->with("error", $ex->getMessage());
         } catch (Throwable $ex) {
-            AppLogger::error($ex, $store ?? null, 'store:redirect-oauth', $request->all());
+            AppLogger::setStore($store ?? null)->error($ex, 'store:redirect-oauth', $request->all());
 
             return redirect()->back()->withInput()->with("error", "Internal server error");
         }

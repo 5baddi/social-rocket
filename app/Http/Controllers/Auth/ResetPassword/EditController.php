@@ -8,21 +8,28 @@
 
 namespace BADDIServices\SocialRocket\Http\Controllers\Auth\ResetPassword;
 
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use BADDIServices\SocialRocket\Services\UserService;
 
 class EditController extends Controller
 {
+    /** @var UserService */
+    private $userService;
+
+    public function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     public function __invoke(string $token)
     {
-        $tokenData = DB::table('password_resets')
-                        ->where('token', $token)->first();
-        
-        abort_if(is_null($tokenData), Response::HTTP_NOT_FOUND);
+        $user = $this->userService->verifyResetPasswordToken($token);
+        abort_if(!$user instanceof User, Response::HTTP_NOT_FOUND);
 
         return view('auth.password', [
-            'email'     =>  $tokenData->email
+            'token'     =>  $token
         ]);
     }
 }

@@ -67,11 +67,6 @@ class AffiliateService extends Service
         return $this->affiliateRepository->create($attributes);
     }
     
-    public function welcomeMail(User $affiliate): void
-    {
-        
-    }
-    
     public function notifyStoreOwner(Store $store, User $affiliate): void
     {
         $store->load(['user', 'setting']);

@@ -71,4 +71,9 @@ class Pack extends ModelEntity
     {
         return $this->attributes[self::TYPE_COLUMN] === self::TYPES[0];
     }
+
+    public function isUsageType(): bool
+    {
+        return $this->getAttribute(self::TYPE_COLUMN) === self::USAGE_TYPE;
+    }
 }

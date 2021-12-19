@@ -6,9 +6,9 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
-use BADDIServices\SocialRocket\Http\Controllers\Auth\SignOutController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\IndexController;
+use BADDIServices\SocialRocket\Http\Controllers\Auth\Subscription\CancelController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsController;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanController;
@@ -31,13 +31,14 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkA
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
 
 
-Route::middleware(['auth', 'has.subscription'])
+Route::middleware(['auth', 'has.subscription', 'store-owner'])
     ->name('subscription')
     ->prefix('subscription')
     ->group(function() {
         Route::get('/', SubscriptionController::class)->name('.select.pack');
         Route::get('/billing/{pack}', BillingPaymentController::class)->name('.pack.billing');
         Route::get('/billing/{pack}/confirmation', BillingConfirmationController::class)->name('.billing.confirmation');
+        Route::get('/cancel', CancelController::class)->name('.cancel');
     });
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
@@ -79,6 +80,4 @@ Route::middleware(['auth', 'has.subscription', 'store-owner'])
         })->name('.plan');
         Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
         Route::get('/plan/cancel', CancelSubscriptionController::class)->name('.plan.cancel');
-
-        Route::get('/logout', SignOutController::class)->name('.signout');
     });

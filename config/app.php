@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Social Rocket
+ *
+ * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
+ */
+
+use Illuminate\Support\Str;
+
 return [
 
     /*
@@ -13,7 +21,7 @@ return [
     |
     */
 
-    'name' => ucwords(env('APP_NAME', 'Social Rocket')),
+    'name' => ucwords(str_replace('_', ' ', env('APP_NAME', 'Social Rocket'))),
 
     /*
     |--------------------------------------------------------------------------
@@ -165,6 +173,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 
         /*
          * Application Service Providers...

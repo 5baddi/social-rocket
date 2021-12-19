@@ -63,6 +63,15 @@ class OrderRepository
             ->get();
     }
     
+    public function getProducts(Carbon $startDate, Carbon $endDate): Collection
+    {
+        return Order::query()
+            ->with('products')
+            ->where(Order::CREATED_AT, '>=', $startDate)
+            ->where(Order::CREATED_AT, '<=', $endDate)
+            ->get();
+    }
+    
     public function getOrdersProducts(string $storeId, Carbon $startDate, Carbon $endDate): Collection
     {
         return Order::query()
@@ -90,6 +99,38 @@ class OrderRepository
                 $endDate
             )
             ->sum(Order::TOTAL_PRICE_USD_COLUMN);
+    }
+    
+    public function getAllOrdersEarnings(Carbon $startDate, carbon $endDate): float
+    {
+        return Order::query()
+            ->whereDate(
+                Order::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->sum(Order::TOTAL_PRICE_USD_COLUMN);
+    }
+    
+    public function getAllNewOrdersCount(Carbon $startDate, carbon $endDate): int
+    {
+        return Order::query()
+            ->whereDate(
+                Order::CREATED_AT,
+                '>=',
+                $startDate
+            )
+            ->whereDate(
+                Order::CREATED_AT,
+                '<=',
+                $endDate
+            )
+            ->count();
     }
     
     public function getNewOrdersCount(string $storeId, Carbon $startDate, carbon $endDate): int

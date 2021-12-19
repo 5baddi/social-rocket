@@ -95,7 +95,7 @@
                                 <span class="form-label">
                                     Email 1 (24 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '24h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -110,7 +110,7 @@
                                 <span class="form-label">
                                     Email 2 (48 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '48h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -125,7 +125,7 @@
                                 <span class="form-label">
                                     Email 3 (120 hours post purchase)
                                 </span>
-                                <a href="{{ route('dashboard.customize.integrations.mails.purchase') }}" target="_blank">
+                                <a href="{{ route('dashboard.customize.integrations.mails.purchase', ['template' => '120h']) }}" target="_blank">
                                     Preview&nbsp;
                                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-forward-up" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

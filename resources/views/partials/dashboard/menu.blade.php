@@ -1,11 +1,11 @@
-<aside class="navbar navbar-vertical navbar-expand-lg navbar-transparent">
+<aside class="navbar navbar-vertical navbar-expand-lg navbar-dark">
     <div class="container-fluid">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu">
         <span class="navbar-toggler-icon"></span>
       </button>
       <h1 class="navbar-brand navbar-brand-autodark">
         <a href="{{ route('dashboard') }}">
-          <img src="{{ asset('assets/img/logo.png') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
+          <img src="{{ asset('assets/img/logo-white.png') }}" width="110" height="32" alt="{{ config('app.name') }}" class="navbar-brand-image"/>
         </a>
       </h1>
       <div class="collapse navbar-collapse" id="navbar-menu">
@@ -60,13 +60,11 @@
           <li class="nav-item {{ request()->routeIs('dashboard.account') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.account') }}">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <circle cx="9" cy="7" r="4"></circle>
-                        <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        <path d="M21 21v-2a4 4 0 0 0 -3 -3.85"></path>
-                    </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
+                  </svg>
                 </span>
                 <span class="nav-link-title">Account</span>
             </a>
@@ -83,6 +81,7 @@
                 <span class="nav-link-title">Settings</span>
             </a>
           </li>
+          @if (config('baddi.help_url'))
           <li class="nav-item {{ request()->routeIs('dashboard.help') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard.help') }}" target="_blank">
                 <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -96,17 +95,23 @@
                 <span class="nav-link-title">Help</span>
             </a>
           </li>
+          @endif
         </ul>
         <div class="row mb-4">
             <div class="col-12">
-                <img src="{{ asset('img/banner.png') }}"/>
+                <img src="{{ asset('assets/img/logo.mini.png') }}"/>
                 <div class="col-auto align-self-center mt-3">
-                    <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-dark w-100">
+                    <a href="{{ route('dashboard.plan.upgrade') }}" class="btn btn-white w-100">
                         Upgrade plan
                     </a>
                 </div>
                 <div class="col-auto align-self-center mt-1">
-                    <a href="{{ route('dashboard.signout') }}" class="btn btn-dark w-100">
+                    <a href="mailto:{{ $settings->support_email ?? env('SUPPORT_EMAIL', 'support@trysocialrocket.com') }}" class="btn btn-white w-100">
+                        Contact Us
+                    </a>
+                </div>
+                <div class="col-auto align-self-center mt-1">
+                    <a href="{{ route('signout') }}" class="btn btn-white w-100">
                         Logout
                     </a>
                 </div>

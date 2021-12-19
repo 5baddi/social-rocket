@@ -25,4 +25,17 @@ class AppService extends Service
     {
         return $this->appRepository->first();
     }
+    
+    public function update(array $attributes): bool
+    {
+        $filteredAttributes = collect($attributes);
+        $filteredAttributes = $filteredAttributes->only([
+            AppSetting::INSTAGRAM_USERNAME_COLUMN,
+            AppSetting::TWITTER_USERNAME_COLUMN,
+            AppSetting::FACEBOOK_USERNAME_COLUMN,
+            AppSetting::SUPPORT_EMAIL_COLUMN,
+        ]);
+
+        return $this->appRepository->update($filteredAttributes->toArray());
+    }
 }

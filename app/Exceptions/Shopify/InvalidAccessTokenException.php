@@ -14,7 +14,7 @@ use Throwable;
 class InvalidAccessTokenException extends Exception
 {
     /** @var int */
-    public const CODE = 12;
+    public const CODE = 65;
 
     /** @var string */
     public const MESSAGE = "Access token is invalid";

@@ -14,7 +14,7 @@ use Throwable;
 class InvalidRequestSignatureException extends Exception
 {
     /** @var int */
-    public const CODE = 13;
+    public const CODE = 66;
 
     /** @var string */
     public const MESSAGE = "Request signature is invalid";

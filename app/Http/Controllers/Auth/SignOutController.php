@@ -17,6 +17,6 @@ class SignOutController extends Controller
     {
         Auth::logout();
 
-        return redirect('/signin');
+        return redirect('/');
     }
 }

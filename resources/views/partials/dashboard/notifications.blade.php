@@ -22,7 +22,7 @@
         <div class="card-footer">
           @if (isset($notification->data['link']))
           <div class="col-auto align-self-center">
-              <a href="{{ $notification->data['link']['url'] ?? '#' }}" class="btn btn-dark w-100">
+              <a href="{{ url($notification->data['link']['url'] ?? '#') . '?' . http_build_query(['notification' => $notification->id]) }}" class="btn btn-dark w-100">
                 {{ $notification->data['link']['label'] }}
               </a>
           </div>

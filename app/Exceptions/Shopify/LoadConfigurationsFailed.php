@@ -14,7 +14,7 @@ use Throwable;
 class LoadConfigurationsFailed extends Exception
 {
     /** @var int */
-    public const CODE = 23;
+    public const CODE = 68;
 
     /** @var string */
     public const MESSAGE = "Failed to load configurations";

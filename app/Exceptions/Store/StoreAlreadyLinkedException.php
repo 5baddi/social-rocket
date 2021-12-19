@@ -14,7 +14,7 @@ use Throwable;
 class StoreAlreadyLinkedException extends Exception
 {
     /** @var int */
-    public const CODE = 14;
+    public const CODE = 55;
 
     /** @var string */
     public const MESSAGE = "Store already linked to another account";

@@ -91,6 +91,7 @@
                     </div>
                     <hr/>
                     <div class="row">
+                        @if ($user->hasPassword())
                         <div class="col-4">
                             <label class="form-label">Current password</label>
                             <input type="password" name="current_password" class="form-control @if ($errors->has('current_password')) is-invalid @endif" placeholder="Current password"/>
@@ -98,6 +99,7 @@
                             <div class="invalid-feedback">{{ $errors->first('current_password') }}</div>
                             @endif
                         </div>
+                        @endif
                         <div class="col-4">
                             <label class="form-label">New password</label>
                             <input type="password" name="password" class="form-control @if ($errors->has('password')) is-invalid @endif" placeholder="New password"/>
@@ -120,7 +122,7 @@
                               <div class="row">
                                 <div class="col-auto">
                                   <span class="avatar rounded">
-                                      <img src="{{ asset('img/mini-logo.png') }}"/>
+                                      <img src="{{ asset('assets/img/logo.mini.png') }}"/>
                                   </span>
                                 </div>
                                 <div class="col">

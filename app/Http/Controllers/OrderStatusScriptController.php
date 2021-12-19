@@ -54,7 +54,7 @@ class OrderStatusScriptController extends Controller
                 $setting = new StoreSetting();
             }
 
-            if (!$setting->thankyou_page) {
+            if (!$setting->thankyou_page || is_null($store->script_tag_id) || !$store->isEnabled()) {
                 return response(null, Response::HTTP_NO_CONTENT);
             }
 
@@ -62,7 +62,7 @@ class OrderStatusScriptController extends Controller
                 'html'      =>  $this->couponService->getScriptTag($setting->discount_amount, $setting->discount_type, $setting->currency, $setting->color)
             ]);
         } catch (Throwable $ex) {
-            AppLogger::error($ex, $store, 'affiliate:script-tag');
+            AppLogger::setStore($store)->error($ex, 'affiliate:script-tag');
 
             return response(null, Response::HTTP_INTERNAL_SERVER_ERROR);
         }

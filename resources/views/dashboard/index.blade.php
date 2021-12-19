@@ -104,6 +104,7 @@
       </div>
     </div>
     <div class="row row-cards">
+      @if (sizeof($topAffiliates) > 0)
       <div class="col-6 mt-4">
         <div class="card">
           <div class="card-header">
@@ -131,6 +132,8 @@
           </div>
         </div>
       </div>
+      @endif
+      @if (sizeof($topProducts) > 0)
       <div class="col-6 mt-4">
         <div class="card">
           <div class="card-header">
@@ -155,6 +158,7 @@
           </div>
         </div>
       </div>
+      @endif
     </div>
 @endsection
 
@@ -177,8 +181,6 @@
       $('#endDate').val(picker.endDate.format('YYYY-MM-DD'));
       $('#periodForm').submit();
     });
-
-
 
     window.ApexCharts && (new ApexCharts(document.getElementById('earnings-chart'), {
       chart: {

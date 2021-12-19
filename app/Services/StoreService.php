@@ -8,15 +8,21 @@
 
 namespace BADDIServices\SocialRocket\Services;
 
+use Carbon\Carbon;
+use App\Models\User;
+use Carbon\CarbonPeriod;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use BADDIServices\SocialRocket\App;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use Illuminate\Support\Facades\Validator;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Illuminate\Validation\ValidationException;
+use BADDIServices\SocialRocket\Services\UserService;
+use BADDIServices\SocialRocket\Services\SettingService;
 use BADDIServices\SocialRocket\Services\ShopifyService;
 use BADDIServices\SocialRocket\Repositories\StoreRepository;
-use Carbon\Carbon;
-use Illuminate\Support\Arr;
 
 class StoreService extends Service
 {
@@ -26,10 +32,23 @@ class StoreService extends Service
     /** @var ShopifyService */
     private $shopifyService;
 
-    public function __construct(StoreRepository $storeRepository, ShopifyService $shopifyService)
+    /** @var UserService */
+    private $userService;
+
+    /** @var SettingService */
+    private $settingService;
+
+    public function __construct(
+        StoreRepository $storeRepository, 
+        ShopifyService $shopifyService, 
+        UserService $userService,
+        SettingService $settingService
+    )
     {
         $this->storeRepository = $storeRepository;
         $this->shopifyService = $shopifyService;
+        $this->userService = $userService;
+        $this->settingService = $settingService;
     }
 
     public function all(): Collection
@@ -51,7 +70,12 @@ class StoreService extends Service
     {
         $store = $this->storeRepository->isLinked($slug);
 
-        if(!$store instanceof Store) {
+        if (!$store instanceof Store) {
+            return false;
+        }
+
+        $user = $this->userService->getStoreOwner($store);
+        if (!$user instanceof User) {
             return false;
         }
 
@@ -68,12 +92,31 @@ class StoreService extends Service
             throw new ValidationException($validator);
         }
 
-        return $this->storeRepository->create($attributes);
+        $store = $this->storeRepository->create($attributes);
+
+        $setting = collect(new StoreSetting());
+        $this->settingService->save($store, $setting);
+
+        return $store;
     }
     
     public function update(Store $store, array $attributes): Store
     {
         return $this->storeRepository->update($store, $attributes);
+    }
+    
+    public function enableStore(Store $store): bool
+    {
+        return $this->storeRepository->update($store, [
+            Store::ENABLED_COLUMN => true
+        ]) !== false;
+    }
+    
+    public function disableStore(Store $store): Store
+    {
+        return $this->storeRepository->update($store, [
+            Store::ENABLED_COLUMN => false
+        ]);
     }
     
     public function updateConfigurations(Store $store): Store
@@ -88,7 +131,7 @@ class StoreService extends Service
             Store::COUNTRY_COLUMN,
         ]);
 
-        Arr::set($attributes, Store::CONNECTED_AT, Carbon::now());
+        Arr::set($attributes, Store::CONNECTED_AT_COLUMN, Carbon::now());
 
         return $this->storeRepository->update($store, $attributes->toArray());
     }
@@ -107,5 +150,41 @@ class StoreService extends Service
         }
 
         return $this->storeRepository->oauth($store->id, $attributes);
+    }
+
+    public function activeStores(): Collection
+    {
+        return $this->storeRepository->where([
+            [Store::CONNECTED_AT_COLUMN, '!=', null]
+        ]);
+    }
+    
+    public function delete(Store $store): bool
+    {
+        return $this->storeRepository->delete($store->id);
+    }
+
+    public function getAllNewStoresCount(CarbonPeriod $period): int
+    {
+        return $this->storeRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate()
+        );
+    }
+    
+    public function getAllNewActiveStoresCount(CarbonPeriod $period): int
+    {
+        return $this->storeRepository->countByPeriod(
+            $period->copy()->getStartDate(),
+            $period->copy()->getEndDate(),
+            [
+                [Store::CONNECTED_AT_COLUMN, '!=', null],
+            ]
+        );
+    }
+
+    public function iterateOnActiveStores(callable $callback, int $chunkSize = App::CHUNK_SIZE): bool
+    {
+        return $this->storeRepository->iterateOnActiveStores($callback, $chunkSize);
     }
 }

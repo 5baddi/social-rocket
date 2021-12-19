@@ -17,4 +17,10 @@ class AppRepository
         return AppSetting::query()
                     ->first();
     }
+    
+    public function update(array $attributes): bool
+    {
+        return AppSetting::query()
+                    ->update($attributes) > 0;
+    }
 }

@@ -14,8 +14,10 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Log;
+use BADDIServices\SocialRocket\AppLogger;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use BADDIServices\SocialRocket\Models\Pack;
 use BADDIServices\SocialRocket\Models\OAuth;
 use BADDIServices\SocialRocket\Models\Store;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,21 +41,22 @@ class ShopifyService extends Service
     /** @var string */
     const SCOPES = "read_orders,read_customers,read_products,read_checkouts,read_price_rules,write_price_rules,read_discounts,write_discounts,read_script_tags,write_script_tags";
     const STORE_ENDPOINT = "https://{store}.myshopify.com";
-    const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-04/shop.json";
+    const STORE_CONFIGS_ENDPOINT = "/admin/api/2021-07/shop.json";
     const PRODUCT_ENDPOINT = "/products/{slug}";
     const OAUTH_AUTHORIZE_ENDPOINT = "/admin/oauth/authorize";
     const OAUTH_ACCESS_TOKEN_ENDPOINT = "/admin/oauth/access_token";
-    const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges.json";
-    const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}/usage_charges.json";
-    const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
-    const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-04/recurring_application_charges/{id}.json";
-    const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-04/script_tags.json";
-    const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-04/price_rules.json";
-    const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-04/price_rules/{id}/discount_codes.json";
-    const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-04/customers/{id}.json";
-    const GET_PRODUCT_ENDPOINT = "/admin/api/2021-04/products/{id}.json";
-    const GET_ORDER_ENDPOINT = "/admin/api/2021-04/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
-    const GET_ORDERS_ENDPOINT = "/admin/api/2021-04/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
+    const RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges.json";
+    const USAGE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}/usage_charges.json";
+    const GET_RECCURING_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}.json";
+    const GET_USAGE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{charge_id}/usage_charges/{usage_id}.json";
+    const DELETE_CHARGE_ENDPOINT = "/admin/api/2021-07/recurring_application_charges/{id}.json";
+    const POST_SCRIPT_TAG_ENDPOINT = "/admin/api/2021-07/script_tags.json";
+    const POST_PRICE_RULE_ENDPOINT = "/admin/api/2021-07/price_rules.json";
+    const POST_DISCOUNT_ENDPOINT = "/admin/api/2021-07/price_rules/{id}/discount_codes.json";
+    const GET_CUSTOMER_ENDPOINT = "/admin/api/2021-07/customers/{id}.json";
+    const GET_PRODUCT_ENDPOINT = "/admin/api/2021-07/products/{id}.json";
+    const GET_ORDER_ENDPOINT = "/admin/api/2021-07/orders/{id}.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
+    const GET_ORDERS_ENDPOINT = "/admin/api/2021-07/orders.json?fields=id,currency,name,total_price,confirmed,total_discounts,total_price_usd,discount_codes,checkout_id,customer,line_items,created_at";
 
     /** @var Client */
     private $client;
@@ -152,8 +155,8 @@ class ShopifyService extends Service
             }
 
             return $data['shop'];
-        } catch (Exception | ClientException | RequestException $ex) {
-            AppLogger::error($ex, $store, 'store:load-configurations');
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:load-configurations');
 
             throw new LoadConfigurationsFailed();
         }
@@ -162,7 +165,7 @@ class ShopifyService extends Service
     /**
      * @throws AcceptPaymentFailed
      */
-    public function getUsageBilling(Store $store, string $chargeId): array
+    public function getUsageBilling(Store $store, Pack $pack, string $chargeId): array
     {
         try {
             $accessToken = $this->hasAccessToken($store);
@@ -173,6 +176,10 @@ class ShopifyService extends Service
             $requestBody['access_token'] = $accessToken;
 
             $requestBody['recurring_application_charge_id'] = $chargeId;
+            $requestBody['usage_charge'] = [
+                'description'   => $pack->price . '% of revenue share',
+                'price'         => 1.0
+            ];
 
             $response = $this->client->request('POST', $chargeURL, 
                 [
@@ -185,20 +192,13 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-
             if (!isset($data['usage_charge'], $data['usage_charge']['id'])) {
                 throw new Exception();
             }
 
-            return $this->getBilling($store, $data['usage_charge']['id']);
-        } catch (Exception | ClientException | RequestException $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'store:create-usage-billing',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+            return $this->getBilling($store, $chargeId, $data['usage_charge']['id']);
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:get-usage-billing');
 
             throw new AcceptPaymentFailed();
         }
@@ -207,13 +207,18 @@ class ShopifyService extends Service
     /**
      * @throws AcceptPaymentFailed
      */
-    public function getBilling(Store $store, string $chargeId): array
+    public function getBilling(Store $store, string $chargeId, string $usageId = null): array
     {
         try {
             $accessToken = $this->hasAccessToken($store);
 
             $chargeURL = $this->getStoreURL($store->slug);
-            $chargeURL .= Str::replace("{id}", $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
+            if ($usageId !== null) {
+                $chargeURL .= Str::replace(['{charge_id}', '{usage_id}'], [$chargeId, $usageId], self::GET_USAGE_CHARGE_ENDPOINT);
+            } else {
+                $chargeURL .= Str::replace('{id}', $chargeId, self::GET_RECCURING_CHARGE_ENDPOINT);
+            }
+
             $chargeURL .= "?access_token={$accessToken}";
 
             $response = $this->client->request('GET', $chargeURL, 
@@ -225,19 +230,13 @@ class ShopifyService extends Service
             );
 
             $data = json_decode($response->getBody(), true);
-            if (!isset($data['recurring_application_charge'])) {
+            if (!isset($data['recurring_application_charge']) && !isset($data['usage_charge'])) {
                 throw new Exception();
             }
 
-            return $data['recurring_application_charge'];
-        } catch (Exception | ClientException | RequestException $ex) {
-            Log::error($ex->getMessage(), [
-                'context'   =>  'store:get-billing',
-                'code'      =>  $ex->getCode(),
-                'line'      =>  $ex->getLine(),
-                'file'      =>  $ex->getFile(),
-                'trace'     =>  $ex->getTrace()
-            ]);
+            return $usageId !== null ? $data['usage_charge'] : $data['recurring_application_charge'];
+        } catch (Exception | ClientException | RequestException $e) {
+            AppLogger::setStore($store)->error($e, 'store:get-charge-billing');
 
             throw new AcceptPaymentFailed();
         }
