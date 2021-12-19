@@ -12,6 +12,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use BADDIServices\SocialRocket\Entities\ModelEntity;
+use BADDIServices\SocialRocket\Entities\StoreSetting;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Store extends ModelEntity
@@ -46,6 +47,20 @@ class Store extends ModelEntity
         self::ENABLED_COLUMN        => 'boolean',
         self::CONNECTED_AT_COLUMN   => 'datetime',
     ];
+
+    private Setting|StoreSetting|null $setting;
+
+    public function setSetting(Setting|StoreSetting $setting): self
+    {
+        $this->setting = $setting;
+
+        return $this;
+    }
+
+    public function getSetting(): Setting|StoreSetting|null
+    {
+        return $this->setting;
+    }
 
     public function user(): BelongsTo
     {
