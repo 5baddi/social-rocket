@@ -6,6 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
+use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
@@ -22,7 +23,7 @@ Route::name('affiliate.')
                 Route::post('/{store}/signup', CreateAccountController::class)->name('signup');
             });
 
-        Route::prefix('dashboard')
+        Route::prefix('mya')
             ->middleware(['auth', 'is.affiliate'])
             ->group(function () {
                 Route::get('/', AnalyticsController::class)->name('analytics');

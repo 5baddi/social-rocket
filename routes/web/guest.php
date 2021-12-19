@@ -6,6 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
+use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignInController;
 use BADDIServices\SocialRocket\Http\Controllers\Auth\SignUpController;
 use BADDIServices\SocialRocket\Http\Controllers\OAuth\OAuthController;

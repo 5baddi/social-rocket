@@ -6,11 +6,13 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
+use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\ViewStoreController;
 use BADDIServices\SocialRocket\Http\Controllers\Admin\Stores as Stores;
 
-Route::prefix('stores')
-    ->name('.stores')
+Route::middleware(['auth', 'admin'])
+    ->prefix('admin/stores')
+    ->name('admin.stores')
     ->group(function() {
         Route::get('/', Stores\IndexController::class);
         Route::post('/{store}/enable', Stores\EnableStoreController::class)->name('.enable');

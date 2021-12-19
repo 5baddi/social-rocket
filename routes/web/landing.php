@@ -6,6 +6,7 @@
  * @copyright   Copyright (c) 2021, BADDI Services. (https://baddi.info)
  */
 
+use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\LandingPageController;
 
 Route::get('/', LandingPageController::class)->name('landing')->middleware(['signin.with.app']);

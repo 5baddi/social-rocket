@@ -45,7 +45,14 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->namespace($this->namespace)
-                ->group(base_path('routes/web.php'));
+                ->group(function () {
+                    $webFiles = glob(__DIR__ . '/../../routes/web/**/*.php');
+                    $signleWebFiles = glob(__DIR__ . '/../../routes/web/*.php');
+
+                    foreach (array_merge($webFiles, $signleWebFiles) as $routeFile) {
+                        require $routeFile;
+                    }
+                });
         });
     }
 
