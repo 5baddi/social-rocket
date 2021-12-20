@@ -12,10 +12,10 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkA
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Activity\ActivityMarkAllAsReadController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.activity')
+    ->prefix('dashboard/activity')
     ->group(function() {
-        Route::get('/activity', ActivityController::class)->name('.activity');
-        Route::get('/activity/read', ActivityMarkAllAsReadController::class)->name('.activity.read.all');
-        Route::get('/activity/{notification}', ActivityMarkAsReadController::class)->name('.activity.read');
+        Route::get('/', ActivityController::class);
+        Route::get('/read', ActivityMarkAllAsReadController::class)->name('.read.all');
+        Route::get('/{notification}', ActivityMarkAsReadController::class)->name('.read');
     });

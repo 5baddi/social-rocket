@@ -14,15 +14,15 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\UpdateIntegr
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Customize\SaveCustomizeSettingController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.customize')
+    ->prefix('dashboard/customize')
     ->group(function() {
-        Route::get('/customize', CustomizeController::class)->name('.customize');
-        Route::post('/customize', SaveCustomizeSettingController::class)->name('.customize.save');
-        Route::get('/customize/integrations', IntegrationsController::class)->name('.customize.integrations');
-        Route::post('/customize/integrations', UpdateIntegrationsController::class)->name('.customize.integrations.save');
-        Route::prefix('customize/integrations')
-            ->name('.customize.integrations')
+        Route::get('/', CustomizeController::class);
+        Route::post('/', SaveCustomizeSettingController::class)->name('.save');
+        Route::get('/integrations', IntegrationsController::class)->name('.integrations');
+        Route::post('/integrations', UpdateIntegrationsController::class)->name('.integrations.save');
+        Route::prefix('/integrations')
+            ->name('.integrations')
             ->group(function() {
                 Route::get('/mails/purchase', PurchaseMailController::class)->name('.mails.purchase');
             });

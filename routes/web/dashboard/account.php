@@ -11,9 +11,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsControl
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\SendPayoutController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.payouts')
+    ->prefix('dashboard/payouts')
     ->group(function() {
-        Route::get('/payouts', PayoutsController::class)->name('.payouts');
-        Route::post('/payouts/{commission}', SendPayoutController::class)->name('.payouts.send');
+        Route::get('/', PayoutsController::class);
+        Route::post('/{commission}', SendPayoutController::class)->name('.send');
     });

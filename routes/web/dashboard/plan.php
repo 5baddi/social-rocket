@@ -11,13 +11,13 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Plan\UpgradePlanContro
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\CancelSubscriptionController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.plan')
+    ->prefix('dashboard/plan')
     ->group(function() {
-        Route::get('/plan', function() {
+        Route::get('/', function() {
             return redirect()->route('dashboard.account', ['tab' => 'plan']);
-        })->name('.plan');
+        });
 
-        Route::get('/plan/upgrade', UpgradePlanController::class)->name('.plan.upgrade');
-        Route::get('/plan/cancel', CancelSubscriptionController::class)->name('.plan.cancel');
+        Route::get('/upgrade', UpgradePlanController::class)->name('.upgrade');
+        Route::get('/cancel', CancelSubscriptionController::class)->name('.cancel');
     });

@@ -11,9 +11,9 @@ use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\SettingsContr
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Settings\UpdateSettingsController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.settings')
+    ->prefix('dashboard/settings')
     ->group(function() {
-        Route::get('/settings', SettingsController::class)->name('.settings');
-        Route::post('/settings', UpdateSettingsController::class)->name('.settings.save');
+        Route::get('/', SettingsController::class);
+        Route::post('/', UpdateSettingsController::class)->name('.save');
     });

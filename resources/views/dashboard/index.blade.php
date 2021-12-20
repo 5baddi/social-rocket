@@ -7,7 +7,7 @@
 @section('content')
     <div class="row align-items-center pt-2 pb-4">
         <div class="col-auto ms-auto d-print-none">
-          <form id="periodForm" action="{{ route('dashboard') }}" method="POST">
+          <form id="periodForm" action="{{ route('dashboard.filtered') }}" method="POST">
             @csrf
             <input type="hidden" id="startDate" name="start-date"/>
             <input type="hidden" id="endDate" name="end-date"/>

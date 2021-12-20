@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\Dashboard\HelpController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard')
-    ->prefix('dashboard')
+    ->name('dashboard.help')
+    ->prefix('dashboard/help')
     ->group(function() {
-        Route::get('/help', HelpController::class)->name('.help');
+        Route::get('/', HelpController::class);
     });

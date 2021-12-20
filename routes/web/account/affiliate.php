@@ -7,7 +7,6 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\OrderStatusScriptController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Dashboard\AnalyticsController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\CreateAccountController;
 use BADDIServices\SocialRocket\Http\Controllers\Affiliate\Inscription\SignUpController as AffiliateSignUpController;
@@ -29,7 +28,3 @@ Route::name('affiliate.')
                 Route::get('/', AnalyticsController::class)->name('analytics');
             });
     });
-
-Route::middleware(['cors'])->group(function() {
-    Route::get('/order_status.js', OrderStatusScriptController::class);
-});
