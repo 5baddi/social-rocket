@@ -69,15 +69,12 @@ class NewOrderController extends AffiliateController
             DB::beginTransaction();
             
             $store = $this->storeService->findBySlug($request->get(Store::SLUG_COLUMN));
-            $store->load('setting');
-
-            /** @var Setting */
-            $setting = $store->setting;
-            if (! $setting instanceof Setting) {
-                $setting = new StoreSetting(); 
+            if (! $store instanceof Store) {
+                return response()->json([], Response::HTTP_NO_CONTENT);
             }
 
-            if (! $setting->thankyou_page) {
+            $setting = $store->getSetting();
+            if (! $setting->isThankYouPageEnabled()) {
                 return response()->json([], Response::HTTP_NO_CONTENT);
             }
 

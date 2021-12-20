@@ -62,12 +62,6 @@ class NotifyAboutNewOrder implements ShouldQueue
             return;
         }
 
-        /** @var Setting */
-        $setting = $store->setting;
-        if (! $setting instanceof Setting) {
-            $setting = new StoreSetting(); 
-        }
-
         try {
             $shopifyOrder = Collection::make($shopifyService->getOrder($store, $this->orderId));
 
@@ -79,6 +73,7 @@ class NotifyAboutNewOrder implements ShouldQueue
 
             if (! $affiliater instanceof User) {
                 $affiliate = $userService->create($store, $customer->toArray(), true);
+                $setting = $store->getSetting();
 
                 $shopifyService->createPriceRule(
                     $store, 

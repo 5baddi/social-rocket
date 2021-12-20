@@ -39,7 +39,7 @@ class Store extends ModelEntity
     private User|null $owner;
     private Subscription|null $subscription;
 
-    public function setSetting(Setting|StoreSetting $setting): self
+    public function setSetting(?Setting $setting = null): self
     {
         $this->setting = $setting;
 
@@ -48,7 +48,7 @@ class Store extends ModelEntity
 
     public function getSetting(): Setting|StoreSetting|null
     {
-        return $this->setting;
+        return $this->setting ?? new StoreSetting();
     }
     
     public function setOAuth(OAuth $oauth): self

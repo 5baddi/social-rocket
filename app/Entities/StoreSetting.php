@@ -40,4 +40,9 @@ class StoreSetting
     public $discount_amount = Setting::DFEAULT_DISCOUNT;
 
     public function __construct() {}
+
+    public function isThankYouPageEnabled(): bool
+    {
+        return $this->thankyou_page === true;
+    }
 }
