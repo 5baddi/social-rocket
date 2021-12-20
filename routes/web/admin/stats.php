@@ -10,4 +10,5 @@ use Illuminate\Support\Facades\Route;
 use BADDIServices\SocialRocket\Http\Controllers\Admin\Stats as Stats;
 
 Route::middleware(['auth', 'admin'])
-    ->get('/admin', Stats\IndexController::class);
+    ->get('/admin', Stats\IndexController::class)
+    ->name('admin');
