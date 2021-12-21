@@ -7,13 +7,13 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\PayoutsController;
-use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Payouts\SendPayoutController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\AccountController;
+use BADDIServices\SocialRocket\Http\Controllers\Dashboard\Account\UpdateAccountController;
     
 Route::middleware(['auth', 'has.subscription', 'store-owner'])
-    ->name('dashboard.payouts')
-    ->prefix('dashboard/payouts')
+    ->name('dashboard.account')
+    ->prefix('dashboard/account')
     ->group(function() {
-        Route::get('/', PayoutsController::class);
-        Route::post('/{commission}', SendPayoutController::class)->name('.send');
+        Route::get('/', AccountController::class);
+        Route::post('/', UpdateAccountController::class)->name('.account.save');
     });
