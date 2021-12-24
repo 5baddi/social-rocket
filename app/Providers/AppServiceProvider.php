@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
     {
         Builder::defaultMorphKeyType('uuid');
         Builder::defaultStringLength(191);
-        
+
         if (app()->environment() !== 'local') {
 	        URL::forceScheme('https');
         }
