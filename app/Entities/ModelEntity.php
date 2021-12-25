@@ -29,4 +29,9 @@ class ModelEntity extends EloquentModel
     protected $keyType = 'string';
 
     protected $guarded = [];
+
+    public function getId(): string
+    {
+        return $this->getAttribute(self::ID_COLUMN);
+    }
 }
