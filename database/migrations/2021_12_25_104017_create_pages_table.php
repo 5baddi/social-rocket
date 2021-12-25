@@ -17,7 +17,8 @@ class CreatePagesTable extends Migration
             $table->uuid('id');
             $table->string('slug')->unique();
             $table->string('title')->unique();
-            $table->longText('content');
+            $table->longText('content')->nullable();
+            $table->tinyInteger('main_menu')->default(0);
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });

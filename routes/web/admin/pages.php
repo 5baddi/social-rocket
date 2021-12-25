@@ -14,4 +14,6 @@ Route::middleware(['auth', 'admin'])
     ->name('admin.pages')
     ->group(function() {
         Route::get('/', Pages\IndexController::class);
+        Route::get('/create', Pages\CreatePageController::class)->name('.create');
+        Route::post('/create', Pages\StorePageController::class)->name('.save');
     });

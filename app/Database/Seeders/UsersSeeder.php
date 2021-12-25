@@ -21,10 +21,13 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
+        $password = Hash::make('baddidev');
+ 
         User::create([
-            User::FIRST_NAME_COLUMN     =>  'Admin Account',
+            User::FIRST_NAME_COLUMN     =>  'Admin',
+            User::LAST_NAME_COLUMN      =>  'Account',
             User::EMAIL_COLUMN          =>  'project@baddi.info',
-            User::PASSWORD_COLUMN       =>  Hash::make('baddidev'),
+            User::PASSWORD_COLUMN       =>  $password,
             User::IS_SUPERADMIN_COLUMN  =>  true,
             User::LAST_LOGIN_COLUMN     =>  null
         ]);

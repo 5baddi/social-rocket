@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d2b59139d2504164f983ee97207e2d70",
+    "content-hash": "fe44e2f7e3c939b3952aabf0d35c5b6e",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -61,6 +61,52 @@
                 "source": "https://github.com/asm89/stack-cors/tree/v2.0.3"
             },
             "time": "2021-03-11T06:42:03+00:00"
+        },
+        {
+            "name": "baddiservices/safehtml",
+            "version": "v0.0.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/baddiservices/safe-html.git",
+                "reference": "a7214a163c5dc1325e899f39f53c2a8a98e26b89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/baddiservices/safe-html/zipball/a7214a163c5dc1325e899f39f53c2a8a98e26b89",
+                "reference": "a7214a163c5dc1325e899f39f53c2a8a98e26b89",
+                "shasum": ""
+            },
+            "require": {
+                "ext-dom": "*",
+                "ext-libxml": "*",
+                "ext-mbstring": "*",
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "BADDIServices\\SafeHTML\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "5baddi",
+                    "email": "project@baddi.info"
+                }
+            ],
+            "description": "Safe HTML package help to prevent XSS vulnerability via HTML content",
+            "support": {
+                "issues": "https://github.com/baddiservices/safe-html/issues",
+                "source": "https://github.com/baddiservices/safe-html/tree/v0.0.6"
+            },
+            "time": "2021-12-25T17:24:17+00:00"
         },
         {
             "name": "brick/math",
@@ -7677,5 +7723,5 @@
         "php": "^7.3|^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
