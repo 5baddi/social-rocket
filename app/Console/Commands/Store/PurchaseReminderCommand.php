@@ -52,6 +52,7 @@ class PurchaseReminderCommand extends Command
                             $setting = $store->setting;
 
                             //purchase_mail_24h purchase_mail_48h purchase_mail_120h
+                            // TODO: send email
                         } catch (Throwable $e) {
                             AppLogger::setStore($store ?? null)->error($e, 'command:purchase:reminder');
                         }
