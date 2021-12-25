@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('slug')->unique();
             $table->string('title')->unique();
             $table->longText('content');
+            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }

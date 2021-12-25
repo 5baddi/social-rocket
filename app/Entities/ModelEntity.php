@@ -10,6 +10,7 @@ namespace BADDIServices\SocialRocket\Entities;
 
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use BADDIServices\SocialRocket\Traits\HasUUID;
+use Carbon\Carbon;
 
 class ModelEntity extends EloquentModel
 {
@@ -33,5 +34,20 @@ class ModelEntity extends EloquentModel
     public function getId(): string
     {
         return $this->getAttribute(self::ID_COLUMN);
+    }
+
+    public function getUpdatedAt(): ?Carbon
+    {
+        return $this->getAttribute(self::UPDATED_AT_COLUMN) ?? null;
+    }
+    
+    public function getDeletedAt(): ?Carbon
+    {
+        return $this->getAttribute(self::DELETED_AT_COLUMN) ?? null;
+    }
+    
+    public function getCreatedAt(): ?Carbon
+    {
+        return $this->getAttribute(self::CREATED_AT_COLUMN) ?? null;
     }
 }

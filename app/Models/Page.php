@@ -16,4 +16,5 @@ class Page extends ModelEntity
     public const SLUG_COLUMN = 'slug';
     public const TITLE_COLUMN = 'title';
     public const CONTENT_COLUMN = 'content';
+    public const PUBLISHED_AT_COLUMN = 'published_at';
 }
