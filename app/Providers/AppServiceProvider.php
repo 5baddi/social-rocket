@@ -8,6 +8,7 @@ use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 use BADDIServices\SocialRocket\Models\AppSetting;
 use BADDIServices\SocialRocket\Services\AppService;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -36,11 +37,13 @@ class AppServiceProvider extends ServiceProvider
         }
 
         $settings = new AppSetting(); 
-        if (Schema::hasTable(AppSetting::TABLE)) {
-            /** @var AppService */
-            $appService = app(AppService::class);
-            $settings = $appService->settings();
-        }
+        try {
+            if (Schema::hasTable(AppSetting::TABLE)) {
+                /** @var AppService */
+                $appService = app(AppService::class);
+                $settings = $appService->settings();
+            }
+        } catch (Throwable $e) {}
         
 
         view()->composer('partials.admin.menu', function ($view) use ($settings) {
