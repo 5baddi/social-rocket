@@ -10,6 +10,12 @@
 
 ## Getting started
 
+1. To avoid user/group permissions issues, let's export your user ID & group ID
+
+```bash
+export WWWUSER=$(id -u ${USER}) WWWGROUP=$(id -g ${USER})
+```
+
 ### Dependencies installation
 
 *(Assuming you've [installed Composer](https://getcomposer.org/doc/00-intro.md))*
