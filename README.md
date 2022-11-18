@@ -56,22 +56,6 @@ Run scheduled commands
 ``` bash
 php artisan schedule:run
 ```
-
-## Mail configuration
-`MAIL_MAILER`=smtp
-
-`MAIL_HOST`=trysocialrocket.com
-
-`MAIL_PORT`=465
-
-`MAIL_USERNAME`=noreply@trysocialrocket.com
-
-`MAIL_PASSWORD`=VR4sE0JIBOHP
-
-`MAIL_ENCRYPTION`=SSL
-
-`MAIL_FROM_ADDRESS=`noreply@trysocialrocket.com
-
 ---
 ## Preparing to submit your app
 
